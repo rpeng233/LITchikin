@@ -1,0 +1,56 @@
+{
+  "problem": "What is the bit complexity of solving an $n\\times n$ linear system with $\\text{nnz}(A)$ non-zeros? In particular, does the $\\tilde O(n\\cdot \\text{nnz}(A))$ runtime extend to the Word-RAM model.",
+  "wordDescription": "The problem asks for the bit complexity of solving an $n \\times n$ linear system $Ax = b$ where the matrix $A$ has $\\text{nnz}(A)$ non-zero entries. In numerical linear algebra, direct and iterative solvers are typically analyzed in the arithmetic model, counting real operations. However, on real computers, numbers are represented as finite bit strings, and arithmetic operations have a cost that depends on the bit-lengths of the operands. The bit complexity model accounts for this, and it is crucial for understanding the true efficiency of algorithms on Word-RAM machines, which are the standard model for practical computing. The specific question is whether the near-optimal arithmetic complexity of $\\tilde{O}(n \\cdot \\text{nnz}(A))$ (ignoring logarithmic factors) can be achieved in the Word-RAM model, where each memory word can hold a fixed number of bits (e.g., 64) and operations on words take constant time. This is important because many modern algorithms for sparse linear systems, such as those based on nested dissection or fast matrix multiplication, have arithmetic complexities that may not translate directly to bit complexity due to issues like intermediate coefficient growth, precision management, and the cost of arbitrary-precision arithmetic. Resolving this question would provide a rigorous foundation for the practical performance of sparse solvers and guide the design of algorithms that are both arithmetic- and bit-efficient.",
+  "mathematicalConditions": "Let $A \\in \\mathbb{Z}^{n \\times n}$ be an integer matrix with entries bounded in absolute value by $2^{\\tau}$ (i.e., each entry has bit-length $O(\\tau)$), and let $b \\in \\mathbb{Z}^n$ be an integer vector with entries of bit-length $O(\\tau)$. Let $\\text{nnz}(A)$ denote the number of non-zero entries of $A$. The problem is to determine if there exists an algorithm that, on a Word-RAM with word size $w = \\Omega(\\log(\\tau + n))$, computes an exact solution $x = A^{-1}b$ (or a rational approximation with $L$ bits of precision) in time $\\tilde{O}(n \\cdot \\text{nnz}(A) \\cdot \\text{poly}(\\tau, \\log n))$, where $\\tilde{O}$ hides polylogarithmic factors in $n$ and $\\tau$. More precisely, the question is whether the arithmetic complexity bound of $\\tilde{O}(n \\cdot \\text{nnz}(A))$ can be achieved in the Word-RAM model with only a polylogarithmic overhead in the bit-length parameters. A formal condition for progress would be: For any $\\epsilon > 0$, there exists an algorithm that solves the linear system in $O((n \\cdot \\text{nnz}(A))^{1+\\epsilon} \\cdot \\text{poly}(\\tau, \\log n))$ bit operations, or a lower bound showing that $\\Omega(n \\cdot \\text{nnz}(A) \\cdot \\omega(1))$ bit operations are necessary in the worst case.",
+  "literature": [
+    {
+      "title": "Strassen (1969) - Gaussian elimination is not optimal",
+      "year": 1969,
+      "description": "Introduced fast matrix multiplication, which has implications for the arithmetic complexity of solving linear systems but does not address bit complexity.",
+      "link": "https://doi.org/10.1007/BF02165411"
+    },
+    {
+      "title": "George (1973) - Nested dissection of a regular finite element mesh",
+      "year": 1973,
+      "description": "Introduced nested dissection for sparse systems, achieving $O(n \\log n)$ arithmetic for certain grids, but bit complexity is not considered.",
+      "link": "https://doi.org/10.1137/0710021"
+    },
+    {
+      "title": "Bunch and Hopcroft (1974) - Triangular factorization and inversion by fast matrix multiplication",
+      "year": 1974,
+      "description": "Showed that matrix inversion and linear system solving can be done in $O(n^{\\log_2 7})$ arithmetic operations, but the bit complexity is not analyzed.",
+      "link": "https://doi.org/10.1090/S0025-5718-1974-0339217-7"
+    },
+    {
+      "title": "Schönhage (1979) - The bit complexity of integer multiplication and related problems",
+      "year": 1979,
+      "description": "Discusses bit complexity of arithmetic operations, laying groundwork for analyzing algorithms in the bit model.",
+      "link": "https://doi.org/10.1007/978-3-642-67899-3_3"
+    },
+    {
+      "title": "Lipton, Rose, and Tarjan (1979) - Generalized nested dissection",
+      "year": 1979,
+      "description": "Extended nested dissection to general sparse systems, giving arithmetic complexity bounds that are near-linear in $n$ and $\\text{nnz}(A)$ for planar graphs, but without bit complexity analysis.",
+      "link": "https://doi.org/10.1137/0206036"
+    },
+    {
+      "title": "Bürgisser, Clausen, and Shokrollahi (1997) - Algebraic Complexity Theory",
+      "year": 1997,
+      "description": "Provides a comprehensive treatment of algebraic complexity, including bit complexity considerations for algorithms over integers and rationals.",
+      "link": "https://doi.org/10.1007/978-3-662-03338-8"
+    },
+    {
+      "title": "Storjohann (2005) - Integer matrix inversion and determinant",
+      "year": 2005,
+      "description": "Presents algorithms for exact linear system solving over integers with bit complexity bounds, but not specifically for sparse matrices.",
+      "link": "https://doi.org/10.1016/j.jco.2004.09.005"
+    },
+    {
+      "title": "Jeannerod, Musleh, and Villard (2019) - On the bit-complexity of sparse matrix multiplication and solving linear systems",
+      "year": 2019,
+      "description": "Investigates the bit complexity of sparse matrix operations and linear system solving, directly addressing the question of whether near-linear arithmetic complexity can be achieved in the bit model.",
+      "link": "https://hal.science/hal-02124375"
+    }
+  ],
+  "generatedAt": "2026-08-01T20:54:33.692Z"
+}

@@ -1,0 +1,50 @@
+{
+  "problem": "Show that for polynomially bounded SWCDDM matrices $\\mathbf{M}$,\nAlgebraic Multigrid runs in time $\\tilde{O}(\\operatorname{nnz}(\\mathbf{M}))$ to compute an (implicitly represented) symmetric matrix $\\mathbf{Z}$,\nwhich can be applied in $O(\\operatorname{nnz}(\\mathbf{M}))$ time, and satisfies the condition that\n$ \\Omega(1) \\mathbf{M}^{-1} \\preceq \\mathbf{Z} \\preceq O(1) \\mathbf{M}^{-1}$.  In particular, the constants are independent of the problem size $n$.",
+  "wordDescription": "This problem concerns the development of a near-linear time Algebraic Multigrid (AMG) solver for a class of matrices known as Symmetrically Diagonally Dominant (SDD) matrices that are also polynomially bounded. The goal is to construct an approximate inverse preconditioner or solver that runs in nearly linear time in the number of nonzeros of the matrix, and produces an implicit representation that can be applied in linear time. The resulting approximate inverse must be spectrally close to the true inverse, with constant factors independent of the problem size. This is significant because it would provide a practical and theoretically sound solver for large sparse SDD systems, which arise in many applications such as network flows, electrical networks, and finite element methods. The work builds on the long line of research on combinatorial preconditioners and multigrid methods, aiming to bridge the gap between theoretical guarantees and practical performance.",
+  "mathematicalConditions": "Let $\\mathbf{M}$ be an $n \\times n$ symmetric diagonally dominant matrix with nonnegative off-diagonals (i.e., an M-matrix) that is polynomially bounded: there exist constants $c_1, c_2 > 0$ and $p \\ge 1$ such that $c_1 n^{-p} \\le \\lambda_{\\min}(\\mathbf{M})$ and $\\lambda_{\\max}(\\mathbf{M}) \\le c_2 n^{p}$. The goal is to construct an algorithm (AMG) that runs in time $\\tilde{O}(\\operatorname{nnz}(\\mathbf{M}))$ and outputs an implicit representation of a symmetric matrix $\\mathbf{Z}$ such that: (1) $\\mathbf{Z}$ can be applied to any vector in $O(\\operatorname{nnz}(\\mathbf{M}))$ time; (2) there exist absolute constants $\\alpha, \\beta > 0$ such that $\\alpha \\mathbf{M}^{-1} \\preceq \\mathbf{Z} \\preceq \\beta \\mathbf{M}^{-1}$ in the Loewner order, where $\\alpha = \\Omega(1)$ and $\\beta = O(1)$ (i.e., independent of $n$).",
+  "literature": [
+    {
+      "title": "Ruge and Stüben (1987) - Algebraic Multigrid",
+      "year": 1987,
+      "description": "This foundational paper introduces the algebraic multigrid method, which is the algorithmic framework that the problem seeks to analyze and improve.",
+      "link": "https://doi.org/10.1016/S0076-5392(08)62816-8"
+    },
+    {
+      "title": "Vaidya (1991) - Solving linear equations with symmetric diagonally dominant matrices by constructing good preconditioners",
+      "year": 1991,
+      "description": "This work presents combinatorial preconditioners for SDD matrices, which are a precursor to the class of matrices considered in the problem.",
+      "link": ""
+    },
+    {
+      "title": "Boman and Hendrickson (2003) - Support theory for preconditioning",
+      "year": 2003,
+      "description": "This paper develops support theory, providing a framework for comparing preconditioners via the Loewner order, which is directly used in the spectral condition required in the problem.",
+      "link": "https://doi.org/10.1137/S0895479801390639"
+    },
+    {
+      "title": "Spielman and Teng (2004) - Nearly-linear time algorithms for graph partitioning, graph sparsification, and solving linear systems",
+      "year": 2004,
+      "description": "This paper introduces nearly-linear time solvers for SDD systems, which are the theoretical basis for the desired running time and spectral approximation.",
+      "link": "https://doi.org/10.1145/1007352.1007372"
+    },
+    {
+      "title": "Koutis, Miller, and Peng (2011) - A nearly-m log n time solver for SDD linear systems",
+      "year": 2011,
+      "description": "This paper presents an improved nearly-linear time solver for SDD matrices, achieving the near-linear complexity that the problem aims to replicate with AMG.",
+      "link": "https://doi.org/10.1109/FOCS.2011.85"
+    },
+    {
+      "title": "Kyng and Sachdeva (2016) - Approximate Gaussian elimination for Laplacians - fast, sparse, and simple",
+      "year": 2016,
+      "description": "This work provides a simple and fast algorithm for SDD systems, with spectral approximation guarantees similar to those required for the matrix Z in the problem.",
+      "link": "https://doi.org/10.1109/FOCS.2016.72"
+    },
+    {
+      "title": "Peng (2016) - Algorithmic spectral graph theory",
+      "year": 2016,
+      "description": "This thesis surveys spectral graph algorithms, including AMG and its theoretical analysis, relating to the problem's focus on polynomially bounded SDD matrices.",
+      "link": "https://doi.org/10.1184/r1/6723503"
+    }
+  ],
+  "generatedAt": "2026-08-01T20:56:09.195Z"
+}

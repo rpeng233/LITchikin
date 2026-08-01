@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Analysis Viewer — LaTeX Rendering (including title)</title>
+    <!-- MathJax configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+            },
+            options: {
+                ignoreHtmlClass: 'no-mathjax',
+            },
+            startup: {
+                typeset: false,
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async>
+    </script>
+    <style>
+        :root {
+            --bg: #f4f6fa;
+            --surface: #ffffff;
+            --surface-alt: #f0f3f8;
+            --text: #1a1d23;
+            --text-secondary: #5a5f6b;
+            --border: #dce1e8;
+            --accent: #4f6ef7;
+            --accent-hover: #3b54d4;
+            --accent-light: #eef1fd;
+            --danger: #e05555;
+            --success: #2ea76e;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+            --radius: 10px;
+            --radius-sm: 6px;
+            --transition: 0.2s ease;
+            --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .app-container {
+            display: flex;
+            width: 100%;
+            max-width: 1400px;
+            height: 90vh;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .sidebar {
+            width: 300px;
+            background: #f8fafd;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .sidebar-header {
+            padding: 20px 16px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .upload-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.82rem;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition);
+            border: none;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+        .upload-btn:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 10px rgba(79,110,247,0.3);
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-list {
+            flex: 1;
+            overflow-y: auto;
+            list-style: none;
+            padding: 8px 0;
+            margin: 0;
+        }
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background var(--transition);
+            border-bottom: 1px solid #f0f2f5;
+            gap: 8px;
+        }
+        .file-item:hover {
+            background: #edf2fc;
+        }
+        .file-item.active {
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .file-item .file-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .file-item .file-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.88rem;
+        }
+        .file-item .remove-btn {
+            background: none;
+            border: none;
+            color: #b0b7c3;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 4px;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .file-item .remove-btn:hover {
+            background: #fde2e2;
+            color: var(--danger);
+        }
+        .sidebar-status {
+            padding: 8px 16px 12px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            background: #f8fafd;
+            text-align: center;
+        }
+        .sidebar-status .count {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .detail-panel {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: var(--surface);
+        }
+        .placeholder-message {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #b0b7c3;
+            font-size: 1rem;
+            gap: 12px;
+            text-align: center;
+            padding: 40px;
+        }
+        .placeholder-message .icon {
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+        .problem-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            color: var(--text);
+            line-height: 1.4;
+            /* allow LaTeX rendering inside */
+        }
+        .boxes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 900px) {
+            .boxes-grid {
+                grid-template-columns: 1fr;
+            }
+            .app-container {
+                flex-direction: column;
+                height: auto;
+            }
+            .sidebar {
+                width: 100%;
+                max-height: 220px;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            .detail-panel {
+                padding: 16px;
+            }
+        }
+        .box-label {
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .box-label .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .dot.blue { background: var(--accent); }
+        .dot.green { background: var(--success); }
+
+        .renderable-box {
+            background: var(--surface-alt);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            min-height: 160px;
+            overflow-y: auto;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: var(--text);
+            background: #fafbfc;
+            transition: all var(--transition);
+        }
+        .renderable-box.math-box {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        .table-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            box-shadow: var(--shadow-sm);
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            min-width: 700px;
+        }
+        table thead {
+            background: var(--surface-alt);
+        }
+        table th {
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+            white-space: nowrap;
+        }
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        table tbody tr:hover {
+            background: #fafcfd;
+        }
+        table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .col-num { width: 40px; text-align: center; color: var(--text-secondary); font-weight: 600; }
+        .col-year { width: 65px; text-align: center; font-weight: 600; }
+        .col-title { font-weight: 600; min-width: 160px; }
+        .col-desc { min-width: 180px; }
+        .col-link a { color: var(--accent); text-decoration: none; font-weight: 500; word-break: break-all; }
+        .col-link a:hover { text-decoration: underline; }
+        .no-link { color: #b0b7c3; font-style: italic; font-size: 0.8rem; }
+        .empty-table-msg {
+            text-align: center;
+            padding: 30px;
+            color: #b0b7c3;
+            font-size: 0.9rem;
+        }
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #1a1d23;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.35s ease;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .toast.success { background: #1e6b42; }
+        .toast.error { background: #a03030; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📂 Uploaded Problems</h2>
+                <label for="fileUpload" class="upload-btn">+ Upload JSON Files</label>
+                <input type="file" id="fileUpload" multiple accept=".json,application/json">
+            </div>
+            <ul id="fileList" class="file-list">
+                <li class="file-item" style="justify-content:center; color:#b0b7c3; pointer-events:none;">
+                    <span>No problems loaded</span>
+                </li>
+            </ul>
+            <div class="sidebar-status" id="sidebarStatus">
+                <span class="count">0</span> file(s) loaded
+            </div>
+        </aside>
+
+        <main class="detail-panel" id="detailPanel">
+            <div id="placeholderMessage" class="placeholder-message">
+                <span class="icon">📋</span>
+                <span>Select a problem from the left panel to view its analysis.</span>
+                <small style="color:#b0b7c3;">Word description, formal conditions, and literature table.</small>
+            </div>
+            <div id="problemDetails" style="display: none; flex-direction: column; gap: 20px;">
+                <h3 class="problem-title" id="problemTitle"></h3>
+                <div class="boxes-grid">
+                    <div>
+                        <div class="box-label"><span class="dot blue"></span> Word Description &amp; Importance</div>
+                        <div id="wordDescBox" class="renderable-box" style="white-space: pre-wrap;"></div>
+                    </div>
+                    <div>
+                        <div class="box-label"><span class="dot green"></span> Mathematical / Formal Conditions</div>
+                        <div id="mathCondBox" class="renderable-box math-box" style="white-space: pre-wrap;"></div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="box-label" style="margin-bottom:12px;"><span class="dot blue"></span> Literature Mentions (Chronological)</div>
+                    <div class="table-wrapper">
+                        <table id="literatureTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-num">#</th>
+                                    <th class="col-year">Year</th>
+                                    <th class="col-title">Reference</th>
+                                    <th class="col-desc">Description</th>
+                                    <th class="col-link">Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="literatureTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+        (function() {
+            const fileUpload = document.getElementById('fileUpload');
+            const fileListEl = document.getElementById('fileList');
+            const sidebarStatus = document.getElementById('sidebarStatus');
+            const placeholderMessage = document.getElementById('placeholderMessage');
+            const problemDetails = document.getElementById('problemDetails');
+            const problemTitle = document.getElementById('problemTitle');
+            const wordDescBox = document.getElementById('wordDescBox');
+            const mathCondBox = document.getElementById('mathCondBox');
+            const literatureTableBody = document.getElementById('literatureTableBody');
+            const toast = document.getElementById('toast');
+
+            let problems = [];
+            let selectedId = null;
+            let idCounter = 0;
+
+            let toastTimer;
+            function showToast(msg, type = '') {
+                clearTimeout(toastTimer);
+                toast.textContent = msg;
+                toast.className = 'toast ' + type + ' show';
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function renderSidebar() {
+                fileListEl.innerHTML = '';
+                if (problems.length === 0) {
+                    fileListEl.innerHTML = `<li class="file-item" style="justify-content:center; color:#b0b7c3; pointer-events:none;">
+                        <span>No problems loaded</span></li>`;
+                } else {
+                    problems.forEach(p => {
+                        const li = document.createElement('li');
+                        li.className = `file-item${p.id === selectedId ? ' active' : ''}`;
+                        li.dataset.id = p.id;
+                        li.innerHTML = `
+                            <span class="file-icon">📄</span>
+                            <span class="file-name" title="${escapeHtml(p.filename)}">${escapeHtml(p.filename)}</span>
+                            <button class="remove-btn" title="Remove" data-action="remove">✕</button>
+                        `;
+                        li.addEventListener('click', (e) => {
+                            if (e.target.closest('[data-action="remove"]')) return;
+                            selectProblem(p.id);
+                        });
+                        li.querySelector('.remove-btn').addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            removeProblem(p.id);
+                        });
+                        fileListEl.appendChild(li);
+                    });
+                }
+                sidebarStatus.innerHTML = `<span class="count">${problems.length}</span> file(s) loaded`;
+            }
+
+            function selectProblem(id) {
+                selectedId = id;
+                renderSidebar();
+                const problem = problems.find(p => p.id === id);
+                if (!problem) {
+                    clearDetails();
+                    return;
+                }
+                displayProblem(problem);
+            }
+
+            function removeProblem(id) {
+                const index = problems.findIndex(p => p.id === id);
+                if (index === -1) return;
+                const wasSelected = (selectedId === id);
+                problems.splice(index, 1);
+                if (wasSelected) {
+                    selectedId = null;
+                    clearDetails();
+                }
+                renderSidebar();
+            }
+
+            function clearDetails() {
+                placeholderMessage.style.display = 'flex';
+                problemDetails.style.display = 'none';
+                problemTitle.textContent = '';
+                wordDescBox.innerHTML = '';
+                mathCondBox.innerHTML = '';
+                literatureTableBody.innerHTML = '';
+            }
+
+            function displayProblem(problem) {
+                placeholderMessage.style.display = 'none';
+                problemDetails.style.display = 'flex';
+                const data = problem.data;
+                const originalProblem = data.problem || '(untitled problem)';
+
+                // Set title as text (safe) and then render LaTeX
+                problemTitle.textContent = originalProblem;
+                // Render MathJax for the title
+                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise([problemTitle]).catch(err => console.warn('MathJax title error:', err));
+                }
+
+                // Content boxes – set as HTML (preserving any formatting from JSON) and render
+                wordDescBox.innerHTML = data.wordDescription || '';
+                mathCondBox.innerHTML = data.mathematicalConditions || '';
+
+                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise([wordDescBox, mathCondBox]).catch(err => console.warn('MathJax box error:', err));
+                }
+
+                // Literature table
+                let literature = Array.isArray(data.literature) ? data.literature : [];
+                literature = [...literature].sort((a, b) => (a.year || 9999) - (b.year || 9999));
+
+                if (literature.length === 0) {
+                    literatureTableBody.innerHTML = `<tr><td colspan="5" class="empty-table-msg">No literature entries found.</td></tr>`;
+                } else {
+                    literatureTableBody.innerHTML = literature.map((entry, i) => {
+                        const year = entry.year || '—';
+                        const title = entry.title || 'Untitled';
+                        const desc = entry.description || '';
+                        const link = entry.link || '';
+                        return `
+                            <tr>
+                                <td class="col-num">${i + 1}</td>
+                                <td class="col-year">${year}</td>
+                                <td class="col-title">${escapeHtml(title)}</td>
+                                <td class="col-desc">${escapeHtml(desc)}</td>
+                                <td class="col-link">
+                                    ${link 
+                                        ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">🔗 link</a>`
+                                        : '<span class="no-link">—</span>'}
+                                </td>
+                            </tr>`;
+                    }).join('');
+                }
+            }
+
+            fileUpload.addEventListener('change', async (e) => {
+                const files = Array.from(e.target.files);
+                if (files.length === 0) return;
+                let addedCount = 0;
+                for (const file of files) {
+                    try {
+                        const text = await file.text();
+                        let json;
+                        try {
+                            json = JSON.parse(text);
+                        } catch (parseErr) {
+                            showToast(`"${file.name}" is not valid JSON. Skipped.`, 'error');
+                            continue;
+                        }
+                        if (!json.problem && !json.wordDescription && !json.mathematicalConditions && !json.literature) {
+                            showToast(`"${file.name}" lacks required fields. Skipped.`, 'error');
+                            continue;
+                        }
+                        const newId = ++idCounter;
+                        problems.push({
+                            id: newId,
+                            filename: file.name,
+                            data: json,
+                        });
+                        addedCount++;
+                    } catch (err) {
+                        showToast(`Error reading "${file.name}": ${err.message}`, 'error');
+                    }
+                }
+                fileUpload.value = '';
+                if (addedCount > 0) {
+                    renderSidebar();
+                    if (!selectedId && problems.length > 0) {
+                        selectProblem(problems[problems.length - 1].id);
+                    }
+                    showToast(`${addedCount} file(s) added.`, 'success');
+                } else {
+                    renderSidebar();
+                }
+            });
+
+            renderSidebar();
+            clearDetails();
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+                    e.preventDefault();
+                    fileUpload.click();
+                }
+            });
+
+            console.log('📂 Viewer ready. LaTeX renders in title and boxes. Ctrl+O to upload.');
+        })();
+    </script>
+</body>
+</html>
