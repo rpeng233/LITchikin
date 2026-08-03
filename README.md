@@ -1,8 +1,8 @@
-# Open Problem Catalog Viewer
+# Problem Catalog Viewer
 
 This viewer is designed for JSON records describing mathematical, algorithmic, or scientific open problems. It supports both the original **LITchikin legacy format** and the newer extended format.
 
-The viewer is a single HTML file. Open `open\\\_problem\\\_catalog\\\_viewer.html` in a browser, then use **Load JSON** or drag JSON files onto the page.
+The viewer is a single HTML file. Open `open\\\\\\\\\\\\\\\_problem\\\\\\\\\\\\\\\_catalog\\\\\\\\\\\\\\\_viewer.html` in a browser, then use **Load JSON** or drag JSON files onto the page.
 
 ## Accepted top-level shapes
 
@@ -15,25 +15,25 @@ The viewer accepts all of the following:
   "problem": "Problem statement",
   "wordDescription": "Expository explanation",
   "mathematicalConditions": "Formal restatement",
-  "literature": \\\[]
+  "literature": \\\\\\\\\\\\\\\[]
 }
 ```
 
 ### 2\. An array of problem objects
 
 ```json
-\\\[
+\\\\\\\\\\\\\\\[
   {
     "problem": "First problem",
     "wordDescription": "...",
     "mathematicalConditions": "...",
-    "literature": \\\[]
+    "literature": \\\\\\\\\\\\\\\[]
   },
   {
     "problem": "Second problem",
     "wordDescription": "...",
     "mathematicalConditions": "...",
-    "literature": \\\[]
+    "literature": \\\\\\\\\\\\\\\[]
   }
 ]
 ```
@@ -44,12 +44,12 @@ The viewer accepts all of the following:
 {
   "schemaVersion": "1.2",
   "title": "My problem collection",
-  "problems": \\\[
+  "problems": \\\\\\\\\\\\\\\[
     {
       "problem": "Problem statement",
       "wordDescription": "...",
       "mathematicalConditions": "...",
-      "literature": \\\[]
+      "literature": \\\\\\\\\\\\\\\[]
     }
   ]
 }
@@ -66,7 +66,7 @@ This is the format used by the earlier JSON files in the LITchikin repository.
   "problem": "What is the complexity of ...?",
   "wordDescription": "A plain-language explanation of the question and its importance.",
   "mathematicalConditions": "A formal statement using LaTeX where useful.",
-  "literature": \\\[
+  "literature": \\\\\\\\\\\\\\\[
     {
       "title": "Author (Year) - Paper title",
       "year": 2025,
@@ -98,7 +98,7 @@ The canonical extended record is:
   "problem": "Cleaned statement without changing the intended meaning",
   "wordDescription": "Expository explanation and importance",
   "mathematicalConditions": "Formal restatement",
-  "literature": \\\[
+  "literature": \\\\\\\\\\\\\\\[
     {
       "title": "Author (Year) - Paper title",
       "year": 2025,
@@ -108,14 +108,14 @@ The canonical extended record is:
   ],
   "source": {
     "title": "Source document title",
-    "authors": \\\["First Author", "Second Author"],
+    "authors": \\\\\\\\\\\\\\\["First Author", "Second Author"],
     "url": "https://...",
     "page": 17,
     "problemNumber": "2.10"
   },
   "status": "open",
   "lastVerified": "2026-08-03",
-  "tags": \\\["linear systems", "bit complexity"],
+  "tags": \\\\\\\\\\\\\\\["linear systems", "bit complexity"],
   "verificationNotes": "What was checked, what remains uncertain, and whether the literature list is exhaustive.",
   "generatedAt": "2026-08-03T14:00:00-04:00"
 }
@@ -176,23 +176,23 @@ The viewer normalizes these aliases:
 
 ## LaTeX and JSON escaping
 
-MathJax renders `$...$`, `$$...$$`, `\\\\(...\\\\)`, and `\\\\\\\[...\\\\]`.
+MathJax renders `$...$`, `$$...$$`, `\\\\\\\\\\\\\\\\(...\\\\\\\\\\\\\\\\)`, and `\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\[...\\\\\\\\\\\\\\\\]`.
 
 Because JSON treats backslash as an escape character, LaTeX commands require doubled backslashes:
 
 ```json
 {
-  "problem": "Estimate $\\\\\\\\operatorname{vol}(K)$ in $\\\\\\\\mathbb{R}^n$."
+  "problem": "Estimate $\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\operatorname{vol}(K)$ in $\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\mathbb{R}^n$."
 }
 ```
 
-Use `\\\\n` for a line break inside a JSON string. Do not place an unescaped literal newline between the opening and closing quotation marks.
+Use `\\\\\\\\\\\\\\\\n` for a line break inside a JSON string. Do not place an unescaped literal newline between the opening and closing quotation marks.
 
 Correct:
 
 ```json
 {
-  "wordDescription": "First paragraph.\\\\nSecond paragraph."
+  "wordDescription": "First paragraph.\\\\\\\\\\\\\\\\nSecond paragraph."
 }
 ```
 
@@ -209,7 +209,7 @@ Create one open-problem record with this canonical schema:
   "problem": "cleaned statement without changing meaning",
   "wordDescription": "clear explanation of the problem and why it matters",
   "mathematicalConditions": "formal restatement with assumptions, quantifiers, target guarantees, and meaningful partial progress",
-  "literature": \\\[
+  "literature": \\\\\\\\\\\\\\\[
     {
       "title": "Author (Year) - Title",
       "year": 2025,
@@ -219,14 +219,14 @@ Create one open-problem record with this canonical schema:
   ],
   "source": {
     "title": "source title",
-    "authors": \\\["author names"],
+    "authors": \\\\\\\\\\\\\\\["author names"],
     "url": "source URL",
     "page": 1,
     "problemNumber": "1.1"
   },
   "status": "open",
   "lastVerified": "YYYY-MM-DD",
-  "tags": \\\["tag one", "tag two"],
+  "tags": \\\\\\\\\\\\\\\["tag one", "tag two"],
   "verificationNotes": "what was verified and any limitations",
   "generatedAt": "ISO-8601 timestamp"
 }
@@ -237,20 +237,7 @@ Requirements:
 - Do not claim the literature list is exhaustive unless it was systematically verified.
 - Use valid JSON double quotes.
 - Escape every LaTeX backslash as a double backslash.
-- Encode line breaks inside strings as \\\\n, not as literal unescaped newlines.
+- Encode line breaks inside strings as \\\\\\\\\\\\\\\\n, not as literal unescaped newlines.
 - Use null or omit a field when the source does not supply it; do not invent metadata.
 ```
-
-## Security and rendering
-
-The viewer inserts problem text with `textContent`, not `innerHTML`. Uploaded text therefore does not execute as HTML or JavaScript. Only `http://` and `https://` literature/source links are activated.
-
-## Included files
-
-* `open\\\_problem\\\_catalog\\\_viewer.html` — standalone viewer with an embedded catalog.
-* `open\\\_problem\\\_catalog\\\_combined.json` — merged dataset.
-* `open\\\_problem\\\_record.schema.json` — JSON Schema for the canonical record and combined catalog.
-* `examples/legacy\\\_litchikin\\\_problem.json`
-* `examples/extended\\\_problem.json`
-* `examples/combined\\\_catalog.json`
 
