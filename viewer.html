@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Problem Analysis Viewer — LaTeX Rendering (including title)</title>
-    <!-- MathJax configuration -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Problem Viewer — Resizable + LaTeX everywhere</title>
+
+    <!-- MathJax -->
     <script>
         MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ],
+                displayMath: [
+                    ['$$', '$$'],
+                    ['\\[', '\\]']
+                ],
                 processEscapes: true,
             },
-            options: {
-                ignoreHtmlClass: 'no-mathjax',
-            },
-            startup: {
-                typeset: false,
-            }
+            options: { ignoreHtmlClass: 'no-mathjax' },
+            startup: { typeset: false }
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async>
     </script>
+
     <style>
+        /* ── reset & variables ── */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         :root {
             --bg: #f4f6fa;
             --surface: #ffffff;
@@ -35,18 +45,13 @@
             --accent-light: #eef1fd;
             --danger: #e05555;
             --success: #2ea76e;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
             --radius: 10px;
             --radius-sm: 6px;
             --transition: 0.2s ease;
             --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
             --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
         body {
             font-family: var(--font-sans);
@@ -59,6 +64,7 @@
             justify-content: center;
             padding: 16px;
         }
+
         .app-container {
             display: flex;
             width: 100%;
@@ -70,24 +76,30 @@
             overflow: hidden;
             border: 1px solid var(--border);
         }
+
+        /* ── sidebar ── */
         .sidebar {
-            width: 300px;
+            width: 280px;
+            min-width: 180px;
+            max-width: 45%;
             background: #f8fafd;
-            border-right: 1px solid var(--border);
+            border-right: none;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
             overflow: hidden;
+            transition: none;
         }
         .sidebar-header {
-            padding: 20px 16px 12px;
+            padding: 14px 14px 10px;
             border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
         }
         .sidebar-header h2 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             letter-spacing: -0.01em;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--text);
             display: flex;
             align-items: center;
@@ -101,8 +113,8 @@
             background: var(--accent);
             color: #fff;
             font-weight: 600;
-            font-size: 0.82rem;
-            padding: 8px 14px;
+            font-size: 0.75rem;
+            padding: 6px 12px;
             border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all var(--transition);
@@ -113,26 +125,27 @@
         }
         .upload-btn:hover {
             background: var(--accent-hover);
-            box-shadow: 0 4px 10px rgba(79,110,247,0.3);
+            box-shadow: 0 4px 10px rgba(79, 110, 247, 0.3);
         }
         input[type="file"] {
             display: none;
         }
+
         .file-list {
             flex: 1;
             overflow-y: auto;
             list-style: none;
-            padding: 8px 0;
+            padding: 4px 0;
             margin: 0;
         }
         .file-item {
             display: flex;
             align-items: center;
-            padding: 10px 16px;
+            padding: 5px 12px;
             cursor: pointer;
             transition: background var(--transition);
             border-bottom: 1px solid #f0f2f5;
-            gap: 8px;
+            gap: 6px;
         }
         .file-item:hover {
             background: #edf2fc;
@@ -144,45 +157,87 @@
             color: var(--accent);
         }
         .file-item .file-icon {
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             flex-shrink: 0;
+            opacity: 0.7;
         }
         .file-item .file-name {
             flex: 1;
+            font-size: 0.78rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
-            font-size: 0.88rem;
+            white-space: normal;
+            word-break: break-word;
         }
         .file-item .remove-btn {
             background: none;
             border: none;
             color: #b0b7c3;
-            font-size: 1rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
             transition: all var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
         .file-item .remove-btn:hover {
             background: #fde2e2;
             color: var(--danger);
         }
+
         .sidebar-status {
-            padding: 8px 16px 12px;
-            font-size: 0.75rem;
+            padding: 6px 14px 10px;
+            font-size: 0.7rem;
             color: var(--text-secondary);
             border-top: 1px solid var(--border);
             background: #f8fafd;
             text-align: center;
+            flex-shrink: 0;
         }
         .sidebar-status .count {
             font-weight: 700;
             color: var(--text);
         }
+
+        /* ── resizer ── */
+        .resizer {
+            width: 6px;
+            background: var(--border);
+            cursor: col-resize;
+            flex-shrink: 0;
+            position: relative;
+            transition: background 0.15s;
+        }
+        .resizer:hover,
+        .resizer.active {
+            background: var(--accent);
+        }
+        .resizer::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 2px;
+            border-left: 2px solid rgba(255, 255, 255, 0.4);
+            border-right: 2px solid rgba(255, 255, 255, 0.4);
+            background-clip: content-box;
+        }
+        .resizer.active::after {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ── detail panel ── */
         .detail-panel {
             flex: 1;
             overflow-y: auto;
@@ -191,6 +246,7 @@
             flex-direction: column;
             gap: 20px;
             background: var(--surface);
+            min-width: 0;
         }
         .placeholder-message {
             flex: 1;
@@ -208,15 +264,66 @@
             font-size: 3rem;
             opacity: 0.7;
         }
+
         .problem-title {
             font-size: 1.35rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 8px;
+            margin-bottom: 2px;
             color: var(--text);
             line-height: 1.4;
-            /* allow LaTeX rendering inside */
         }
+        .problem-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            padding: 4px 0 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .problem-meta .meta-tag {
+            background: var(--surface-alt);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        .problem-meta .meta-tag.status {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+        .problem-meta .meta-tag .label {
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+        .source-ref {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            padding: 4px 12px;
+            background: var(--surface-alt);
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 4px 14px;
+        }
+        .source-ref a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .source-ref a:hover {
+            text-decoration: underline;
+        }
+
         .boxes-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -231,22 +338,28 @@
                 height: auto;
             }
             .sidebar {
-                width: 100%;
+                width: 100% !important;
                 max-height: 220px;
                 border-right: none;
                 border-bottom: 1px solid var(--border);
+                min-width: unset;
+                max-width: 100%;
+            }
+            .resizer {
+                display: none;
             }
             .detail-panel {
                 padding: 16px;
             }
         }
+
         .box-label {
             font-weight: 700;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -256,17 +369,24 @@
             height: 8px;
             border-radius: 50%;
         }
-        .dot.blue { background: var(--accent); }
-        .dot.green { background: var(--success); }
+        .dot.blue {
+            background: var(--accent);
+        }
+        .dot.green {
+            background: var(--success);
+        }
+        .dot.purple {
+            background: #8b5cf6;
+        }
 
         .renderable-box {
             background: var(--surface-alt);
             border: 1.5px solid var(--border);
             border-radius: var(--radius);
-            padding: 16px;
+            padding: 14px 16px;
             font-family: var(--font-sans);
             font-size: 0.9rem;
-            min-height: 160px;
+            min-height: 100px;
             overflow-y: auto;
             line-height: 1.7;
             white-space: pre-wrap;
@@ -279,6 +399,8 @@
             font-family: var(--font-mono);
             font-size: 0.85rem;
         }
+
+        /* ── literature table ── */
         .table-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -294,25 +416,25 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
-            min-width: 700px;
+            font-size: 0.82rem;
+            min-width: 600px;
         }
         table thead {
             background: var(--surface-alt);
         }
         table th {
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
             color: var(--text-secondary);
-            padding: 10px 12px;
+            padding: 8px 10px;
             text-align: left;
             border-bottom: 2px solid var(--border);
             white-space: nowrap;
         }
         table td {
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-bottom: 1px solid var(--border);
             vertical-align: top;
         }
@@ -322,30 +444,78 @@
         table tbody tr:last-child td {
             border-bottom: none;
         }
-        .col-num { width: 40px; text-align: center; color: var(--text-secondary); font-weight: 600; }
-        .col-year { width: 65px; text-align: center; font-weight: 600; }
-        .col-title { font-weight: 600; min-width: 160px; }
-        .col-desc { min-width: 180px; }
-        .col-link a { color: var(--accent); text-decoration: none; font-weight: 500; word-break: break-all; }
-        .col-link a:hover { text-decoration: underline; }
-        .no-link { color: #b0b7c3; font-style: italic; font-size: 0.8rem; }
+        .col-year {
+            width: 100px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .col-year a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .col-year a:hover {
+            text-decoration: underline;
+        }
+        .col-title {
+            font-weight: 600;
+            min-width: 150px;
+        }
+        .col-desc {
+            min-width: 160px;
+        }
+        .col-desc p {
+            margin: 0;
+        }
         .empty-table-msg {
             text-align: center;
-            padding: 30px;
+            padding: 24px;
             color: #b0b7c3;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
+
+        .verification-section {
+            margin-top: 2px;
+        }
+        .verification-section .renderable-box {
+            min-height: 50px;
+            background: #f8fafd;
+            border-color: #dce1e8;
+        }
+        .verification-section .box-label {
+            margin-bottom: 6px;
+        }
+
+        /* ── tags ── */
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+            margin-top: 2px;
+        }
+        .tags-list .tag {
+            background: var(--surface-alt);
+            padding: 1px 10px;
+            border-radius: 12px;
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        /* ── toast ── */
         .toast {
             position: fixed;
             bottom: 28px;
             right: 28px;
             background: #1a1d23;
             color: #fff;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: var(--radius-sm);
             font-weight: 600;
-            font-size: 0.85rem;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+            font-size: 0.8rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
             z-index: 999;
             opacity: 0;
             transform: translateY(20px);
@@ -357,17 +527,23 @@
             transform: translateY(0);
             pointer-events: auto;
         }
-        .toast.success { background: #1e6b42; }
-        .toast.error { background: #a03030; }
+        .toast.success {
+            background: #1e6b42;
+        }
+        .toast.error {
+            background: #a03030;
+        }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
+
+    <div class="app-container" id="appContainer">
+        <!-- ─── SIDEBAR ─── -->
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h2>📂 Uploaded Problems</h2>
                 <label for="fileUpload" class="upload-btn">+ Upload JSON Files</label>
-                <input type="file" id="fileUpload" multiple accept=".json,application/json">
+                <input type="file" id="fileUpload" multiple accept=".json,application/json" />
             </div>
             <ul id="fileList" class="file-list">
                 <li class="file-item" style="justify-content:center; color:#b0b7c3; pointer-events:none;">
@@ -379,64 +555,165 @@
             </div>
         </aside>
 
+        <!-- ─── RESIZER ─── -->
+        <div class="resizer" id="resizer"></div>
+
+        <!-- ─── DETAIL PANEL ─── -->
         <main class="detail-panel" id="detailPanel">
+
+            <!-- placeholder -->
             <div id="placeholderMessage" class="placeholder-message">
                 <span class="icon">📋</span>
                 <span>Select a problem from the left panel to view its analysis.</span>
-                <small style="color:#b0b7c3;">Word description, formal conditions, and literature table.</small>
+                <small style="color:#b0b7c3;">Supports the Open Problem Record schema (single, array, or catalog).</small>
             </div>
-            <div id="problemDetails" style="display: none; flex-direction: column; gap: 20px;">
-                <h3 class="problem-title" id="problemTitle"></h3>
+
+            <!-- problem details -->
+            <div id="problemDetails" style="display: none; flex-direction: column; gap: 16px;">
+
+                <!-- title + meta -->
+                <div>
+                    <h3 class="problem-title" id="problemTitle"></h3>
+                    <div class="problem-subtitle" id="sourceStatement"></div>
+                    <div class="problem-meta" id="problemMeta"></div>
+                    <div class="source-ref" id="sourceRef" style="display:none;"></div>
+                    <div id="tagsContainer" style="display:none; margin-top: 2px;">
+                        <div class="tags-list" id="tagsList"></div>
+                    </div>
+                </div>
+
+                <!-- two boxes -->
                 <div class="boxes-grid">
                     <div>
-                        <div class="box-label"><span class="dot blue"></span> Word Description &amp; Importance</div>
+                        <div class="box-label"><span class="dot blue"></span> Significance / Word Description</div>
                         <div id="wordDescBox" class="renderable-box" style="white-space: pre-wrap;"></div>
                     </div>
                     <div>
-                        <div class="box-label"><span class="dot green"></span> Mathematical / Formal Conditions</div>
+                        <div class="box-label"><span class="dot green"></span> Mathematical Formulation</div>
                         <div id="mathCondBox" class="renderable-box math-box" style="white-space: pre-wrap;"></div>
                     </div>
                 </div>
+
+                <!-- literature (reverse chronological) -->
                 <div class="table-card">
-                    <div class="box-label" style="margin-bottom:12px;"><span class="dot blue"></span> Literature Mentions (Chronological)</div>
+                    <div class="box-label" style="margin-bottom:8px;">
+                        <span class="dot blue"></span> Literature Mentions
+                        <span style="font-weight:400; text-transform:none; font-size:0.7rem; color:var(--text-secondary); margin-left:8px;">
+                            (reverse chronological)
+                        </span>
+                    </div>
                     <div class="table-wrapper">
                         <table id="literatureTable">
                             <thead>
                                 <tr>
-                                    <th class="col-num">#</th>
-                                    <th class="col-year">Year</th>
+                                    <th class="col-year">Time</th>
                                     <th class="col-title">Reference</th>
                                     <th class="col-desc">Description</th>
-                                    <th class="col-link">Link</th>
                                 </tr>
                             </thead>
                             <tbody id="literatureTableBody"></tbody>
                         </table>
                     </div>
                 </div>
+
+                <!-- verification notes -->
+                <div class="verification-section">
+                    <div class="box-label"><span class="dot purple"></span> Verification Notes</div>
+                    <div id="verificationNotesBox" class="renderable-box" style="white-space: pre-wrap; min-height:50px;"></div>
+                </div>
+
             </div>
         </main>
     </div>
+
     <div class="toast" id="toast"></div>
 
     <script>
         (function() {
+            'use strict';
+
+            // ── DOM refs ──
             const fileUpload = document.getElementById('fileUpload');
             const fileListEl = document.getElementById('fileList');
             const sidebarStatus = document.getElementById('sidebarStatus');
-            const placeholderMessage = document.getElementById('placeholderMessage');
-            const problemDetails = document.getElementById('problemDetails');
-            const problemTitle = document.getElementById('problemTitle');
-            const wordDescBox = document.getElementById('wordDescBox');
-            const mathCondBox = document.getElementById('mathCondBox');
-            const literatureTableBody = document.getElementById('literatureTableBody');
+            const placeholder = document.getElementById('placeholderMessage');
+            const details = document.getElementById('problemDetails');
+            const sidebar = document.getElementById('sidebar');
+            const resizer = document.getElementById('resizer');
+            const container = document.getElementById('appContainer');
+
+            const titleEl = document.getElementById('problemTitle');
+            const sourceStatementEl = document.getElementById('sourceStatement');
+            const metaEl = document.getElementById('problemMeta');
+            const sourceRefEl = document.getElementById('sourceRef');
+            const tagsContainer = document.getElementById('tagsContainer');
+            const tagsList = document.getElementById('tagsList');
+
+            const wordBox = document.getElementById('wordDescBox');
+            const mathBox = document.getElementById('mathCondBox');
+            const tableBody = document.getElementById('literatureTableBody');
+            const notesBox = document.getElementById('verificationNotesBox');
+
             const toast = document.getElementById('toast');
 
+            // ── state ──
             let problems = [];
             let selectedId = null;
             let idCounter = 0;
-
             let toastTimer;
+
+            // ── resizer logic ──
+            let isDragging = false;
+            let startX, startWidth;
+
+            function initResizer() {
+                resizer.addEventListener('mousedown', function(e) {
+                    isDragging = true;
+                    startX = e.clientX;
+                    startWidth = sidebar.getBoundingClientRect().width;
+                    resizer.classList.add('active');
+                    document.body.style.userSelect = 'none';
+                    document.body.style.cursor = 'col-resize';
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    e.preventDefault();
+                });
+            }
+
+            function onMouseMove(e) {
+                if (!isDragging) return;
+                const delta = e.clientX - startX;
+                let newWidth = startWidth + delta;
+                const containerRect = container.getBoundingClientRect();
+                const minWidth = 160;
+                const maxWidth = containerRect.width * 0.45;
+                newWidth = Math.min(Math.max(newWidth, minWidth), maxWidth);
+                sidebar.style.width = newWidth + 'px';
+            }
+
+            function onMouseUp() {
+                if (isDragging) {
+                    isDragging = false;
+                    resizer.classList.remove('active');
+                    document.body.style.userSelect = '';
+                    document.body.style.cursor = '';
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+            }
+
+            // ── helpers ──
+            function safeStr(v) {
+                if (v === undefined || v === null) return '';
+                return String(v);
+            }
+
+            function renderMath(el) {
+                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise([el]).catch(() => {});
+                }
+            }
+
             function showToast(msg, type = '') {
                 clearTimeout(toastTimer);
                 toast.textContent = msg;
@@ -444,25 +721,231 @@
                 toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
             }
 
-            function escapeHtml(str) {
-                const div = document.createElement('div');
-                div.textContent = str;
-                return div.innerHTML;
+            // ── parse uploaded JSON into problem records ──
+            function parseProblemRecords(raw) {
+                let records = [];
+                if (!raw) return records;
+                if (Array.isArray(raw)) {
+                    for (const item of raw) {
+                        if (item && typeof item === 'object') records.push(item);
+                    }
+                    return records;
+                }
+                if (raw.problems && Array.isArray(raw.problems)) {
+                    for (const item of raw.problems) {
+                        if (item && typeof item === 'object') records.push(item);
+                    }
+                    return records;
+                }
+                if (raw.problem !== undefined || raw.wordDescription !== undefined ||
+                    raw.mathematicalConditions !== undefined || raw.literature !== undefined) {
+                    records.push(raw);
+                    return records;
+                }
+                if (typeof raw === 'object' && raw !== null) {
+                    if (raw.problem) { records.push(raw); return records; }
+                    if (raw.wordDescription || raw.mathematicalConditions) { records.push(raw); return records; }
+                }
+                return records;
             }
 
+            // ── sort literature reverse chronologically ──
+            function sortLiterature(lit) {
+                if (!Array.isArray(lit)) return [];
+                return [...lit].sort((a, b) => {
+                    const ya = a && (a.year !== undefined && a.year !== null) ? Number(a.year) : null;
+                    const yb = b && (b.year !== undefined && b.year !== null) ? Number(b.year) : null;
+                    if (ya === null && yb === null) return 0;
+                    if (ya === null) return 1;
+                    if (yb === null) return -1;
+                    return yb - ya;
+                });
+            }
+
+            // ── render literature table with LaTeX support ──
+            function renderLiterature(literature) {
+                const sorted = sortLiterature(literature);
+                if (sorted.length === 0) {
+                    tableBody.innerHTML =
+                        `<tr><td colspan="3" class="empty-table-msg">No literature entries found.</td></tr>`;
+                    return;
+                }
+                let html = '';
+                sorted.forEach((entry, i) => {
+                    let year = '—',
+                        title = '',
+                        desc = '',
+                        link = '';
+                    if (typeof entry === 'string') {
+                        title = entry;
+                    } else if (entry && typeof entry === 'object') {
+                        year = (entry.year !== undefined && entry.year !== null) ? String(entry.year) : '—';
+                        title = entry.title || '';
+                        desc = entry.description || '';
+                        link = entry.link || '';
+                    } else {
+                        title = String(entry);
+                    }
+                    let yearDisplay = year;
+                    // Put the link directly on the year (no separate icon)
+                    if (link) {
+                        yearDisplay = `<a href="${link}" target="_blank" rel="noopener noreferrer">${year}</a>`;
+                    }
+                    html += `
+                        <tr>
+                            <td class="col-year">${yearDisplay}</td>
+                            <td class="col-title">${title}</td>
+                            <td class="col-desc">${desc}</td>
+                        </tr>`;
+                });
+                tableBody.innerHTML = html;
+                renderMath(tableBody);
+            }
+
+            // ── display a problem ──
+            function displayProblem(problem) {
+                placeholder.style.display = 'none';
+                details.style.display = 'flex';
+
+                const data = problem.data || {};
+
+                // title
+                const pTitle = data.problem || data.title || '(untitled problem)';
+                titleEl.textContent = pTitle;
+                renderMath(titleEl);
+
+                // source statement — now rendered as HTML with LaTeX
+                const srcStmt = data.sourceStatement || '';
+                sourceStatementEl.innerHTML = srcStmt;
+                sourceStatementEl.style.display = srcStmt ? 'block' : 'none';
+                if (srcStmt) renderMath(sourceStatementEl);
+
+                // meta
+                let metaParts = [];
+                if (data.status) {
+                    metaParts.push(`<span class="meta-tag status"><span class="label">status</span> ${data.status}</span>`);
+                }
+                if (data.lastVerified) {
+                    metaParts.push(
+                        `<span class="meta-tag"><span class="label">verified</span> ${data.lastVerified}</span>`
+                        );
+                }
+                if (data.generatedAt) {
+                    metaParts.push(
+                        `<span class="meta-tag"><span class="label">generated</span> ${data.generatedAt}</span>`
+                        );
+                }
+                metaEl.innerHTML = metaParts.join(' ');
+                metaEl.style.display = metaParts.length ? 'flex' : 'none';
+
+                // source reference
+                const src = data.source || {};
+                let srcParts = [];
+                if (src.title) srcParts.push(`<strong>${src.title}</strong>`);
+                if (src.authors) {
+                    const authors = Array.isArray(src.authors) ? src.authors.join(', ') : String(src.authors);
+                    srcParts.push(`by ${authors}`);
+                }
+                if (src.url) {
+                    srcParts.push(`<a href="${src.url}" target="_blank" rel="noopener">${src.url}</a>`);
+                }
+                if (src.page) srcParts.push(`p. ${String(src.page)}`);
+                if (src.problemNumber) srcParts.push(`#${String(src.problemNumber)}`);
+                if (srcParts.length) {
+                    sourceRefEl.innerHTML = '📖 ' + srcParts.join(' · ');
+                    sourceRefEl.style.display = 'block';
+                } else {
+                    sourceRefEl.style.display = 'none';
+                }
+
+                // tags
+                const tags = data.tags || [];
+                if (Array.isArray(tags) && tags.length) {
+                    tagsContainer.style.display = 'block';
+                    tagsList.innerHTML = tags.map(t => `<span class="tag">${String(t)}</span>`).join('');
+                } else if (typeof tags === 'string' && tags.trim()) {
+                    tagsContainer.style.display = 'block';
+                    tagsList.innerHTML = tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('');
+                } else {
+                    tagsContainer.style.display = 'none';
+                }
+
+                // word description
+                wordBox.innerHTML = data.wordDescription || '';
+                renderMath(wordBox);
+
+                // mathematical conditions
+                mathBox.innerHTML = data.mathematicalConditions || '';
+                renderMath(mathBox);
+
+                // literature (reverse chronological) with LaTeX
+                const lit = Array.isArray(data.literature) ? data.literature : [];
+                renderLiterature(lit);
+
+                // verification notes
+                const notes = data.verificationNotes || data.verificationNotes || '';
+                notesBox.innerHTML = notes;
+                renderMath(notesBox);
+            }
+
+            // ── clear details ──
+            function clearDetails() {
+                placeholder.style.display = 'flex';
+                details.style.display = 'none';
+                titleEl.textContent = '';
+                sourceStatementEl.innerHTML = '';
+                sourceStatementEl.style.display = 'none';
+                metaEl.innerHTML = '';
+                metaEl.style.display = 'none';
+                sourceRefEl.innerHTML = '';
+                sourceRefEl.style.display = 'none';
+                tagsContainer.style.display = 'none';
+                tagsList.innerHTML = '';
+                wordBox.innerHTML = '';
+                mathBox.innerHTML = '';
+                notesBox.innerHTML = '';
+                tableBody.innerHTML = '';
+            }
+
+            // ── select problem ──
+            function selectProblem(id) {
+                selectedId = id;
+                renderSidebar();
+                const p = problems.find(pr => pr.id === id);
+                if (!p) { clearDetails(); return; }
+                displayProblem(p);
+            }
+
+            // ── remove problem ──
+            function removeProblem(id) {
+                const idx = problems.findIndex(p => p.id === id);
+                if (idx === -1) return;
+                const wasSelected = (selectedId === id);
+                problems.splice(idx, 1);
+                if (wasSelected) {
+                    selectedId = null;
+                    clearDetails();
+                }
+                renderSidebar();
+            }
+
+            // ── render sidebar ──
             function renderSidebar() {
                 fileListEl.innerHTML = '';
                 if (problems.length === 0) {
-                    fileListEl.innerHTML = `<li class="file-item" style="justify-content:center; color:#b0b7c3; pointer-events:none;">
-                        <span>No problems loaded</span></li>`;
+                    fileListEl.innerHTML = `
+                        <li class="file-item" style="justify-content:center; color:#b0b7c3; pointer-events:none;">
+                            <span>No problems loaded</span>
+                        </li>`;
                 } else {
                     problems.forEach(p => {
                         const li = document.createElement('li');
                         li.className = `file-item${p.id === selectedId ? ' active' : ''}`;
                         li.dataset.id = p.id;
+                        const label = p.data.problem || p.data.title || p.filename || 'Untitled';
                         li.innerHTML = `
                             <span class="file-icon">📄</span>
-                            <span class="file-name" title="${escapeHtml(p.filename)}">${escapeHtml(p.filename)}</span>
+                            <span class="file-name" title="${label}">${label}</span>
                             <button class="remove-btn" title="Remove" data-action="remove">✕</button>
                         `;
                         li.addEventListener('click', (e) => {
@@ -479,131 +962,55 @@
                 sidebarStatus.innerHTML = `<span class="count">${problems.length}</span> file(s) loaded`;
             }
 
-            function selectProblem(id) {
-                selectedId = id;
-                renderSidebar();
-                const problem = problems.find(p => p.id === id);
-                if (!problem) {
-                    clearDetails();
-                    return;
-                }
-                displayProblem(problem);
-            }
-
-            function removeProblem(id) {
-                const index = problems.findIndex(p => p.id === id);
-                if (index === -1) return;
-                const wasSelected = (selectedId === id);
-                problems.splice(index, 1);
-                if (wasSelected) {
-                    selectedId = null;
-                    clearDetails();
-                }
-                renderSidebar();
-            }
-
-            function clearDetails() {
-                placeholderMessage.style.display = 'flex';
-                problemDetails.style.display = 'none';
-                problemTitle.textContent = '';
-                wordDescBox.innerHTML = '';
-                mathCondBox.innerHTML = '';
-                literatureTableBody.innerHTML = '';
-            }
-
-            function displayProblem(problem) {
-                placeholderMessage.style.display = 'none';
-                problemDetails.style.display = 'flex';
-                const data = problem.data;
-                const originalProblem = data.problem || '(untitled problem)';
-
-                // Set title as text (safe) and then render LaTeX
-                problemTitle.textContent = originalProblem;
-                // Render MathJax for the title
-                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
-                    MathJax.typesetPromise([problemTitle]).catch(err => console.warn('MathJax title error:', err));
-                }
-
-                // Content boxes – set as HTML (preserving any formatting from JSON) and render
-                wordDescBox.innerHTML = data.wordDescription || '';
-                mathCondBox.innerHTML = data.mathematicalConditions || '';
-
-                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
-                    MathJax.typesetPromise([wordDescBox, mathCondBox]).catch(err => console.warn('MathJax box error:', err));
-                }
-
-                // Literature table
-                let literature = Array.isArray(data.literature) ? data.literature : [];
-                literature = [...literature].sort((a, b) => (a.year || 9999) - (b.year || 9999));
-
-                if (literature.length === 0) {
-                    literatureTableBody.innerHTML = `<tr><td colspan="5" class="empty-table-msg">No literature entries found.</td></tr>`;
-                } else {
-                    literatureTableBody.innerHTML = literature.map((entry, i) => {
-                        const year = entry.year || '—';
-                        const title = entry.title || 'Untitled';
-                        const desc = entry.description || '';
-                        const link = entry.link || '';
-                        return `
-                            <tr>
-                                <td class="col-num">${i + 1}</td>
-                                <td class="col-year">${year}</td>
-                                <td class="col-title">${escapeHtml(title)}</td>
-                                <td class="col-desc">${escapeHtml(desc)}</td>
-                                <td class="col-link">
-                                    ${link 
-                                        ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">🔗 link</a>`
-                                        : '<span class="no-link">—</span>'}
-                                </td>
-                            </tr>`;
-                    }).join('');
-                }
-            }
-
+            // ── file upload handler ──
             fileUpload.addEventListener('change', async (e) => {
                 const files = Array.from(e.target.files);
-                if (files.length === 0) return;
-                let addedCount = 0;
+                if (!files.length) return;
+                let added = 0;
                 for (const file of files) {
                     try {
                         const text = await file.text();
                         let json;
-                        try {
-                            json = JSON.parse(text);
-                        } catch (parseErr) {
+                        try { json = JSON.parse(text); } catch (_) {
                             showToast(`"${file.name}" is not valid JSON. Skipped.`, 'error');
                             continue;
                         }
-                        if (!json.problem && !json.wordDescription && !json.mathematicalConditions && !json.literature) {
-                            showToast(`"${file.name}" lacks required fields. Skipped.`, 'error');
+                        const records = parseProblemRecords(json);
+                        if (!records.length) {
+                            showToast(`"${file.name}" contains no recognizable problem records. Skipped.`, 'error');
                             continue;
                         }
-                        const newId = ++idCounter;
-                        problems.push({
-                            id: newId,
-                            filename: file.name,
-                            data: json,
-                        });
-                        addedCount++;
+                        for (const rec of records) {
+                            if (!rec.problem && !rec.wordDescription && !rec.mathematicalConditions) {
+                                if (!rec.title) continue;
+                            }
+                            problems.push({
+                                id: ++idCounter,
+                                filename: file.name,
+                                data: rec,
+                            });
+                            added++;
+                        }
+                        if (added === 0) {
+                            showToast(`"${file.name}" had no valid records.`, 'error');
+                        }
                     } catch (err) {
                         showToast(`Error reading "${file.name}": ${err.message}`, 'error');
                     }
                 }
                 fileUpload.value = '';
-                if (addedCount > 0) {
+                if (added > 0) {
                     renderSidebar();
-                    if (!selectedId && problems.length > 0) {
+                    if (!selectedId && problems.length) {
                         selectProblem(problems[problems.length - 1].id);
                     }
-                    showToast(`${addedCount} file(s) added.`, 'success');
+                    showToast(`${added} problem(s) added from ${files.length} file(s).`, 'success');
                 } else {
                     renderSidebar();
                 }
             });
 
-            renderSidebar();
-            clearDetails();
-
+            // ── keyboard shortcut ──
             document.addEventListener('keydown', (e) => {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
                     e.preventDefault();
@@ -611,7 +1018,13 @@
                 }
             });
 
-            console.log('📂 Viewer ready. LaTeX renders in title and boxes. Ctrl+O to upload.');
+            // ── init ──
+            initResizer();
+            renderSidebar();
+            clearDetails();
+
+            console.log('📂 Open Problem Viewer ready. Drag the divider to resize. Ctrl+O to upload.');
+
         })();
     </script>
 </body>

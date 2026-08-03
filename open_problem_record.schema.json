@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-problem-record.schema.json",
+  "title": "Open Problem Record or Catalog",
+  "description": "Canonical schema used by the Open Problem Catalog Viewer. The viewer accepts additional legacy aliases documented in the README.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/problemRecord"
+    },
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/problemRecord"
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "problems"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "generatedAt": {
+          "type": "string"
+        },
+        "lastVerified": {
+          "type": "string"
+        },
+        "problemCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "problems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/problemRecord"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  ],
+  "$defs": {
+    "literatureEntry": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "year": {
+              "type": [
+                "integer",
+                "string",
+                "null"
+              ]
+            },
+            "description": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "authors": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "page": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "problemNumber": {
+          "type": [
+            "string",
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "problemRecord": {
+      "type": "object",
+      "required": [
+        "problem"
+      ],
+      "properties": {
+        "sourceStatement": {
+          "type": "string"
+        },
+        "problem": {
+          "type": "string"
+        },
+        "wordDescription": {
+          "type": "string"
+        },
+        "mathematicalConditions": {
+          "type": "string"
+        },
+        "literature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/literatureEntry"
+          }
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "status": {
+          "type": "string"
+        },
+        "lastVerified": {
+          "type": "string"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "verificationNotes": {
+          "type": "string"
+        },
+        "generatedAt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
