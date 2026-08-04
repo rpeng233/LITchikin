@@ -487,6 +487,71 @@
             margin-bottom: 6px;
         }
 
+        /* ── read-only comments ── */
+        .comments-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            box-shadow: var(--shadow-sm);
+        }
+        .comments-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .comments-heading .box-label {
+            margin-bottom: 0;
+        }
+        .comments-count {
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            white-space: nowrap;
+        }
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .comment-card {
+            background: #fafbfc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+        }
+        .comment-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 7px;
+        }
+        .comment-author {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .comment-time {
+            color: var(--text-secondary);
+            font-size: 0.68rem;
+            white-space: nowrap;
+        }
+        .comment-body {
+            color: var(--text);
+            font-size: 0.86rem;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+        .comments-empty {
+            color: #b0b7c3;
+            font-size: 0.84rem;
+            padding: 16px;
+            text-align: center;
+        }
+
         /* ── tags ── */
         .tags-list {
             display: flex;
@@ -622,6 +687,15 @@
                     <div id="verificationNotesBox" class="renderable-box" style="white-space: pre-wrap; min-height:50px;"></div>
                 </div>
 
+                <!-- read-only comments -->
+                <section class="comments-section" aria-labelledby="commentsLabel">
+                    <div class="comments-heading">
+                        <div class="box-label" id="commentsLabel"><span class="dot blue"></span> Comments</div>
+                        <span class="comments-count" id="commentsCount"></span>
+                    </div>
+                    <div class="comments-list" id="commentsList"></div>
+                </section>
+
             </div>
         </main>
     </div>
@@ -653,6 +727,8 @@
             const mathBox = document.getElementById('mathCondBox');
             const tableBody = document.getElementById('literatureTableBody');
             const notesBox = document.getElementById('verificationNotesBox');
+            const commentsList = document.getElementById('commentsList');
+            const commentsCount = document.getElementById('commentsCount');
 
             const toast = document.getElementById('toast');
 
@@ -802,6 +878,59 @@
                 renderMath(tableBody);
             }
 
+            // ── render comments in their stored chronological order ──
+            function renderComments(comments) {
+                const entries = Array.isArray(comments)
+                    ? comments.filter(comment => comment && typeof comment === 'object')
+                    : [];
+
+                commentsList.replaceChildren();
+                commentsCount.textContent = `${entries.length} ${entries.length === 1 ? 'comment' : 'comments'}`;
+
+                if (entries.length === 0) {
+                    const empty = document.createElement('div');
+                    empty.className = 'comments-empty';
+                    empty.textContent = 'No comments yet.';
+                    commentsList.appendChild(empty);
+                    return;
+                }
+
+                for (const comment of entries) {
+                    const card = document.createElement('article');
+                    card.className = 'comment-card';
+
+                    const header = document.createElement('div');
+                    header.className = 'comment-header';
+
+                    const author = document.createElement('span');
+                    author.className = 'comment-author';
+                    if (typeof comment.author === 'string') {
+                        author.textContent = comment.author.trim() || 'Unknown user';
+                    } else if (comment.author && typeof comment.author === 'object') {
+                        author.textContent = safeStr(
+                            comment.author.displayName || comment.author.name || comment.author.id
+                        ).trim() || 'Unknown user';
+                    } else {
+                        author.textContent = 'Unknown user';
+                    }
+
+                    const time = document.createElement('time');
+                    time.className = 'comment-time';
+                    const createdAt = safeStr(comment.createdAt).trim();
+                    time.textContent = createdAt;
+                    if (createdAt) time.dateTime = createdAt;
+
+                    const body = document.createElement('div');
+                    body.className = 'comment-body';
+                    body.textContent = safeStr(comment.body);
+
+                    header.append(author, time);
+                    card.append(header, body);
+                    commentsList.appendChild(card);
+                    renderMath(body);
+                }
+            }
+
             // ── display a problem ──
             function displayProblem(problem) {
                 placeholder.style.display = 'none';
@@ -886,6 +1015,9 @@
                 const notes = data.verificationNotes || data.verificationNotes || '';
                 notesBox.innerHTML = notes;
                 renderMath(notesBox);
+
+                // comments (read-only)
+                renderComments(data.comments);
             }
 
             // ── clear details ──
@@ -905,6 +1037,8 @@
                 mathBox.innerHTML = '';
                 notesBox.innerHTML = '';
                 tableBody.innerHTML = '';
+                commentsList.replaceChildren();
+                commentsCount.textContent = '';
             }
 
             // ── select problem ──
