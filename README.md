@@ -2,7 +2,20 @@
 
 This viewer is designed for JSON records describing mathematical, algorithmic, or scientific open problems. It supports both the original **LITchikin legacy format** and the newer extended format.
 
-The viewer is a single HTML file. Open `open\\\\\\\\\\\\\\\_problem\\\\\\\\\\\\\\\_catalog\\\\\\\\\\\\\\\_viewer.html` in a browser, then use **Load JSON** or drag JSON files onto the page.
+Open `viewer.html` in a browser, then use **Upload JSON Files** to load either a repository catalog or a local JSON file. Uploads are read and parsed in the browser.
+
+## Repository layout
+
+```text
+.
+├── viewer.html
+├── gener_ds.html
+├── open_problem_record.schema.json
+└── data/
+    └── SimonsF25ComplexityLinAlg.json
+```
+
+All catalog JSON files belong in `data/`. The viewer remains at the repository root. The repository's default catalog is `data/SimonsF25ComplexityLinAlg.json`.
 
 ## Accepted top-level shapes
 
@@ -98,6 +111,7 @@ The canonical extended record is:
   "problem": "Cleaned statement without changing the intended meaning",
   "wordDescription": "Expository explanation and importance",
   "mathematicalConditions": "Formal restatement",
+  "comments": [],
   "literature": \\\\\\\\\\\\\\\[
     {
       "title": "Author (Year) - Paper title",
@@ -128,6 +142,7 @@ The canonical extended record is:
 |`problem`|string|The cleaned problem statement. This is the only strongly recommended field.|
 |`wordDescription`|string|Explanation, motivation, and importance.|
 |`mathematicalConditions`|string|Formal assumptions, quantifiers, success criteria, and meaningful partial progress.|
+|`comments`|array|Chronological user comments associated with this problem. Use an empty array when there are no comments.|
 |`literature`|array|Relevant papers, books, posts, or source mentions.|
 |`sourceStatement`|string|Verbatim or minimally normalized wording from the source.|
 |`source`|object|Source title, authors, URL, page, and problem number.|
@@ -136,6 +151,25 @@ The canonical extended record is:
 |`tags`|array of strings|Search/filter labels.|
 |`verificationNotes`|string|Scope, ambiguities, source errors, and verification limitations.|
 |`generatedAt`|string|ISO timestamp for record generation.|
+
+### Comment entries
+
+Comments are stored directly in each problem record as a flat chronological array:
+
+```json
+{
+  "id": "comment-01HXYZ",
+  "author": {
+    "id": "user-123",
+    "displayName": "Ada"
+  },
+  "body": "A Markdown or LaTeX-enabled comment.",
+  "createdAt": "2026-08-04T16:00:00Z",
+  "updatedAt": null
+}
+```
+
+`id`, `author`, `body`, and `createdAt` are required for non-empty comment entries. `author` may also be a string for legacy or imported data. Additional comment fields are allowed for forward compatibility.
 
 ### Literature entries
 
@@ -209,6 +243,7 @@ Create one open-problem record with this canonical schema:
   "problem": "cleaned statement without changing meaning",
   "wordDescription": "clear explanation of the problem and why it matters",
   "mathematicalConditions": "formal restatement with assumptions, quantifiers, target guarantees, and meaningful partial progress",
+  "comments": [],
   "literature": \\\\\\\\\\\\\\\[
     {
       "title": "Author (Year) - Title",
@@ -240,4 +275,3 @@ Requirements:
 - Encode line breaks inside strings as \\\\\\\\\\\\\\\\n, not as literal unescaped newlines.
 - Use null or omit a field when the source does not supply it; do not invent metadata.
 ```
-

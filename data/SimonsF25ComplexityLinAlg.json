@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "source": {
     "title": "Linear Systems and Eigenvalue Problems: Open Questions from a Simons Workshop",
     "authors": [
@@ -55,6 +55,7 @@
       "problem": "Prove a near-linear construction and linear-time application guarantee for an algebraic-multigrid approximate inverse of every polynomially bounded SWCDDM matrix.",
       "wordDescription": "Algebraic multigrid is among the most successful practical methods for elliptic and graph-structured systems, but a theorem matching its observed near-linear behavior on this broad matrix class is missing. The requested result would translate multigrid hierarchies into the spectral-approximation language common in theoretical computer science. It would also clarify whether purely algebraic coarsening can achieve the same kind of nearly linear guarantee as specialized Laplacian solvers.",
       "mathematicalConditions": "For every polynomially bounded symmetric weakly chained diagonally dominant M-matrix \\(M\\), compute an implicit symmetric operator \\(Z\\) in \\(\\widetilde O(\\operatorname{nnz}(M))\\) time such that \\(Z\\) is a constant-factor Loewner approximation to \\(M^{-1}\\). Applying \\(Z\\) to a vector must cost \\(O(\\operatorname{nnz}(M))\\), with approximation constants independent of \\(n\\). The paper also highlights planar-only and mildly relaxed construction/application variants.",
+      "comments": [],
       "literature": [
         {
           "title": "[BHM00] William L. Briggs, Van Emden Henson, and Steve F. McCormick. A Multigrid Tutorial. Society for Industrial and Applied Mathematics, Philadelphia, PA, 2nd edition, 2000.",
@@ -141,6 +142,7 @@
       "problem": "Determine the asymptotic iteration complexity of conjugate gradients versus randomized coordinate descent on random-basis systems with polynomially decaying eigenvalues.",
       "wordDescription": "Worst-case condition numbers do not capture how iterative methods exploit a full eigenvalue distribution. This model fixes a controlled power-law spectrum, randomizes the eigenbasis, and chooses a generic solution direction. It therefore offers a clean test of whether Krylov polynomial approximation or coordinate sampling better exploits spectral decay. A sharp answer could reveal distribution-sensitive complexity measures that are more predictive than the ordinary condition number.",
       "mathematicalConditions": "For fixed \\(p,\\varepsilon>0\\), characterize with high probability or in expectation the growth rates in \\(n\\) of the stopping times for CG and RCD applied to the stated random system. The stopping criterion should be the paper's prescribed relative error measure. Determine the ratio or asymptotic ordering of the two complexities, including any phase transitions as a function of \\(p\\).",
+      "comments": [],
       "literature": [
         {
           "title": "[HS52] Magnus R. Hestenes and Eduard Stiefel. Method of Conjugate Gradients for Solving Linear Systems. Journal of Research of the National Bureau of Stan- dards, 49(6):409–436, 1952.",
@@ -227,6 +229,7 @@
       "problem": "Obtain a sparse solver whose complexity separates the cost of handling \\(k\\) large spectral outliers from the cost of solving the remaining well-conditioned bulk.",
       "wordDescription": "A small number of outlying singular values can make the usual condition number look much worse than the bulk spectrum. Krylov methods can often deflate such directions, but existing guarantees do not attain the proposed sparse direct-access bound. The target combines fast algebra on the outlier subspace with nearly input-sparsity-time work on the remainder.",
       "mathematicalConditions": "Use the paper's definition of an \\((n,k,0,\\kappa)\\) system: after removing at most \\(k\\) large singular-value outliers, the remaining spectrum has condition number at most \\(\\kappa\\). Given direct access to the nonzero entries of \\(A\\), compute a high-accuracy solution using \\(\\widetilde O(k^\\omega+\\operatorname{nnz}(A)\\kappa)\\) arithmetic operations.",
+      "comments": [],
       "literature": [
         {
           "title": "[AL86] Owe Axelsson and Gunhild Lindskog. On the rate of convergence of the pre- conditioned conjugate gradient method. Numerische Mathematik, 48:499–523, 1986.",
@@ -301,6 +304,7 @@
       "problem": "Determine the strongest averaged-condition-number dependence achievable by fast dense and sparse linear-system solvers.",
       "wordDescription": "The ordinary condition number is controlled by the single smallest singular value, even when almost all singular values are benign. Averaged condition numbers interpolate between a bulk statistic and the worst case. The problem asks how far solver complexity can be made sensitive to this average and whether sparse access creates a fundamental barrier that is absent in dense systems.",
       "mathematicalConditions": "For singular values \\(\\sigma_1\\ge\\cdots\\ge\\sigma_n>0\\), let \\(\\bar\\kappa_p=(n^{-1}\\sum_i(\\sigma_i/\\sigma_n)^p)^{1/p}\\). Find the infimum of \\(p>0\\) for which every input can be solved to high accuracy in \\(\\widetilde O(T_A\\bar\\kappa_p)\\) operations, separately for \\(T_A=n^2\\) and \\(T_A=\\operatorname{nnz}(A)\\), or prove lower bounds ruling out such dependence.",
+      "comments": [],
       "literature": [
         {
           "title": "[DS25] Michal Dereziński and Aaron Sidford. Approaching optimality for solving dense linear systems with low-rank structure. arXiv preprint arXiv:2507.11724, 2025.",
@@ -387,6 +391,7 @@
       "problem": "Characterize the optimal cost of solving systems with \\(\\ell\\) small singular-value outliers, distinguishing direct-entry access from black-box matrix-vector access.",
       "wordDescription": "Small singular-value outliers are harder to isolate than large ones because they can dominate inverse behavior while carrying little energy in forward products. The paper asks whether direct access to entries enables preprocessing or deflation that a pure matrix-vector oracle cannot emulate. Resolving the model separation would clarify the limits of Krylov methods and the value of structural access.",
       "mathematicalConditions": "Under the paper's \\((n,0,\\ell,\\kappa)\\) spectral promise, determine matching upper and lower bounds for high-accuracy solution. Give bounds in arithmetic operations for direct access to \\(A\\), and in matrix-vector products for an oracle returning \\(Av\\) and possibly \\(A^*v\\). The result should expose dependence on \\(n,\\ell,\\kappa\\), sparsity, and target accuracy.",
+      "comments": [],
       "literature": [
         {
           "title": "[AL86] Owe Axelsson and Gunhild Lindskog. On the rate of convergence of the pre- conditioned conjugate gradient method. Numerische Mathematik, 48:499–523, 1986.",
@@ -467,6 +472,7 @@
       "problem": "Solve a typical i.i.d. random dense linear system asymptotically faster than general matrix inversion, for an arbitrary right-hand side.",
       "wordDescription": "Random dense matrices are usually well behaved in many senses, yet the smallest singular values still create nontrivial inverse complexity. The question asks whether typical-case structure can beat the matrix-multiplication barrier, even when the right-hand side is adversarial. A positive result would be a strong example of an average-case speedup for a fundamental algebraic problem.",
       "mathematicalConditions": "For \\(A\\) drawn from an i.i.d. Gaussian, Rademacher, or Bernoulli ensemble, construct an algorithm that, on an event of probability \\(1-o(1)\\) over \\(A\\), solves \\(Ax=b\\) for every fixed or arbitrary \\(b\\) to high accuracy in \\(o(n^\\omega)\\) time. Alternatively, prove a matching conditional or oracle lower bound. Matrix-vector complexity variants are also relevant.",
+      "comments": [],
       "literature": [
         {
           "title": "[DS25] Michal Dereziński and Aaron Sidford. Approaching optimality for solving dense linear systems with low-rank structure. arXiv preprint arXiv:2507.11724, 2025.",
@@ -547,6 +553,7 @@
       "problem": "Translate spectrum-sensitive real-arithmetic solvers into bit-efficient Word-RAM algorithms, or identify precision barriers.",
       "wordDescription": "Exact-arithmetic iteration counts can hide severe coefficient growth and loss of orthogonality. This problem asks whether the attractive outlier-sensitive bounds survive when every number has finite representation and arithmetic cost depends on bit length. The issue is especially acute for Krylov deflation, where exploiting close or extreme eigenvalues can require high precision.",
       "mathematicalConditions": "Specify an input bit model for \\(A,b\\) and a normwise or backward-error target. Determine the Word-RAM cost of solving systems satisfying the paper's \\((n,k,\\ell,\\kappa)\\) promise. In particular, achieve \\(\\widetilde O(k^\\omega+n^2\\kappa)\\) word operations with only polylogarithmic precision overhead for \\(\\ell=0\\), or prove that some instances require more bits or more time.",
+      "comments": [],
       "literature": [
         {
           "title": "[AL86] Owe Axelsson and Gunhild Lindskog. On the rate of convergence of the pre- conditioned conjugate gradient method. Numerische Mathematik, 48:499–523, 1986.",
@@ -627,6 +634,7 @@
       "problem": "Determine whether the best sparse real-arithmetic linear-system runtime can be achieved with controlled precision and bit cost.",
       "wordDescription": "Sparse solvers are often analyzed by counting arithmetic operations on exact reals. On a Word-RAM, intermediate numbers, conditioning, and rounding errors can dominate. The requested result would place a near-optimal sparse solver on a realistic discrete computational foundation. A lower bound would instead show that the arithmetic model conceals unavoidable precision costs.",
       "mathematicalConditions": "Let \\(A\\) and \\(b\\) have bounded input bit length and let \\(\\operatorname{nnz}(A)\\) denote sparsity. Compute an exact rational solution or an approximation meeting a stated forward/backward error in \\(\\widetilde O(n\\operatorname{nnz}(A))\\) Word-RAM operations, with word size and precision overhead polylogarithmic in the dimension, conditioning, input bit length, and requested accuracy; or establish a contrary lower bound.",
+      "comments": [],
       "literature": [
         {
           "title": "[PV21] Richard Peng and Santosh Vempala. Solving sparse linear systems faster than matrix multiplication. In Proceedings of the 2021 ACM-SIAM Symposium on Discrete Algorithms (SODA), pages 504–521. SIAM, 2021.",
@@ -701,6 +709,7 @@
       "problem": "Develop a quantitatively predictive theorem for the initial, pre-asymptotic convergence or stagnation of GMRES on nonnormal matrices.",
       "wordDescription": "Many standard GMRES bounds are valid but too pessimistic to explain observed residual curves. Nonnormality can create a long transient before asymptotic behavior becomes visible, and this transient often matters most in computations. The problem asks for a bound based on accessible matrix information that actually tracks this early phase rather than merely certifying eventual convergence.",
       "mathematicalConditions": "For a nonnormal matrix \\(A\\), right-hand side \\(b\\), and GMRES residuals \\(r_k\\), derive upper and preferably lower estimates for \\(\\|r_k\\|/\\|r_0\\|\\) over the early iteration range. The bound should use computable or interpretable quantities such as pseudospectra, numerical range, eigenvector conditioning, or problem-specific structure and should be sharp on representative examples.",
+      "comments": [],
       "literature": [
         {
           "title": "[Emb22] Mark Embree. How descriptive are GMRES convergence bounds? Technical Report arXiv2209:01231, 2022.",
@@ -781,6 +790,7 @@
       "problem": "Identify and rigorously analyze a nonnormal preconditioned problem for which eigenvalue distribution alone is genuinely descriptive of GMRES convergence.",
       "wordDescription": "Eigenvalue plots are routinely used to assess preconditioners, yet for nonnormal matrices they can be misleading because eigenvectors and pseudospectra also matter. This problem seeks a positive model where the common eigenvalue heuristic is not merely correlated with performance but can be turned into a correct predictive theorem.",
       "mathematicalConditions": "Construct a parameterized family \\(P_n^{-1}A_n\\) and prove that its GMRES residual history is controlled, up to explicit constants, by a statistic of the eigenvalue distribution. The analysis should rule out hidden dependence on severely conditioned eigenvectors or show that such dependence is uniformly bounded in the model.",
+      "comments": [],
       "literature": [
         {
           "title": "[LS05] J. Liesen and Z. Strakoš. GMRES convergence analysis for a convection- diffusion model problem. SIAM J. Sci. Comput., 26(6):1989–2009, 2005.",
@@ -861,6 +871,7 @@
       "problem": "Give a rigorous mechanism for the post-transient acceleration of GMRES on a convection-diffusion model and quantify the role of eigenvalues and eigenvectors.",
       "wordDescription": "Some convection-diffusion examples show slow or erratic initial GMRES progress followed by a much faster phase. The observed switch is not fully explained by standard bounds. A solution would isolate which components are removed during the transient and why the remaining polynomial approximation problem becomes easier.",
       "mathematicalConditions": "For the preconditioned convection-diffusion family considered in the cited literature, identify an iteration scale \\(k_0\\) and prove a sharper convergence law for \\(k\\ge k_0\\). Relate \\(k_0\\) and the later rate to explicit eigenvalue clusters, eigenvector conditioning, invariant subspaces, pseudospectral geometry, or discretization parameters.",
+      "comments": [],
       "literature": [
         {
           "title": "[LS05] J. Liesen and Z. Strakoš. GMRES convergence analysis for a convection- diffusion model problem. SIAM J. Sci. Comput., 26(6):1989–2009, 2005.",
@@ -941,6 +952,7 @@
       "problem": "Characterize when finite-precision residual recurrences in CG and steepest descent produce residual norms smaller than unit roundoff, and when they cannot.",
       "wordDescription": "Iterative methods update a residual recursively, and that internal residual may drift from the true residual \\(b-Ax_k\\). In some experiments the recurrence continues to decrease beyond machine precision, a behavior that is both surprising and relevant to stopping criteria. The problem asks for structural conditions or explicit counterexamples that explain the phenomenon.",
       "mathematicalConditions": "In a floating-point model with unit roundoff \\(u\\), analyze the recursively computed residual sequence for CG or steepest descent on SPD matrices. Give verifiable conditions on \\(A,b\\), the spectrum, and rounding errors that imply \\(\\widehat{\\|r_k\\|}<u\\) for some \\(k\\), or construct a family for which this never occurs despite continued iterations. Distinguish the recursive and true residuals.",
+      "comments": [],
       "literature": [
         {
           "title": "[CLS24] Erin Carson, Jörg Liesen, and Zdeněk Strakoš. Towards understanding CG and GMRES through examples. Linear Algebra Appl., 692:241–291, 2024.",
@@ -1021,6 +1033,7 @@
       "problem": "Establish a precise finite-precision equivalence—or a meaningful separation—between conjugate gradients and Lanczos.",
       "wordDescription": "In exact arithmetic, CG and Lanczos are tightly linked through the same Krylov recurrences. Floating-point rounding breaks orthogonality and can perturb the two implementations differently. The question is whether their observed convergence and stability can still be coupled under realistic assumptions, or whether there are matrices on which they diverge qualitatively.",
       "mathematicalConditions": "Compare finite-precision CG iterates/residuals with quantities generated by a finite-precision Lanczos process on the same SPD matrix and starting vector. Prove a backward-error, nearby-matrix, or residual-polynomial coupling over a stated iteration range, or exhibit a family with asymptotically different behavior.",
+      "comments": [],
       "literature": [
         {
           "title": "[HS52] Magnus R. Hestenes and Eduard Stiefel. Method of Conjugate Gradients for Solving Linear Systems. Journal of Research of the National Bureau of Stan- dards, 49(6):409–436, 1952.",
@@ -1101,6 +1114,7 @@
       "problem": "Determine the precision required to make at most \\(n\\) CG iterations normwise backward stable to a prescribed tolerance.",
       "wordDescription": "Exact CG terminates in at most \\(n\\) steps, but finite precision can destroy this property and leave a non-negligible backward error. This problem asks for a direct quantitative relation between bits of precision, spectral properties, dimension, and the final backward error. It is a clean test of whether exact-arithmetic iteration bounds can be made bit-complexity statements.",
       "mathematicalConditions": "For SPD \\(A\\) and target \\(\\varepsilon\\), find the smallest mantissa length \\(s=s(n,\\kappa(A),\\varepsilon,\\ldots)\\) such that an implementation of CG run for at most \\(n\\) steps returns \\(\\widehat x\\) with normwise backward error at most \\(\\varepsilon\\). Prove sufficiency and, ideally, matching necessity over a specified input class.",
+      "comments": [],
       "literature": [
         {
           "title": "[CLS24] Erin Carson, Jörg Liesen, and Zdeněk Strakoš. Towards understanding CG and GMRES through examples. Linear Algebra Appl., 692:241–291, 2024.",
@@ -1181,6 +1195,7 @@
       "problem": "Develop a Paige-style finite-precision theory for Lanczos when each operator or preconditioner application is itself approximate.",
       "wordDescription": "Modern large-scale solvers often use inner iterations, compression, mixed precision, or approximate preconditioners, so the Krylov recurrence sees a changing operator error. Classical Lanczos stability theory mainly treats rounding in otherwise exact products. The requested extension would explain when inexactness merely corresponds to a nearby problem and when it destroys spectral information.",
       "mathematicalConditions": "Analyze a Lanczos recurrence with products \\(\\widehat w_k=Aq_k+e_k\\) and/or approximate preconditioner applications. Derive orthogonality, residual, and nearby-matrix statements in terms of the error sequence \\(e_k\\), precision, and conditioning. Identify allowable error schedules that preserve the desired Ritz-value or linear-solve guarantees.",
+      "comments": [],
       "literature": [
         {
           "title": "[CT24] Tyler Chen and Thomas Trogdon. Stability of the lanczos algorithm on ma- trices with regular spectral distributions. Linear Algebra and its Applications, 682:191–237, February 2024.",
@@ -1261,6 +1276,7 @@
       "problem": "Build a complete finite-precision stability and loss-of-orthogonality theory for block Lanczos comparable to Paige's scalar analysis.",
       "wordDescription": "Block Lanczos is used to exploit multiple starting vectors, clustered eigenvalues, and parallel hardware. Its finite-precision behavior is more complicated because whole subspaces can lose rank or orthogonality. Extending the classical theory would support reliable block eigensolvers, matrix-function methods, and randomized Krylov algorithms.",
       "mathematicalConditions": "For block size \\(s\\), derive a finite-precision representation of the computed block Lanczos factors as an exact or nearly exact recurrence for a nearby matrix. Quantify block orthogonality loss, rank deficiency, ghost Ritz values, and residuals in terms of unit roundoff, spectral gaps, and conditioning, with bounds that remain meaningful as \\(s\\) varies.",
+      "comments": [],
       "literature": [
         {
           "title": "[CT24] Tyler Chen and Thomas Trogdon. Stability of the lanczos algorithm on ma- trices with regular spectral distributions. Linear Algebra and its Applications, 682:191–237, February 2024.",
@@ -1341,6 +1357,7 @@
       "problem": "Resolve the Forsythe conjecture on the two-cycle limiting directions of steepest-descent residuals.",
       "wordDescription": "Steepest descent on a quadratic can display an asymptotic zig-zag. Forsythe conjectured that, after normalization, the even residual directions and odd residual directions each approach a single limit. The issue is subtle when the spectrum and starting vector create multiple competing modes. A proof would complete a classical qualitative description of one of the most basic iterative methods.",
       "mathematicalConditions": "Let \\(A\\succ0\\) and apply exact line-search steepest descent to \\(f(x)=\\tfrac12x^TAx-b^Tx\\). For residuals \\(r_k=b-Ax_k\\), prove that \\(r_{2k}/\\|r_{2k}\\|\\) and \\(r_{2k+1}/\\|r_{2k+1}\\|\\) each converge as \\(k\\to\\infty\\), with an appropriate treatment of degenerate starting vectors and spectral multiplicities, or give a counterexample if the paper's formulation permits one.",
+      "comments": [],
       "literature": [
         {
           "title": "[FLT23] Vance Faber, Jörg Liesen, and Petr Tichý. On the Forsythe conjecture. BIT, 63:49, 2023.",
@@ -1415,6 +1432,7 @@
       "problem": "Derandomize pseudospectral shattering: deterministically perturb any matrix by at most \\(\\delta\\) so that the perturbed eigenproblem is polynomially well conditioned, in nearly cubic time and logarithmic precision.",
       "wordDescription": "Small random perturbations can regularize a highly nonnormal eigenproblem and enable fast stable diagonalization. The open question is whether the perturbation can be chosen deterministically without losing polynomial eigenvector conditioning or near-cubic complexity. Such a result would remove a central source of randomness from modern complexity-theoretic eigensolvers.",
       "mathematicalConditions": "Given \\(A\\) and \\(\\delta\\), deterministically construct \\(E\\) with \\(\\|E\\|\\le\\delta\\) such that the eigenvector/eigenvalue condition measure of \\(A+E\\) is bounded by \\(\\operatorname{poly}(n/\\delta)\\). Use \\(O(n^3\\operatorname{polylog}(n/\\delta))\\) operations and preferably only \\(\\operatorname{polylog}(n/\\delta)\\) bits. The source formula \\(C(\\delta/n)^c\\) appears directionally inconsistent with the surrounding request for a polynomial bound in \\(n/\\delta\\).",
+      "comments": [],
       "literature": [
         {
           "title": "[BGVKS23] Jess Banks, Jorge Garza-Vargas, Archit Kulkarni, and Nikhil Srivastava. Pseu- dospectral shattering, the sign function, and diagonalization in nearly matrix multiplication time. Found. Comput. Math., 23(6):1959–2047, 2023.",
@@ -1501,6 +1519,7 @@
       "problem": "Construct deterministic small perturbations of Hermitian tridiagonal matrices that guarantee the eigenvalue separation supplied probabilistically by Minami estimates.",
       "wordDescription": "Minami-type estimates show that random perturbations make multiple eigenvalues in a short interval unlikely. A deterministic counterpart would give explicit spectral separation without probabilistic regularization. This could support deterministic high-accuracy eigensolvers and sharpen the derandomization program for Hermitian problems.",
       "mathematicalConditions": "For a Hermitian tridiagonal matrix and perturbation scale \\(\\delta\\), construct an explicit perturbation of controlled norm whose spectrum has a quantitative minimum-gap or interval-occupancy guarantee comparable to the relevant random Minami estimate. The construction should be computationally efficient and compatible with finite precision.",
+      "comments": [],
       "literature": [
         {
           "title": "[Min96] Nariyuki Minami. Local fluctuation of the spectrum of a multidimensional anderson tight binding model. Communications in mathematical physics, 177(3):709–725, 1996.",
@@ -1587,6 +1606,7 @@
       "problem": "Obtain a nearly cubic, logarithmic-precision randomized eigensolver with rigorous backward error for general matrices.",
       "wordDescription": "Fast asymptotic eigenvalue algorithms often rely on high precision, inverses, or conditioning assumptions that prevent a clean bit-complexity theorem. The target is a fully stable algorithm whose arithmetic and precision costs are simultaneously near optimal. It would place general nonsymmetric diagonalization or Schur decomposition on a footing analogous to stable dense linear algebra.",
       "mathematicalConditions": "For \\(A\\in\\mathbb C^{n\\times n}\\), failure probability and backward tolerance \\(\\delta\\), output a diagonalization when appropriate or a Schur factorization \\(A+\\Delta A=QTQ^*\\) with \\(\\|\\Delta A\\|\\le\\delta\\|A\\|\\). The algorithm should run in \\(O(n^3\\operatorname{polylog}(n/\\delta))\\) operations, use \\(O(\\log(n/\\delta))\\)-bit words, and succeed with high probability.",
+      "comments": [],
       "literature": [
         {
           "title": "[BGVKS23] Jess Banks, Jorge Garza-Vargas, Archit Kulkarni, and Nikhil Srivastava. Pseu- dospectral shattering, the sign function, and diagonalization in nearly matrix multiplication time. Found. Comput. Math., 23(6):1959–2047, 2023.",
@@ -1673,6 +1693,7 @@
       "problem": "Characterize when adding arbitrary extra directions to an approximate invariant subspace preserves a full set of accurate Ritz-value approximations.",
       "wordDescription": "Rayleigh-Ritz extraction is reliable when a trial space closely captures an invariant subspace, but practical methods often use a larger search space containing unrelated buffer directions. Those directions can change the compression and its Ritz values. A theorem would explain when oversampling is harmless and provide robust extraction guarantees for restarted and randomized eigensolvers.",
       "mathematicalConditions": "Let \\(\\mathcal U\\) be a \\(d\\)-dimensional invariant subspace of \\(A\\), let \\(\\widehat{\\mathcal U}\\) approximate it in principal-angle or residual norm, and let \\(\\mathcal B\\) be an arbitrary buffer subspace. Find verifiable conditions on angles, gaps, nonnormality, and \\(\\mathcal B\\) under which the Rayleigh quotient on \\(\\widehat{\\mathcal U}+\\mathcal B\\) contains \\(d\\) Ritz values close to the target eigenvalues.",
+      "comments": [],
       "literature": [
         {
           "title": "[BER04] Christopher Beattie, Mark Embree, and John Rossi. Convergence of restarted Krylov subspaces to invariant subspaces. SIAM J. Matrix Anal. Appl., 25:1074– 1109, 2004.",
@@ -1759,6 +1780,7 @@
       "problem": "Quantify how well conditioned and how nonnormal the small matrix produced by random-start Krylov compression is.",
       "wordDescription": "Krylov methods replace a large matrix by a much smaller Rayleigh quotient. Even when the original matrix is difficult, the compression may be better conditioned in practice, which could explain the success of Ritz-value computations. The problem asks for probabilistic control of eigenvector conditioning or pseudospectral size for this compressed matrix.",
       "mathematicalConditions": "Let \\(Q_k\\) span a Krylov subspace generated from a random starting vector and define \\(H_k=Q_k^*AQ_k\\). Establish high-probability bounds on \\(\\kappa_{\\mathrm{eig}}(H_k)\\), its pseudospectral area, or a related nonnormality measure as a function of \\(n,k\\), properties of \\(A\\), and the start distribution.",
+      "comments": [],
       "literature": [
         {
           "title": "[Ste02] G. W. Stewart. Backward error bounds for approximate Krylov subspaces. Linear Algebra Appl., 340:81–86, 2002.",
@@ -1839,6 +1861,7 @@
       "problem": "Describe which points of the numerical range arise as Ritz values and how their distribution changes for arbitrary, Krylov-generated, and random trial subspaces.",
       "wordDescription": "Every Ritz value lies in the numerical range, but the converse geometry is poorly understood beyond special cases. A distributional theory would connect inverse field-of-values questions, random compression, and Krylov convergence. It could also clarify whether observed Ritz plots are universal or strongly matrix dependent.",
       "mathematicalConditions": "For \\(A\\in\\mathbb C^{n\\times n}\\) and a trial subspace \\(\\mathcal S\\), study the eigenvalues of \\(Q^*AQ\\). Determine attainable sets for fixed dimension, probability laws under Haar-random \\(\\mathcal S\\), and evolution under Krylov subspaces. Express the answer in terms of the numerical range, spectrum, normality, or other matrix invariants.",
+      "comments": [],
       "literature": [
         {
           "title": "[PS08] Beresford Parlett and Gilbert Strang. Matrices with prescribed Ritz values. Linear Algebra Appl., 428:1725–1739, 2008.",
@@ -1925,6 +1948,7 @@
       "problem": "Formalize the multiple relatively robust representations eigensolver with explicit, verifiable assumptions and end-to-end correctness, stability, and complexity guarantees.",
       "wordDescription": "MRRR is a sophisticated practical algorithm for symmetric tridiagonal eigenproblems. Its analysis relies on notions of relative robustness and conditional choices that are difficult to package as a clean theorem. The problem asks for a proof style with precise interfaces, probabilities or deterministic conditions, bit requirements, and failure modes that can be checked on the input or during execution.",
       "mathematicalConditions": "State explicit conditions under which MRRR returns all requested eigenpairs with specified residual and orthogonality bounds. Prove termination and arithmetic/bit complexity, and show how the algorithm verifies the robustness conditions or handles their failure. The theorem should cover clustered eigenvalues without relying on uncheckable genericity assumptions.",
+      "comments": [],
       "literature": [
         {
           "title": "[Dhi97] Inderjit Singh Dhillon. A New O(n2 ) Algorithm for the Symmetric Tridiagonal Eigenvalue/Eigenvector Problem. PhD thesis, EECS Department, University of California, Berkeley, Oct 1997.",
@@ -2017,6 +2041,7 @@
       "problem": "Design a linear-per-triplet bidiagonal SVD algorithm that simultaneously guarantees high relative accuracy and near orthogonality.",
       "wordDescription": "Bidiagonal SVD is a core kernel in dense and sparse singular-value computations. Existing algorithms may attain accuracy, orthogonality, or favorable complexity under different conditions, but the requested combination for only \\(k\\) triplets remains unsettled. An \\(O(kn)\\) method would be output-sensitive and especially useful when only a small spectral subset is needed.",
       "mathematicalConditions": "Given an \\(n\\times n\\) bidiagonal matrix and a requested set of \\(k\\) singular triplets, return \\((\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)\\) with prescribed relative residual/accuracy and pairwise near orthogonality. The total arithmetic cost should be \\(O(kn)\\), with a finite-precision analysis that covers clustered or tiny singular values.",
+      "comments": [],
       "literature": [
         {
           "title": "[GL03] Benedikt Großer and Bruno Lang. An o(n2 ) algorithm for the bidiagonal svd. Linear Algebra and its Applications, 358(1):45–70, 2003.",
@@ -2103,6 +2128,7 @@
       "problem": "Approximate a near-largest-modulus eigenvalue of a diagonalizable nonnormal matrix using only polylogarithmically many matrix-vector products in dimension and eigenvector conditioning.",
       "wordDescription": "The power method estimates spectral radius but can fail to identify a nearby complex eigenvalue accurately when the matrix is nonnormal. The target complexity would be dramatically smaller than generic Krylov bounds and would depend only logarithmically on dimension and eigenvector conditioning. It asks whether coarse radial information can be upgraded to a genuine eigenvalue approximation efficiently.",
       "mathematicalConditions": "In a black-box model for products \\(Av\\), assume \\(A\\) is diagonalizable with finite \\(\\kappa_V\\). Return a scalar within \\(\\varepsilon|\\lambda_1|\\) of at least one eigenvalue whose modulus is at least \\((1-\\varepsilon)|\\lambda_1|\\), using \\(\\operatorname{poly}(\\log(n\\kappa_V),1/\\varepsilon)\\) products and a controlled success probability. Stronger variants approximate all eigenvalues in the outer annulus.",
+      "comments": [],
       "literature": [
         {
           "title": "[SSZ24] Rikhav Shah, Nikhil Srivastava, and Edward Zeng. Sparse Pseudospectral Shattering, 2024.",
@@ -2183,6 +2209,7 @@
       "problem": "Identify useful matrix structures for which practical greedy or randomized index-selection algorithms admit near-optimal column-subset or rank-revealing-factorization guarantees.",
       "wordDescription": "Worst-case column subset selection and pivoted factorizations can have weak approximation factors, while practical matrices often have kernels, decay, positivity, or PDE structure that makes simple pivoting work exceptionally well. The problem asks for assumptions that are broad enough to cover applications but strong enough to yield provable quasi-optimality.",
       "mathematicalConditions": "Choose a structural class of matrices \\(A\\) and an efficient greedy or randomized algorithm. Prove a CSSP error bound within a slowly growing factor of the best rank-\\(k\\) approximation and/or strong RRQR bounds on the selected block and trailing factor. State how the approximation factor and runtime depend on the structural parameters.",
+      "comments": [],
       "literature": [
         {
           "title": "[GE96] Ming Gu and Stanley C Eisenstat. Efficient algorithms for computing a strong rank-revealing qr factorization. SIAM J. Sci. Comput., 17(4):848–869, 1996.",
@@ -2269,6 +2296,7 @@
       "problem": "Prove application-specific, sharper-than-worst-case pivoted cross-approximation bounds for the fermionic kernel used in the discrete Lehmann representation.",
       "wordDescription": "The discrete Lehmann representation compresses imaginary-time Green's functions by selecting interpolation nodes and kernel columns. Complete pivoting works well, but generic bounds do not explain its rapid convergence for this analytic kernel. A proof would justify node selection and representation size in quantum many-body calculations.",
       "mathematicalConditions": "For the fermionic kernel \\(K(t,\\omega)=e^{-t\\omega}/(1+e^{-\\omega})\\) on the stated domain and cutoff, analyze complete-pivoting cross approximation. Bound interpolation error, selected rank, and conditioning as functions of tolerance and cutoff, improving generic matrix bounds and ideally matching observed logarithmic or near-logarithmic rank.",
+      "comments": [],
       "literature": [
         {
           "title": "[KCP22] Jason Kaye, Kun Chen, and Olivier Parcollet. Discrete lehmann representation of imaginary time green’s functions. Phys. Rev. B, 105:235115, Jun 2022.",
@@ -2361,6 +2389,7 @@
       "problem": "Prove or refute a polynomial rank-revealing guarantee for standard QRCP on matrices with orthonormal rows.",
       "wordDescription": "QR with column pivoting is ubiquitous and usually effective, but worst-case examples prevent strong general guarantees. Orthonormal rows remove scaling and conditioning pathologies while preserving a nontrivial column-selection problem. This special case may be the right setting for explaining practical behavior or constructing a decisive counterexample.",
       "mathematicalConditions": "Let \\(A\\in\\mathbb R^{m\\times n}\\) satisfy \\(AA^T=I_m\\). Run the standard greedy QRCP algorithm and analyze its selected \\(k\\)-column block and trailing factor. Prove bounds polynomial in \\(m,n,k\\) analogous to RRQR guarantees, or exhibit an orthonormal-row family with superpolynomial or exponential failure.",
+      "comments": [],
       "literature": [
         {
           "title": "[GKS76] G Golub, V Klema, and GW Stewart. Rank degeneracy and least squares problems. In Rep. STAN-CS-76-559. Dept. Comput. Sci., Stanford University, 1976.",
@@ -2447,6 +2476,7 @@
       "problem": "When does selecting columns after observing only \\(O(k)\\) random rows perform almost as well as column selection on the entire matrix?",
       "wordDescription": "For very tall matrices, even reading every entry defeats sublinear algorithms. A natural strategy samples a few rows and chooses representative columns from that sketch. The problem asks for structural conditions under which those local choices transfer to the full matrix with only logarithmic loss. Such a theorem would justify fast skeletonization and kernel compression from partial observations.",
       "mathematicalConditions": "Let \\(I\\) be a random set of \\(r=O(k)\\) rows and let \\(\\widetilde J\\) be columns selected from \\(A(I,:)\\). Find assumptions ensuring \\(\\|\\Pi_{\\widetilde J}A-A\\|_F\\le c(n,m,k)\\|\\Pi_JA-A\\|_F\\) with high probability, where \\(J\\) is the choice obtained from full access and \\(c\\) is at most logarithmic. Quantify sample size, coherence, leverage, and kernel regularity.",
+      "comments": [],
       "literature": [
         {
           "title": "[CD13] Jiawei Chiu and Laurent Demanet. Sublinear randomized algorithms for skele- ton decompositions. SIAM J. Matrix Anal. Appl., 34(3):1361–1383, 2013.",
@@ -2533,6 +2563,7 @@
       "problem": "Construct adaptive hierarchical low-rank approximations of PDE solution operators with quasi-optimal error and explicit complexity dependence on the partition.",
       "wordDescription": "Solution operators for PDEs often have low-rank off-diagonal blocks, but the right hierarchical partition and local ranks depend on propagation, coefficients, and geometry. An adaptive theorem would let the representation discover this structure while remaining close to the best approximation available in the chosen format. It would connect operator learning, hierarchical matrices, and tensor partitioning.",
       "mathematicalConditions": "For a specified PDE solution operator and hierarchical block or tensor partition, give an adaptive sampling/approximation algorithm. Prove an error bound within a controlled factor of the best rank-structured approximation and derive sample, arithmetic, and storage complexity as functions of tolerance, local ranks, tree depth, admissibility, and PDE parameters.",
+      "comments": [],
       "literature": [
         {
           "title": "[WT23] Christopher Wang and Alex Townsend. Operator learning for hyperbolic partial differential equations, 2023.",
@@ -2619,6 +2650,7 @@
       "problem": "Determine whether selecting Nyström columns for positive-definite SDDM/SDD matrices has a submodular nuclear-error objective.",
       "wordDescription": "Submodularity would immediately justify greedy column selection with strong approximation guarantees. SDDM and SDD matrices have graph-like positivity and diagonal-dominance structure that may enforce diminishing returns even though the property fails for general matrices. Resolving this would connect spectral graph structure to combinatorial optimization of low-rank approximations.",
       "mathematicalConditions": "For \\(K\\succ0\\) in the SDDM or SDD class, define the set function given by the nuclear norm of the Nyström residual after selecting indices \\(I\\). Determine whether the corresponding error reduction satisfies diminishing returns for all \\(S\\subseteq T\\) and \\(j\\notin T\\). If not, identify the weakest additional matrix conditions or an approximate-submodularity bound.",
+      "comments": [],
       "literature": [
         {
           "title": "[CKM20] Alice Cortinovis, Daniel Kressner, and Stefano Massei. On maximum volume submatrices and cross approximation for symmetric semidefinite and diagonally dominant matrices. Linear Algebra Appl., 593:251–268, 2020.",
@@ -2693,6 +2725,7 @@
       "problem": "Quantify, as a function only of the spectrum, the gap between worst-case optimal column selection and expected determinantal volume sampling.",
       "wordDescription": "Volume sampling has an exact expected trace-error formula depending only on eigenvalues. Optimal deterministic subset selection can also be evaluated in the worst orientation of eigenvectors, but its spectrum-only relationship to volume sampling is unknown. A tight comparison would reveal how much can be inferred from eigenvalues alone and how close randomized determinant-based selection is to the best subset.",
       "mathematicalConditions": "For \\(\\lambda\\in\\mathbb R_{>0}^n\\), analyze the ratio or additive gap between the paper's quantities \\(x_k(\\lambda)\\) and \\(y_k(\\lambda)\\) for every \\(1\\le k<n\\). Prove tight universal upper and lower bounds, characterize equality cases, and optionally determine variance or higher moments of the volume-sampling error.",
+      "comments": [],
       "literature": [
         {
           "title": "[GS12] Thierry Gallay and Denis Serre. Numerical measure of a complex matrix. 65:287–336, 2012.",
@@ -2773,6 +2806,7 @@
       "problem": "For each randomized linear-algebra algorithm, identify the minimal geometric or distributional property of the sketch that is sufficient for its accuracy guarantee.",
       "wordDescription": "Analyses often assume a full oblivious subspace embedding even when the algorithm may use much less information. Stronger assumptions force larger sketches and can obscure which feature of randomness actually drives success. This meta-problem asks for an algorithm-specific hierarchy of sketch properties, enabling sharper dimensions, sparser maps, and better practical choices.",
       "mathematicalConditions": "Fix an algorithm \\(\\mathcal A(A,\\Omega)\\) and target error event. Characterize a property \\(P\\) of \\(\\Omega\\)—for example one-sided injectivity, moment control, approximate matrix multiplication, or a restricted embedding—such that \\(P\\) implies the guarantee. Prove minimality by separating \\(P\\) from weaker candidate properties or by constructing sketches that satisfy only the necessary condition.",
+      "comments": [],
       "literature": [
         {
           "title": "[Sar06] Tamás Sarlós. Improved Approximation Algorithms for Large Matrices via Random Projections. In 2006 47th Annual IEEE Symposium on Foundations of Computer Science (FOCS’06), pages 143–152, October 2006.",
@@ -2859,6 +2893,7 @@
       "problem": "Determine whether one-sided oblivious subspace injectivity alone guarantees relative-error sketch-and-solve least squares.",
       "wordDescription": "Standard least-squares sketching analyses use a two-sided subspace embedding or additional approximate-product conditions. An oblivious subspace injection only prevents vectors in the relevant subspace from shrinking too much. If that weaker one-sided property suffices, then smaller or sparser sketches may achieve relative error; a counterexample would identify the missing geometric ingredient.",
       "mathematicalConditions": "Under exactly the source hypotheses, prove the stated \\(1+O(\\varepsilon)\\) Frobenius residual guarantee uniformly for all \\(A,B\\), or give a distribution over sketches and an input pair satisfying the OSI condition but violating relative error. Variants may allow failure probability \\(\\delta=\\operatorname{poly}(\\varepsilon)\\).",
+      "comments": [],
       "literature": [
         {
           "title": "[Sar06] Tamás Sarlós. Improved Approximation Algorithms for Large Matrices via Random Projections. In 2006 47th Annual IEEE Symposium on Foundations of Computer Science (FOCS’06), pages 143–152, October 2006.",
@@ -2945,6 +2980,7 @@
       "problem": "Determine whether a one-sided oblivious subspace injection is sufficient for relative-error randomized low-rank approximation.",
       "wordDescription": "Randomized SVD normally relies on preserving a target subspace in both directions or on stronger range-finding estimates. The problem tests whether merely avoiding collapse of every fixed \\(r\\)-subspace already forces the sampled range \\(A\\Omega\\) to capture the best rank-\\(r\\) approximation. The answer would sharpen the conceptual and dimensional requirements of randomized SVD.",
       "mathematicalConditions": "Under the source's OSI hypothesis, prove \\(\\|A-\\widetilde A\\|_F\\le(1+O(\\varepsilon))\\|A-A_r\\|_F\\) (and clarify any spectral-norm variant), or construct a counterexample. Track whether a smaller failure probability or an additional one-sided moment condition is necessary.",
+      "comments": [],
       "literature": [
         {
           "title": "[Sar06] Tamás Sarlós. Improved Approximation Algorithms for Large Matrices via Random Projections. In 2006 47th Annual IEEE Symposium on Foundations of Computer Science (FOCS’06), pages 143–152, October 2006.",
@@ -3031,6 +3067,7 @@
       "problem": "Find the correct one-sided sketching property for constant-factor \\(\\ell_p\\) regression.",
       "wordDescription": "Euclidean subspace embeddings have a clean singular-value interpretation, but \\(\\ell_p\\) regression lacks the same orthogonal geometry. The question asks for a weaker property than full norm preservation that still guarantees sketch-and-solve success. Such a formulation could unify sparse, heavy-tailed, and structured sketches across different \\(p\\)-norms.",
       "mathematicalConditions": "Define a distributional property of \\(\\Omega\\) for each relevant \\(p\\) such that, for every fixed \\(A,b\\), the sketched minimizer satisfies \\(\\|A\\widetilde x-b\\|_p\\le C\\min_x\\|Ax-b\\|_p\\) with constant probability. Prove the implication, determine sketch dimension/sparsity, and show necessity or separations from standard \\(\\ell_p\\) embeddings.",
+      "comments": [],
       "literature": [
         {
           "title": "[Woo14] David P. Woodruff. Sketching as a Tool for Numerical Linear Algebra. Foun- dations and Trends® in Theoretical Computer Science, 10(1-2):1–157, 2014.",
@@ -3111,6 +3148,7 @@
       "problem": "Resolve the conjectured optimal embedding dimension and sparsity tradeoff for the SparseStack construction.",
       "wordDescription": "Sparse embeddings accelerate the multiplication of a data matrix by a sketch, but extreme sparsity can force larger target dimension. Nelson and Nguyen proposed a specific stacked sparse construction believed to achieve the optimal tradeoff. Recent work has approached the conjecture, but the exact parameter regime remains unresolved.",
       "mathematicalConditions": "For the SparseStack distribution defined in the paper, prove that its stated sparsity and target dimension yield a \\((1\\pm\\varepsilon)\\) oblivious subspace embedding for every fixed \\(r\\)-dimensional subspace with constant success probability, or construct a subspace violating the conjecture. Match lower bounds up to constant or subpolylogarithmic factors.",
+      "comments": [],
       "literature": [
         {
           "title": "[NN13] Jelani Nelson and Huy L. Nguyên. OSNAP: Faster numerical linear algebra algorithms via sparser subspace embeddings. In 2013 Ieee 54th Annual Sym- posium on Foundations of Computer Science, pages 117–126. IEEE, 2013.",
@@ -3203,6 +3241,7 @@
       "problem": "Determine whether constant column sparsity and linear target dimension suffice for one-sided subspace injectivity in SparseStack.",
       "wordDescription": "A one-sided injection is weaker than a full embedding, so it may be achievable with dramatically sparser sketches. The proposed parameters are especially attractive in practice: only four nonzeros per column and roughly twice the intrinsic dimension. Resolving this would show how much cheaper sketching becomes when an algorithm only needs to prevent collapse.",
       "mathematicalConditions": "For every fixed \\(r\\)-dimensional subspace of \\(\\mathbb R^n\\) with \\(r\\le c n/\\log n\\), prove that the minimum singular value of the restricted SparseStack map with \\(\\zeta=4,k=2r\\) is bounded below by a universal constant with constant probability, or give a counterexample. Determine whether the ambient-dimension restriction is necessary.",
+      "comments": [],
       "literature": [
         {
           "title": "[Tro25] Joel A. Tropp. Comparison theorems for the minimum eigenvalue of a random positive-semidefinite matrix, January 2025.",
@@ -3283,6 +3322,7 @@
       "problem": "Show that rerandomization removes the logarithmic oversampling of the SRHT, or find a subspace on which optimal-dimension rerandomized SRHT fails.",
       "wordDescription": "The standard subsampled randomized Hadamard transform is fast but usually needs an extra logarithmic factor in target dimension. Interleaving additional random signs and Hadamard transforms may spread leverage more uniformly and attain the information-theoretic dimension \\(O(r/\\varepsilon^2)\\). A proof would give an exceptionally attractive fast OSE; a counterexample would identify the limitation of finite rerandomization.",
       "mathematicalConditions": "For the rerandomized SRHT construction defined by the paper and \\(n\\ge c\\log r\\), prove that every fixed \\(r\\)-dimensional subspace has all singular values in \\([1-\\varepsilon,1+\\varepsilon]\\) after projection to \\(k=C r/\\varepsilon^2\\) dimensions with constant success probability, or construct a violating subspace. Weaker constant-distortion and OSI variants are also meaningful.",
+      "comments": [],
       "literature": [
         {
           "title": "[Tro11] Joel A. Tropp. Improved analysis of the subsampled randomized Hadamard transform. Advances in Adaptive Data Analysis, 03(01n02):115–126, April 2011.",
@@ -3369,6 +3409,7 @@
       "problem": "Beat the universal \\(m-1\\) approximation factor for tree tensor-network truncation, or prove that factor computationally optimal.",
       "wordDescription": "Sequential or hierarchical SVD truncation accumulates local errors and yields an \\(m-1\\)-type global guarantee. The strict-improvement question asks whether this factor is an artifact of the analysis and algorithm or an inherent consequence of efficient computation over a nonconvex tensor-network variety. Even an arbitrarily small worst-case improvement would be conceptually significant.",
       "mathematicalConditions": "Fix any tree tensor-network topology with \\(m\\) nodes and edge ranks. For every input tensor, compute in polynomial time a representable tensor with squared Frobenius error strictly less than \\((m-1)\\) times optimum, preferably \\(o(m)\\) times optimum. Alternatively, give a reduction showing no polynomial-time algorithm can improve the factor under a stated complexity assumption.",
+      "comments": [],
       "literature": [
         {
           "title": "[KB09] Tamara G Kolda and Brett W Bader. Tensor decompositions and applications. SIAM review, 51(3):455–500, 2009.",
@@ -3461,6 +3502,7 @@
       "problem": "Design a fast nonlinear eigensolver for product-state local-Hamiltonian optimization with superlinear local convergence and only linear dependence on the number of factors.",
       "wordDescription": "Optimizing a local Hamiltonian over product states is a structured nonconvex problem arising in quantum many-body computation. The paper reformulates its stationarity conditions as a nonlinear eigenvalue problem of dimension \\(nd\\). Existing self-consistent or Rayleigh-quotient methods may converge only linearly or have unfavorable dependence on \\(d\\). The target combines local Newton-like speed with scalable global iteration cost.",
       "mathematicalConditions": "For the Hamiltonian tensor-product structure in equation (18) and objective (19), construct an algorithm for the associated NEPv. Near a nondegenerate solution, prove superlinear convergence; globally or from an admissible initialization, bound the number of iterations by \\(O(d\\,\\operatorname{poly}(n,\\log(1/\\varepsilon)))\\) or another expression linear in \\(d\\). Account for the cost of forming/applying local operators.",
+      "comments": [],
       "literature": [
         {
           "title": "[KKR06] Julia Kempe, Alexei Kitaev, and Oded Regev. The complexity of the local Hamiltonian problem. SIAM J. Comput., 35(5):1070–1097, 2006.",
@@ -3547,6 +3589,7 @@
       "problem": "Determine the optimal sign-function approximation error under a matrix-multiplication budget rather than a polynomial-degree budget.",
       "wordDescription": "A high-degree polynomial can sometimes be evaluated with very few nonscalar multiplications by exploiting composition and addition chains. For GPU-oriented matrix functions, multiplication count is more important than degree. The problem asks for the approximation power of the nonlinear class of polynomials that can be generated with at most \\(m\\) matrix multiplications.",
       "mathematicalConditions": "Let \\(\\Pi_m^*\\) be the set of scalar polynomials evaluable at a matrix using at most \\(m\\) matrix-matrix multiplications, along with free additions and scalings. Determine the asymptotics of \\(\\varepsilon_m^*=\\inf_{p\\in\\Pi_m^*}\\max_{x\\in[-1,-\\delta]\\cup[\\delta,1]}|p(x)-\\operatorname{sign}(x)|\\) jointly in \\(m\\) and \\(\\delta\\), with matching constructive upper and lower bounds.",
+      "comments": [],
       "literature": [
         {
           "title": "[EY07] A. Eremenko and P. Yuditskii. Uniform approximation of sgn x by polynomials and entire functions. Journal of Analysis and Mathematics, 101:313–324, 2007.",
@@ -3633,6 +3676,7 @@
       "problem": "Determine whether best \\(\\ell_2\\) sign approximants within a multiplication-limited polynomial class exhibit an equioscillation law.",
       "wordDescription": "Equioscillation characterizes best uniform approximation by a linear polynomial space, but the multiplication-limited class is nonlinear and the objective here is \\(\\ell_2\\). Empirical evidence reported in the paper suggests an alternating-error structure may nevertheless survive. A theorem could provide optimality certificates and guide numerical construction of multiplication-efficient matrix functions.",
       "mathematicalConditions": "Precisely define the \\(\\ell_2\\) measure on \\([-1,-\\delta]\\cup[\\delta,1]\\) and minimize the error over the paper's multiplication-constrained polynomial class. Prove or refute that a minimizer has an ordered set of extremal or interpolation points at which the signed error alternates in the appropriate equioscillation sense. Clarify existence and nonuniqueness.",
+      "comments": [],
       "literature": [
         {
           "title": "[Tre13] Lloyd N. Trefethen. Approximation Theory and Approximation Practice. SIAM, 1st edition, 2013.",
@@ -3713,6 +3757,7 @@
       "problem": "Quantify the approximation loss from restricting multiplication-efficient sign polynomials to compositions of scaled linear-plus-cubic maps.",
       "wordDescription": "Compositions of cubic maps are simple, stable, and highly parallelizable, and they include purification iterations used in electronic structure. The full class of polynomials computable with the same multiplication budget is much richer. This problem asks whether the simple compositional family is essentially optimal or requires substantially more multiplications to match the best possible error.",
       "mathematicalConditions": "Let \\(\\Pi_{2T}^{\\mathrm{comp}}\\) consist of compositions of \\(T\\) polynomials \\(a_tx+b_tx^3\\), each evaluable with two matrix multiplications, and let \\(\\varepsilon_{2T}^{\\mathrm{comp}}\\) be its best uniform sign-approximation error. Compare it sharply with \\(\\varepsilon_{2T}^*\\), or determine the minimal overhead \\(T=T(m,\\delta)\\) needed to achieve \\(\\varepsilon_{2T}^{\\mathrm{comp}}\\le \\varepsilon_m^*\\).",
+      "comments": [],
       "literature": [
         {
           "title": "[JL25] Elias Jarlebring and Gustaf Lorentzon. The polynomial set associated with a fixed number of matrix-matrix multiplications, 2025.",
