@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.2",
+  "schemaVersion": "1.3",
   "source": {
     "title": "Linear Systems and Eigenvalue Problems: Open Questions from a Simons Workshop",
     "authors": [
@@ -135,7 +135,8 @@
         "near-linear algorithms"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.3"
     },
     {
       "sourceStatement": "Fix constants \\(\\varepsilon>0\\) and \\(p>0\\). Let \\(A_n=U\\Lambda_nU^*\\), where \\(U\\in\\mathbb C^{n\\times n}\\) is Haar unitary and \\(\\Lambda_n=\\operatorname{diag}(1^{-p},2^{-p},\\ldots,n^{-p})\\). Let \\(b_n=A_nz_n\\), where \\(z_n\\) is distributed uniformly on the sphere. What is the asymptotic behavior of \\(T_{\\mathrm{CG}}(A_n,b_n,\\varepsilon)\\) compared with \\(T_{\\mathrm{RCD}}(A_n,b_n,\\varepsilon)\\) as \\(n\\to\\infty\\)?",
@@ -222,7 +223,8 @@
         "random matrices"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.4"
     },
     {
       "sourceStatement": "Can we solve an \\((n,k,0,\\kappa)\\) linear system \\(Ax=b\\) to high accuracy using \\(\\widetilde O(k^\\omega+\\operatorname{nnz}(A)\\kappa)\\) arithmetic operations?",
@@ -297,7 +299,8 @@
         "Krylov methods"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.5"
     },
     {
       "sourceStatement": "Find the smallest \\(p>0\\) such that we can solve an \\(n\\times n\\) linear system \\(Ax=b\\) to high accuracy using \\(\\widetilde O(T_A\\,\\bar\\kappa_p)\\) arithmetic operations, where \\(\\bar\\kappa_p\\) is the \\(p\\)-averaged condition number of the singular values of \\(A\\), whereas \\(T_A\\) is either \\(n^2\\) or \\(\\operatorname{nnz}(A)\\).",
@@ -384,7 +387,8 @@
         "complexity"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.6"
     },
     {
       "sourceStatement": "What is the complexity of solving \\((n,0,\\ell,\\kappa)\\) linear systems, and how is this affected by the model of computation (direct access vs. matrix-vector product)?",
@@ -465,7 +469,8 @@
         "lower bounds"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.7"
     },
     {
       "sourceStatement": "Let \\(A\\) be an \\(n\\times n\\) random matrix with i.i.d. Gaussian (or Rademacher, or Bernoulli) entries, and take any \\(n\\)-dimensional vector \\(b\\). Is it possible, conditioned on a high-probability event, to solve \\(Ax=b\\) to high accuracy faster than \\(O(n^\\omega)\\)?",
@@ -546,7 +551,8 @@
         "matrix multiplication"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.8"
     },
     {
       "sourceStatement": "What is the bit complexity of solving \\((n,k,\\ell,\\kappa)\\) linear systems? In particular, does the \\(\\widetilde O(k^\\omega+n^2\\kappa)\\) running time for \\((n,k,0,\\kappa)\\) systems extend to the Word-RAM model?",
@@ -627,7 +633,8 @@
         "finite precision"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.9"
     },
     {
       "sourceStatement": "What is the bit complexity of solving an \\(n\\times n\\) linear system with \\(\\operatorname{nnz}(A)\\) non-zeros? In particular, does the \\(\\widetilde O(n\\,\\operatorname{nnz}(A))\\) runtime extend to the Word-RAM model?",
@@ -702,7 +709,8 @@
         "Word-RAM"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.10"
     },
     {
       "sourceStatement": "Find a descriptive convergence bound for the early transient behavior of GMRES for nonnormal linear systems.",
@@ -783,7 +791,8 @@
         "convergence bounds"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.12"
     },
     {
       "sourceStatement": "Find a model problem in which the eigenvalue distribution of the preconditioned matrix genuinely predicts GMRES convergence.",
@@ -864,7 +873,8 @@
         "eigenvalue distributions"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.13"
     },
     {
       "sourceStatement": "Explain the acceleration of GMRES after the transient phase for the convection-diffusion model problem, and determine how it relates to eigeninformation.",
@@ -945,7 +955,8 @@
         "transient behavior"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.14"
     },
     {
       "sourceStatement": "Determine conditions under which the recursively computed residual norms for finite-precision CG or steepest descent eventually fall below machine precision, or construct counterexamples.",
@@ -1026,7 +1037,8 @@
         "residuals"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.15"
     },
     {
       "sourceStatement": "Do finite-precision CG and finite-precision Lanczos behave similarly?",
@@ -1107,7 +1119,8 @@
         "finite precision"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.16"
     },
     {
       "sourceStatement": "How many bits of precision are sufficient for CG to attain normwise backward error \\(\\varepsilon\\) in at most \\(n\\) steps?",
@@ -1188,7 +1201,8 @@
         "precision"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.17"
     },
     {
       "sourceStatement": "Extend Paige's analysis of Lanczos to inexact matrix-vector products or inexact preconditioners.",
@@ -1269,7 +1283,8 @@
         "preconditioning"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.18"
     },
     {
       "sourceStatement": "Extend Paige's analysis of the Lanczos algorithm to block Lanczos.",
@@ -1350,7 +1365,8 @@
         "stability"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.19"
     },
     {
       "sourceStatement": "Prove the Forsythe conjecture: for steepest descent on a positive definite quadratic, the even and odd subsequences of normalized residuals each converge to a unique limit.",
@@ -1425,7 +1441,8 @@
         "asymptotic dynamics"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:2.20"
     },
     {
       "sourceStatement": "Give a provably correct and efficient deterministic algorithm for the following task: on input \\(A\\in\\mathbb C^{n\\times n}\\) and \\(\\delta>0\\), output a perturbation \\(E\\) with \\(\\|E\\|\\le\\delta\\) such that \\(\\kappa_{\\mathrm{eig}}(A+E)\\le C(\\delta/n)^c\\), where \\(C,c\\) are universal constants. Efficient means \\(O(n^3\\log^c(n/\\delta))\\) arithmetic operations, either in exact arithmetic or, more ambitiously, in finite arithmetic with \\(O(\\log^c(n/\\delta))\\) bits of precision.",
@@ -1512,7 +1529,8 @@
         "conditioning"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link. The displayed source bound \\(C(\\delta/n)^c\\) is preserved verbatim. The surrounding text asks for a polynomial upper bound that worsens as \\(\\delta\\) decreases, so the cleaned/formal statement records the likely intended \\(\\operatorname{poly}(n/\\delta)\\) behavior rather than silently treating the displayed exponent as unambiguous.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.1"
     },
     {
       "sourceStatement": "Give a deterministic analogue of the Minami estimate for perturbations of Hermitian tridiagonal matrices.",
@@ -1599,7 +1617,8 @@
         "derandomization"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.2"
     },
     {
       "sourceStatement": "Design a randomized \\(O(n^3\\operatorname{polylog}(n/\\delta))\\)-time algorithm for diagonalization or Schur decomposition with backward error \\(\\delta\\), using only \\(O(\\log(n/\\delta))\\) bits of precision.",
@@ -1686,7 +1705,8 @@
         "bit complexity"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.3"
     },
     {
       "sourceStatement": "Give conditions under which an approximate invariant subspace, augmented by an arbitrary buffer subspace, yields \\(d\\) accurate Ritz values.",
@@ -1773,7 +1793,8 @@
         "Rayleigh-Ritz"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.4"
     },
     {
       "sourceStatement": "Bound the eigenvector condition number or pseudospectral area of the Rayleigh quotient obtained from a random-start Krylov subspace.",
@@ -1854,7 +1875,8 @@
         "randomization"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.5"
     },
     {
       "sourceStatement": "Characterize the distribution of Ritz values in the numerical range for arbitrary, Krylov, or random subspaces.",
@@ -1941,7 +1963,8 @@
         "random compressions"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.6"
     },
     {
       "sourceStatement": "Give a theoretical-computer-science-style rigorous proof of the MRRR algorithm under checkable input conditions.",
@@ -2034,7 +2057,8 @@
         "formal analysis"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.7"
     },
     {
       "sourceStatement": "Compute \\(k\\) accurate, nearly orthogonal singular triplets of a bidiagonal matrix in \\(O(kn)\\) time.",
@@ -2121,7 +2145,8 @@
         "output-sensitive algorithms"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.8"
     },
     {
       "sourceStatement": "Consider a general nonnormal matrix \\(A=V\\Lambda V^{-1}\\) with largest eigenvalue magnitude \\(\\lambda_1\\) and finite eigenvector condition number \\(\\kappa_V=\\|V\\|\\|V^{-1}\\|\\). Is there an algorithm that uses \\(\\operatorname{poly}(\\log(n\\kappa_V),1/\\varepsilon)\\) matrix-vector products with \\(A\\) and returns \\(\\lambda\\) so that \\(|\\lambda-\\lambda'|\\le \\varepsilon|\\lambda_1|\\), where \\(\\lambda'\\) is any eigenvalue of \\(A\\) with \\(|\\lambda'|\\ge(1-\\varepsilon)|\\lambda_1|\\)?",
@@ -2202,7 +2227,8 @@
         "spectral radius"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:3.9"
     },
     {
       "sourceStatement": "Under what structural or problem-dependent assumptions on \\(A\\) does there exist an efficient, greedy and/or randomized algorithm that achieves quasi-optimal guarantees such as (1) the CSSP bound (7), and (2) the RRQR bounds (8)–(9)?",
@@ -2289,7 +2315,8 @@
         "structured matrices"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.1"
     },
     {
       "sourceStatement": "Obtain stronger convergence or rank-revealing guarantees for Gaussian elimination with complete pivoting applied to the discrete Lehmann fermionic kernel.",
@@ -2382,7 +2409,8 @@
         "pivoting"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.2"
     },
     {
       "sourceStatement": "Does practical QR with column pivoting admit a polynomial-type rank-revealing bound when the input matrix has orthonormal rows?",
@@ -2469,7 +2497,8 @@
         "orthonormal rows"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.3"
     },
     {
       "sourceStatement": "Choose \\(r=O(k)\\) random rows, select columns from the sampled submatrix, and determine conditions on \\(r\\) and the kernel or matrix structure that guarantee, with high probability, a full-matrix column-selection error within a logarithmic factor of selecting columns using the full matrix.",
@@ -2556,7 +2585,8 @@
         "column selection"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.4"
     },
     {
       "sourceStatement": "Develop an adaptive quasi-optimal rank-structured approximation of PDE solution operators, and quantify its dependence on the partition parameters.",
@@ -2643,7 +2673,8 @@
         "adaptivity"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.5"
     },
     {
       "sourceStatement": "Is the nuclear-norm Nyström approximation error submodular for positive-definite SDDM or SDD matrices?",
@@ -2718,7 +2749,8 @@
         "SDD matrices"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.6"
     },
     {
       "sourceStatement": "For positive eigenvalues \\(\\lambda\\), prove tight bounds between \\(x_k(\\lambda)\\), the worst-case trace error of optimal \\(k\\)-column subset selection over matrices with spectrum \\(\\lambda\\), and \\(y_k(\\lambda)=(k+1)e_{k+1}(\\lambda)/e_k(\\lambda)\\), the expected trace error from \\(k\\)-DPP volume sampling.",
@@ -2799,7 +2831,8 @@
         "volume sampling"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:4.7"
     },
     {
       "sourceStatement": "For a given algorithm that uses a sketching matrix \\(\\Omega\\), what is the weakest assumption we can make on \\(\\Omega\\) that ensures a desired level of accuracy?",
@@ -2886,7 +2919,8 @@
         "meta-problem"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link. This is an explicitly labeled meta-problem in Section 5.1 rather than one of the paper's 47 numbered problems. It is included because it has the same open-problem format and motivates Problems 5.1–5.3.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.meta"
     },
     {
       "sourceStatement": "Let \\(A\\in\\mathbb R^{n\\times d}\\) be full rank, \\(B\\in\\mathbb R^{n\\times p}\\), and let \\(\\Omega\\in\\mathbb R^{n\\times k}\\) be an oblivious subspace injection with dimension \\(d\\) and injectivity \\(1-\\varepsilon\\). Let \\(\\widetilde X=(\\Omega^TA)^+(\\Omega^TB)\\). Prove or disprove whether \\(\\|A\\widetilde X-B\\|_F\\le(1+O(\\varepsilon))\\min_X\\|AX-B\\|_F\\) necessarily holds.",
@@ -2973,7 +3007,8 @@
         "relative error"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.1"
     },
     {
       "sourceStatement": "Let \\(A\\in\\mathbb R^{n\\times d}\\), fix \\(r>0\\), and let \\(\\Omega\\in\\mathbb R^{n\\times k}\\) be an oblivious subspace injection with dimension \\(r\\) and injectivity \\(1-\\varepsilon\\). Let \\(\\widetilde A=(A\\Omega)(A\\Omega)^+A\\) and let \\(A_r\\) be the best rank-\\(r\\) approximation. Does an OSI necessarily imply a \\((1+O(\\varepsilon))\\) relative-error randomized-SVD guarantee?",
@@ -3060,7 +3095,8 @@
         "oblivious subspace injection"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.2"
     },
     {
       "sourceStatement": "Formulate a generalization of the oblivious subspace injection property to \\(\\ell_p\\) regression that ensures the sketched solution \\(\\widetilde x\\in\\arg\\min_x\\|\\Omega^TAx-\\Omega^Tb\\|_{\\ell_p}\\) succeeds to constant-factor accuracy.",
@@ -3141,7 +3177,8 @@
         "randomized algorithms"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.3"
     },
     {
       "sourceStatement": "Prove or disprove the Nelson–Nguyen SparseStack oblivious-subspace-embedding conjecture.",
@@ -3234,7 +3271,8 @@
         "OSE"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.4"
     },
     {
       "sourceStatement": "Assume \\(r\\le O(n/\\log n)\\). Prove or disprove: a SparseStack embedding with \\(\\zeta=O(1)\\) and \\(k=O(r)\\) is an oblivious subspace injection with constant parameter. More specifically, do \\(\\zeta=4\\) and \\(k=2r\\) suffice for all sufficiently large \\(r\\)?",
@@ -3315,7 +3353,8 @@
         "sparse random matrices"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.5"
     },
     {
       "sourceStatement": "Assume \\(n=\\Omega(\\log r)\\). Prove or disprove: the rerandomized SRHT of dimension \\(k=O(r/\\varepsilon^2)\\) is an oblivious subspace embedding with \\(\\alpha=1-\\varepsilon\\) and \\(\\beta=1+\\varepsilon\\).",
@@ -3402,7 +3441,8 @@
         "oblivious subspace embedding"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:5.6"
     },
     {
       "sourceStatement": "Given any \\(m\\)-node tree tensor network and choice of ranks, let \\(S\\) be its representable tensors. Find a polynomial-time algorithm that, for every tensor \\(A\\), returns \\(X\\in S\\) satisfying \\(\\|X-A\\|_F^2<(m-1)\\min_{Y\\in S}\\|Y-A\\|_F^2\\), or show that an \\((m-1)\\)-approximation is optimal under complexity-theoretic assumptions.",
@@ -3495,7 +3535,8 @@
         "approximation hardness"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:6.1"
     },
     {
       "sourceStatement": "Devise a computationally efficient algorithm for the nonlinear eigenvalue problem equivalent to the product-state minimization problem (19), or an alternative equivalent NEPv, that achieves superlinear local convergence and has iteration complexity depending linearly on \\(d\\).",
@@ -3582,7 +3623,8 @@
         "product states"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:6.2"
     },
     {
       "sourceStatement": "What is the asymptotic error \\(\\varepsilon_m^*\\) as a function of \\(m\\) and \\(\\delta\\), where \\(\\varepsilon_m^*\\) is the best uniform approximation error to \\(\\operatorname{sign}(x)\\) on \\([-1,-\\delta]\\cup[\\delta,1]\\) by a polynomial computable using at most \\(m\\) matrix-matrix multiplications?",
@@ -3669,7 +3711,8 @@
         "multiplication complexity"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:6.3"
     },
     {
       "sourceStatement": "Let \\(p^*\\) be a minimizer to the analogue of (21) with approximation error measured in \\(\\ell_2\\)-norm. Does \\(p^*(x)-\\operatorname{sign}(x)\\) satisfy the equioscillation property?",
@@ -3750,7 +3793,8 @@
         "polynomial optimization"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link. The source uses the phrase 'equioscillation property' for an \\(\\ell_2\\)-error analogue, although classical equioscillation is an \\(\\ell_\\infty\\) optimality criterion. The record preserves that framing and flags the need to define the intended alternation notion formally.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:6.4"
     },
     {
       "sourceStatement": "How does \\(\\varepsilon_{2T}^{\\mathrm{comp}}\\) of (22) compare to \\(\\varepsilon_{2T}^*\\) of (21)? Alternatively, what is the smallest \\(T\\) as a function of \\(m\\) for which \\(\\varepsilon_{2T}^{\\mathrm{comp}}\\le \\varepsilon_m^*\\)?",
@@ -3843,7 +3887,9 @@
         "electronic structure"
       ],
       "verificationNotes": "Transcribed from arXiv:2602.05394v2, with line breaks normalized and mathematical notation converted to LaTeX. The status records the paper's presentation of the item as open as of April 2026; it is not an exhaustive post-publication resolution audit. The literature list is a curated subset of works cited in the paper's surrounding discussion, rather than a complete citation graph. Where the source bibliography does not expose a stable DOI or arXiv identifier, the link is a title-search link.",
-      "generatedAt": "2026-08-03T11:33:00-04:00"
+      "generatedAt": "2026-08-03T11:33:00-04:00",
+      "recordId": "lit:simons-f25-complexity-linalg:6.5"
     }
-  ]
+  ],
+  "catalogId": "simons-f25-complexity-linalg"
 }
