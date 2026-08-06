@@ -55,7 +55,18 @@
       "problem": "Prove a near-linear construction and linear-time application guarantee for an algebraic-multigrid approximate inverse of every polynomially bounded SWCDDM matrix.",
       "wordDescription": "Algebraic multigrid is among the most successful practical methods for elliptic and graph-structured systems, but a theorem matching its observed near-linear behavior on this broad matrix class is missing. The requested result would translate multigrid hierarchies into the spectral-approximation language common in theoretical computer science. It would also clarify whether purely algebraic coarsening can achieve the same kind of nearly linear guarantee as specialized Laplacian solvers.",
       "mathematicalConditions": "For every polynomially bounded symmetric weakly chained diagonally dominant M-matrix \\(M\\), compute an implicit symmetric operator \\(Z\\) in \\(\\widetilde O(\\operatorname{nnz}(M))\\) time such that \\(Z\\) is a constant-factor Loewner approximation to \\(M^{-1}\\). Applying \\(Z\\) to a vector must cost \\(O(\\operatorname{nnz}(M))\\), with approximation constants independent of \\(n\\). The paper also highlights planar-only and mildly relaxed construction/application variants.",
-      "comments": [],
+      "comments": [
+        {
+          "id": "d512c447-97a8-405b-9e25-484c95b80c74",
+          "author": {
+            "id": "6e502c91-a5d5-4e09-ac1a-b8f3cc6671b5",
+            "displayName": "Richard Peng"
+          },
+          "body": "how is algebraic multigrid formally defined? Is it the `two grids condition' stated below this problem?\n\nthe current formal specification allows direct invocations of TCS style SDDM solvers.",
+          "createdAt": "2026-08-06T18:55:41.006Z",
+          "updatedAt": null
+        }
+      ],
       "literature": [
         {
           "title": "[BHM00] William L. Briggs, Van Emden Henson, and Steve F. McCormick. A Multigrid Tutorial. Society for Industrial and Applied Mathematics, Philadelphia, PA, 2nd edition, 2000.",
