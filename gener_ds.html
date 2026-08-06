@@ -577,6 +577,14 @@
     <div class="card-header"><span class="dot green"></span> Save Results</div>
     <div class="save-row">
         <div class="input-group">
+            <label for="catalogIdInput">Catalog ID</label>
+            <input type="text" id="catalogIdInput" placeholder="my-problem-catalog">
+        </div>
+        <div class="input-group">
+            <label for="recordSuffixInput">Record Suffix</label>
+            <input type="text" id="recordSuffixInput" placeholder="1.1" value="1">
+        </div>
+        <div class="input-group">
             <label for="filenameInput">JSON Filename</label>
             <input type="text" id="filenameInput" placeholder="my-problem-analysis" value="">
         </div>
@@ -610,6 +618,8 @@
         const wordDescBox = document.getElementById('wordDescriptionBox');
         const mathCondBox = document.getElementById('mathConditionsBox');
         const literatureTableBody = document.getElementById('literatureTableBody');
+        const catalogIdInput = document.getElementById('catalogIdInput');
+        const recordSuffixInput = document.getElementById('recordSuffixInput');
         const filenameInput = document.getElementById('filenameInput');
         const saveBtn = document.getElementById('saveBtn');
         const clearBtn = document.getElementById('clearBtn');
@@ -818,16 +828,16 @@ Return a JSON object with "wordDescription", "mathematicalConditions", and "lite
                 hasData = true;
                 saveBtn.disabled = false;
 
-                // Auto-fill filename if empty
-                if (!filenameInput.value.trim()) {
-                    const slug = problemDesc
-                        .toLowerCase()
-                        .replace(/[^a-z0-9\s-]/g, '')
-                        .trim()
-                        .replace(/\s+/g, '-')
-                        .substring(0, 50);
-                    filenameInput.value = slug || 'problem-analysis';
-                }
+                // Auto-fill the stable catalog ID and filename if empty.
+                const slug = problemDesc
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .trim()
+                    .replace(/\s+/g, '-')
+                    .substring(0, 50)
+                    .replace(/^-+|-+$/g, '') || 'problem-analysis';
+                if (!filenameInput.value.trim()) filenameInput.value = slug;
+                if (!catalogIdInput.value.trim()) catalogIdInput.value = slug;
 
                 setStatus('✅ Data successfully generated! You can edit the boxes before saving.', 'status-success');
                 showToast('AI data loaded successfully!', 'success');
@@ -897,19 +907,43 @@ Return a JSON object with "wordDescription", "mathematicalConditions", and "lite
                 return;
             }
 
+            const catalogId = catalogIdInput.value.trim();
+            const recordSuffix = recordSuffixInput.value.trim();
+            if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(catalogId)) {
+                showToast('Catalog ID must use lowercase kebab-case.', 'error');
+                catalogIdInput.focus();
+                return;
+            }
+            if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(recordSuffix)) {
+                showToast('Record suffix may use letters, numbers, dots, underscores, and hyphens.', 'error');
+                recordSuffixInput.focus();
+                return;
+            }
+
             const filenameRaw = filenameInput.value.trim();
             const filename = filenameRaw
                 ? (filenameRaw.endsWith('.json') ? filenameRaw : filenameRaw + '.json')
-                : 'problem-analysis.json';
+                : catalogId + '.json';
+            const timestamp = new Date().toISOString();
 
-            const saveData = {
+            const problem = {
                 problem: originalProblem,
                 wordDescription: wordDescBox.value,
                 mathematicalConditions: mathCondBox.value,
                 comments: [],
                 literature: literatureData,
-                generatedAt: new Date().toISOString(),
+                generatedAt: timestamp,
+                contentUpdatedAt: timestamp,
                 generatedBy: 'DeepSeek API (deepseek-chat)',
+                recordId: `lit:${catalogId}:${recordSuffix}`,
+            };
+            const saveData = {
+                schemaVersion: '1.4',
+                catalogId,
+                generatedAt: timestamp,
+                contentUpdatedAt: timestamp,
+                problemCount: 1,
+                problems: [problem],
             };
 
             const jsonString = JSON.stringify(saveData, null, 2);
@@ -940,6 +974,8 @@ Return a JSON object with "wordDescription", "mathematicalConditions", and "lite
             renderLiteratureTable();
             hasData = false;
             saveBtn.disabled = true;
+            catalogIdInput.value = '';
+            recordSuffixInput.value = '1';
             filenameInput.value = '';
             originalProblem = '';
             clearStatus();

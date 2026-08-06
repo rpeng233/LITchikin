@@ -1,54 +1,53 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/open-problem-record.schema.json",
-  "title": "Open Problem Record or Catalog",
-  "description": "Canonical schema used by the Open Problem Catalog Viewer. The viewer accepts additional legacy aliases documented in the README.",
-  "oneOf": [
-    {
-      "$ref": "#/$defs/problemRecord"
+  "$id": "https://raw.githubusercontent.com/rpeng233/LITchikin/main/open_problem_record.schema.json",
+  "title": "LITchikin Problem Catalog 1.4",
+  "description": "Canonical strict catalog format used by LITchikin generators, viewers, and hosted services.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "catalogId",
+    "contentUpdatedAt",
+    "problems"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.4"
     },
-    {
+    "catalogId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "contentUpdatedAt": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "lastVerified": {
+      "type": "string"
+    },
+    "problemCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "problems": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/problemRecord"
       }
-    },
-    {
-      "type": "object",
-      "required": [
-        "problems"
-      ],
-      "properties": {
-        "schemaVersion": {
-          "type": [
-            "string",
-            "number"
-          ]
-        },
-        "title": {
-          "type": "string"
-        },
-        "generatedAt": {
-          "type": "string"
-        },
-        "lastVerified": {
-          "type": "string"
-        },
-        "problemCount": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "problems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/problemRecord"
-          }
-        }
-      },
-      "additionalProperties": true
     }
-  ],
+  },
+  "additionalProperties": true,
   "$defs": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
     "literatureEntry": {
       "oneOf": [
         {
@@ -120,12 +119,16 @@
           "type": "string"
         },
         "createdAt": {
-          "type": "string"
+          "$ref": "#/$defs/timestamp"
         },
         "updatedAt": {
-          "type": [
-            "string",
-            "null"
+          "oneOf": [
+            {
+              "$ref": "#/$defs/timestamp"
+            },
+            {
+              "type": "null"
+            }
           ]
         }
       },
@@ -173,9 +176,16 @@
     "problemRecord": {
       "type": "object",
       "required": [
-        "problem"
+        "problem",
+        "recordId",
+        "contentUpdatedAt",
+        "comments"
       ],
       "properties": {
+        "recordId": {
+          "type": "string",
+          "pattern": "^lit:[a-z0-9]+(?:-[a-z0-9]+)*:[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
         "sourceStatement": {
           "type": "string"
         },
@@ -226,7 +236,10 @@
           "type": "string"
         },
         "generatedAt": {
-          "type": "string"
+          "$ref": "#/$defs/timestamp"
+        },
+        "contentUpdatedAt": {
+          "$ref": "#/$defs/timestamp"
         }
       },
       "additionalProperties": true
