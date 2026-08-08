@@ -1400,7 +1400,18 @@
       "problem": "Resolve the Forsythe conjecture on the two-cycle limiting directions of steepest-descent residuals.",
       "wordDescription": "Steepest descent on a quadratic can display an asymptotic zig-zag. Forsythe conjectured that, after normalization, the even residual directions and odd residual directions each approach a single limit. The issue is subtle when the spectrum and starting vector create multiple competing modes. A proof would complete a classical qualitative description of one of the most basic iterative methods.",
       "mathematicalConditions": "Let \\(A\\succ0\\) and apply exact line-search steepest descent to \\(f(x)=\\tfrac12x^TAx-b^Tx\\). For residuals \\(r_k=b-Ax_k\\), prove that \\(r_{2k}/\\|r_{2k}\\|\\) and \\(r_{2k+1}/\\|r_{2k+1}\\|\\) each converge as \\(k\\to\\infty\\), with an appropriate treatment of degenerate starting vectors and spectral multiplicities, or give a counterexample if the paper's formulation permits one.",
-      "comments": [],
+      "comments": [
+        {
+          "id": "b090193e-2db7-4c8c-845b-cb7c19ae9c86",
+          "author": {
+            "id": "7995272a-64d0-48f8-9d34-166974ab2014",
+            "displayName": "Joerg Liesen"
+          },
+          "body": "Several people have tried to find a proof for the case s=2 using ChatGPT over the last few months. Attempts failed until very recently, when three proofs for this case using GPT-5.6 appeared in a short timeframe:\nhttps://arxiv.org/abs/2608.02852\nhttps://jarek.ai/papers/proof-of-the-forsythe-conjecture-for-s-2.pdf\nhttps://yangpliu.github.io/repo/restarted-cg-two/paper.pdf\n(In alphabetical order.)",
+          "createdAt": "2026-08-07T11:12:22.039Z",
+          "updatedAt": null
+        }
+      ],
       "literature": [
         {
           "title": "[FLT23] Vance Faber, Jörg Liesen, and Petr Tichý. On the Forsythe conjecture. BIT, 63:49, 2023.",
