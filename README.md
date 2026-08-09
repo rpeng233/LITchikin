@@ -97,10 +97,10 @@ Comments are stored directly in each problem's chronological `comments` array:
 `id`, `author`, `body`, and `createdAt` are required for non-empty entries.
 `author` may be a string for imported historical data.
 
-## Maintainers
+## Eligible curators (`maintainers`)
 
-A problem may contain an optional active maintainer list. Its absence is
-equivalent to an empty list:
+A problem may contain an optional Eligible curator list stored in the existing
+`maintainers` field. Its absence is equivalent to an empty list:
 
 ```json
 "maintainers": [
@@ -111,12 +111,19 @@ equivalent to an empty list:
 ]
 ```
 
-Each entry contains only the maintainer's real name and public email address.
+Each entry contains only the curator's real name and public email address. The
+list is intended for public display as compact problem attribution, not as
+authorship of the LLM-generated problem description.
 When no permitted source supplies an address, `email` is the empty string. A
 nonempty email is the stable identity used by hosted services; an empty email is
 only a roster placeholder and must never grant access. The name is display
 metadata. Catalogs remain schema version `1.4`, and existing records do not need
 to add an empty list.
+
+For `SimonsF25ComplexityLinAlg.json`, each list is initialized only from the
+scribe or scribes named for that problem's subsection in arXiv:2602.05394.
+Literature authors and other mentioned authors are excluded. Nonempty emails
+are copied only from official arXiv submission source bundles.
 
 ## Generator
 
