@@ -97,6 +97,27 @@ Comments are stored directly in each problem's chronological `comments` array:
 `id`, `author`, `body`, and `createdAt` are required for non-empty entries.
 `author` may be a string for imported historical data.
 
+## Maintainers
+
+A problem may contain an optional active maintainer list. Its absence is
+equivalent to an empty list:
+
+```json
+"maintainers": [
+  {
+    "name": "Ada Lovelace",
+    "email": "ada@example.edu"
+  }
+]
+```
+
+Each entry contains only the maintainer's real name and public email address.
+When no permitted source supplies an address, `email` is the empty string. A
+nonempty email is the stable identity used by hosted services; an empty email is
+only a roster placeholder and must never grant access. The name is display
+metadata. Catalogs remain schema version `1.4`, and existing records do not need
+to add an empty list.
+
 ## Generator
 
 In `gener_ds.html`:
