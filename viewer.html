@@ -616,7 +616,7 @@
                 </li>
             </ul>
             <div class="sidebar-status" id="sidebarStatus">
-                <span class="count">0</span> file(s) loaded
+                <span class="count">0</span> problem(s) loaded
             </div>
         </aside>
 
@@ -630,7 +630,7 @@
             <div id="placeholderMessage" class="placeholder-message">
                 <span class="icon">📋</span>
                 <span>Select a problem from the left panel to view its analysis.</span>
-                <small style="color:#b0b7c3;">Supports the Open Problem Record schema (single, array, or catalog).</small>
+                <small style="color:#b0b7c3;">Accepts strict LITchikin schemaVersion 1.4 catalogs.</small>
             </div>
 
             <!-- problem details -->
@@ -737,6 +737,8 @@
             let selectedId = null;
             let idCounter = 0;
             let toastTimer;
+            const CATALOG_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+            const RECORD_SUFFIX_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
             // ── resizer logic ──
             let isDragging = false;
@@ -797,32 +799,88 @@
                 toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
             }
 
-            // ── parse uploaded JSON into problem records ──
+            function isUtcTimestamp(value) {
+                return typeof value === 'string' && value.endsWith('Z') &&
+                    Number.isFinite(Date.parse(value));
+            }
+
+            function validateComments(comments, recordId) {
+                for (const comment of comments) {
+                    const authorIsValid = typeof comment?.author === 'string'
+                        ? Boolean(comment.author.trim())
+                        : comment?.author && typeof comment.author === 'object' &&
+                            Boolean(safeStr(comment.author.displayName).trim());
+                    if (!comment || typeof comment !== 'object' ||
+                        !safeStr(comment.id).trim() || typeof comment.body !== 'string' ||
+                        !authorIsValid) {
+                        throw new Error(`Problem ${recordId} contains an invalid comment.`);
+                    }
+                    if (!isUtcTimestamp(comment.createdAt)) {
+                        throw new Error(`Comment ${comment.id} createdAt must be UTC.`);
+                    }
+                    if (comment.updatedAt !== undefined && comment.updatedAt !== null &&
+                        !isUtcTimestamp(comment.updatedAt)) {
+                        throw new Error(`Comment ${comment.id} updatedAt must be UTC.`);
+                    }
+                }
+            }
+
+            // ── validate a strict 1.4 catalog ──
             function parseProblemRecords(raw) {
-                let records = [];
-                if (!raw) return records;
-                if (Array.isArray(raw)) {
-                    for (const item of raw) {
-                        if (item && typeof item === 'object') records.push(item);
+                if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+                    throw new Error('Expected a LITchikin 1.4 catalog object.');
+                }
+                if (raw.schemaVersion !== '1.4') {
+                    throw new Error('Only schemaVersion 1.4 catalogs are supported.');
+                }
+                const catalogId = safeStr(raw.catalogId).trim();
+                if (!CATALOG_ID_PATTERN.test(catalogId)) {
+                    throw new Error('Catalog ID must use lowercase kebab-case.');
+                }
+                if (!isUtcTimestamp(raw.contentUpdatedAt)) {
+                    throw new Error('Catalog contentUpdatedAt must be an explicit UTC timestamp.');
+                }
+                if (raw.generatedAt !== undefined && !isUtcTimestamp(raw.generatedAt)) {
+                    throw new Error('Catalog generatedAt must be UTC when present.');
+                }
+                if (!Array.isArray(raw.problems)) {
+                    throw new Error('Catalog problems must be an array.');
+                }
+                if (raw.problemCount !== undefined && raw.problemCount !== raw.problems.length) {
+                    throw new Error('Catalog problemCount does not match its problems array.');
+                }
+
+                const recordIds = new Set();
+                for (const record of raw.problems) {
+                    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+                        throw new Error('Catalog contains an invalid problem record.');
                     }
-                    return records;
-                }
-                if (raw.problems && Array.isArray(raw.problems)) {
-                    for (const item of raw.problems) {
-                        if (item && typeof item === 'object') records.push(item);
+                    if (typeof record.problem !== 'string' || !record.problem.trim()) {
+                        throw new Error('Every problem must have a non-empty problem field.');
                     }
-                    return records;
+                    const recordId = safeStr(record.recordId).trim();
+                    const prefix = `lit:${catalogId}:`;
+                    const suffix = recordId.startsWith(prefix) ? recordId.slice(prefix.length) : '';
+                    if (!RECORD_SUFFIX_PATTERN.test(suffix)) {
+                        throw new Error(`Invalid recordId for catalog ${catalogId}.`);
+                    }
+                    if (recordIds.has(recordId)) {
+                        throw new Error(`Duplicate recordId: ${recordId}.`);
+                    }
+                    if (!isUtcTimestamp(record.contentUpdatedAt)) {
+                        throw new Error(`Problem ${recordId} needs an explicit UTC contentUpdatedAt.`);
+                    }
+                    if (record.generatedAt !== undefined && !isUtcTimestamp(record.generatedAt)) {
+                        throw new Error(`Problem ${recordId} generatedAt must be UTC when present.`);
+                    }
+                    if (!Array.isArray(record.comments)) {
+                        throw new Error(`Problem ${recordId} must contain a comments array.`);
+                    }
+                    validateComments(record.comments, recordId);
+                    recordIds.add(recordId);
                 }
-                if (raw.problem !== undefined || raw.wordDescription !== undefined ||
-                    raw.mathematicalConditions !== undefined || raw.literature !== undefined) {
-                    records.push(raw);
-                    return records;
-                }
-                if (typeof raw === 'object' && raw !== null) {
-                    if (raw.problem) { records.push(raw); return records; }
-                    if (raw.wordDescription || raw.mathematicalConditions) { records.push(raw); return records; }
-                }
-                return records;
+
+                return raw.problems;
             }
 
             // ── sort literature reverse chronologically ──
@@ -964,6 +1022,9 @@
                         `<span class="meta-tag"><span class="label">generated</span> ${data.generatedAt}</span>`
                         );
                 }
+                metaParts.push(
+                    `<span class="meta-tag"><span class="label">updated</span> ${data.contentUpdatedAt}</span>`
+                );
                 metaEl.innerHTML = metaParts.join(' ');
                 metaEl.style.display = metaParts.length ? 'flex' : 'none';
 
@@ -1093,7 +1154,7 @@
                         fileListEl.appendChild(li);
                     });
                 }
-                sidebarStatus.innerHTML = `<span class="count">${problems.length}</span> file(s) loaded`;
+                sidebarStatus.innerHTML = `<span class="count">${problems.length}</span> problem(s) loaded`;
             }
 
             // ── file upload handler ──
