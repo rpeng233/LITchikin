@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open Problem Catalog Generator (Batch + Browser)</title>
+    <title>LITchikin Catalog Generator</title>
     <style>
         /* ── reset & base ── */
         *,
@@ -104,7 +104,9 @@
         textarea,
         input[type="text"],
         input[type="number"],
-        input[type="url"] {
+        input[type="url"],
+        input[type="email"],
+        select {
             font-family: 'Inter', system-ui, sans-serif;
             font-size: 0.95rem;
             padding: 0.65rem 0.9rem;
@@ -116,7 +118,8 @@
             color: #1a1e2b;
         }
         textarea:focus,
-        input:focus {
+        input:focus,
+        select:focus {
             outline: none;
             border-color: #4f6ef7;
             box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.12);
@@ -134,8 +137,13 @@
         }
         input[type="text"],
         input[type="number"],
-        input[type="url"] {
+        input[type="url"],
+        input[type="email"],
+        select {
             height: 48px;
+        }
+        select {
+            appearance: auto;
         }
 
         /* ── buttons ── */
@@ -216,7 +224,7 @@
             flex: 1;
         }
 
-        /* ── API key row ── */
+        /* ── API key and model row ── */
         .api-row {
             display: flex;
             flex-wrap: wrap;
@@ -232,9 +240,10 @@
             font-size: 0.85rem;
             color: #3d4758;
         }
-        .api-row input {
+        .api-row input,
+        .api-row select {
             flex: 1;
-            min-width: 200px;
+            min-width: 150px;
             height: 40px;
             padding: 0.4rem 0.8rem;
             background: #fff;
@@ -248,6 +257,10 @@
         }
         .api-row .status.err {
             color: #e5484c;
+        }
+        .api-row .model-select {
+            flex: 0.7;
+            min-width: 120px;
         }
 
         /* ── navigation ── */
@@ -365,6 +378,35 @@
             resize: vertical;
         }
 
+        /* maintainers */
+        .maintainer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+        }
+        .maintainer-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 0.6rem;
+            align-items: center;
+            background: #f8faff;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #e9edf4;
+        }
+        .maintainer-entry input {
+            height: 38px;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.85rem;
+            background: #fff;
+        }
+        .maintainer-entry .btn {
+            height: 38px;
+            padding: 0 0.8rem;
+            font-size: 0.8rem;
+        }
+
         /* ── status / loading ── */
         .loading-dots::after {
             content: '...';
@@ -437,6 +479,12 @@
             .record-nav .counter {
                 text-align: center;
             }
+            .maintainer-entry {
+                grid-template-columns: 1fr 1fr;
+            }
+            .maintainer-entry .btn {
+                grid-column: 1 / -1;
+            }
         }
         @media (max-width: 480px) {
             .lit-entry {
@@ -447,6 +495,9 @@
             }
             .lit-entry .lit-actions .btn {
                 flex: 1;
+            }
+            .maintainer-entry {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -526,22 +577,54 @@
     <div class="container" id="app">
         <header>
             <h1>
-                📋 Open Problem Catalog Generator <small>Batch + Browser</small>
+                📋 LITchikin Catalog Generator <small>v1.4</small>
             </h1>
             <div class="subhead">
-                One short description per line → produces a JSON <strong>array</strong>.<br />
-                Uses <strong>deepseek-reasoner</strong> for high‑quality reasoning.
+                Generate a full catalog (with metadata) from problem descriptions.<br />
+                Choose your DeepSeek model – <strong>reasoner</strong>, <strong>v3</strong>, or <strong>chat</strong>.
             </div>
         </header>
 
-        <!-- ── API KEY ── -->
+        <!-- ── API KEY & MODEL SELECTOR ── -->
         <div class="api-row">
-            <label for="apiKey">🔑 DeepSeek API Key</label>
+            <label for="apiKey">🔑 API Key</label>
             <input type="password" id="apiKey" placeholder="sk-..." />
+            <label for="modelSelect">🧠 Model</label>
+            <select id="modelSelect" class="model-select">
+                <option value="deepseek-reasoner" selected>deepseek-reasoner</option>
+                <option value="deepseek-v3">deepseek-v3</option>
+                <option value="deepseek-chat">deepseek-chat</option>
+            </select>
             <button class="btn btn-sm btn-outline" id="saveKeyBtn">Save</button>
             <button class="btn btn-sm btn-outline" id="clearKeyBtn">Clear</button>
             <span class="status" id="keyStatus">—</span>
         </div>
+
+        <!-- ── CATALOG METADATA ── -->
+        <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:1rem;">Catalog Metadata</h3>
+        <div class="row">
+            <div class="field-group">
+                <label for="catalogId">Catalog ID <span class="badge">required</span></label>
+                <input type="text" id="catalogId" placeholder="e.g. my-problems" value="example-catalog" pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$" />
+                <div class="hint">Lowercase alphanumeric with hyphens only.</div>
+            </div>
+            <div class="field-group">
+                <label for="catalogTitle">Catalog Title <span class="badge">optional</span></label>
+                <input type="text" id="catalogTitle" placeholder="My Problem Collection" />
+            </div>
+        </div>
+        <div class="field-group">
+            <label>Maintainers <span class="badge">optional</span></label>
+            <div class="hint">Each maintainer must have a name and an email (can be empty).</div>
+            <div id="maintainerList" class="maintainer-list">
+                <div class="lit-empty">No maintainers yet.</div>
+            </div>
+            <div class="flex-row mt-1">
+                <button class="btn btn-sm btn-outline" id="addMaintainerBtn">+ Add Maintainer</button>
+            </div>
+        </div>
+
+        <hr />
 
         <!-- ── INPUT (maps to `problem`) ── -->
         <div class="field-group">
@@ -550,7 +633,7 @@
                 <span class="badge">problem</span>
             </label>
             <textarea id="shortDescriptions" rows="5" placeholder="Riemann hypothesis about the zeros of the zeta function.&#10;P vs NP problem.&#10;Goldbach's conjecture."></textarea>
-            <div class="hint">Each non‑empty line becomes the <code>problem</code> field of one record.</div>
+            <div class="hint">Each non‑empty line becomes a <code>problem</code> field in a record.</div>
         </div>
 
         <div class="toolbar">
@@ -695,19 +778,22 @@
 
         <!-- ── PREVIEW & DOWNLOAD ── -->
         <div class="toolbar">
-            <button class="btn btn-success" id="downloadBtn">⬇ Download JSON (array)</button>
+            <button class="btn btn-success" id="downloadBtn">⬇ Download JSON (catalog)</button>
             <button class="btn btn-outline" id="previewBtn">👁 Preview JSON</button>
             <span class="spacer"></span>
             <span id="previewStatus" class="text-muted text-small"></span>
         </div>
         <div id="jsonPreview" class="json-preview" style="display:none;">
-            <span class="label">JSON Preview (array)</span>
-            <pre id="jsonContent">[]</pre>
+            <span class="label">JSON Preview (full catalog)</span>
+            <pre id="jsonContent">{
+  "schemaVersion": "1.4",
+  ...
+}</pre>
         </div>
 
         <div class="text-muted text-small" style="margin-top:1.2rem; border-top:1px solid #e9edf4; padding-top:1rem;">
-            <code>problem</code> ← your short description · <code>sourceStatement</code> ← generated full description (1 paragraph) · <code>mathematicalConditions</code> ← concise formal formulation.<br />
-            Uses <strong>deepseek-reasoner</strong> for high‑quality reasoning. Browse and edit each record individually.
+            Output conforms to <code>open_problem_record.schema.json</code> v1.4.<br />
+            Each record includes <code>recordId</code> (format: <code>lit:{catalogId}:{slug}</code>) and <code>contentUpdatedAt</code>.
         </div>
     </div>
 
@@ -718,9 +804,11 @@
 
         const state = {
             apiKey: localStorage.getItem('deepseek_api_key') || '',
-            generatedRecords: [],        // array of full record objects
+            model: localStorage.getItem('deepseek_model') || 'deepseek-reasoner',
+            generatedRecords: [],
             currentIndex: 0,
-            comments: [],                 // global comments (copied into each record)
+            comments: [],
+            maintainers: [],
         };
 
         // ──────────────────────────────────────────────────────────────
@@ -731,9 +819,15 @@
 
         const el = {
             apiKey: $('apiKey'),
+            modelSelect: $('modelSelect'),
             keyStatus: $('keyStatus'),
             saveKeyBtn: $('saveKeyBtn'),
             clearKeyBtn: $('clearKeyBtn'),
+
+            catalogId: $('catalogId'),
+            catalogTitle: $('catalogTitle'),
+            maintainerList: $('maintainerList'),
+            addMaintainerBtn: $('addMaintainerBtn'),
 
             shortDescriptions: $('shortDescriptions'),
             fullDescPreview: $('fullDescPreview'),
@@ -790,6 +884,12 @@
             return key;
         }
 
+        function getModel() {
+            const m = el.modelSelect.value || state.model;
+            state.model = m;
+            return m;
+        }
+
         function setKeyStatus(msg, type) {
             el.keyStatus.textContent = msg;
             el.keyStatus.className = 'status' + (type ? ' ' + type : '');
@@ -833,6 +933,65 @@
             return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         }
 
+        function getCatalogId() {
+            return el.catalogId.value.trim() || 'my-catalog';
+        }
+
+        function getCatalogTitle() {
+            return el.catalogTitle.value.trim() || undefined;
+        }
+
+        function buildMaintainers() {
+            const items = [];
+            const entries = el.maintainerList.querySelectorAll('.maintainer-entry');
+            entries.forEach(entry => {
+                const name = entry.querySelector('.m-name')?.value?.trim() || '';
+                const email = entry.querySelector('.m-email')?.value?.trim() || '';
+                if (!name && !email) return;
+                items.push({ name, email });
+            });
+            return items;
+        }
+
+        function renderMaintainers() {
+            const list = el.maintainerList;
+            const items = state.maintainers;
+            if (!items || items.length === 0) {
+                list.innerHTML = '<div class="lit-empty">No maintainers yet.</div>';
+                return;
+            }
+            list.innerHTML = '';
+            items.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'maintainer-entry';
+                div.dataset.idx = idx;
+                div.innerHTML = `
+                    <input class="m-name" type="text" placeholder="Name" value="${escHtml(item.name)}" />
+                    <input class="m-email" type="email" placeholder="Email" value="${escHtml(item.email)}" />
+                    <button class="btn btn-sm btn-danger m-del" data-idx="${idx}">✕</button>
+                `;
+                list.appendChild(div);
+            });
+            list.querySelectorAll('.m-del').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = Number(btn.dataset.idx);
+                    state.maintainers.splice(idx, 1);
+                    renderMaintainers();
+                });
+            });
+            list.querySelectorAll('.maintainer-entry input').forEach(inp => {
+                inp.addEventListener('change', () => {
+                    state.maintainers = buildMaintainers();
+                });
+                inp.addEventListener('input', () => {
+                    clearTimeout(inp._timer);
+                    inp._timer = setTimeout(() => {
+                        state.maintainers = buildMaintainers();
+                    }, 300);
+                });
+            });
+        }
+
         // ──────────────────────────────────────────────────────────────
         //  Current record access
         // ──────────────────────────────────────────────────────────────
@@ -844,12 +1003,6 @@
             if (idx < 0) return null;
             state.currentIndex = idx;
             return records[idx];
-        }
-
-        function updateCurrentRecord(field, value) {
-            const rec = getCurrentRecord();
-            if (!rec) return;
-            rec[field] = value;
         }
 
         // ──────────────────────────────────────────────────────────────
@@ -867,11 +1020,9 @@
             state.currentIndex = index;
             const rec = records[index];
 
-            // Show navigation
             el.recordNav.style.display = 'flex';
             el.recordCounter.textContent = `Record ${index+1} of ${records.length}`;
 
-            // Update dropdown
             const sel = el.recordSelect;
             sel.innerHTML = '';
             for (let i = 0; i < records.length; i++) {
@@ -882,12 +1033,9 @@
                 sel.appendChild(opt);
             }
 
-            // Populate fields
             el.fullDescPreview.value = rec.sourceStatement || '';
             el.wordDescription.value = rec.wordDescription || '';
             el.mathematicalConditions.value = rec.mathematicalConditions || '';
-
-            // Literature
             renderLiterature(rec.literature || []);
         }
 
@@ -923,8 +1071,6 @@
                 `;
                 list.appendChild(div);
             });
-
-            // Delete
             list.querySelectorAll('.lit-del').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const idx = Number(btn.dataset.idx);
@@ -935,8 +1081,6 @@
                     }
                 });
             });
-
-            // Edit – update record on change
             list.querySelectorAll('.lit-entry input').forEach(inp => {
                 inp.addEventListener('change', () => {
                     saveLiteratureFromDOM();
@@ -1009,13 +1153,14 @@
         }
 
         // ──────────────────────────────────────────────────────────────
-        //  DeepSeek API calls (temp 0.1, max_tokens 100000)
+        //  DeepSeek API calls (with model selector)
         // ──────────────────────────────────────────────────────────────
 
         async function callDeepSeek(prompt, systemPrompt = '') {
             const key = getApiKey();
             if (!key) throw new Error('DeepSeek API key is required.');
 
+            const model = getModel();
             const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -1023,7 +1168,7 @@
                     'Authorization': `Bearer ${key}`,
                 },
                 body: JSON.stringify({
-                    model: 'deepseek-reasoner',  // <-- changed to reasoning model
+                    model: model,               // ← selected model
                     messages: [
                         ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
                         { role: 'user', content: prompt },
@@ -1138,6 +1283,8 @@
             const globalSource = buildGlobalSource();
             const globalComments = state.comments.slice();
 
+            const catalogId = getCatalogId();
+
             for (let i = 0; i < lines.length; i++) {
                 const desc = lines[i];
                 el.genStatus.textContent = `Processing line ${i+1}/${lines.length}…`;
@@ -1191,6 +1338,7 @@
                         literature = [];
                     }
 
+                    // Create record without recordId and contentUpdatedAt (will be added later)
                     const record = {
                         problem: desc,
                         sourceStatement: fullDesc,
@@ -1203,7 +1351,7 @@
                         lastVerified: globalLastVerified,
                         tags: globalTags.length === 1 ? globalTags[0] : globalTags.length > 1 ? globalTags : undefined,
                         verificationNotes: globalVerificationNotes,
-                        generatedAt: new Date().toISOString(),
+                        generatedAt: new Date().toISOString().replace('Z', 'Z'),
                     };
 
                     // clean undefined
@@ -1222,11 +1370,13 @@
                         wordDescription: '',
                         mathematicalConditions: '',
                         literature: [],
+                        comments: globalComments.length > 0 ? globalComments : [],
+                        source: globalSource,
                         status: globalStatus,
                         lastVerified: globalLastVerified,
                         tags: globalTags.length === 1 ? globalTags[0] : globalTags.length > 1 ? globalTags : undefined,
                         verificationNotes: globalVerificationNotes,
-                        generatedAt: new Date().toISOString(),
+                        generatedAt: new Date().toISOString().replace('Z', 'Z'),
                     });
                 }
 
@@ -1250,20 +1400,57 @@
         }
 
         // ──────────────────────────────────────────────────────────────
-        //  Build / Preview / Download
+        //  Build full catalog (with schema wrapper)
         // ──────────────────────────────────────────────────────────────
 
-        function buildRecordsArray() {
-            return state.generatedRecords.slice();
+        function buildFullCatalog() {
+            const now = new Date().toISOString().replace('Z', 'Z');
+            const catalogId = getCatalogId();
+            const title = getCatalogTitle();
+            const maintainers = state.maintainers.slice();
+            const records = state.generatedRecords.slice();
+
+            const enrichedRecords = records.map((rec, idx) => {
+                const problemSlug = (rec.problem || 'problem')
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '')
+                    .slice(0, 20) || 'problem';
+                const suffix = Math.random().toString(36).slice(2, 6);
+                const recordId = `lit:${catalogId}:${problemSlug}-${suffix}`;
+
+                const comments = (rec.comments && Array.isArray(rec.comments)) ? rec.comments : [];
+                const contentUpdatedAt = rec.contentUpdatedAt || now;
+
+                return {
+                    ...rec,
+                    recordId,
+                    contentUpdatedAt,
+                    comments,
+                };
+            });
+
+            const catalog = {
+                schemaVersion: "1.4",
+                catalogId: catalogId,
+                contentUpdatedAt: now,
+                problems: enrichedRecords,
+                problemCount: enrichedRecords.length,
+            };
+
+            if (title) catalog.title = title;
+            catalog.generatedAt = now;
+
+            return catalog;
         }
 
+        // ──────────────────────────────────────────────────────────────
+        //  Preview & Download
+        // ──────────────────────────────────────────────────────────────
+
         function showPreview() {
-            const records = buildRecordsArray();
-            if (records.length === 0) {
-                el.jsonContent.textContent = '[]  (No records generated yet. Run "Generate All" first.)';
-            } else {
-                el.jsonContent.textContent = JSON.stringify(records, null, 2);
-            }
+            const catalog = buildFullCatalog();
+            el.jsonContent.textContent = JSON.stringify(catalog, null, 2);
             el.jsonPreview.style.display = 'block';
             el.previewStatus.textContent = '✓ preview updated';
             setTimeout(() => { if (el.previewStatus.textContent === '✓ preview updated') el.previewStatus.textContent = ''; },
@@ -1271,17 +1458,17 @@
         }
 
         function downloadJSON() {
-            const records = buildRecordsArray();
-            if (records.length === 0) {
+            const catalog = buildFullCatalog();
+            if (!catalog.problems || catalog.problems.length === 0) {
                 alert('No records to download. Generate some first.');
                 return;
             }
-            const json = JSON.stringify(records, null, 2);
+            const json = JSON.stringify(catalog, null, 2);
             const blob = new Blob([json], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `problem-records-${new Date().toISOString().slice(0,10)}.json`;
+            a.download = `catalog-${catalog.catalogId}-${new Date().toISOString().slice(0,10)}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1295,7 +1482,7 @@
         //  Event wiring
         // ──────────────────────────────────────────────────────────────
 
-        // API key
+        // API key & model
         el.saveKeyBtn.addEventListener('click', () => {
             const key = el.apiKey.value.trim();
             if (key) {
@@ -1311,6 +1498,12 @@
             state.apiKey = '';
             el.apiKey.value = '';
             setKeyStatus('— cleared', '');
+        });
+
+        // Model selection persists in localStorage
+        el.modelSelect.addEventListener('change', () => {
+            state.model = el.modelSelect.value;
+            localStorage.setItem('deepseek_model', state.model);
         });
 
         // Generate
@@ -1368,12 +1561,18 @@
                 id: generateId(),
                 author: { displayName: author },
                 body: body,
-                createdAt: new Date().toISOString(),
+                createdAt: new Date().toISOString().replace('Z', 'Z'),
                 updatedAt: null,
             });
             el.commentAuthor.value = '';
             el.commentBody.value = '';
             renderComments();
+        });
+
+        // Maintainers
+        el.addMaintainerBtn.addEventListener('click', () => {
+            state.maintainers.push({ name: '', email: '' });
+            renderMaintainers();
         });
 
         // Navigation
@@ -1432,10 +1631,14 @@
             } else {
                 setKeyStatus('— no key', '');
             }
+            // Restore model selection
+            if (state.model) {
+                el.modelSelect.value = state.model;
+            }
             renderComments();
-            // No records yet, hide navigation
+            renderMaintainers();
             el.recordNav.style.display = 'none';
-            console.log('Open Problem Catalog Generator (Batch + Browser) ready. Using deepseek-reasoner.');
+            console.log('LITchikin Catalog Generator ready (v1.4) – model selector active.');
         })();
     </script>
 
