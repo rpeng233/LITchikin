@@ -1,0 +1,597 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "laplacian-open-problems",
+  "title": "Open Problems on Laplacian Algorithms for General Integer-Weighted Graphs",
+  "source": {
+    "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs"
+  },
+  "generatedAt": "2026-08-18T04:19:43.000Z",
+  "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+  "lastVerified": "2026-08-18",
+  "problemCount": 12,
+  "scopeNotes": "The seed statements were supplied as a compact research agenda. Unless a record says otherwise, graphs may be sparse or dense, edge weights are positive integers represented in binary, n is the number of vertices, m is the number of edges or nonzeros, and U bounds the absolute input entries. Running-time goals are in bit operations when precision or exactness matters. The word 'faster' is sharpened relative to the cited primary-source baselines; where the seed milestone has already been achieved, the record explicitly identifies the remaining input-linear, output-sensitive, or optimal-sparsity question.",
+  "problems": [
+    {
+      "sourceStatement": "Faster solver for undirected Laplacians, vector error.",
+      "problem": "Obtain an input-optimal normwise solver for undirected integer-weighted Laplacian systems.",
+      "wordDescription": "Undirected Laplacian systems can already be solved in expected time linear in the number of edges up to iterated-logarithmic factors, with logarithmic dependence on the requested normwise accuracy. These solvers are foundational primitives for graph optimization, random walks, spectral clustering, and scientific computing. The remaining question is whether the residual overhead is inherent or whether a solver can match the time needed to read the graph and write the solution.\n\nThe bit model is important for integer-weighted graphs. A unit-cost arithmetic statement can hide precision growth, while a vector-error guarantee only asks for a normwise approximation and should not pay the much larger cost needed for coordinatewise relative accuracy. A satisfactory result should therefore separate graph-size overhead, input bit length, and accuracy dependence.",
+      "mathematicalConditions": "Let G be a connected undirected graph with n vertices, m edges, and integer weights in [1,U], let L be its Laplacian, and let b be an integer vector with 1^T b=0. For x=L^\\dagger b, compute x_tilde satisfying ||x_tilde-x||_L <= epsilon ||x||_L with constant success probability. Determine whether this can be done in O(m log(1/epsilon)) word operations for polynomially bounded U, or in input-linear bit complexity up to factors depending only polylogarithmically on log U and log(1/epsilon). More generally, determine the optimal dependence on m, n, log U, and epsilon, improving the current m (log log n)^{O(1)} log(1/epsilon) expected-time frontier.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Nearly-Linear Time Algorithms for Preconditioning and Solving Symmetric, Diagonally Dominant Linear Systems",
+          "year": 2006,
+          "description": "Established the classical nearly-linear-time energy-norm solver framework for SDD and Laplacian systems.",
+          "link": "https://arxiv.org/abs/cs/0607105"
+        },
+        {
+          "title": "A Simple, Combinatorial Algorithm for Solving SDD Systems in Nearly-Linear Time",
+          "year": 2013,
+          "description": "Gave a conceptually simple nearly-linear solver and discussed numerical stability and precision.",
+          "link": "https://arxiv.org/abs/1301.6628"
+        },
+        {
+          "title": "Ultrasparse Ultrasparsifiers and Faster Laplacian System Solvers",
+          "year": 2020,
+          "description": "Gave an expected O(m (log log n)^{O(1)} log(1/epsilon)) Laplacian solver, the main runtime baseline for removing graph-size overhead.",
+          "link": "https://arxiv.org/abs/2011.08806"
+        },
+        {
+          "title": "Entrywise Approximation for Matrix Inversion and Linear Systems",
+          "year": 2025,
+          "description": "Makes the bit-complexity distinction between normwise and entrywise guarantees explicit and provides near-linear bit bounds for normwise SDDM solving.",
+          "link": "https://arxiv.org/abs/2504.19054"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "1"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "Laplacian systems",
+        "undirected graphs",
+        "vector error",
+        "bit complexity",
+        "integer weights"
+      ],
+      "verificationNotes": "The seed problem is interpreted as removing the remaining iterated-logarithmic graph-size overhead while retaining a standard energy-norm guarantee. Primary-source search was performed through 2026-08-18; this is not an exhaustive resolution audit.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:undirected-vector-error-solver"
+    },
+    {
+      "sourceStatement": "Faster solver for directed polynomial-mixing-time Laplacians, vector error.",
+      "problem": "Match the fastest undirected normwise solvers for directed Laplacians whose random walks mix in polynomial time.",
+      "wordDescription": "Nearly-linear directed Laplacian solvers are known, but their polylogarithmic overheads, reductions to Eulerian systems, and dependence on sparsification remain substantially more involved than in the undirected case. When the associated random walk has polynomial mixing time and the weights are polynomially bounded, conditioning is controlled enough that precision is not the main obstruction. This regime isolates the structural cost of directionality.\n\nA faster solver would immediately improve algorithms for stationary distributions, PageRank, hitting and escape probabilities, and other Markov-chain quantities. It would also test whether recent smaller Eulerian sparsifiers can close the runtime gap with the best undirected solvers.",
+      "mathematicalConditions": "Let L be the column Laplacian of a strongly connected directed graph with n vertices, m arcs, polynomially bounded positive integer weights, and polynomial mixing time. Given b in im(L) and epsilon in (0,1), compute x_tilde approximating L^\\dagger b in a stated norm, such as the U_L-energy norm after Eulerian scaling, where U_L=(L+L^T)/2 in the Eulerian case. Seek expected time m (log log n)^{O(1)} log(1/epsilon), or ideally O(m log(1/epsilon)), including all reductions from the general strongly connected case. The guarantee must state the stationary scaling, norm, success probability, and bit precision explicitly.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Almost-Linear-Time Algorithms for Markov Chains and New Spectral Primitives for Directed Graphs",
+          "year": 2016,
+          "description": "Introduced directed spectral approximation and an almost-linear solver framework for Eulerian and general directed Laplacians.",
+          "link": "https://arxiv.org/abs/1611.00755"
+        },
+        {
+          "title": "Solving Directed Laplacian Systems in Nearly-Linear Time through Sparse LU Factorizations",
+          "year": 2018,
+          "description": "Established nearly-linear randomized solving via sparse approximate LU factorizations.",
+          "link": "https://arxiv.org/abs/1811.10722"
+        },
+        {
+          "title": "Sparsified Block Elimination for Directed Laplacians",
+          "year": 2021,
+          "description": "Related directed-solver time directly to the time and output size of Eulerian sparsification.",
+          "link": "https://arxiv.org/abs/2111.10257"
+        },
+        {
+          "title": "Eulerian Graph Sparsification by Effective Resistance Decomposition",
+          "year": 2024,
+          "description": "Improved Eulerian sparsifier construction and the resulting polylogarithmic factors in directed Laplacian solving.",
+          "link": "https://arxiv.org/abs/2408.10172"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "2"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "directed Laplacians",
+        "Markov chains",
+        "mixing time",
+        "vector error",
+        "near-linear algorithms"
+      ],
+      "verificationNotes": "The problem is sharpened to the polynomial-mixing regime and asks for undirected-like overhead, not merely an almost-linear bound. Primary-source search was performed through 2026-08-18; this is not an exhaustive resolution audit.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:directed-poly-mixing-solver"
+    },
+    {
+      "sourceStatement": "Complexity of a directed Laplacian solver with arbitrary mixing time, perhaps even with exact entries.",
+      "problem": "Determine the bit complexity of solving arbitrary-mixing directed integer Laplacian systems, including exact rational solutions.",
+      "wordDescription": "Directed graphs with extremely slow mixing can have exponentially small stationary probabilities and badly conditioned Laplacian systems even when every edge weight has a short integer representation. Approximate arithmetic-operation bounds can therefore obscure the true precision cost. Exact solutions are rational and may encode weighted arborescence counts, so both their output length and the cost of producing them must be measured.\n\nThis problem asks for an output-sensitive theory that remains meaningful without a polynomial mixing-time promise. A sharp answer could range from a nearly input-linear approximate solver whose bit complexity depends only on the actual output precision, to an exact algorithm matching the total bit length of the rational solution up to lower-order factors, or to reductions showing that such targets are impossible.",
+      "mathematicalConditions": "Let L be the directed Laplacian of a strongly connected n-vertex, m-arc graph with positive integer weights at most U, and let b be an integer vector in im(L). With no bound on mixing time or condition number, determine the optimal bit complexity of (a) computing a normwise epsilon-approximation to L^\\dagger b and (b) outputting the exact rational vector L^\\dagger b under a fixed normalization. Bounds should be expressed in m, n, log U, the bit length of b, epsilon, and the output length. A principal target is an output-sensitive exact algorithm, for example near O_tilde(m+output bits), or a conditional lower bound separating directed Laplacians from undirected ones.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Faster Algorithms for Computing the Stationary Distribution, Simulating Random Walks, and More",
+          "year": 2016,
+          "description": "Connected directed Laplacian solving to stationary distributions and made mixing time a central conditioning parameter.",
+          "link": "https://arxiv.org/abs/1608.03270"
+        },
+        {
+          "title": "Solving Directed Laplacian Systems in Nearly-Linear Time through Sparse LU Factorizations",
+          "year": 2018,
+          "description": "Provides a nearly-linear approximate solver with logarithmic dependence on accuracy and natural conditioning parameters.",
+          "link": "https://arxiv.org/abs/1811.10722"
+        },
+        {
+          "title": "Derandomizing Directed Random Walks in Almost-Linear Time",
+          "year": 2022,
+          "description": "Gives deterministic almost-linear directed solving under explicit condition-number control.",
+          "link": "https://arxiv.org/abs/2208.10959"
+        },
+        {
+          "title": "Entrywise Approximation for Matrix Inversion and Linear Systems",
+          "year": 2025,
+          "description": "Develops fixed-point bit-complexity bounds for directed diagonally dominant L-matrices and illustrates the cost of exponentially small entries.",
+          "link": "https://arxiv.org/abs/2504.19054"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "3"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "directed Laplacians",
+        "exact linear algebra",
+        "bit complexity",
+        "mixing time",
+        "integer weights"
+      ],
+      "verificationNotes": "This formulation separates normwise approximation from exact rational output and does not assume that unit-cost arithmetic captures the computation. Primary-source search was performed through 2026-08-18; this is not an exhaustive resolution audit.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:directed-arbitrary-mixing-exact"
+    },
+    {
+      "sourceStatement": "Faster entrywise solver for undirected Laplacians.",
+      "problem": "Give a nearly input-linear bit-complexity solver with entrywise relative error for grounded undirected Laplacians.",
+      "wordDescription": "Energy-norm accuracy does not protect coordinates whose true values are exponentially smaller than the norm of the solution. Hitting probabilities, escape probabilities, Green's functions, and related random-walk quantities require the stronger guarantee that every nonzero coordinate is approximated multiplicatively. This changes the relevant complexity from arithmetic operations to bit operations.\n\nRecent work gives an approximately m sqrt(n) bit-operation algorithm for one SDDM system with entrywise guarantees. The open challenge is to remove the sqrt(n) overhead, understand whether a fine-grained obstruction prevents this, and identify the correct dependence on input precision and failure probability.",
+      "mathematicalConditions": "Let M be an invertible SDDM matrix obtained, for example, by grounding one vertex of a connected undirected integer-weighted Laplacian, with m nonzeros and entries bounded by U. For a nonnegative integer vector b and x=M^{-1}b, output x_tilde such that exp(-epsilon)x_i <= x_tilde_i <= exp(epsilon)x_i for every i with x_i>0, with probability at least 1-delta. Improve the current O_tilde(m sqrt(n) log^2(U epsilon^{-1} delta^{-1})) bit bound toward O_tilde(m polylog(U epsilon^{-1} delta^{-1})), or prove a matching conditional lower bound.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Nearly-Linear Time Algorithms for Preconditioning and Solving Symmetric, Diagonally Dominant Linear Systems",
+          "year": 2006,
+          "description": "Provides the normwise solver baseline whose guarantee is insufficient for exponentially small coordinates.",
+          "link": "https://arxiv.org/abs/cs/0607105"
+        },
+        {
+          "title": "Solving Laplacian Systems in Logarithmic Space",
+          "year": 2016,
+          "description": "Studies high-precision Euclidean approximation for polynomially weighted Laplacian systems from a space-complexity perspective.",
+          "link": "https://arxiv.org/abs/1608.01426"
+        },
+        {
+          "title": "Entrywise Approximation for Matrix Inversion and Linear Systems",
+          "year": 2025,
+          "description": "Introduces the current approximately m sqrt(n) bit-operation bound for one fixed-point SDDM solve with entrywise relative error.",
+          "link": "https://arxiv.org/abs/2504.19054"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "4"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "entrywise approximation",
+        "undirected Laplacians",
+        "SDDM matrices",
+        "bit complexity",
+        "random walks"
+      ],
+      "verificationNotes": "Entrywise multiplicative error is stated only where nonnegativity makes it well-defined. The approximately m sqrt(n) baseline is taken from arXiv:2504.19054. Primary-source search was performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:undirected-entrywise-solver"
+    },
+    {
+      "sourceStatement": "Entrywise solver for directed Laplacians (polynomial weights, do better than n direct solves).",
+      "problem": "Compute an entrywise approximate inverse of a polynomially weighted directed grounded Laplacian in near-output-linear time.",
+      "wordDescription": "Computing all entries of a directed Laplacian inverse exposes all-pairs hitting, escape, and Green's-function information. Running a single-right-hand-side routine once per column ignores the shared graph structure and can be far more expensive than the n^2 values that must be written. The natural goal is an output-sensitive algorithm.\n\nThe original milestone of beating n unrelated direct solves has already seen substantial progress: 2025 algorithms for fixed-point row-diagonally-dominant L-matrices are subcubic in dense regimes and improve on straightforward repeated solving in important sparse regimes. The sharpened open problem is to reach n^{2+o(1)} bit operations for sparse polynomially weighted graphs, or otherwise characterize the optimal tradeoff among m, n, and matrix-multiplication exponents.",
+      "mathematicalConditions": "Let M be an invertible RDDL matrix obtained by grounding a strongly connected directed Laplacian, with m nonzeros and integer entries bounded by U=n^{O(1)}. Output Z satisfying exp(-epsilon)(M^{-1})_{ij} <= Z_{ij} <= exp(epsilon)(M^{-1})_{ij} for all positive entries, with probability at least 1-delta. Seek O_tilde(n^2 + m n^{o(1)}) bit operations, or any bound that improves the current O_tilde(min{n^{omega+1/2}, m n^{3/2+o(1)}}) inversion frontier throughout a nontrivial parameter range. Determine matching lower bounds, noting that n^2 output entries are unavoidable.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Solving Directed Laplacian Systems in Nearly-Linear Time through Sparse LU Factorizations",
+          "year": 2018,
+          "description": "Gives the standard normwise directed-solve primitive but not entrywise relative control on an entire inverse.",
+          "link": "https://arxiv.org/abs/1811.10722"
+        },
+        {
+          "title": "On Fast Computation of Directed Graph Laplacian Pseudo-Inverse",
+          "year": 2020,
+          "description": "Studies column-by-column computation of the full directed Laplacian pseudoinverse using iterative methods.",
+          "link": "https://arxiv.org/abs/2002.12773"
+        },
+        {
+          "title": "Entrywise Approximation for Matrix Inversion and Linear Systems",
+          "year": 2025,
+          "description": "Gives subcubic entrywise inversion algorithms for fixed-point RDDL matrices and is the principal current quantitative baseline.",
+          "link": "https://arxiv.org/abs/2504.19054"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "5"
+      },
+      "status": "open (sharpened after partial progress)",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "entrywise approximation",
+        "directed Laplacians",
+        "matrix inversion",
+        "output-sensitive algorithms",
+        "integer weights"
+      ],
+      "verificationNotes": "The literal goal of improving on n fully independent solves is no longer the strongest open formulation after arXiv:2504.19054. This record preserves the seed statement and sharpens the target to near-output-linear inversion. Primary-source search was performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:directed-entrywise-inverse"
+    },
+    {
+      "sourceStatement": "Faster O(n)-sized sparsifier for undirected Laplacians.",
+      "problem": "Construct optimal-size undirected spectral sparsifiers in input-linear time.",
+      "wordDescription": "For fixed accuracy, every undirected weighted graph has a spectral sparsifier with O(n) edges, and such a sparsifier can already be constructed in almost-linear randomized time. Thus the broad existence-and-almost-linear-time milestone in the seed statement has been achieved. The remaining problem is to remove residual runtime and accuracy overhead while retaining the optimal O(n/epsilon^2) edge count.\n\nAn input-linear algorithm would make optimal sparsification as cheap as reading the graph and would simplify many downstream solver and optimization pipelines. The deterministic version remains substantially harder: a very recent construction makes major progress for dense graphs, but retains polylogarithmic sparsity overhead and a roughly quadratic additive runtime term.",
+      "mathematicalConditions": "Given an undirected n-vertex, m-edge graph with positive integer weights and epsilon in (0,1), output a reweighted subgraph H with O(n/epsilon^2) edges satisfying (1-epsilon)L_G <= L_H <= (1+epsilon)L_G. Seek O(m) expected time for constant epsilon, or O(m polylog(1/epsilon)) time with explicit bit complexity, improving current O_tilde(m/epsilon^{O(1)}) constructions. Separately determine whether the same target is possible deterministically.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Twice-Ramanujan Sparsifiers",
+          "year": 2008,
+          "description": "Proved the existence of O(n/epsilon^2)-edge spectral sparsifiers and gave a polynomial-time deterministic construction.",
+          "link": "https://arxiv.org/abs/0808.0163"
+        },
+        {
+          "title": "Constructing Linear-Sized Spectral Sparsification in Almost-Linear Time",
+          "year": 2015,
+          "description": "Gave the first almost-linear-time construction of a linear-size spectral sparsifier.",
+          "link": "https://arxiv.org/abs/1508.03261"
+        },
+        {
+          "title": "An SDP-Based Algorithm for Linear-Sized Spectral Sparsification",
+          "year": 2017,
+          "description": "Outputs O(n/epsilon^2) edges in O_tilde(m/epsilon^{O(1)}) time.",
+          "link": "https://arxiv.org/abs/1702.08415"
+        },
+        {
+          "title": "Deterministic Spectral Sparsification in Almost-Linear Time for Dense Graphs",
+          "year": 2026,
+          "description": "Gives a deterministic sparsifier with O(n epsilon^{-2} log^{24+o(1)} n) edges in m^{1+o(1)} plus roughly quadratic additive time, sharpening the remaining deterministic target.",
+          "link": "https://arxiv.org/abs/2608.13910"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "6"
+      },
+      "status": "open (sharpened; original milestone achieved)",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "spectral sparsification",
+        "undirected graphs",
+        "linear-size sparsifiers",
+        "input-linear algorithms",
+        "derandomization"
+      ],
+      "verificationNotes": "O(n/epsilon^2)-edge almost-linear randomized construction is already known, so the record targets truly input-linear randomized time and an optimal-size, input-efficient deterministic analogue. The 2026 dense-graph deterministic result is included. Primary-source search was performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:undirected-linear-size-sparsifier"
+    },
+    {
+      "sourceStatement": "Smallest sized sparsifier for Eulerian sparsifiers.",
+      "problem": "Determine the optimal edge count of spectral sparsifiers for Eulerian directed Laplacians.",
+      "wordDescription": "Eulerian directed sparsification must approximate an asymmetric Laplacian while preserving in-degree/out-degree balance. Undirected graphs admit the optimal O(n/epsilon^2) edge bound, but current Eulerian constructions retain polylogarithmic factors. Those factors propagate directly into the cost and complexity of directed Laplacian solvers.\n\nThe central structural question is whether directionality forces extra edges or whether the undirected optimum remains attainable. Both existential and efficient-construction versions matter: proving a smaller sparsifier exists may require discrepancy tools, while finding it in almost-linear time adds algorithmic constraints.",
+      "mathematicalConditions": "For an n-vertex weighted Eulerian directed graph with Laplacian L and U_L=(L+L^T)/2, determine the minimum s(n,epsilon) such that there is an Eulerian reweighted subgraph with s arcs whose Laplacian L_tilde is an epsilon-approximation to L in the standard asymmetric norm induced by U_L. Close the gap between the Omega(n/epsilon^2) lower bound inherited from undirected graphs and the best known O(n log^{3/2}(n)/epsilon^2) polynomial-time upper bound (up to alternative mixed epsilon terms). In particular, prove or refute s(n,epsilon)=Theta(n/epsilon^2), and seek an almost-linear-time construction if it holds.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Almost-Linear-Time Algorithms for Markov Chains and New Spectral Primitives for Directed Graphs",
+          "year": 2016,
+          "description": "Introduced the directed spectral approximation notion and constructive Eulerian sparsification.",
+          "link": "https://arxiv.org/abs/1611.00755"
+        },
+        {
+          "title": "Better Sparsifiers for Directed Eulerian Graphs",
+          "year": 2023,
+          "description": "Improved Eulerian sparsifier size using short-cycle decompositions and discrepancy theory.",
+          "link": "https://arxiv.org/abs/2311.06232"
+        },
+        {
+          "title": "Eulerian Graph Sparsification by Effective Resistance Decomposition",
+          "year": 2024,
+          "description": "Gives an almost-linear construction with roughly n log^2(n)/epsilon^2 edges and a polynomial-time O(n log^{3/2}(n)/epsilon^2) bound.",
+          "link": "https://arxiv.org/abs/2408.10172"
+        },
+        {
+          "title": "Singular Value Approximation and Sparsifying Random Walks on Directed Graphs",
+          "year": 2023,
+          "description": "Develops a stronger composable approximation framework and sparsification tools for directed random walks.",
+          "link": "https://arxiv.org/abs/2301.13541"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "7"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "Eulerian graphs",
+        "directed sparsification",
+        "spectral approximation",
+        "discrepancy theory",
+        "optimal sparsity"
+      ],
+      "verificationNotes": "The quantitative baseline is taken from the 2023 and 2024 Eulerian sparsification papers. Bounds have different epsilon regimes; the stated n log^{3/2}(n)/epsilon^2 expression highlights the cleanest polynomial-time comparison. Search performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:eulerian-minimum-size-sparsifier"
+    },
+    {
+      "sourceStatement": "Faster dynamic effective resistances.",
+      "problem": "Improve the update-query tradeoff for fully dynamic approximate effective resistance on general weighted graphs.",
+      "wordDescription": "Effective resistance is a basic dynamic measure of connectivity and a central primitive behind sparsification, electrical-flow optimization, and random-walk analysis. Maintaining a spectral edge sparsifier is not by itself enough for fast arbitrary-pair resistance queries: evaluating a query still requires access to an inverse or a suitable dynamic Schur complement.\n\nExisting general-graph data structures achieve sublinear but polynomial update and query bounds, with different guarantees for unweighted versus weighted graphs and for oblivious versus adaptive adversaries. The open goal is to lower these exponents, obtain worst-case rather than amortized bounds, and understand which combinations are ruled out by dynamic lower bounds.",
+      "mathematicalConditions": "Maintain an undirected graph with positive integer conductances under edge insertions, deletions, and weight changes. On a query (s,t), return R_eff^G(s,t) within a factor 1+epsilon. Improve the best general-graph tradeoffs, including the O_tilde(n^{2/3+o(1)} epsilon^{-O(1)}) amortized scale for all-pairs queries, while supporting polynomially bounded weights. Desired results include update and query times n^{1/2+o(1)} or better, worst-case guarantees, and robustness to an adaptive adversary; alternatively prove conditional lower bounds that identify the optimal frontier.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "On Fully Dynamic Graph Sparsifiers",
+          "year": 2016,
+          "description": "Established polylogarithmic-update dynamic spectral sparsifiers, an important but insufficient primitive for fast resistance queries.",
+          "link": "https://arxiv.org/abs/1604.02094"
+        },
+        {
+          "title": "Fully Dynamic Effective Resistances",
+          "year": 2018,
+          "description": "Gave the first sublinear general-graph all-pairs resistance data structure via dynamically maintained Schur complements.",
+          "link": "https://arxiv.org/abs/1804.04038"
+        },
+        {
+          "title": "Fully Dynamic Spectral Vertex Sparsifiers and Applications",
+          "year": 2019,
+          "description": "Improved and generalized dynamic vertex sparsification, Laplacian-solution access, and resistance queries.",
+          "link": "https://arxiv.org/abs/1906.10530"
+        },
+        {
+          "title": "Fast Dynamic Cuts, Distances and Effective Resistances via Vertex Sparsifiers",
+          "year": 2020,
+          "description": "Obtained an O_tilde(n^{2/3+o(1)} epsilon^{-O(1)}) amortized scale for fully dynamic all-pairs effective resistance.",
+          "link": "https://arxiv.org/abs/2005.02368"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "8"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "dynamic algorithms",
+        "effective resistance",
+        "Schur complements",
+        "weighted graphs",
+        "data structures"
+      ],
+      "verificationNotes": "The record focuses on arbitrary-pair queries in general graphs and explicitly tracks weightedness and adversary model, which differ across existing results. Primary-source search was performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:dynamic-effective-resistance"
+    },
+    {
+      "sourceStatement": "Dynamic electrical flows with heavy hitters (find all edges whose electrical flow values are greater than epsilon of the total).",
+      "problem": "Maintain an output-sensitive heavy-hitter oracle for electrical flows under dynamic resistances and demands.",
+      "wordDescription": "Optimization algorithms based on electrical flows often need only the few edges carrying a large fraction of the current flow or energy. Recomputing the full m-dimensional electrical flow after every resistance or demand update defeats this sparsity. A dynamic heavy-hitter oracle would expose the important coordinates without materializing the entire flow.\n\nSpecialized versions of this idea already power faster maximum-flow algorithms, but they rely on restricted update sequences and amortization tailored to an interior-point method. The broader open problem is to build a reusable data structure for general dynamic graphs, with a clean approximation guarantee and update/query bounds that scale with the number of reported heavy edges.",
+      "mathematicalConditions": "Let G have incidence matrix B, resistance matrix R, Laplacian L=B R^{-1} B^T, and dynamic zero-sum demand b. The electrical flow is f=R^{-1}B^T L^\\dagger b and its energy is E=f^T R f. Support resistance updates, edge insertions/deletions, and sparse changes to b. A query with epsilon must output a set H containing every edge e with sqrt(r_e)|f_e| >= epsilon sqrt(E), excluding every edge below (epsilon/2)sqrt(E), together with constant-factor or 1+o(1) estimates of reported values. Seek sublinear, ideally polylogarithmic, amortized update time and O_tilde(epsilon^{-2}+|H|) query time, under a clearly stated adversary and numerical model.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Electrical Flows, Laplacian Systems, and Faster Approximation of Maximum Flow in Undirected Graphs",
+          "year": 2010,
+          "description": "Established electrical flows as a central algorithmic primitive for graph optimization.",
+          "link": "https://arxiv.org/abs/1010.2921"
+        },
+        {
+          "title": "Fully Dynamic Spectral Vertex Sparsifiers and Applications",
+          "year": 2019,
+          "description": "Maintains approximate electrical-flow energies and query access to potentials under graph and demand changes.",
+          "link": "https://arxiv.org/abs/1906.10530"
+        },
+        {
+          "title": "Fully Dynamic Electrical Flows: Sparse Maxflow Faster Than Goldberg-Rao",
+          "year": 2021,
+          "description": "Builds restricted dynamic data structures that return edges with large electrical energy and uses them in a faster exact max-flow algorithm.",
+          "link": "https://arxiv.org/abs/2101.07233"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "9"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "dynamic algorithms",
+        "electrical flows",
+        "heavy hitters",
+        "Laplacian systems",
+        "output-sensitive algorithms"
+      ],
+      "verificationNotes": "The seed phrase 'epsilon of the total' is formalized using leverage-normalized l2 energy, the heavy-hitter notion used naturally by electrical-flow algorithms. Other l1 or unweighted-current variants should be recorded separately. Search performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:dynamic-flow-heavy-hitters"
+    },
+    {
+      "sourceStatement": "Determinant estimation of undirected Laplacians.",
+      "problem": "Estimate an undirected Laplacian cofactor multiplicatively in nearly input-linear time.",
+      "wordDescription": "By the matrix-tree theorem, a cofactor of an undirected graph Laplacian is the total weight of its spanning trees. Approximating the log determinant additively can be done in near-linear time, but that guarantee may correspond to a very large multiplicative error in the determinant itself. A genuine 1+epsilon estimate of the determinant is therefore a stronger counting problem.\n\nRecent work gives a roughly m^{3/2}/epsilon-time multiplicative estimator by repeatedly removing uncorrelated edge sets, improving earlier sparse-graph bounds. Closing the remaining gap to near-linear time would connect electrical-flow localization, determinant-preserving sparsification, and high-accuracy trace estimation in a particularly clean setting.",
+      "mathematicalConditions": "Given a connected undirected graph G with n vertices, m edges, and positive integer weights at most U, fix a root r and let tau(G)=det(L_{-r,-r}), the weighted spanning-tree count. With probability at least 1-delta, output tau_tilde satisfying (1-epsilon)tau(G) <= tau_tilde <= (1+epsilon)tau(G). Seek O_tilde(m poly(epsilon^{-1},log U,log delta^{-1})) bit operations, improving the known O_tilde(m^{3/2} epsilon^{-1}) sparse-graph bound and the earlier roughly n^2 epsilon^{-2} determinant-preserving bound. The result must distinguish multiplicative determinant error from additive error in log tau(G).",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Computing the Log-Determinant of Symmetric, Diagonally Dominant Matrices in Near-Linear Time",
+          "year": 2014,
+          "description": "Gives near-linear algorithms for additive approximation of SDD log determinants, a weaker but important baseline.",
+          "link": "https://arxiv.org/abs/1408.1693"
+        },
+        {
+          "title": "Determinant-Preserving Sparsification of SDDM Matrices with Applications to Counting and Sampling Spanning Trees",
+          "year": 2017,
+          "description": "Gives a roughly n^2/epsilon^2-time multiplicative determinant estimator and determinant-preserving sparsification tools.",
+          "link": "https://arxiv.org/abs/1705.00985"
+        },
+        {
+          "title": "Sampling Random Spanning Trees Faster than Matrix Multiplication",
+          "year": 2016,
+          "description": "Develops fast Schur-complement and effective-resistance machinery for weighted random spanning trees.",
+          "link": "https://arxiv.org/abs/1611.07451"
+        },
+        {
+          "title": "Approximate Spanning Tree Counting from Uncorrelated Edge Sets",
+          "year": 2025,
+          "description": "Gives an O_tilde(m^{3/2} epsilon^{-1}) multiplicative estimator, the main sparse-graph runtime baseline for the near-linear target.",
+          "link": "https://arxiv.org/abs/2505.14666"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "10"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "determinant estimation",
+        "undirected Laplacians",
+        "spanning trees",
+        "randomized algorithms",
+        "bit complexity"
+      ],
+      "verificationNotes": "The record uses multiplicative error in the determinant, not additive approximation of log det. The two notions have very different precision requirements. The 2025 uncorrelated-edge-set algorithm is included as the current sparse-graph baseline found in the primary-source search through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:undirected-determinant-estimation"
+    },
+    {
+      "sourceStatement": "Determinant estimation of directed Laplacians.",
+      "problem": "Develop a nearly input-linear multiplicative estimator for directed Laplacian cofactors and weighted arborescence counts.",
+      "wordDescription": "A cofactor of a directed Laplacian counts rooted weighted arborescences. Unlike the undirected case, the matrix is asymmetric and current spectral sparsification controls a norm induced by the symmetrization rather than determinant directly. There is no immediate directed analogue of the determinant-preserving SDDM machinery.\n\nA fast estimator would provide a counting counterpart to nearly-linear directed Laplacian solvers and could illuminate stationary-distribution normalization, since directed tree weights encode stationary masses. The problem is meaningful both for Eulerian graphs, where the spectral theory is cleanest, and for general strongly connected graphs.",
+      "mathematicalConditions": "Given a strongly connected directed graph with n vertices, m arcs, and positive integer weights at most U, fix a root r and let tau_r=det(L_{-r,-r}), the total weight of spanning in-arborescences rooted at r under the chosen Laplacian convention. Output a (1+epsilon)-multiplicative estimate with failure probability at most delta. Seek O_tilde(m poly(epsilon^{-1},log U,log delta^{-1})) bit operations first for Eulerian graphs and then for arbitrary strongly connected graphs. Establish whether directed spectral or singular-value sparsifiers preserve enough information for this purpose, or identify a different primitive.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "Almost-Linear-Time Algorithms for Markov Chains and New Spectral Primitives for Directed Graphs",
+          "year": 2016,
+          "description": "Introduces the directed spectral tools and solvers that a determinant estimator might build upon.",
+          "link": "https://arxiv.org/abs/1611.00755"
+        },
+        {
+          "title": "An Elementary Proof of a Matrix Tree Theorem for Directed Graphs",
+          "year": 2019,
+          "description": "Gives the directed weighted matrix-tree identity connecting Laplacian cofactors to arborescences.",
+          "link": "https://arxiv.org/abs/1904.12221"
+        },
+        {
+          "title": "Better Sparsifiers for Directed Eulerian Graphs",
+          "year": 2023,
+          "description": "Provides improved asymmetric spectral sparsifiers but does not establish multiplicative determinant preservation.",
+          "link": "https://arxiv.org/abs/2311.06232"
+        },
+        {
+          "title": "Singular Value Approximation and Sparsifying Random Walks on Directed Graphs",
+          "year": 2023,
+          "description": "Develops composable singular-value approximation for directed random-walk matrices, a possible route to determinant control.",
+          "link": "https://arxiv.org/abs/2301.13541"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "11"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "determinant estimation",
+        "directed Laplacians",
+        "arborescences",
+        "Eulerian graphs",
+        "randomized algorithms"
+      ],
+      "verificationNotes": "No primary source found in the search through 2026-08-18 gives a general near-linear multiplicative estimator for directed Laplacian cofactors. This negative search result is not a proof that no such result exists.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:directed-determinant-estimation"
+    },
+    {
+      "sourceStatement": "Complexity of exact determinant computation.",
+      "problem": "Determine the exact bit complexity of Laplacian determinants and weighted spanning-tree or arborescence counts.",
+      "wordDescription": "Generic exact algorithms compute the determinant of an integer matrix in essentially integer-matrix-multiplication time. A reduced graph Laplacian is much more structured: it is sparse, diagonally dominant in the undirected case, and its determinant is a positive combinatorial count. It is unknown how far this structure can reduce exact bit complexity on general graphs.\n\nThe problem should be treated as exact symbolic computation rather than numerical linear algebra. Any claimed speedup must account for coefficient growth, modular reconstruction, and the output length of the integer determinant. Directed and undirected Laplacians may have different algorithmic behavior even though both admit matrix-tree interpretations.",
+      "mathematicalConditions": "Given a connected undirected graph or strongly connected directed graph with n vertices, m edges or arcs, and positive integer weights at most U, compute exactly det(L_{-r,-r}) for a specified root r. Determine the optimal randomized and deterministic bit complexity as a function of m, n, and log U. Improve on applying generic integer determinant algorithms, whose dense Las Vegas complexity is (n^omega log U)^{1+o(1)}, by exploiting Laplacian sparsity and graph structure; an aspirational target is O_tilde(m+n^2) or another output-sensitive bound. Alternatively, establish reductions or conditional lower bounds showing that exact Laplacian determinant is as hard as a standard exact-linear-algebra primitive.",
+      "comments": [],
+      "literature": [
+        {
+          "title": "The Shifted Number System for Fast Linear Algebra on Integer Matrices",
+          "year": 2005,
+          "description": "Reduces exact integer determinant and linear solving to integer matrix multiplication in Las Vegas bit complexity.",
+          "link": "https://doi.org/10.1016/j.jco.2005.04.002"
+        },
+        {
+          "title": "Determinant-Preserving Sparsification of SDDM Matrices with Applications to Counting and Sampling Spanning Trees",
+          "year": 2017,
+          "description": "Explores Laplacian-specific determinant structure in the approximate setting.",
+          "link": "https://arxiv.org/abs/1705.00985"
+        },
+        {
+          "title": "An Elementary Proof of a Matrix Tree Theorem for Directed Graphs",
+          "year": 2019,
+          "description": "Supplies the exact directed combinatorial interpretation of the determinant target.",
+          "link": "https://arxiv.org/abs/1904.12221"
+        },
+        {
+          "title": "A Fast Algorithm for Computing the Smith Normal Form with Multipliers for a Nonsingular Integer Matrix",
+          "year": 2021,
+          "description": "Shows that substantially richer exact integer linear algebra can be performed in essentially matrix-multiplication bit complexity.",
+          "link": "https://arxiv.org/abs/2111.09949"
+        }
+      ],
+      "source": {
+        "title": "10-ish problems on Laplacian solving related things on general, integer weighted graphs",
+        "problemNumber": "12"
+      },
+      "status": "open",
+      "lastVerified": "2026-08-18",
+      "tags": [
+        "exact determinant",
+        "integer linear algebra",
+        "spanning trees",
+        "arborescences",
+        "bit complexity"
+      ],
+      "verificationNotes": "The target is an exact integer output and is deliberately separated from determinant estimation. The generic dense baseline follows the integer-linear-algebra literature; primary-source search was performed through 2026-08-18.",
+      "generatedAt": "2026-08-18T04:19:43.000Z",
+      "contentUpdatedAt": "2026-08-18T04:19:43.000Z",
+      "recordId": "lit:laplacian-open-problems:exact-determinant-complexity"
+    }
+  ]
+}
