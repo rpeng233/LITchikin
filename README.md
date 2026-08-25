@@ -9,6 +9,7 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 ```text
 .
 ├── data/
+│   ├── LaplacianOpenProblems.json
 │   └── SimonsF25ComplexityLinAlg.json
 ├── gener_ds.html
 ├── open_problem_record.schema.json
@@ -18,6 +19,16 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 `gener_ds.html` creates a one-problem catalog in the browser. `viewer.html`
 temporarily reads one or more local catalog files in the browser. Neither page
 uploads a selected JSON file to a server.
+
+## Current catalogs
+
+- `LaplacianOpenProblems.json`: 12 open or sharpened problems on Laplacian
+  solvers, entrywise guarantees, sparsification, dynamic electrical quantities,
+  and determinant computation for general integer-weighted graphs. Its catalog-
+  and record-level `resolutionAudit` fields preserve the search cutoff, query
+  families, checked anchors, confidence, and the precise remaining gap.
+- `SimonsF25ComplexityLinAlg.json`: the Complexity and Linear Algebra open
+  problems catalog from the Simons Institute Fall 2025 program.
 
 ## Strict catalog format (`1.4`)
 
