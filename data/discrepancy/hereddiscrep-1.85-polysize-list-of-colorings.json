@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.85: Polysize list of colorings",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.85",
+      "sourceStatement": "Is there a list of colorings of polynomial size such that for any subset of the columns, one of these colorings gives it a discrepancy of O(h), where $h$ is the hereditary discrepancy?",
+      "problem": "Determine whether every set system admits a list of polynomially many 2-colorings such that, for every subset of the elements, some coloring in the list has discrepancy $O(h)$ on the induced subsystem, where $h$ is the hereditary discrepancy of the whole system.",
+      "wordDescription": "This question asks whether hereditary discrepancy can be 'certified' by a small explicit list of colorings: given the system, is there a poly-size family of colorings that simultaneously realizes the hereditary discrepancy guarantee on every restriction? The AimPL page records that the answer is negative, resolved during the workshop: the counterexample is the simple set system consisting of $\\sqrt{n}$ disjoint rows (sets) of size $\\sqrt{n}$ each. Its hereditary discrepancy is $O(1)$ (each induced subsystem is a union of rows, each 2-colorable to discrepancy at most 1), yet any fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns, because each row contributes a signed sum of about $\\sqrt{n}/2$ random-sign elements; a single coloring can therefore serve only an exponentially small fraction of the $2^n$ subsets, so any list of polynomial size fails on some subset. No published paper describing this negative result was located; it is recorded here as resolved in the workshop discussion on the AimPL page.",
+      "mathematicalConditions": "Given a set system (matrix $A \\in \\{0,1\\}^{m \\times n}$) with hereditary discrepancy $h = \\mathrm{herdisc}(A)$, does there exist a list $\\mathcal{L}$ of $\\mathrm{poly}(n)$ colorings $\\chi \\in \\{-1,1\\}^n$ such that for every subset $J \\subseteq [n]$ of columns, some $\\chi \\in \\mathcal{L}$ satisfies $\\max_{i} \\left|\\sum_{j \\in S_i \\cap J} \\chi(j)\\right| = O(h)$? Answer (per the AimPL page): no — the system of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each has $h = O(1)$, yet no polynomial-size list of colorings can cover all subsets, since a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns.",
+      "status": "solved",
+      "comments": [],
+      "literature": [
+        {
+          "title": "L. Lovász, J. Spencer, K. Vesztergombi, Discrepancies of set-systems and matrices, European Journal of Combinatorics 7(2):151-160, 1986",
+          "year": 1986,
+          "description": "Introduced hereditary discrepancy (and the determinant lower bound); the notion of hereditary discrepancy that the question refers to.",
+          "link": "https://scholar.google.com/scholar?q=Lov%C3%A1sz+Spencer+Vesztergombi+Discrepancies+of+set-systems+and+matrices+1986"
+        },
+        {
+          "title": "J. Matoušek, The determinant bound for discrepancy is almost tight, Proceedings of the AMS 141(2):451-460, 2013",
+          "year": 2013,
+          "description": "Establishes that the determinant lower bound approximates hereditary discrepancy up to polylog factors, the main structural tool for reasoning about herdisc.",
+          "link": "https://scholar.google.com/scholar?q=Matou%C5%A1ek+The+determinant+bound+for+discrepancy+is+almost+tight"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
+          "year": 2020,
+          "description": "Polynomial-time approximation of hereditary discrepancy via the $\\gamma_2$ norm; the algorithmic context in which 'short certificates' for herdisc are relevant.",
+          "link": "https://arxiv.org/abs/1408.1376"
+        },
+        {
+          "title": "AimPL: Hereditary discrepancy and factorization norms — Problem 1.85 (with the negative answer)",
+          "year": 2016,
+          "description": "Records the question and the workshop resolution (negative answer via $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$); no separate publication of the negative result was found.",
+          "link": "http://aimpl.org/hereddiscrep/1/"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.85",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "hereditary discrepancy",
+        "colorings",
+        "certificates"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The status ('answered in the negative' with the counterexample of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$) is transcribed from the AimPL page; no external publication of this negative result was located in the literature (searched 2026-08-25), so it is treated as workshop-recorded folklore. The intuition recorded in the wordDescription (a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns, so poly-many colorings cannot cover all $2^n$ subsets) is the standard explanation; the exact quantitative statement is best confirmed against the workshop participants' notes.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "This was answered in the negative. Counterexample is a simple set system comprising of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each."
+    }
+  ]
+}

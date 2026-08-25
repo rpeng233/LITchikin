@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.3: Discrepancy of permutations",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.3",
+      "sourceStatement": "a) discrepancy of k-permutations: For $k=3$, $[NNN'12]$ showed a lower bound of $\\Omega(\\log n)$ where $n$ is the number of elements in the ground set. For general $k$, we know that the answer lies in $[\\sqrt{k}+\\log n,\\sqrt{k}\\log n]$. An open question is to clsoe this gap. b) discrepancy of k-random permutations: A lower bound of $\\Omega(\\sqrt{k})$ is known.",
+      "problem": "Determine the maximum discrepancy of a $k$-permutation family on $n$ elements (the set system of all intervals of $k$ given permutations of $[n]$), and determine the discrepancy of $k$ uniformly random permutations.",
+      "wordDescription": "A $k$-permutation family is the set system whose sets are all intervals of $k$ permutations of the integers $1, \\dots, n$. Beck conjectured (c. 1987) that three permutations always admit a constant-discrepancy coloring; Newman and Nikolov refuted this with a recursive construction of three permutations with discrepancy $\\Omega(\\log n)$ (with Neiman, they also showed consequences for rounding the Gilmore-Gomory bin-packing LP). Spencer, Srinivasan and Tetali proved the upper bound $O(\\sqrt{k}\\log n)$ for $k$ permutations (sharp for $k \\geq n$). For fixed $k \\geq 3$ the lower bound $\\Omega(\\log n)$ transfers from the $k = 3$ construction, so the maximal discrepancy of a $k$-permutation family is known to lie between $\\sqrt{k} + \\log n$ (up to constants) and $\\sqrt{k}\\log n$; closing this gap is the open question. For $k$ random permutations, a lower bound of $\\Omega(\\sqrt{k})$ is reported on the AimPL page.",
+      "mathematicalConditions": "Let $\\pi_1, \\dots, \\pi_k$ be permutations of $[n]$ and let $\\mathcal{P}$ be the set system of all intervals of all $\\pi_j$ (i.e. all sets $\\{\\pi_j(a), \\dots, \\pi_j(b)\\}$, $1 \\leq a \\leq b \\leq n$). Determine $D(k, n) = \\max_{\\pi_1,\\dots,\\pi_k} \\mathrm{disc}(\\mathcal{P})$. Known: $D(1,n) = 1$, $D(2,n) = 2$ (Spencer 1987); $D(3,n) = \\Omega(\\log n)$ (Newman-Nikolov 2011; Newman-Neiman-Nikolov FOCS 2012); $D(k,n) = O(\\sqrt{k}\\log n)$ (Spencer-Srinivasan-Tetali 2001), tight for $k \\geq n$. Open: exact growth of $D(k,n)$, in particular whether $D(k,n) = O(\\sqrt{k} + \\log n)$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "A. Newman, A. Nikolov, A counterexample to Beck's conjecture on the discrepancy of three permutations, arXiv:1104.2922, 2011",
+          "year": 2011,
+          "description": "Constructs, for every $n = 3^k$, three permutations whose interval system has discrepancy $\\Omega(\\log n)$, disproving Beck's conjecture (and the $O(\\sqrt{\\ell})$ generalization of Spencer-Srinivasan-Tetali for $\\ell = 3$).",
+          "link": "https://arxiv.org/abs/1104.2922"
+        },
+        {
+          "title": "A. Newman, O. Neiman, A. Nikolov, Beck's three permutations conjecture: a counterexample and some consequences, FOCS 2012, pp. 253-262",
+          "year": 2012,
+          "description": "The '[NNN'12]' citation of the AimPL page: the $\\Omega(\\log n)$ counterexample together with the implication that natural rounding schemes for the Gilmore-Gomory bin-packing LP (e.g. in the Karmarkar-Karp algorithm) incur logarithmic error.",
+          "link": "https://scholar.google.com/scholar?q=Newman+Neiman+Nikolov+Beck+three+permutations+conjecture+counterexample+consequences"
+        },
+        {
+          "title": "J. Spencer, A. Srinivasan, P. Tetali, The discrepancy of permutations (manuscript), 2001",
+          "year": 2001,
+          "description": "Proves the $O(\\sqrt{k}\\log n)$ upper bound for $k$-permutation families; conjectured $O(\\sqrt{k})$ (disproved for $k=3$ by Newman-Nikolov).",
+          "link": "https://scholar.google.com/scholar?q=Spencer+Srinivasan+Tetali+discrepancy+of+permutations"
+        },
+        {
+          "title": "G. Bohus, On the discrepancy of 3 permutations, Graphs and Combinatorics 6(3):215-220, 1990",
+          "year": 1990,
+          "description": "Earlier $O(k \\log n)$-type bound for $\\ell$ permutations (as cited in Newman-Nikolov).",
+          "link": "https://scholar.google.com/scholar?q=Bohus+On+the+discrepancy+of+3+permutations+1990"
+        },
+        {
+          "title": "C. Franks, A simplified disproof of Beck's three permutations conjecture and an application to root-mean-squared discrepancy, arXiv:1811.01102, 2018",
+          "year": 2018,
+          "description": "Simpler proof of the $\\Omega(\\log n)$ lower bound for Newman-Nikolov's family, plus $6$-permutation families with root-mean-squared discrepancy $\\Omega(\\sqrt{\\log n})$.",
+          "link": "https://arxiv.org/abs/1811.01102"
+        },
+        {
+          "title": "F. Eisenbrand, D. Pálvölgyi, T. Rothvoß, Bin packing via discrepancy of permutations (SODA 2011 / ACM Trans. Algorithms)",
+          "year": 2011,
+          "description": "Connection of Beck's conjecture to the additive integrality gap of the Gilmore-Gomory LP for bin packing: if the 3-permutation discrepancy were $O(1)$, the integral optimum would beat the LP value by only an additive constant.",
+          "link": "https://scholar.google.com/scholar?q=Eisenbrand+P%C3%A1lv%C3%B6lgyi+Rothvoss+Bin+packing+via+discrepancy+of+permutations"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.3",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "permutations",
+        "interval hypergraphs",
+        "bin packing"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The $\\Omega(\\log n)$ lower bound for $k=3$ (Newman-Nikolov arXiv:1104.2922; FOCS 2012 version with Neiman) and the $O(\\sqrt{k}\\log n)$ upper bound (Spencer-Srinivasan-Tetali) are confirmed; the upper bound is sharp for $k \\geq n$. The lower-bound side '$\\sqrt{k} + \\log n$' as stated on the page combines the $\\Omega(\\log n)$ bound (which transfers to all $k \\geq 3$ by adding dummy permutations) with a $\\sqrt{k}$ term; for part (b), the claimed $\\Omega(\\sqrt{k})$ lower bound for random permutations could not be traced to a published citation during verification and is reported as stated on the AimPL page. The typo 'clsoe' in the source statement is preserved verbatim.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "a) For $k=3$, $\\Omega(\\log n)$ lower bound; for general $k$ the answer lies in $[\\sqrt{k}+\\log n,\\sqrt{k}\\log n]$, and closing this gap is open. b) For $k$ random permutations, a lower bound of $\\Omega(\\sqrt{k})$ is known."
+    }
+  ]
+}

@@ -1,0 +1,890 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Open problems",
+  "generatedAt": "2026-08-25T14:55:26.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 14,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.05",
+      "sourceStatement": "There is a universal constant $c>0$ s.t. for every $v_1,v_2,...,v_n \\in \\mathbb{B_2}^d$, there exist signs $\\epsilon_1,...,\\epsilon_n\\in \\{-1,1\\}$ s.t. $|| \\sum_{i=1}^n \\epsilon_i v_i||_{\\infty} \\le c$",
+      "problem": "Prove the Komlós conjecture: for any multiset of $n$ vectors in the Euclidean unit ball of $\\mathbb{R}^d$, there exist $\\pm 1$ signs whose signed sum has $\\ell_\\infty$ norm bounded by an absolute constant, independent of both the dimension $d$ and the number of vectors $n$.",
+      "wordDescription": "The Komlós conjecture is one of the central open problems in combinatorial discrepancy. It asserts that vectors of Euclidean norm at most one can always be signed so that every coordinate of the signed sum stays within an absolute constant, no matter how many vectors there are or how high the dimension is. It strictly generalizes the Beck–Fiala conjecture (scale each element's incidence vector by $1/\\sqrt{t}$), and in the special case of normalized $\\pm 1$ vectors it recovers Spencer's theorem. The best known general bound is logarithmic: Banaszczyk's vector-balancing theorem gives $O(\\sqrt{\\log n})$, and with Gaussian-slice estimates of Barthe, Guédon, Mendelson and Naor this improves to $O(\\sqrt{\\log d})$ where $d$ is the dimension of the span of the vectors. The conjecture remains open despite decades of effort; the recent bound of Bansal and Jiang ($\\widetilde{O}(\\log^{1/4} n)$) is the first to go beyond the square root of a logarithm.",
+      "mathematicalConditions": "For every $d, n \\geq 1$ and every $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, there exist signs $\\epsilon_1, \\dots, \\epsilon_n \\in \\{-1, 1\\}$ and an absolute constant $c$ (independent of $d$ and $n$) such that $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq c$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "J. Komlós, A generalization of a problem of Steinitz, Acta Mathematica Academiae Scientiarum Hungaricae 41(3-4):217-229, 1983",
+          "year": 1983,
+          "description": "The paper in which the Komlós conjecture (in its vector-balancing form) originates; it studies signed sums of vectors and generalizes the classical Steinitz lemma.",
+          "link": "https://scholar.google.com/scholar?q=Komlos+A+generalization+of+a+problem+of+Steinitz+Acta+Mathematica+Hungaricae+1983"
+        },
+        {
+          "title": "J. Spencer, Six standard deviations suffice, Transactions of the American Mathematical Society 289(2):679-706, 1985",
+          "year": 1985,
+          "description": "Proves the $O(\\log n)$ bound for the $\\ell_\\infty$ discrepancy of vectors in the Euclidean ball and states the discrete version of the Komlós conjecture.",
+          "link": "https://scholar.google.com/scholar?q=Spencer+Six+standard+deviations+suffice+1985"
+        },
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Proves the vector-balancing theorem for convex bodies of Gaussian measure at least $1/2$, which yields the best known bound $O(\\sqrt{\\log n})$ for the Komlós problem.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "F. Barthe, O. Guédon, S. Mendelson, A. Naor, A probabilistic approach to the geometry of the $\\ell_p^n$-ball, Annals of Probability 33(2):480-513, 2005",
+          "year": 2005,
+          "description": "The '[Naor'05]' reference of the AimPL page. Gaussian-measure estimates for slices of the $\\ell_p^n$ ball that, combined with Banaszczyk's theorem, improve the Komlós bound to $O(\\sqrt{\\log d})$ where $d \\leq \\min\\{n, m\\}$ is the dimension of the span.",
+          "link": "https://arxiv.org/abs/math/0503650"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.3961, 2025",
+          "year": 2025,
+          "description": "Gives an $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem (and resolves the Beck-Fiala conjecture for degree $k \\geq \\log^2 n$), the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$; the companion paper 'Smoothed analysis of the Komlós conjecture' proves the conjecture under Gaussian perturbations when $n = \\omega(d \\log d)$.",
+          "link": "https://arxiv.org/abs/2508.3961"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.05",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Komlós conjecture",
+        "vector balancing",
+        "convex geometry"
+      ],
+      "verificationNotes": "Verified on 2026-08-25 against http://aimpl.org/hereddiscrep/1/ and the literature. The page attributes the bound $c=O(\\sqrt{\\log\\min\\{d,n\\}})$ to '[Banaszczyk'98] and [Naor'05]'; '[Naor'05]' is the joint paper Barthe, Guédon, Mendelson and Naor (2005), whose slice estimates give the $\\sqrt{\\log d}$ dependence on the span dimension (see e.g. the Theory of Computing article arXiv:1612.04304 for this derivation). Confirmed that the conjecture is still open as of 2026 and that Bansal-Jiang (arXiv:2508.3961) currently holds the best general bound $\\widetilde{O}(\\log^{1/4} n)$.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "$c = O(\\sqrt{\\log \\min\\{d, n\\}})$ was given by Banaszczyk (1998) together with the Gaussian measure estimates for slices of the $\\ell_\\infty$ ball due to Barthe, Guédon, Mendelson and Naor (2005), where $d$ is the dimension of the span of the vectors. Bansal and Jiang (2025) improved the general bound to $\\widetilde{O}(\\log^{1/4} n)$ and proved the conjecture in a smoothed-analysis setting when the number of vectors satisfies $n = \\omega(d \\log d)$. The conjecture with $c = O(1)$ remains open."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.1",
+      "sourceStatement": "Find a polynomial time algorithm to find the signs above.",
+      "problem": "Design a polynomial-time algorithm that, given vectors $v_1, \\dots, v_n$ in the Euclidean unit ball of $\\mathbb{R}^d$, finds signs $\\epsilon_i \\in \\{-1, 1\\}$ achieving the strongest known (Komlós-type) discrepancy guarantee on $\\|\\sum_i \\epsilon_i v_i\\|_\\infty$.",
+      "wordDescription": "Banaszczyk's bound $O(\\sqrt{\\log \\min\\{d, n\\}})$ for the Komlós problem was originally non-constructive, and the question of finding the signs efficiently was a major challenge. The workshop-era status was a constructive $O(\\log \\min\\{d, n\\})$ bound via the partial-coloring based algorithms of Bansal and of Lovett-Meka and the convex-geometric algorithm of Rothvoss. Shortly after the workshop this gap was closed: Bansal, Dadush and Garg (FOCS 2016) gave a polynomial-time algorithm matching Banaszczyk's bound for the Komlós problem, and Bansal, Dadush, Garg and Lovett then gave a constructive version of the full Banaszczyk vector-balancing theorem (the Gram-Schmidt walk), with an alternative multiplicative-weight-update approach by Dadush, Garg, Lovett and Nikolov. The problem as posed is therefore essentially resolved: the remaining gap between the achievable constructive bound and a constant is exactly the Komlós conjecture itself.",
+      "mathematicalConditions": "Design a randomized (or deterministic) polynomial-time algorithm that, on input $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, outputs a coloring $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq f(d, n)$, where $f(d, n) = O(\\sqrt{\\log \\min\\{d, n\\}})$ matches Banaszczyk's non-constructive bound.",
+      "status": "equivalent to problem 1.05",
+      "comments": [],
+      "literature": [
+        {
+          "title": "N. Bansal, Constructive algorithms for discrepancy minimization, FOCS 2010",
+          "year": 2010,
+          "description": "The breakthrough SDP-based algorithm that first made classical discrepancy bounds (including Spencer's theorem and $O(\\sqrt{t} \\log n)$ for the $t$-sparse setting) constructive.",
+          "link": "https://scholar.google.com/scholar?q=Bansal+Constructive+algorithms+for+discrepancy+minimization+FOCS+2010"
+        },
+        {
+          "title": "S. Lovett, R. Meka, Constructive discrepancy minimization by walking on the edges, FOCS 2012; SIAM Journal on Computing 44(5):1573-1605, 2015",
+          "year": 2015,
+          "description": "A simpler random-walk ('edge-walk') algorithm matching Spencer's theorem; the partial-coloring machinery adapted to it yields the constructive $O(\\log \\min\\{d, n\\})$ bound for the Komlós problem.",
+          "link": "https://scholar.google.com/scholar?q=Lovett+Meka+Constructive+discrepancy+minimization+by+walking+on+the+edges"
+        },
+        {
+          "title": "T. Rothvoss, Constructive discrepancy minimization for convex sets, FOCS 2014",
+          "year": 2014,
+          "description": "A convex-geometric approach via Gaussian measure and separation oracles that also yields constructive bounds for the Komlós problem.",
+          "link": "https://scholar.google.com/scholar?q=Rothvoss+Constructive+discrepancy+minimization+for+convex+sets+FOCS+2014"
+        },
+        {
+          "title": "N. Bansal, D. Dadush, S. Garg, An algorithm for Komlós conjecture matching Banaszczyk's bound, FOCS 2016",
+          "year": 2016,
+          "description": "First polynomial-time algorithm achieving Banaszczyk's $O(\\sqrt{\\log \\min\\{d, n\\}})$ bound for the Komlós problem, resolving the constructive-Komlós question up to the conjecture itself.",
+          "link": "https://scholar.google.com/scholar?q=Bansal+Dadush+Garg+An+algorithm+for+Komlos+conjecture+matching+Banaszczyk+bound"
+        },
+        {
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, SoCG 2016; Theory of Computing 15(15):1-58, 2019",
+          "year": 2019,
+          "description": "Multiplicative-weight-update based algorithm for the general vector-balancing theorem of Banaszczyk; also discusses the tightness of the Gaussian measure threshold $1/2$.",
+          "link": "https://arxiv.org/abs/1612.04304"
+        },
+        {
+          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018",
+          "year": 2018,
+          "description": "Constructive algorithm matching Banaszczyk's theorem for arbitrary convex bodies (beyond cubes), subsuming the constructive Komlós and Beck-Fiala results.",
+          "link": "https://arxiv.org/abs/1708.01079"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.1",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Komlós conjecture",
+        "algorithmic discrepancy",
+        "polynomial time"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The page's status '$O(\\log min\\{d,n\\})$ [Bansal'10, Lovett-Meka'14, Rothvoss'15]' matches the workshop-era state of the art: Garg's thesis (TU Eindhoven, 2018) states that 'partial coloring, and the algorithms for it, can be adapted to give an O(log n) bound for the Komlós setting'. The later improvement to $O(\\sqrt{\\log \\min\\{d, n\\}})$ by Bansal-Dadush-Garg (FOCS 2016) and Bansal-Dadush-Garg-Lovett (Gram-Schmidt walk, arXiv:1708.01079) is confirmed by multiple sources, e.g. arXiv:1806.04484 and arXiv:2207.03268 ('later work has since then closed the gap and given a polynomial time algorithm matching Banaszczyk's bound').",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "At workshop time: $O(\\log \\min\\{d, n\\})$ [Bansal'10, Lovett-Meka'14, Rothvoss'15]. Since then Bansal-Dadush-Garg (FOCS 2016) and Bansal-Dadush-Garg-Lovett (2016/2017) achieve $O(\\sqrt{\\log \\min\\{d, n\\}})$ constructively, matching Banaszczyk. The remaining challenge of a constant guarantee is equivalent to the Komlós conjecture."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.15",
+      "sourceStatement": "Given a set system $(V,\\mathcal{S})$ with $V=[n]$, $\\mathcal{S}=S_1,...,S_m$. Each $i\\in V$ occurs in at most $t$ sets from $\\mathcal{S}$. Then there is a coloring to the elements of $V$ achieving a discrepancy of $O(\\sqrt{t})$. Komlós conjecture implies this by treating the incidence vector of each $i\\in V$ as a vector and scaling it down by $\\sqrt{t}$.",
+      "problem": "Prove the Beck-Fiala conjecture: every set system in which each element belongs to at most $t$ sets has a 2-coloring of discrepancy $O(\\sqrt{t})$, with the bound independent of the number of elements and sets. A constructive (polynomial-time) version is also sought.",
+      "wordDescription": "The Beck-Fiala conjecture is the most famous open problem for sparse set systems: it asserts that maximum degree $t$ forces discrepancy $O(\\sqrt{t})$, far better than the linear $2t-1$ bound of the Beck-Fiala theorem. The Komlós conjecture implies it by scaling incidence vectors by $1/\\sqrt{t}$. Progress on the pure bound has been slow ($2t-3$, then $2t - \\log^* t$ by Bukh), while Banaszczyk's vector-balancing theorem gives the much better $O(\\sqrt{t\\log n})$ at the price of dependence on $n$ and a non-constructive proof. The algorithmic question was largely resolved: Bansal (2010), Lovett-Meka (2012) and Rothvoss (2014) achieved $O(\\sqrt{t}\\log n)$ constructively, and Bansal-Dadush-Garg (2016) made Banaszczyk's $O(\\sqrt{t\\log n})$ bound constructive. In 2025 Bansal and Jiang resolved the conjecture itself for all degrees $t \\geq \\log^2 n$ and gave $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for $t \\leq \\log^2 n$, so the full conjecture is now known up to $\\mathrm{poly}(\\log\\log n)$ factors, with only the small-degree regime $t < \\log^2 n$ remaining.",
+      "mathematicalConditions": "For a set system $(V, \\mathcal{S})$ with $|V| = n$, $|\\mathcal{S}| = m$, such that every $i \\in V$ lies in at most $t$ of the sets $S_1, \\dots, S_m$, there exists a coloring $\\chi: V \\to \\{-1, 1\\}$ with $\\max_{j \\in [m]} \\left|\\sum_{i \\in S_j} \\chi(i)\\right| = O(\\sqrt{t})$, where the constant is absolute (independent of $n, m, t$). The constructive version asks for a polynomial-time algorithm finding such a coloring.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "J. Beck, T. Fiala, 'Integer-making' theorems, Discrete Applied Mathematics 3(1):1-8, 1981",
+          "year": 1981,
+          "description": "Proves the Beck-Fiala theorem: discrepancy at most $2t-1$ for systems of maximum degree $t$, and states the conjecture that $O(\\sqrt{t})$ is the truth.",
+          "link": "https://scholar.google.com/scholar?q=Beck+Fiala+Integer+making+theorems+1981"
+        },
+        {
+          "title": "D. Bednarchak, M. Helm, A note on the Beck-Fiala theorem, Combinatorica 17(1):147-149, 1997; M. Helm, On the Beck-Fiala theorem, Discrete Mathematics 207:207, 1999",
+          "year": 1997,
+          "description": "Small improvements of the Beck-Fiala bound to $2t-3$ (for $t \\geq 3$).",
+          "link": "https://scholar.google.com/scholar?q=Bednarchak+Helm+note+on+the+Beck-Fiala+theorem"
+        },
+        {
+          "title": "B. Bukh, An improvement of the Beck-Fiala theorem, Combinatorics, Probability and Computing 25(3):380-398, 2016",
+          "year": 2016,
+          "description": "Improves the Beck-Fiala bound to $2t - \\log^* t$, where $\\log^*$ is the iterated logarithm — the best bound depending only on $t$.",
+          "link": "https://scholar.google.com/scholar?q=Bukh+An+improvement+of+the+Beck-Fiala+theorem"
+        },
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Implies the $O(\\sqrt{t\\log n})$ (equivalently $O(\\sqrt{t\\log m})$) bound for degree-$t$ systems, non-constructively.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017 (arXiv:1611.01805; first posted as arXiv:1512.02074)",
+          "year": 2017,
+          "description": "A framework going beyond the partial-coloring method; the AimPL page credits it with the $O(\\sqrt{t\\log n\\log|S_j|})$ guarantee in the $t$-sparse setting and it improved algorithmic bounds for Tusnády's and Steinitz problems.",
+          "link": "https://arxiv.org/abs/1611.01805"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.3961, 2025",
+          "year": 2025,
+          "description": "Resolves the Beck-Fiala conjecture for $t \\geq \\log^2 n$ and gives $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for $t \\leq \\log^2 n$, improving on Banaszczyk's $O(\\sqrt{t\\log n})$; all bounds are algorithmic.",
+          "link": "https://arxiv.org/abs/2508.3961"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.15",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Beck-Fiala conjecture",
+        "sparse set systems",
+        "algorithmic discrepancy"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The statements on the page are consistent with the literature: Beck-Fiala (1981) gives $2t-1$; Bukh's $2t - \\log^* t$ is published in Combinatorics, Probability and Computing 25 (2016) 380-398 (also stated in Theory of Computing 15(15), 2019); Banaszczyk's non-constructive bound is quoted as $O(\\sqrt{t\\log\\min\\{n,m\\}})$ in the literature. '[Bansal-Garg'15]' refers to Bansal-Garg, 'Algorithmic discrepancy beyond partial coloring', first posted December 2015 and published at STOC 2017 (arXiv:1611.01805). Bansal-Jiang (arXiv:2508.3961, 2025) confirmed: resolves the conjecture for $t \\geq \\log^2 n$ and gives $\\widetilde{O}(\\sqrt{t}+\\sqrt{\\log n})$ for $t \\leq \\log^2 n$.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "A $2t-1$ guarantee which is also algorithmic was given by Beck-Fiala. Recently, [Bukh] gave a guarantee of $2t-\\log^*t$. Banaszczyk's result implies a bound of $O(\\sqrt{t\\log m})$ but is non-constructive. Other algorithmic guarantees are $O(\\sqrt{t}\\log n)$ [Bansal'10, Lovett-Meka'12, Rothvoss'15] and $O(\\sqrt{t\\log n\\log|S_j|})$ [Bansal-Garg'15]. Bansal and Jiang (2025) resolved the conjecture for $t \\geq \\log^2 n$ and gave $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for $t \\leq \\log^2 n$; the conjecture is open only in the regime $t < \\log^2 n$."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.2",
+      "sourceStatement": "Each element $i\\in [n]$ lies in $t$ randomly selected sets from $\\mathcal{S}$. They show that when $m\\ge n$, hereditary discrepancy of the set system is $O(\\sqrt{t\\log t})$ whp. When $n\\ge m^t$, hereditary discrepancy is $O(1)$. An open question is to explore this setting for the remaining range of parameters i.e. when $n^{1/t} < m < n$.",
+      "problem": "Determine the hereditary discrepancy of random sparse set systems: with $n$ elements and $m$ sets, each element placed in $t$ uniformly random sets, what is the hereditary discrepancy with high probability, especially in the intermediate parameter regime $n^{1/t} < m < n$?",
+      "wordDescription": "This is a probabilistic version of the Beck-Fiala conjecture due to Esther Ezra and Shachar Lovett. In the model where each element is assigned to $t$ random sets, they proved: (i) when $m \\geq n$ the hereditary discrepancy is $O(\\sqrt{t\\log t})$ with high probability, via a combination of the Lovász Local Lemma and partial matchings; and (ii) when $n \\gg m^t$ the hereditary discrepancy is $O(1)$, via an analysis of the lattice spanned by sparse vectors. The interesting open case is the intermediate range $n^{1/t} < m < n$, where neither regime applies. Follow-up work by Hoberg and Rothvoss made progress: a Fourier-analytic argument gives discrepancy at most 1 when $n \\geq \\Theta(m^2 \\log m)$, and a subsequent paper shows expected discrepancy $O(\\sqrt{t})$ over the whole range when $t = \\Omega((\\log\\log m)^2)$; an $\\Omega(\\sqrt{t})$ spectral lower bound (e.g. for $n = m = 2t$) shows this is tight.",
+      "mathematicalConditions": "Let $\\mathcal{S} = (X, \\Sigma)$ be a random set system with $|X| = n$ and $|\\Sigma| = m$, where each element $x \\in X$ is placed into $t$ sets chosen uniformly at random from $\\Sigma$ (the $t$-tuple of sets containing $x$ is uniform among the $\\binom{m}{t}$ possibilities). Determine the asymptotic behavior, with high probability, of $\\mathrm{herdisc}(X, \\Sigma)$, in particular in the regime $n^{1/t} < m < n$ not covered by the two known bounds ($m \\geq n \\Rightarrow O(\\sqrt{t\\log t})$; $n \\gg m^t \\Rightarrow O(1)$).",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "E. Ezra, S. Lovett, On the Beck-Fiala conjecture for random set systems, APPROX/RANDOM 2016 (LIPIcs vol. 60, 29:1-29:10); Random Structures & Algorithms 54(4):665-675, 2019",
+          "year": 2019,
+          "description": "The source paper for this problem: proves $O(\\sqrt{t\\log t})$ when $|\\Sigma| \\geq |X|$ and $O(1)$ when $|X| \\gg |\\Sigma|^t$, and poses the intermediate regime as open.",
+          "link": "https://arxiv.org/abs/1511.00583"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, A Fourier-analytic approach for the discrepancy of random set systems, arXiv:1806.04484, 2018",
+          "year": 2018,
+          "description": "Fourier-analytic method showing discrepancy at most 1 with high probability when $n \\geq \\Theta(m^2 \\log m)$, improving the $O(1)$ regime of Ezra-Lovett (which required $n \\gg m^t$).",
+          "link": "https://arxiv.org/abs/1806.04484"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, On the discrepancy of random low degree set systems, arXiv:1810.03374, 2018",
+          "year": 2018,
+          "description": "Shows the expected discrepancy is $O(\\sqrt{t})$ for the entire range of $n$ and $m$, provided $t = \\Omega((\\log\\log m)^2)$; also notes the $\\Omega(\\sqrt{t})$ spectral lower bound (e.g. $n = m = 2t$) and that the problem is open even for simple hypergraphs (pairwise intersecting edges in at most one element).",
+          "link": "https://arxiv.org/abs/1810.03374"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.2",
+        "problemBy": "Esther Ezra and Shachar Lovett",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Beck-Fiala conjecture",
+        "random set systems",
+        "hereditary discrepancy"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The problem and its two bounds match Ezra-Lovett (arXiv:1511.00583; APPROX/RANDOM 2016; journal version RSA 54(4):665-675, 2019). Two minor clarifications relative to the AimPL text: the paper states the $O(1)$ regime as $|X| \\gg |\\Sigma|^t$ (strictly larger), and the intermediate range is $m \\leq n \\leq m^t$ (i.e. $n^{1/t} \\leq m \\leq n$). Follow-up progress by Hoberg-Rothvoss (arXiv:1806.04484, arXiv:1810.03374) is confirmed; the full conjecture for the intermediate regime remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "When $m\\ge n$, hereditary discrepancy of the set system is $O(\\sqrt{t\\log t})$ whp. When $n\\ge m^t$, hereditary discrepancy is $O(1)$. The remaining range $n^{1/t} < m < n$ is open (with subsequent partial progress by Hoberg and Rothvoss)."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.25",
+      "sourceStatement": "Given a set system where the elements are the vertices of the hypercube $\\{0,1\\}^n$. Corresponding to each vertex $v$, there is a set $S_v$ which is generated by picking a random subset of the neighbours of $v$ in the hypercube. What is the discrepancy of this set system?",
+      "problem": "Determine the discrepancy (in expectation / with high probability) of the set system on the vertices of the hypercube $\\{0,1\\}^n$ in which each vertex $v$ is assigned a set $S_v$ consisting of a random subset of its neighbours in the hypercube.",
+      "wordDescription": "This problem, posed by Shachar Lovett at the workshop, concerns the discrepancy of a natural random set system supported on the $n$-dimensional hypercube. The elements are the $2^n$ vertices, and each set $S_v$ is formed by independently picking a random subset of the neighbours of $v$. The status note on the AimPL page points out that in the deterministic variant where $S_v$ is the full set of neighbours of $v$, there is an easy coloring with discrepancy 1: color each vertex by the parity of its first $n/2$ bits. The question is what happens when each $S_v$ is a random (and therefore typically much smaller, size about $n/2$) subset of the neighbourhood. No published treatment of this specific model was located during verification; the problem appears to remain open and is recorded here as posed at the 2016 AIM workshop.",
+      "mathematicalConditions": "Let $V = \\{0,1\\}^n$ and for each $v \\in V$ let $S_v$ be a random subset of the Hamming neighbours of $v$ (each neighbour included independently with probability $1/2$, say, or chosen uniformly among subsets). Determine $\\mathrm{disc}(V, \\{S_v : v \\in V\\}) = \\min_{\\chi: V \\to \\{\\pm 1\\}} \\max_{v \\in V} \\left|\\sum_{u \\in S_v} \\chi(u)\\right|$, typically in expectation or with high probability over the random choices. In the deterministic case $S_v = N(v)$ (all neighbours), the discrepancy is 1 via the parity coloring $\\chi(v) = (-1)^{v_1 + \\cdots + v_{n/2}}$.",
+      "status": "no progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "AimPL: Hereditary discrepancy and factorization norms — Problem 1.25 (posed by Shachar Lovett)",
+          "year": 2016,
+          "description": "The only source located for this problem; no published paper treating this specific hypercube-neighbourhood random set system was found during verification (checked 2026-08-25).",
+          "link": "http://aimpl.org/hereddiscrep/1/"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.25",
+        "problemBy": "Shachar Lovett",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "hypercube",
+        "random set systems",
+        "graph discrepancy"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The problem statement and the parity-coloring remark for the deterministic neighbourhood case were transcribed verbatim from the AimPL page. Searches for related literature (e.g. discrepancy of hypercube neighbourhoods, Lovett hypercube set system) did not return any published treatment of this exact model, so the record lists only the AimPL page itself as literature and marks the problem as open.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "If instead of picking a random subset of the neighbours, $S_v$ was the full set of neighbours of $v$, then there is an easy solution giving discrepancy 1. Color each vertex depending on the parity of its first $n/2$ bits. The random-subset version is open."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.3",
+      "sourceStatement": "a) discrepancy of k-permutations: For $k=3$, $[NNN'12]$ showed a lower bound of $\\Omega(\\log n)$ where $n$ is the number of elements in the ground set. For general $k$, we know that the answer lies in $[\\sqrt{k}+\\log n,\\sqrt{k}\\log n]$. An open question is to clsoe this gap. b) discrepancy of k-random permutations: A lower bound of $\\Omega(\\sqrt{k})$ is known.",
+      "problem": "Determine the maximum discrepancy of a $k$-permutation family on $n$ elements (the set system of all intervals of $k$ given permutations of $[n]$), and determine the discrepancy of $k$ uniformly random permutations.",
+      "wordDescription": "A $k$-permutation family is the set system whose sets are all intervals of $k$ permutations of the integers $1, \\dots, n$. Beck conjectured (c. 1987) that three permutations always admit a constant-discrepancy coloring; Newman and Nikolov refuted this with a recursive construction of three permutations with discrepancy $\\Omega(\\log n)$ (with Neiman, they also showed consequences for rounding the Gilmore-Gomory bin-packing LP). Spencer, Srinivasan and Tetali proved the upper bound $O(\\sqrt{k}\\log n)$ for $k$ permutations (sharp for $k \\geq n$). For fixed $k \\geq 3$ the lower bound $\\Omega(\\log n)$ transfers from the $k = 3$ construction, so the maximal discrepancy of a $k$-permutation family is known to lie between $\\sqrt{k} + \\log n$ (up to constants) and $\\sqrt{k}\\log n$; closing this gap is the open question. For $k$ random permutations, a lower bound of $\\Omega(\\sqrt{k})$ is reported on the AimPL page.",
+      "mathematicalConditions": "Let $\\pi_1, \\dots, \\pi_k$ be permutations of $[n]$ and let $\\mathcal{P}$ be the set system of all intervals of all $\\pi_j$ (i.e. all sets $\\{\\pi_j(a), \\dots, \\pi_j(b)\\}$, $1 \\leq a \\leq b \\leq n$). Determine $D(k, n) = \\max_{\\pi_1,\\dots,\\pi_k} \\mathrm{disc}(\\mathcal{P})$. Known: $D(1,n) = 1$, $D(2,n) = 2$ (Spencer 1987); $D(3,n) = \\Omega(\\log n)$ (Newman-Nikolov 2011; Newman-Neiman-Nikolov FOCS 2012); $D(k,n) = O(\\sqrt{k}\\log n)$ (Spencer-Srinivasan-Tetali 2001), tight for $k \\geq n$. Open: exact growth of $D(k,n)$, in particular whether $D(k,n) = O(\\sqrt{k} + \\log n)$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "A. Newman, A. Nikolov, A counterexample to Beck's conjecture on the discrepancy of three permutations, arXiv:1104.2922, 2011",
+          "year": 2011,
+          "description": "Constructs, for every $n = 3^k$, three permutations whose interval system has discrepancy $\\Omega(\\log n)$, disproving Beck's conjecture (and the $O(\\sqrt{\\ell})$ generalization of Spencer-Srinivasan-Tetali for $\\ell = 3$).",
+          "link": "https://arxiv.org/abs/1104.2922"
+        },
+        {
+          "title": "A. Newman, O. Neiman, A. Nikolov, Beck's three permutations conjecture: a counterexample and some consequences, FOCS 2012, pp. 253-262",
+          "year": 2012,
+          "description": "The '[NNN'12]' citation of the AimPL page: the $\\Omega(\\log n)$ counterexample together with the implication that natural rounding schemes for the Gilmore-Gomory bin-packing LP (e.g. in the Karmarkar-Karp algorithm) incur logarithmic error.",
+          "link": "https://scholar.google.com/scholar?q=Newman+Neiman+Nikolov+Beck+three+permutations+conjecture+counterexample+consequences"
+        },
+        {
+          "title": "J. Spencer, A. Srinivasan, P. Tetali, The discrepancy of permutations (manuscript), 2001",
+          "year": 2001,
+          "description": "Proves the $O(\\sqrt{k}\\log n)$ upper bound for $k$-permutation families; conjectured $O(\\sqrt{k})$ (disproved for $k=3$ by Newman-Nikolov).",
+          "link": "https://scholar.google.com/scholar?q=Spencer+Srinivasan+Tetali+discrepancy+of+permutations"
+        },
+        {
+          "title": "G. Bohus, On the discrepancy of 3 permutations, Graphs and Combinatorics 6(3):215-220, 1990",
+          "year": 1990,
+          "description": "Earlier $O(k \\log n)$-type bound for $\\ell$ permutations (as cited in Newman-Nikolov).",
+          "link": "https://scholar.google.com/scholar?q=Bohus+On+the+discrepancy+of+3+permutations+1990"
+        },
+        {
+          "title": "C. Franks, A simplified disproof of Beck's three permutations conjecture and an application to root-mean-squared discrepancy, arXiv:1811.01102, 2018",
+          "year": 2018,
+          "description": "Simpler proof of the $\\Omega(\\log n)$ lower bound for Newman-Nikolov's family, plus $6$-permutation families with root-mean-squared discrepancy $\\Omega(\\sqrt{\\log n})$.",
+          "link": "https://arxiv.org/abs/1811.01102"
+        },
+        {
+          "title": "F. Eisenbrand, D. Pálvölgyi, T. Rothvoß, Bin packing via discrepancy of permutations (SODA 2011 / ACM Trans. Algorithms)",
+          "year": 2011,
+          "description": "Connection of Beck's conjecture to the additive integrality gap of the Gilmore-Gomory LP for bin packing: if the 3-permutation discrepancy were $O(1)$, the integral optimum would beat the LP value by only an additive constant.",
+          "link": "https://scholar.google.com/scholar?q=Eisenbrand+P%C3%A1lv%C3%B6lgyi+Rothvoss+Bin+packing+via+discrepancy+of+permutations"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.3",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "permutations",
+        "interval hypergraphs",
+        "bin packing"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The $\\Omega(\\log n)$ lower bound for $k=3$ (Newman-Nikolov arXiv:1104.2922; FOCS 2012 version with Neiman) and the $O(\\sqrt{k}\\log n)$ upper bound (Spencer-Srinivasan-Tetali) are confirmed; the upper bound is sharp for $k \\geq n$. The lower-bound side '$\\sqrt{k} + \\log n$' as stated on the page combines the $\\Omega(\\log n)$ bound (which transfers to all $k \\geq 3$ by adding dummy permutations) with a $\\sqrt{k}$ term; for part (b), the claimed $\\Omega(\\sqrt{k})$ lower bound for random permutations could not be traced to a published citation during verification and is reported as stated on the AimPL page. The typo 'clsoe' in the source statement is preserved verbatim.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "a) For $k=3$, $\\Omega(\\log n)$ lower bound; for general $k$ the answer lies in $[\\sqrt{k}+\\log n,\\sqrt{k}\\log n]$, and closing this gap is open. b) For $k$ random permutations, a lower bound of $\\Omega(\\sqrt{k})$ is known."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.35",
+      "sourceStatement": "Given matrices $A_1,...,A_n \\in\\mathbb{R}^{n\\times n}$ satisfying $||A_i||_{op} \\le 1$ where $||.||_{op}$ is the operator norm of matrices. Do there exists signs $\\epsilon_1,...,\\epsilon_n\\in\\{-1,1\\}$ s.t. $||\\sum_{i=1}^n\\epsilon_i A_i || =O(\\sqrt{n})$.",
+      "problem": "Prove (or disprove) the Matrix Spencer conjecture: for any $n$ symmetric $d \\times d$ matrices of operator norm at most 1, there exist signs $\\epsilon_i \\in \\{-1, 1\\}$ such that the operator norm of the signed sum is $O(\\sqrt{n})$ (for $d = n$; more generally $O(\\sqrt{n \\max(1, \\log(d/n))})$).",
+      "wordDescription": "The Matrix Spencer conjecture (due to Zouzias 2012, popularized by Meka 2014) is the matrix analogue of Spencer's 'six standard deviations suffice' theorem: it asks whether signing $n$ unit-norm matrices can balance their sum in operator norm to $O(\\sqrt{n})$, the bound that Spencer's theorem gives when all matrices commute (in which case the problem reduces to its diagonal / vector form). Random signings achieve only $O(\\sqrt{n \\log d})$ by the non-commutative Khintchine inequality / matrix Chernoff bound, and the conjecture says the $\\sqrt{\\log d}$ factor can be removed. The conjecture remains open in general; notable partial results include rank-$O(\\sqrt{n})$ matrices (Hopkins-Raghavendra-Shetty), block-diagonal matrices (Levy-Ramadas-Rothvoss; Dadush-Jiang-Reis), and matrices of rank at most $n/\\log^3 n$ (Bansal-Jiang-Meka). Connections to quantum random access codes, Kadison-Singer-type problems, and graph sparsification are known.",
+      "mathematicalConditions": "There is an absolute constant $C > 0$ such that for all $n, d \\geq 1$ and all symmetric $d \\times d$ matrices $A_1, \\dots, A_n$ with $\\|A_i\\|_{\\mathrm{op}} \\leq 1$, there exist signs $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i A_i\\right\\|_{\\mathrm{op}} \\leq C\\sqrt{n \\max(1, \\log(d/n))}$. In the case $d = n$ (as stated on the AimPL page), the claim is $O(\\sqrt{n})$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "M. Zouzias (2012) — first appearance of the Matrix Spencer conjecture (as cited in R. van Handel, Randomstrasse101: Open Problems of 2024, arXiv:2504.20539)",
+          "year": 2012,
+          "description": "The conjecture is attributed to Zouzias (2012); see also R. Meka, 'Discrepancy: the vector and matrix versions', Windows on Theory blog (2014), which popularized it.",
+          "link": "https://scholar.google.com/scholar?q=Zouzias+2012+matrix+discrepancy+Spencer"
+        },
+        {
+          "title": "R. Meka, Discrepancy: the vector and matrix versions, Windows on Theory blog post, 2014",
+          "year": 2014,
+          "description": "Blog post (2014) that brought the Matrix Spencer conjecture to wide attention; cited as [Mek14] in the literature.",
+          "link": "https://windowsontheory.org/2014/02/07/discrepancy-the-vector-and-matrix-versions/"
+        },
+        {
+          "title": "R. van Handel (ed.), Randomstrasse101: Open Problems of 2024, arXiv:2504.20539",
+          "year": 2025,
+          "description": "Discusses the Matrix Spencer conjecture in depth, including the commutative and free extremes, and the 'Group Spencer' conjecture of Bandeira-Kunisky-Mixon-Zeng.",
+          "link": "https://arxiv.org/abs/2504.20539"
+        },
+        {
+          "title": "S. B. Hopkins, P. Raghavendra, A. Shetty, Matrix discrepancy from quantum communication, FOCS 2022",
+          "year": 2022,
+          "description": "Proves the Matrix Spencer conjecture for matrices of rank $O(\\sqrt{n})$, via a connection to quantum information theory.",
+          "link": "https://scholar.google.com/scholar?q=Hopkins+Raghavendra+Shetty+Matrix+discrepancy+from+quantum+communication"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, R. Meka, Resolving Matrix Spencer conjecture up to poly-logarithmic rank, arXiv:2208.11286, 2022",
+          "year": 2022,
+          "description": "Proves the conjecture for matrices with $\\|A_i\\|_F^2 \\leq n/\\log^3 n$ (in particular rank at most $n/\\log^3 n$), with an efficient algorithm, using improved non-commutative Khintchine inequalities of Bandeira-Boedihardjo-van Handel.",
+          "link": "https://arxiv.org/abs/2208.11286"
+        },
+        {
+          "title": "D. Dadush, H. Jiang, V. Reis, A new framework for matrix discrepancy: integrality gap bounds for the Lovász Cap Set problem, 2022; A. Levy, H. Ramadas, T. Rothvoss, Deterministic discrepancy minimization via the multiplicative weight update method, 2017",
+          "year": 2022,
+          "description": "Prove the conjecture for block-diagonal matrices (block size $h = O(n/d)$), the DJR paper via covering estimates for relative entropy.",
+          "link": "https://scholar.google.com/scholar?q=Dadush+Jiang+Reis+matrix+discrepancy+integrality+gap+Lov%C3%A1sz+cap+set"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.35",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Matrix Spencer conjecture",
+        "operator norm",
+        "matrix concentration"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The conjecture is confirmed to be a recognized open problem attributed to Zouzias (2012) and Meka (2014), with the exact statement $\\mathrm{disc}(A_1,\\dots,A_n) \\leq C\\sqrt{n\\max(1,\\log(d/n))}$ as in arXiv:2410.17887 and arXiv:2208.11286. Matrix Chernoff / non-commutative Khintchine gives $O(\\sqrt{n\\log d})$, matching the page's '$O(\\sqrt{n\\log n})$' for $d = n$. Partial results verified: HRS 2022 (rank $O(\\sqrt{n})$), LRR 2017 and DJR 2022 (block-diagonal), BJM 2022/2023 (rank $\\leq n/\\log^3 n$, arXiv:2208.11286). The full conjecture remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "We can assume that the matrices are symmetric. Matrix Chernoff gives a bound of $O(\\sqrt{n\\log n})$. The conjecture itself remains open; partial progress: rank $O(\\sqrt{n})$ (Hopkins-Raghavendra-Shetty 2022), block-diagonal matrices (Levy-Ramadas-Rothvoss 2017; Dadush-Jiang-Reis 2022), rank at most $n/\\log^3 n$ (Bansal-Jiang-Meka 2023)."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.4",
+      "sourceStatement": "Given vectors $v_1,...,v_n\\in\\mathbb{R}^d$ and a norm $X$ satisfying $\\sum_{i=1}^n v_i=0$ and $||v_i||_X\\le 1$ for all $i$. Define $S_n(X,d)=min_{\\pi\\in S^n}max_{k=1,...,n}|| \\sum_{i=1}^k v_{\\pi(i)}||_X$ where $S^n$ is the set of all permutations of $[n]$. Let $S(X,d)=sup_n S_n(X,d)$. Then, $S(X,d) =O(\\sqrt{d})$.",
+      "problem": "Prove the Steinitz conjecture: for vectors in $\\mathbb{R}^d$ of norm at most 1 with zero sum, there is always an ordering whose partial sums all have norm $O(\\sqrt{d})$, for every norm (in particular for $\\ell_2$ and $\\ell_\\infty$, where the bound should depend only on the dimension, not on the number of vectors).",
+      "wordDescription": "The Steinitz problem (going back to Steinitz 1913, answering a question of Riemann and Lévy) asks how far a zero-sum family of unit vectors can be kept from the origin when ordered: minimize the maximum norm of partial sums over all permutations. The classical Steinitz lemma gives $O(d)$ in any norm, improved to $S(X,d) \\leq d$ by Grinberg-Sevastyanov (and to $d - 1 + 1/d$ for symmetric norms), with an $\\Omega(d)$ lower bound for $\\ell_1$-type norms. It is conjectured that for $\\ell_2$ (and $\\ell_\\infty$) the truth is $O(\\sqrt{d})$. Banaszczyk proved $O(\\sqrt{d} + \\sqrt{\\log n})$ for $\\ell_2$ (and $O(\\sqrt{d\\log n})$ for $\\ell_\\infty$) non-constructively; the workshop remark records that an algorithmic guarantee of $\\sqrt{d}\\log n$ was worked out at the workshop, later improved to $O(\\sqrt{d\\log n})$ by Bansal-Garg. Recent work (Dutta-Jha-Jiang 2026) gives an efficient algorithm matching the conjectured $O(\\sqrt{d})$ bound for $\\ell_2$ under the condition $d \\geq \\Omega(\\log^7 n)$. Chobanyan's transference theorem relates the Steinitz constant to the vector-balancing discrepancy constant $\\alpha(X,X,d)$.",
+      "mathematicalConditions": "For a normed space $(\\mathbb{R}^d, \\|\\cdot\\|_X)$ define $S_n(X, d) = \\min_{\\pi \\in S_n} \\max_{1 \\leq k \\leq n} \\left\\|\\sum_{i=1}^k v_{\\pi(i)}\\right\\|_X$ over all zero-sum families $v_1, \\dots, v_n$ with $\\|v_i\\|_X \\leq 1$, and $S(X, d) = \\sup_n S_n(X, d)$. The conjecture is that $S(X, d) = O(\\sqrt{d})$ for every norm $X$ (with the main cases of interest $X = \\ell_2, \\ell_\\infty$). Known: $S(X,d) \\leq d$ (Sevastyanov; Grinberg-Sevastyanov 1980); for symmetric $X$, $S(X,d) \\leq d - 1 + 1/d$; $S(\\ell_2, d) = O(\\sqrt{d} + \\sqrt{\\log n})$ (Banaszczyk 2012/13) with lower bound $\\Omega(\\sqrt{d})$; $S(X,d) \\geq \\alpha(X, X, d)$ (Chobanyan).",
+      "status": "partial progress",
+      "comments": [
+        {
+          "id": "aimpl-remark-steinitz-algorithmic",
+          "author": {
+            "displayName": "AimPL workshop participant"
+          },
+          "body": "An algorithmic guarantee of $\\sqrt{d}\\log\\,n$ was worked upon in the workshop.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        }
+      ],
+      "literature": [
+        {
+          "title": "E. Steinitz, Bedingt konvergente Reihen und konvexe Systeme, Journal für die reine und angewandte Mathematik 143:128-175, 1913",
+          "year": 1913,
+          "description": "Origin of the Steinitz lemma: zero-sum unit vectors in $\\mathbb{R}^d$ can be ordered so that all partial sums have norm $O(d)$.",
+          "link": "https://scholar.google.com/scholar?q=Steinitz+Bedingt+konvergente+Reihen+und+konvexe+Systeme+1913"
+        },
+        {
+          "title": "V. S. Grinberg, S. V. Sevastyanov, On the value of the Steinitz constant, Functional Analysis and Its Applications 14(2):125-126, 1980",
+          "year": 1980,
+          "description": "Proves $S(X, d) \\leq d$ for all norms; the later strengthening to $d - 1 + 1/d$ for symmetric norms is due to Sevastyanov (confirming a claim of Banaszczyk).",
+          "link": "https://scholar.google.com/scholar?q=Grinberg+Sevastyanov+value+of+the+Steinitz+constant+1980"
+        },
+        {
+          "title": "W. Banaszczyk, On the Steinitz constant (2012/2013, cited as [Ban12] in the discrepancy literature)",
+          "year": 2012,
+          "description": "Non-constructive $O(\\sqrt{d} + \\sqrt{\\log n})$ bound for the $\\ell_2$ Steinitz problem (and $O(\\sqrt{d\\log n})$ for $\\ell_\\infty$), the best known bounds, via his vector-balancing theorem.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+On+the+Steinitz+constant"
+        },
+        {
+          "title": "S. Chobanyan, Transference theorems for the Steinitz problem (1994)",
+          "year": 1994,
+          "description": "Reduces the Steinitz problem to the signed-series / vector-balancing problem, showing the Steinitz constant is bounded by the discrepancy constant $\\alpha(X, X, d)$; the reduction can be made algorithmic.",
+          "link": "https://scholar.google.com/scholar?q=Chobanyan+transference+theorems+Steinitz+problem"
+        },
+        {
+          "title": "I. Bárány, On the power of linear dependencies, in Building Bridges (Bolyai Society Mathematical Studies 19), 2008, pp. 31-45",
+          "year": 2008,
+          "description": "Bárány's survey/manifesto ('epic document' per the AimPL page) discussing the Steinitz problem and the power of linear dependencies.",
+          "link": "https://scholar.google.com/scholar?q=B%C3%A1r%C3%A1ny+On+the+power+of+linear+dependencies+2008"
+        },
+        {
+          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017 (arXiv:1611.01805)",
+          "year": 2017,
+          "description": "First algorithm matching Banaszczyk's bound in the $\\ell_\\infty$ case and improving algorithmic bounds in the $\\ell_2$ case for the signed-series / Steinitz problems ($O(\\sqrt{d\\log n})$ for $\\ell_2$).",
+          "link": "https://arxiv.org/abs/1611.01805"
+        },
+        {
+          "title": "K. Dutta, A. V. Jha, H. Jiang, Near-optimal constructive bounds for $\\ell_2$ prefix discrepancy and Steinitz problems via affine spectral independence, arXiv:2604.13355, 2026",
+          "year": 2026,
+          "description": "Efficient algorithm matching the conjectured $O(\\sqrt{d})$ bound for the $\\ell_2$ Steinitz problem when $d \\geq \\Omega(\\log^7 n)$; also covers $\\ell_2$ prefix discrepancy.",
+          "link": "https://arxiv.org/abs/2604.13355"
+        },
+        {
+          "title": "A note on the Steinitz Lemma, arXiv:2505.09465, 2025",
+          "year": 2025,
+          "description": "Survey of the history of the Steinitz lemma and the Steinitz constant, including the Grinberg-Sevastyanov and Sevastyanov bounds and the role of Banaszczyk's claim.",
+          "link": "https://arxiv.org/abs/2505.09465"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.4",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Steinitz conjecture",
+        "signed series",
+        "vector balancing"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The main claims are confirmed in the literature: $S(X,d) \\leq d$ (Grinberg-Sevastyanov 1980); $d - 1 + 1/d$ for symmetric norms (Sevastyanov, confirming Banaszczyk's claim, per arXiv:2505.09465); Banaszczyk's $O(\\sqrt{d} + \\sqrt{\\log n})$ for $\\ell_2$ (cited as [Ban12] in Bansal-Garg arXiv:1611.01805 and in arXiv:2604.13355); $\\Omega(\\sqrt{d})$ lower bound for $\\ell_2$; Chobanyan's transference (Bansal-Garg cite [Cho94]: reduction from Steinitz to signed series with $B \\leq E$). The claim in item (ii) that $S(\\ell_p, d) = \\Omega(d)$ for $1 < p < 2$ could not be independently confirmed in the literature during verification and is reported as stated on the AimPL page. The '[Harvey]' attribution for converting signings to orderings could not be pinned to a specific publication; it is reported as given on the AimPL page.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "i) Sevastiyanov showed $S(X,d) \\le d$. For $X$ a symmetric norm, Banaszczyk improved this to $d-\\frac{1}{d}$. ii) If $X=l_p$ for $1< p < 2$, $S(X,d) =\\Omega(d)$. iii) For $X=l_2$, Banaszczyk'13 gave a bound of $O(\\sqrt{d}+\\sqrt{\\log n})$. A lower bound of $\\sqrt{d}$ is known here. iv) It is known that $S(X,d) \\ge \\alpha(X,X,d)$ [Chobanyan] (refer to vector balancing problem below for definition of $\\alpha$). Given in Barany's epic document. Moreover, for a given set of vectors $v_1,..,v_n$ , given a signing of it achieving discrepancy $\\alpha$, we can recover a permutation achieving a guarantee of $\\alpha$ in the Steinitz setting [Harvey]."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.5",
+      "sourceStatement": "Let $X,Y$ be norms on $\\mathbb{R}^d$. Given vectors $v_1,...,v_n\\in \\mathbb{R}^d$ satisfying $||v_i||_X\\le 1$ for all $i$. We want to find signs $\\epsilon_i \\in \\{-1,1\\}$ to minimize $|| \\sum_{i=1}^n\\epsilon_iv_i ||_Y$. Call this the discrepancy of the vectors. Define $\\alpha_n(X,Y,d)$ as the maximum of this discrepancy over all choice of $n$ vectors satisfying $||v_i||_X\\le 1$ and $\\alpha(X,Y,d) =sup_n \\alpha_n(X,Y,d)$. Banaszczyk proved $\\alpha(X,Y,d) \\ge \\sqrt{d}(\\frac{vol(B_X)}{vol(B_Y)})^{1/d}$ where $B_X,B_Y$ are the unit balls of the corresponding norms. Is this lower bound also an upper bound for $\\alpha(X,Y,d)$ upto $\\log d$ factors?",
+      "problem": "Determine whether Banaszczyk's volume-ratio lower bound for the vector-balancing constant $\\alpha(X, Y, d)$ is tight up to logarithmic factors: is $\\alpha(X, Y, d) = O\\left(\\sqrt{d} \\left(\\frac{\\mathrm{vol}(B_X)}{\\mathrm{vol}(B_Y)}\\right)^{1/d} \\cdot \\log d\\right)$ for all norms $X, Y$ on $\\mathbb{R}^d$?",
+      "wordDescription": "Vector balancing asks for signs minimizing the $Y$-norm of the signed sum of vectors whose $X$-norm is at most 1, and $\\alpha(X, Y, d)$ is the worst-case value over all such vector families. Banaszczyk proved the lower bound $\\alpha(X,Y,d) \\geq \\sqrt{d}\\,(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d}$, and the problem asks whether this is essentially the answer. As Sasho Nikolov's remarks on the AimPL page point out, the naive lower bound can be too small by a factor of $\\sqrt{d}$ (e.g. $X = Y = \\ell_1^d$), so the interesting candidate is the stronger 'subspace-ellipsoid' quantity obtained by maximizing over subspaces and minimizing over enclosing ellipsoids; up to logarithmic factors that quantity may be the right answer. This question is intimately connected with the $\\gamma_2$-norm approximation of hereditary discrepancy (Matoušek-Nikolov-Talwar) and with the constructive version of Banaszczyk's theorem (Dadush-Garg-Lovett-Nikolov; Bansal-Dadush-Garg-Lovett).",
+      "mathematicalConditions": "For norms $X, Y$ on $\\mathbb{R}^d$ with unit balls $B_X, B_Y$, define $\\alpha_n(X, Y, d) = \\max_{v_1,\\dots,v_n: \\|v_i\\|_X \\leq 1} \\min_{\\epsilon \\in \\{\\pm 1\\}^n} \\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_Y$ and $\\alpha(X, Y, d) = \\sup_n \\alpha_n(X, Y, d)$. Question: is $\\alpha(X, Y, d) \\leq C \\cdot \\sqrt{d}\\,(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d} \\cdot \\log d$ for an absolute constant $C$? (Nikolov's refined candidate: $\\max_{k=1}^d \\max_{W: \\dim W = k} \\min_{E: B_X \\cap W \\subseteq E} \\sqrt{k}\\, \\mathrm{vol}(E)^{1/k} / \\mathrm{vol}(B_Y \\cap W)^{1/k}$, up to log factors.)",
+      "status": "no progress",
+      "comments": [
+        {
+          "id": "aimpl-remark-vectorbal-nikolov-1",
+          "author": {
+            "displayName": "Sasho Nikolov"
+          },
+          "body": "In fact, this lower bound can be too small by a factor of $\\sqrt{d}$, for example when $X = Y = \\ell_1^d$. However, the following stronger lower bound may in fact also be an upper bound, up to logarithmic factors: $\\max_{k = 1}^{d}\\max_{W: \\mathrm{dim}(W) = k} \\min_{B_Y \\cap W \\subseteq E} \\sqrt{d} \\frac{vol(E)^{1/d}}{vol(B_X \\cap W)^{1/d}}$, where the maximum is over subspaces $W$ of dimension $k$ and the minimum is over ellipsoids $E$ containing $B_Y \\cap W$.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        },
+        {
+          "id": "aimpl-remark-vectorbal-nikolov-2",
+          "author": {
+            "displayName": "Sasho Nikolov"
+          },
+          "body": "The formula above should be $\\max_{k = 1}^d \\max_{W: \\mathrm{dim}(W) = k} \\min_{E: B_X \\cap W \\subseteq E} \\sqrt{k} \\frac{vol(E)^{1/k}}{vol(B_Y \\cap W)^{1/k}}$.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        }
+      ],
+      "literature": [
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Source of the volume-ratio lower bound $\\alpha(X,Y,d) \\geq \\sqrt{d}(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d}$ and of the Gaussian-measure upper-bound machinery behind the question.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
+          "year": 2020,
+          "description": "Shows $\\gamma_2$ approximates hereditary discrepancy up to $O(\\sqrt{\\log m})$ factors; the subspace/ellipsoid geometry in this problem is the same machinery relevant to the vector-balancing question.",
+          "link": "https://arxiv.org/abs/1408.1376"
+        },
+        {
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, Theory of Computing 15(15):1-58, 2019 (arXiv:1612.04304)",
+          "year": 2019,
+          "description": "Constructive algorithms for the general vector-balancing theorem; discusses the tightness of the Gaussian-measure threshold and the geometry relevant to $\\alpha(X,Y,d)$.",
+          "link": "https://arxiv.org/abs/1612.04304"
+        },
+        {
+          "title": "S. K. K. Nikolov, K. Talwar, Approximating hereditary discrepancy via small width ellipsoids, SODA 2014",
+          "year": 2014,
+          "description": "Predecessor of the $\\gamma_2$ work: approximating hereditary discrepancy via ellipsoid width, the geometric language used in the remarks above.",
+          "link": "https://scholar.google.com/scholar?q=Nikolov+Talwar+Approximating+hereditary+discrepancy+via+small+width+ellipsoids"
+        },
+        {
+          "title": "Vector balancing in Lebesgue spaces, arXiv:2007.05634, 2020",
+          "year": 2020,
+          "description": "Recent bounds for balancing vectors between $\\ell_p$ spaces, illustrating the behavior of $\\alpha(X, Y, d)$ in concrete norm pairs.",
+          "link": "https://arxiv.org/abs/2007.05634"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.5",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "vector balancing",
+        "volume ratio",
+        "convex geometry"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. Banaszczyk's volume-ratio lower bound is stated consistently across the literature (e.g. arXiv:1612.04304 and arXiv:2007.05634 discuss the vector-balancing theorem and its applications). The two remarks by Sasho Nikolov are transcribed verbatim from the AimPL page (the second one corrects the first). No published resolution of the question was found; it remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "Banaszczyk proved $\\alpha(X,Y,d) \\ge \\sqrt{d}(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d}$. Whether it is an upper bound up to $\\log d$ factors is open."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.65",
+      "sourceStatement": "Let $d_n$ be the discrepancy of $n$ points in $\\mathbb{R}^2$ wrt all alix-aligned rectangles i.e. the set system comprises of all axis-aligned rectangles in $\\mathbb{R}^2$ as sets, maximised over all choices of $n$ points. Tusnady's problem then asks for the exact value of $d_n$. We can also ask for the same question in $\\mathbb{R}^d$.",
+      "problem": "Determine the exact discrepancy $d_n$ of $n$ points in $\\mathbb{R}^2$ with respect to all axis-aligned rectangles (the maximum over all $n$-point sets of the combinatorial discrepancy of the set system of axis-parallel rectangles), and the analogous quantity in $\\mathbb{R}^d$ with respect to axis-parallel boxes.",
+      "wordDescription": "Tusnády's problem (posed by Tusnády in the early 1980s) asks for the tight value of the combinatorial discrepancy of axis-parallel rectangles: given $n$ points in the plane, 2-color them so that every axis-parallel rectangle contains nearly equal numbers of red and blue points, and minimize the worst imbalance. In dimension 2 the discrepancy is known to be $\\Theta(\\log n)$-ish but the exact growth is open: Schmidt's lower bound $\\Omega(\\log n)$ (via Lebesgue-measure discrepancy, combined with a reduction of Beck) is the best known, while the best upper bound progressed from $O(\\log^{2.5} n)$ to $O(\\log^2 n)$ (Bansal-Garg 2017). In higher dimensions $\\mathbb{R}^d$, Matoušek-Nikolov-Talwar proved $\\Omega(\\log^{d-1} n)$ (improving the previous $\\approx \\log^{(d-1)/2} n$) and $O(\\log^{d+1/2} n)$, and Nikolov later improved the upper bound to $O(\\log^{d-0.5} n)$; closing the gap between $\\log^{d-1}$ and $\\log^{d-0.5}$ remains open for $d \\geq 3$.",
+      "mathematicalConditions": "Let $\\mathcal{R}_d$ be the family of axis-parallel boxes in $\\mathbb{R}^d$ and define $d_n^{(d)} = \\max_{P: |P| = n} \\mathrm{disc}(P, \\mathcal{R}_d) = \\max_{P} \\min_{\\chi: P \\to \\{\\pm 1\\}} \\sup_{R \\in \\mathcal{R}_d} \\left|\\sum_{p \\in P \\cap R} \\chi(p)\\right|$. Tusnády's problem asks for the exact value of $d_n := d_n^{(2)}$ (and of $d_n^{(d)}$). Known: $d_n^{(2)} = \\Omega(\\log n)$ and $O(\\log^2 n)$; $d_n^{(d)} = \\Omega(\\log^{d-1} n)$ and $O(\\log^{d-0.5} n)$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
+          "year": 2020,
+          "description": "Proves the $\\Omega(\\log^{d-1} n)$ lower bound for the $d$-dimensional Tusnády problem (improving the previous $\\approx \\log^{(d-1)/2} n$) and gives a new simple proof of the $O(\\log^{d+1/2} n)$ upper bound.",
+          "link": "https://arxiv.org/abs/1408.1376"
+        },
+        {
+          "title": "A. Nikolov, Tighter bounds for the discrepancy of boxes and polytopes, SoCG 2017",
+          "year": 2017,
+          "description": "Improves the upper bound for axis-parallel boxes in $\\mathbb{R}^d$ to $O(\\log^{d-0.5} n)$, currently the strongest known upper bound for Tusnády's problem in higher dimensions.",
+          "link": "https://scholar.google.com/scholar?q=Nikolov+Tighter+bounds+for+the+discrepancy+of+boxes+and+polytopes"
+        },
+        {
+          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017 (arXiv:1611.01805)",
+          "year": 2017,
+          "description": "Gives an algorithmic $O(\\log^2 n)$ bound for axis-parallel rectangles in the plane (improving $O(\\log^{2.5} n)$) and $O_d(\\log^d n)$ for $d$-dimensional boxes.",
+          "link": "https://arxiv.org/abs/1611.01805"
+        },
+        {
+          "title": "W. M. Schmidt, Irregularities of distribution VII, Acta Arithmetica 21:45-50, 1972; J. Beck, Roth's estimate of the discrepancy of integer sequences is nearly sharp, Combinatorica 1(4):319-325, 1981",
+          "year": 1972,
+          "description": "Schmidt's $\\Omega(\\log n)$ lower bound on Lebesgue-measure discrepancy in the plane together with Beck's reduction yields the $\\Omega(\\log n)$ lower bound for Tusnády's problem in $\\mathbb{R}^2$; this remains the best known lower bound in the plane.",
+          "link": "https://scholar.google.com/scholar?q=Schmidt+Irregularities+of+distribution+VII+Acta+Arithmetica"
+        },
+        {
+          "title": "Discrepancy Theory: An Algorithmic and Geometric Perspective, arXiv:2608.00140, 2026",
+          "year": 2026,
+          "description": "Recent survey confirming the state of the art for Tusnády's problem: lower bound $\\Omega(\\log^{d-1} n)$ (MNT) and strongest upper bound $O(\\log^{d-0.5} n)$ (Nikolov).",
+          "link": "https://arxiv.org/abs/2608.00140"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.65",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Tusnády problem",
+        "axis-parallel rectangles",
+        "geometric discrepancy"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The page's status line contains a typo: the $\\mathbb{R}^2$ lower bound should be $\\Omega(\\log n)$ (not $O(\\log n)$); this is confirmed by the literature (Schmidt + Beck). The $\\mathbb{R}^2$ upper bound $O(\\log^{2.5} n)$ was later improved to $O(\\log^2 n)$ by Bansal-Garg (STOC 2017). In $\\mathbb{R}^d$ the page's upper bound $\\log^{d+1/2} n$ was later improved to $\\log^{d-0.5} n$ by Nikolov (SoCG 2017), per the survey arXiv:2608.00140. The problem remains open; in particular the exact value of $d_n$ in the plane is unknown.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "In $\\mathbb{R^2}$, we know a lower bound of $O(\\log n)$ on $d_n$ and an upper bound of $O(\\log^{2.5}n)$. In $\\mathbb{R}^d$, we know that $d_n\\in[\\log^{d-1}n,log^{d+1/2}n]$."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.7",
+      "sourceStatement": "Consider a matrix where both columns are rows are t-sparse. LLL gives a discrepancy bound of $O(\\sqrt{t\\log t})$ here. If we assume the stronger property that every pair of rows intersect in at most one element, can we get a $O(\\sqrt{t})$?",
+      "problem": "For 0-1 matrices (set systems) in which every row and every column has at most $t$ non-zero entries (both rows and columns $t$-sparse), determine whether the stronger hypothesis that any two rows intersect in at most one element (a simple / linear hypergraph) yields a discrepancy bound of $O(\\sqrt{t})$, improving on the Lovász Local Lemma bound $O(\\sqrt{t\\log t})$.",
+      "wordDescription": "For a $t$-sparse 0-1 matrix (each element lies in at most $t$ sets and each set has size at most $t$), a folklore application of the Lovász Local Lemma gives discrepancy $O(\\sqrt{t\\log t})$: a random coloring is analyzed per row and the dependencies are controlled by the sparsity. The question asks whether the 'simple hypergraph' condition — any two sets intersect in at most one element — removes the $\\sqrt{\\log t}$ factor, giving the Beck-Fiala-conjecture bound $O(\\sqrt{t})$ in this special case. This is a special case of the Beck-Fiala conjecture, and the literature notes explicitly that the conjecture 'is open even for very special cases such as when the hypergraph is simple, i.e. any two sets intersect in at most one element' (Hoberg-Rothvoss). No progress or resolution of this specific question was found in the literature as of 2026.",
+      "mathematicalConditions": "Let $A \\in \\{0,1\\}^{m \\times n}$ with all row sums and column sums at most $t$, and additionally $|\\{i: A_{i,j} = A_{i,j'} = 1\\}| \\leq 1$ for all distinct columns $j \\neq j'$ (any two rows share at most one element). Does there exist $\\chi \\in \\{-1,1\\}^n$ with $\\|A\\chi\\|_\\infty = O(\\sqrt{t})$, with an absolute constant? (The LLL bound is $O(\\sqrt{t\\log t})$ under mere sparsity.)",
+      "status": "no progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "N. Alon, J. H. Spencer, The Probabilistic Method (textbook), Wiley; see also the folklore discrepancy bound for hypergraphs of bounded degree and bounded edge size",
+          "year": 2000,
+          "description": "Standard reference for the Lovász Local Lemma and its application to discrepancy: hypergraphs of maximum degree $\\Delta$ and edge size $R$ have discrepancy $O(\\sqrt{R \\log(R\\Delta)})$, which specializes to $O(\\sqrt{t\\log t})$ for $R = \\Delta = t$.",
+          "link": "https://scholar.google.com/scholar?q=Alon+Spencer+The+Probabilistic+Method+Lov%C3%A1sz+Local+Lemma+discrepancy"
+        },
+        {
+          "title": "A note on the discrepancy of matrices with bounded row and column sums, Discrete Mathematics (2015)",
+          "year": 2015,
+          "description": "Generalizes the LLL folklore result to real matrices with bounded row and column $\\ell_1$ norms, giving $O(R \\log(R\\Delta))$-type guarantees.",
+          "link": "https://scholar.google.com/scholar?q=note+on+the+discrepancy+of+matrices+with+bounded+row+and+column+sums"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, On the discrepancy of random low degree set systems, arXiv:1810.03374, 2018",
+          "year": 2018,
+          "description": "Explicitly notes that the Beck-Fiala-type problem 'is open even for very special cases such as when the hypergraph corresponding to the set system is simple, i.e. any two sets intersect in at most one element' — i.e. the exact question posed here remains open.",
+          "link": "https://arxiv.org/abs/1810.03374"
+        },
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Gives the best general bound $O(\\sqrt{t\\log n})$ for degree-$t$ systems; in particular contexts the pairwise-intersection condition is a candidate to improve this to $O(\\sqrt{t})$.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.7",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Lovász Local Lemma",
+        "sparse matrices",
+        "linear hypergraphs"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The LLL folklore bound $O(\\sqrt{t\\log t})$ for systems with bounded degree and bounded set size is standard (Alon-Spencer; also stated in arXiv:1810.03374 and arXiv:1806.04484). The open question about simple hypergraphs (pairwise intersections of size at most 1) is confirmed open by the explicit remark in Hoberg-Rothvoss (arXiv:1810.03374). Note: the page's statement 'both columns are rows are t-sparse' (sic) is preserved verbatim in the source statement.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "LLL gives a discrepancy bound of $O(\\sqrt{t\\log t})$ here; whether the pairwise-intersection-at-most-one condition improves this to $O(\\sqrt{t})$ is open."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.75",
+      "sourceStatement": "Can we prove some hardness statement about finding a coloring achieving Komlos guarantee or the Banaszczyk discrepancy guarantee?",
+      "problem": "Prove a computational-hardness statement for the task of finding a coloring that achieves the Komlós guarantee ($\\|\\sum_i \\epsilon_i v_i\\|_\\infty = O(1)$, or the best known $O(\\sqrt{\\log \\min\\{d,n\\}})$ / Banaszczyk guarantee) for vectors in the Euclidean unit ball.",
+      "wordDescription": "For the general discrepancy-minimization problem on set systems, strong hardness is known: Charikar-Newman-Nikolov proved it is NP-hard to distinguish systems with discrepancy 0 from systems with discrepancy $\\Omega(\\sqrt{n})$, so no polynomial-time algorithm can find colorings of discrepancy $o(\\sqrt{n})$ even when near-perfect colorings exist; Austrin-Guruswami-Håstad proved it is NP-hard to approximate hereditary discrepancy within a factor of 2. However, these results concern the optimization version (approximating the discrepancy value / worst-case instances). The structured promise problem here — given unit-norm vectors, find signs achieving the (guaranteed) $O(\\sqrt{\\log \\min\\{d,n\\}})$ Banaszczyk bound — is not known to be hard, and no hardness result for it has been published. The question is whether such a hardness statement exists (or whether the task is always easy in a formal sense).",
+      "mathematicalConditions": "Given $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$ (or the $t$-sparse matrix version), the task is to find $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq C\\sqrt{\\log \\min\\{d, n\\}}$ (the Banaszczyk guarantee). Question: can one prove NP-hardness (or other intractability) for this task, or for the decision version of achieving the Komlós guarantee with constant $c$?",
+      "status": "no progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "M. Charikar, A. Newman, A. Nikolov, Tight hardness results for minimizing discrepancy, SODA 2011",
+          "year": 2011,
+          "description": "NP-hard to distinguish set systems with discrepancy 0 from those with discrepancy $\\Omega(\\sqrt{n})$ (for $O(n)$ sets on $n$ elements), showing Bansal's guarantees are tight for general systems and ruling out poly-time multiplicative approximation of discrepancy.",
+          "link": "https://scholar.google.com/scholar?q=Charikar+Newman+Nikolov+Tight+hardness+results+for+minimizing+discrepancy"
+        },
+        {
+          "title": "P. Austrin, V. Guruswami, J. Håstad, On the hardness of approximating discrepancy (2013)",
+          "year": 2013,
+          "description": "NP-hard to approximate the hereditary discrepancy of a set system within a factor of 2 (as cited in Nikolov-Talwar and the discrepancy literature).",
+          "link": "https://scholar.google.com/scholar?q=Austrin+Guruswami+H%C3%A5stad+hardness+approximating+discrepancy+hereditary"
+        },
+        {
+          "title": "V. V. S. P. Bhattiprolu, V. Guruswami, E. Lee, Approximate hypergraph coloring under low-discrepancy and related promises, RANDOM 2015",
+          "year": 2015,
+          "description": "Related promise-colorability hardness: for low-discrepancy hypergraphs, coloring is hard in various regimes, giving context for what kind of hardness might be provable for Komlós-style tasks.",
+          "link": "https://scholar.google.com/scholar?q=Bhattiprolu+Guruswami+Lee+Approximate+hypergraph+coloring+under+low-discrepancy+promises"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.75",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Komlós conjecture",
+        "hardness",
+        "complexity theory"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The Charikar-Newman-Nikolov hardness (NP-hard to distinguish disc 0 vs $\\Omega(\\sqrt{n})$) is confirmed (SODA 2011, full paper available from DIMACS); the Austrin-Guruswami-Håstad factor-2 hardness for hereditary discrepancy is cited in Nikolov's SODA 2014 slides. No published hardness result specific to finding Komlós/Banaszczyk-guarantee colorings was located; the question appears open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "Open. No hardness result for finding a coloring achieving the Komlós/Banaszczyk guarantee is known; the closest results are hardness for the general discrepancy-minimization problem (Charikar-Newman-Nikolov 2011) and factor-2 hardness for approximating hereditary discrepancy (Austrin-Guruswami-Håstad 2013)."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.8",
+      "sourceStatement": "Say that a convex body $K$ has property B if for any set of vectors of length no more than $c$ (some small constant), there exists a signing of them s.t. this signed sum lies inside $K$. What is the convex body with the smallest gaussian volume which has property $B$?",
+      "problem": "Characterize the convex body of minimum Gaussian volume that has 'property B': for every finite set of vectors of length at most some small constant $c$, there exist signs such that the signed sum lies in $K$.",
+      "wordDescription": "This is the reverse (extremal) direction of Banaszczyk's vector-balancing theorem, which states that every convex body $K$ of Gaussian measure at least $1/2$ has property B for vectors of length at most $1/5$ (up to a constant factor). The question asks for the smallest Gaussian volume a body with property B can have — i.e., how tight the $1/2$ threshold really is. The threshold is known to be 'essentially tight' in a weak sense (a body of Gaussian measure $< 1/2$ can fail to contain 0, and the halfspace argument shows $\\gamma(K) \\geq 1/2$ forces $0 \\in K$), but the extremal question about the true minimum Gaussian volume among property-B bodies is open. Daniel Dadush's remark recorded on the AimPL page shows that property B forces $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ for a standard Gaussian $G$, i.e. the Gaussian measure of $K$ is at least $\\exp(-(\\log n)^{O(1)})$ — so the answer lies between $\\approx 1/2$ and $\\exp(-\\mathrm{polylog}\\, n)$.",
+      "mathematicalConditions": "Let $K \\subseteq \\mathbb{R}^n$ be a convex body. Say $K$ has property B (with constant $c > 0$) if for every $m \\geq 1$ and every $v_1, \\dots, v_m$ with $\\|v_i\\|_2 \\leq c$ there exist signs $\\epsilon_i \\in \\{-1, 1\\}$ with $\\sum_{i=1}^m \\epsilon_i v_i \\in K$. Determine $\\inf\\{\\gamma_n(K) : K \\text{ has property B}\\}$, where $\\gamma_n$ is the standard Gaussian measure on $\\mathbb{R}^n$. Banaszczyk's theorem gives the upper bound $\\gamma_n(K) \\geq 1/2 \\Rightarrow$ property B (for $c = 1/5$); Dadush's workshop remark gives $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ as a necessary condition.",
+      "status": "partial progress",
+      "comments": [
+        {
+          "id": "aimpl-remark-reverse-banaszczyk-dadush",
+          "author": {
+            "displayName": "Daniel Dadush"
+          },
+          "body": "During the workshop it was shown that if $K$ has property $B$, then $\\mathbb{E} \\|G\\|_K = (\\log n)^{O(1)}$, where $G$ is a standard Gaussian random vector.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        }
+      ],
+      "literature": [
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "The forward direction: any convex body of Gaussian measure at least $1/2$ has property B for vectors of $\\ell_2$ norm at most $1/5$ (up to constant factors); the problem asks for the reverse/extremal characterization.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, Theory of Computing 15(15):1-58, 2019 (arXiv:1612.04304)",
+          "year": 2019,
+          "description": "Discusses the tightness of the Gaussian measure threshold $1/2$ in Banaszczyk's theorem (e.g. the necessity of $0 \\in K$), providing the context for the reverse question.",
+          "link": "https://arxiv.org/abs/1612.04304"
+        },
+        {
+          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018 (arXiv:1708.01079)",
+          "year": 2018,
+          "description": "Constructive version of Banaszczyk's theorem for general convex bodies; relevant to what shapes are 'attainable' by signed sums and hence to property B extremal questions.",
+          "link": "https://arxiv.org/abs/1708.01079"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.8",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Banaszczyk theorem",
+        "Gaussian measure",
+        "convex bodies"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. Banaszczyk's theorem and the 'essentially tight' threshold discussion (a body of Gaussian measure at least $1/2$ must contain 0; a body of small Gaussian measure need not) are confirmed in arXiv:1612.04304. Daniel Dadush's remark is transcribed verbatim from the AimPL page. No published resolution of the extremal question was located; it remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "Open. During the workshop it was shown that if $K$ has property B, then $\\mathbb{E} \\|G\\|_K = (\\log n)^{O(1)}$, where $G$ is a standard Gaussian random vector (remark of Daniel Dadush)."
+    },
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.85",
+      "sourceStatement": "Is there a list of colorings of polynomial size such that for any subset of the columns, one of these colorings gives it a discrepancy of O(h), where $h$ is the hereditary discrepancy?",
+      "problem": "Determine whether every set system admits a list of polynomially many 2-colorings such that, for every subset of the elements, some coloring in the list has discrepancy $O(h)$ on the induced subsystem, where $h$ is the hereditary discrepancy of the whole system.",
+      "wordDescription": "This question asks whether hereditary discrepancy can be 'certified' by a small explicit list of colorings: given the system, is there a poly-size family of colorings that simultaneously realizes the hereditary discrepancy guarantee on every restriction? The AimPL page records that the answer is negative, resolved during the workshop: the counterexample is the simple set system consisting of $\\sqrt{n}$ disjoint rows (sets) of size $\\sqrt{n}$ each. Its hereditary discrepancy is $O(1)$ (each induced subsystem is a union of rows, each 2-colorable to discrepancy at most 1), yet any fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns, because each row contributes a signed sum of about $\\sqrt{n}/2$ random-sign elements; a single coloring can therefore serve only an exponentially small fraction of the $2^n$ subsets, so any list of polynomial size fails on some subset. No published paper describing this negative result was located; it is recorded here as resolved in the workshop discussion on the AimPL page.",
+      "mathematicalConditions": "Given a set system (matrix $A \\in \\{0,1\\}^{m \\times n}$) with hereditary discrepancy $h = \\mathrm{herdisc}(A)$, does there exist a list $\\mathcal{L}$ of $\\mathrm{poly}(n)$ colorings $\\chi \\in \\{-1,1\\}^n$ such that for every subset $J \\subseteq [n]$ of columns, some $\\chi \\in \\mathcal{L}$ satisfies $\\max_{i} \\left|\\sum_{j \\in S_i \\cap J} \\chi(j)\\right| = O(h)$? Answer (per the AimPL page): no — the system of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each has $h = O(1)$, yet no polynomial-size list of colorings can cover all subsets, since a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns.",
+      "status": "solved",
+      "comments": [],
+      "literature": [
+        {
+          "title": "L. Lovász, J. Spencer, K. Vesztergombi, Discrepancies of set-systems and matrices, European Journal of Combinatorics 7(2):151-160, 1986",
+          "year": 1986,
+          "description": "Introduced hereditary discrepancy (and the determinant lower bound); the notion of hereditary discrepancy that the question refers to.",
+          "link": "https://scholar.google.com/scholar?q=Lov%C3%A1sz+Spencer+Vesztergombi+Discrepancies+of+set-systems+and+matrices+1986"
+        },
+        {
+          "title": "J. Matoušek, The determinant bound for discrepancy is almost tight, Proceedings of the AMS 141(2):451-460, 2013",
+          "year": 2013,
+          "description": "Establishes that the determinant lower bound approximates hereditary discrepancy up to polylog factors, the main structural tool for reasoning about herdisc.",
+          "link": "https://scholar.google.com/scholar?q=Matou%C5%A1ek+The+determinant+bound+for+discrepancy+is+almost+tight"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
+          "year": 2020,
+          "description": "Polynomial-time approximation of hereditary discrepancy via the $\\gamma_2$ norm; the algorithmic context in which 'short certificates' for herdisc are relevant.",
+          "link": "https://arxiv.org/abs/1408.1376"
+        },
+        {
+          "title": "AimPL: Hereditary discrepancy and factorization norms — Problem 1.85 (with the negative answer)",
+          "year": 2016,
+          "description": "Records the question and the workshop resolution (negative answer via $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$); no separate publication of the negative result was found.",
+          "link": "http://aimpl.org/hereddiscrep/1/"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.85",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "hereditary discrepancy",
+        "colorings",
+        "certificates"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The status ('answered in the negative' with the counterexample of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$) is transcribed from the AimPL page; no external publication of this negative result was located in the literature (searched 2026-08-25), so it is treated as workshop-recorded folklore. The intuition recorded in the wordDescription (a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns, so poly-many colorings cannot cover all $2^n$ subsets) is the standard explanation; the exact quantitative statement is best confirmed against the workshop participants' notes.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "This was answered in the negative. Counterexample is a simple set system comprising of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.7: Beating LLL",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.7",
+      "sourceStatement": "Consider a matrix where both columns are rows are t-sparse. LLL gives a discrepancy bound of $O(\\sqrt{t\\log t})$ here. If we assume the stronger property that every pair of rows intersect in at most one element, can we get a $O(\\sqrt{t})$?",
+      "problem": "For 0-1 matrices (set systems) in which every row and every column has at most $t$ non-zero entries (both rows and columns $t$-sparse), determine whether the stronger hypothesis that any two rows intersect in at most one element (a simple / linear hypergraph) yields a discrepancy bound of $O(\\sqrt{t})$, improving on the Lovász Local Lemma bound $O(\\sqrt{t\\log t})$.",
+      "wordDescription": "For a $t$-sparse 0-1 matrix (each element lies in at most $t$ sets and each set has size at most $t$), a folklore application of the Lovász Local Lemma gives discrepancy $O(\\sqrt{t\\log t})$: a random coloring is analyzed per row and the dependencies are controlled by the sparsity. The question asks whether the 'simple hypergraph' condition — any two sets intersect in at most one element — removes the $\\sqrt{\\log t}$ factor, giving the Beck-Fiala-conjecture bound $O(\\sqrt{t})$ in this special case. This is a special case of the Beck-Fiala conjecture, and the literature notes explicitly that the conjecture 'is open even for very special cases such as when the hypergraph is simple, i.e. any two sets intersect in at most one element' (Hoberg-Rothvoss). No progress or resolution of this specific question was found in the literature as of 2026.",
+      "mathematicalConditions": "Let $A \\in \\{0,1\\}^{m \\times n}$ with all row sums and column sums at most $t$, and additionally $|\\{i: A_{i,j} = A_{i,j'} = 1\\}| \\leq 1$ for all distinct columns $j \\neq j'$ (any two rows share at most one element). Does there exist $\\chi \\in \\{-1,1\\}^n$ with $\\|A\\chi\\|_\\infty = O(\\sqrt{t})$, with an absolute constant? (The LLL bound is $O(\\sqrt{t\\log t})$ under mere sparsity.)",
+      "status": "no progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "N. Alon, J. H. Spencer, The Probabilistic Method (textbook), Wiley; see also the folklore discrepancy bound for hypergraphs of bounded degree and bounded edge size",
+          "year": 2000,
+          "description": "Standard reference for the Lovász Local Lemma and its application to discrepancy: hypergraphs of maximum degree $\\Delta$ and edge size $R$ have discrepancy $O(\\sqrt{R \\log(R\\Delta)})$, which specializes to $O(\\sqrt{t\\log t})$ for $R = \\Delta = t$.",
+          "link": "https://scholar.google.com/scholar?q=Alon+Spencer+The+Probabilistic+Method+Lov%C3%A1sz+Local+Lemma+discrepancy"
+        },
+        {
+          "title": "A note on the discrepancy of matrices with bounded row and column sums, Discrete Mathematics (2015)",
+          "year": 2015,
+          "description": "Generalizes the LLL folklore result to real matrices with bounded row and column $\\ell_1$ norms, giving $O(R \\log(R\\Delta))$-type guarantees.",
+          "link": "https://scholar.google.com/scholar?q=note+on+the+discrepancy+of+matrices+with+bounded+row+and+column+sums"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, On the discrepancy of random low degree set systems, arXiv:1810.03374, 2018",
+          "year": 2018,
+          "description": "Explicitly notes that the Beck-Fiala-type problem 'is open even for very special cases such as when the hypergraph corresponding to the set system is simple, i.e. any two sets intersect in at most one element' — i.e. the exact question posed here remains open.",
+          "link": "https://arxiv.org/abs/1810.03374"
+        },
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Gives the best general bound $O(\\sqrt{t\\log n})$ for degree-$t$ systems; in particular contexts the pairwise-intersection condition is a candidate to improve this to $O(\\sqrt{t})$.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.7",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Lovász Local Lemma",
+        "sparse matrices",
+        "linear hypergraphs"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The LLL folklore bound $O(\\sqrt{t\\log t})$ for systems with bounded degree and bounded set size is standard (Alon-Spencer; also stated in arXiv:1810.03374 and arXiv:1806.04484). The open question about simple hypergraphs (pairwise intersections of size at most 1) is confirmed open by the explicit remark in Hoberg-Rothvoss (arXiv:1810.03374). Note: the page's statement 'both columns are rows are t-sparse' (sic) is preserved verbatim in the source statement.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "LLL gives a discrepancy bound of $O(\\sqrt{t\\log t})$ here; whether the pairwise-intersection-at-most-one condition improves this to $O(\\sqrt{t})$ is open."
+    }
+  ]
+}

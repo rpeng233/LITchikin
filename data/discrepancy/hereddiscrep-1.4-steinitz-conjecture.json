@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.4: Steinitz conjecture",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.4",
+      "sourceStatement": "Given vectors $v_1,...,v_n\\in\\mathbb{R}^d$ and a norm $X$ satisfying $\\sum_{i=1}^n v_i=0$ and $||v_i||_X\\le 1$ for all $i$. Define $S_n(X,d)=min_{\\pi\\in S^n}max_{k=1,...,n}|| \\sum_{i=1}^k v_{\\pi(i)}||_X$ where $S^n$ is the set of all permutations of $[n]$. Let $S(X,d)=sup_n S_n(X,d)$. Then, $S(X,d) =O(\\sqrt{d})$.",
+      "problem": "Prove the Steinitz conjecture: for vectors in $\\mathbb{R}^d$ of norm at most 1 with zero sum, there is always an ordering whose partial sums all have norm $O(\\sqrt{d})$, for every norm (in particular for $\\ell_2$ and $\\ell_\\infty$, where the bound should depend only on the dimension, not on the number of vectors).",
+      "wordDescription": "The Steinitz problem (going back to Steinitz 1913, answering a question of Riemann and Lévy) asks how far a zero-sum family of unit vectors can be kept from the origin when ordered: minimize the maximum norm of partial sums over all permutations. The classical Steinitz lemma gives $O(d)$ in any norm, improved to $S(X,d) \\leq d$ by Grinberg-Sevastyanov (and to $d - 1 + 1/d$ for symmetric norms), with an $\\Omega(d)$ lower bound for $\\ell_1$-type norms. It is conjectured that for $\\ell_2$ (and $\\ell_\\infty$) the truth is $O(\\sqrt{d})$. Banaszczyk proved $O(\\sqrt{d} + \\sqrt{\\log n})$ for $\\ell_2$ (and $O(\\sqrt{d\\log n})$ for $\\ell_\\infty$) non-constructively; the workshop remark records that an algorithmic guarantee of $\\sqrt{d}\\log n$ was worked out at the workshop, later improved to $O(\\sqrt{d\\log n})$ by Bansal-Garg. Recent work (Dutta-Jha-Jiang 2026) gives an efficient algorithm matching the conjectured $O(\\sqrt{d})$ bound for $\\ell_2$ under the condition $d \\geq \\Omega(\\log^7 n)$. Chobanyan's transference theorem relates the Steinitz constant to the vector-balancing discrepancy constant $\\alpha(X,X,d)$.",
+      "mathematicalConditions": "For a normed space $(\\mathbb{R}^d, \\|\\cdot\\|_X)$ define $S_n(X, d) = \\min_{\\pi \\in S_n} \\max_{1 \\leq k \\leq n} \\left\\|\\sum_{i=1}^k v_{\\pi(i)}\\right\\|_X$ over all zero-sum families $v_1, \\dots, v_n$ with $\\|v_i\\|_X \\leq 1$, and $S(X, d) = \\sup_n S_n(X, d)$. The conjecture is that $S(X, d) = O(\\sqrt{d})$ for every norm $X$ (with the main cases of interest $X = \\ell_2, \\ell_\\infty$). Known: $S(X,d) \\leq d$ (Sevastyanov; Grinberg-Sevastyanov 1980); for symmetric $X$, $S(X,d) \\leq d - 1 + 1/d$; $S(\\ell_2, d) = O(\\sqrt{d} + \\sqrt{\\log n})$ (Banaszczyk 2012/13) with lower bound $\\Omega(\\sqrt{d})$; $S(X,d) \\geq \\alpha(X, X, d)$ (Chobanyan).",
+      "status": "partial progress",
+      "comments": [
+        {
+          "id": "aimpl-remark-steinitz-algorithmic",
+          "author": {
+            "displayName": "AimPL workshop participant"
+          },
+          "body": "An algorithmic guarantee of $\\sqrt{d}\\log\\,n$ was worked upon in the workshop.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        }
+      ],
+      "literature": [
+        {
+          "title": "E. Steinitz, Bedingt konvergente Reihen und konvexe Systeme, Journal für die reine und angewandte Mathematik 143:128-175, 1913",
+          "year": 1913,
+          "description": "Origin of the Steinitz lemma: zero-sum unit vectors in $\\mathbb{R}^d$ can be ordered so that all partial sums have norm $O(d)$.",
+          "link": "https://scholar.google.com/scholar?q=Steinitz+Bedingt+konvergente+Reihen+und+konvexe+Systeme+1913"
+        },
+        {
+          "title": "V. S. Grinberg, S. V. Sevastyanov, On the value of the Steinitz constant, Functional Analysis and Its Applications 14(2):125-126, 1980",
+          "year": 1980,
+          "description": "Proves $S(X, d) \\leq d$ for all norms; the later strengthening to $d - 1 + 1/d$ for symmetric norms is due to Sevastyanov (confirming a claim of Banaszczyk).",
+          "link": "https://scholar.google.com/scholar?q=Grinberg+Sevastyanov+value+of+the+Steinitz+constant+1980"
+        },
+        {
+          "title": "W. Banaszczyk, On the Steinitz constant (2012/2013, cited as [Ban12] in the discrepancy literature)",
+          "year": 2012,
+          "description": "Non-constructive $O(\\sqrt{d} + \\sqrt{\\log n})$ bound for the $\\ell_2$ Steinitz problem (and $O(\\sqrt{d\\log n})$ for $\\ell_\\infty$), the best known bounds, via his vector-balancing theorem.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+On+the+Steinitz+constant"
+        },
+        {
+          "title": "S. Chobanyan, Transference theorems for the Steinitz problem (1994)",
+          "year": 1994,
+          "description": "Reduces the Steinitz problem to the signed-series / vector-balancing problem, showing the Steinitz constant is bounded by the discrepancy constant $\\alpha(X, X, d)$; the reduction can be made algorithmic.",
+          "link": "https://scholar.google.com/scholar?q=Chobanyan+transference+theorems+Steinitz+problem"
+        },
+        {
+          "title": "I. Bárány, On the power of linear dependencies, in Building Bridges (Bolyai Society Mathematical Studies 19), 2008, pp. 31-45",
+          "year": 2008,
+          "description": "Bárány's survey/manifesto ('epic document' per the AimPL page) discussing the Steinitz problem and the power of linear dependencies.",
+          "link": "https://scholar.google.com/scholar?q=B%C3%A1r%C3%A1ny+On+the+power+of+linear+dependencies+2008"
+        },
+        {
+          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017 (arXiv:1611.01805)",
+          "year": 2017,
+          "description": "First algorithm matching Banaszczyk's bound in the $\\ell_\\infty$ case and improving algorithmic bounds in the $\\ell_2$ case for the signed-series / Steinitz problems ($O(\\sqrt{d\\log n})$ for $\\ell_2$).",
+          "link": "https://arxiv.org/abs/1611.01805"
+        },
+        {
+          "title": "K. Dutta, A. V. Jha, H. Jiang, Near-optimal constructive bounds for $\\ell_2$ prefix discrepancy and Steinitz problems via affine spectral independence, arXiv:2604.13355, 2026",
+          "year": 2026,
+          "description": "Efficient algorithm matching the conjectured $O(\\sqrt{d})$ bound for the $\\ell_2$ Steinitz problem when $d \\geq \\Omega(\\log^7 n)$; also covers $\\ell_2$ prefix discrepancy.",
+          "link": "https://arxiv.org/abs/2604.13355"
+        },
+        {
+          "title": "A note on the Steinitz Lemma, arXiv:2505.09465, 2025",
+          "year": 2025,
+          "description": "Survey of the history of the Steinitz lemma and the Steinitz constant, including the Grinberg-Sevastyanov and Sevastyanov bounds and the role of Banaszczyk's claim.",
+          "link": "https://arxiv.org/abs/2505.09465"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.4",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Steinitz conjecture",
+        "signed series",
+        "vector balancing"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The main claims are confirmed in the literature: $S(X,d) \\leq d$ (Grinberg-Sevastyanov 1980); $d - 1 + 1/d$ for symmetric norms (Sevastyanov, confirming Banaszczyk's claim, per arXiv:2505.09465); Banaszczyk's $O(\\sqrt{d} + \\sqrt{\\log n})$ for $\\ell_2$ (cited as [Ban12] in Bansal-Garg arXiv:1611.01805 and in arXiv:2604.13355); $\\Omega(\\sqrt{d})$ lower bound for $\\ell_2$; Chobanyan's transference (Bansal-Garg cite [Cho94]: reduction from Steinitz to signed series with $B \\leq E$). The claim in item (ii) that $S(\\ell_p, d) = \\Omega(d)$ for $1 < p < 2$ could not be independently confirmed in the literature during verification and is reported as stated on the AimPL page. The '[Harvey]' attribution for converting signings to orderings could not be pinned to a specific publication; it is reported as given on the AimPL page.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "i) Sevastiyanov showed $S(X,d) \\le d$. For $X$ a symmetric norm, Banaszczyk improved this to $d-\\frac{1}{d}$. ii) If $X=l_p$ for $1< p < 2$, $S(X,d) =\\Omega(d)$. iii) For $X=l_2$, Banaszczyk'13 gave a bound of $O(\\sqrt{d}+\\sqrt{\\log n})$. A lower bound of $\\sqrt{d}$ is known here. iv) It is known that $S(X,d) \\ge \\alpha(X,X,d)$ [Chobanyan] (refer to vector balancing problem below for definition of $\\alpha$). Given in Barany's epic document. Moreover, for a given set of vectors $v_1,..,v_n$ , given a signing of it achieving discrepancy $\\alpha$, we can recover a permutation achieving a guarantee of $\\alpha$ in the Steinitz setting [Harvey]."
+    }
+  ]
+}

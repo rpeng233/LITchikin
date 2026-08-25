@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.05: Komlós conjecture",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.05",
+      "sourceStatement": "There is a universal constant $c>0$ s.t. for every $v_1,v_2,...,v_n \\in \\mathbb{B_2}^d$, there exist signs $\\epsilon_1,...,\\epsilon_n\\in \\{-1,1\\}$ s.t. $|| \\sum_{i=1}^n \\epsilon_i v_i||_{\\infty} \\le c$",
+      "problem": "Prove the Komlós conjecture: for any multiset of $n$ vectors in the Euclidean unit ball of $\\mathbb{R}^d$, there exist $\\pm 1$ signs whose signed sum has $\\ell_\\infty$ norm bounded by an absolute constant, independent of both the dimension $d$ and the number of vectors $n$.",
+      "wordDescription": "The Komlós conjecture is one of the central open problems in combinatorial discrepancy. It asserts that vectors of Euclidean norm at most one can always be signed so that every coordinate of the signed sum stays within an absolute constant, no matter how many vectors there are or how high the dimension is. It strictly generalizes the Beck–Fiala conjecture (scale each element's incidence vector by $1/\\sqrt{t}$), and in the special case of normalized $\\pm 1$ vectors it recovers Spencer's theorem. The best known general bound is logarithmic: Banaszczyk's vector-balancing theorem gives $O(\\sqrt{\\log n})$, and with Gaussian-slice estimates of Barthe, Guédon, Mendelson and Naor this improves to $O(\\sqrt{\\log d})$ where $d$ is the dimension of the span of the vectors. The conjecture remains open despite decades of effort; the recent bound of Bansal and Jiang ($\\widetilde{O}(\\log^{1/4} n)$) is the first to go beyond the square root of a logarithm.",
+      "mathematicalConditions": "For every $d, n \\geq 1$ and every $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, there exist signs $\\epsilon_1, \\dots, \\epsilon_n \\in \\{-1, 1\\}$ and an absolute constant $c$ (independent of $d$ and $n$) such that $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq c$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "J. Komlós, A generalization of a problem of Steinitz, Acta Mathematica Academiae Scientiarum Hungaricae 41(3-4):217-229, 1983",
+          "year": 1983,
+          "description": "The paper in which the Komlós conjecture (in its vector-balancing form) originates; it studies signed sums of vectors and generalizes the classical Steinitz lemma.",
+          "link": "https://scholar.google.com/scholar?q=Komlos+A+generalization+of+a+problem+of+Steinitz+Acta+Mathematica+Hungaricae+1983"
+        },
+        {
+          "title": "J. Spencer, Six standard deviations suffice, Transactions of the American Mathematical Society 289(2):679-706, 1985",
+          "year": 1985,
+          "description": "Proves the $O(\\log n)$ bound for the $\\ell_\\infty$ discrepancy of vectors in the Euclidean ball and states the discrete version of the Komlós conjecture.",
+          "link": "https://scholar.google.com/scholar?q=Spencer+Six+standard+deviations+suffice+1985"
+        },
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Proves the vector-balancing theorem for convex bodies of Gaussian measure at least $1/2$, which yields the best known bound $O(\\sqrt{\\log n})$ for the Komlós problem.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "F. Barthe, O. Guédon, S. Mendelson, A. Naor, A probabilistic approach to the geometry of the $\\ell_p^n$-ball, Annals of Probability 33(2):480-513, 2005",
+          "year": 2005,
+          "description": "The '[Naor'05]' reference of the AimPL page. Gaussian-measure estimates for slices of the $\\ell_p^n$ ball that, combined with Banaszczyk's theorem, improve the Komlós bound to $O(\\sqrt{\\log d})$ where $d \\leq \\min\\{n, m\\}$ is the dimension of the span.",
+          "link": "https://arxiv.org/abs/math/0503650"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.3961, 2025",
+          "year": 2025,
+          "description": "Gives an $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem (and resolves the Beck-Fiala conjecture for degree $k \\geq \\log^2 n$), the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$; the companion paper 'Smoothed analysis of the Komlós conjecture' proves the conjecture under Gaussian perturbations when $n = \\omega(d \\log d)$.",
+          "link": "https://arxiv.org/abs/2508.3961"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.05",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Komlós conjecture",
+        "vector balancing",
+        "convex geometry"
+      ],
+      "verificationNotes": "Verified on 2026-08-25 against http://aimpl.org/hereddiscrep/1/ and the literature. The page attributes the bound $c=O(\\sqrt{\\log\\min\\{d,n\\}})$ to '[Banaszczyk'98] and [Naor'05]'; '[Naor'05]' is the joint paper Barthe, Guédon, Mendelson and Naor (2005), whose slice estimates give the $\\sqrt{\\log d}$ dependence on the span dimension (see e.g. the Theory of Computing article arXiv:1612.04304 for this derivation). Confirmed that the conjecture is still open as of 2026 and that Bansal-Jiang (arXiv:2508.3961) currently holds the best general bound $\\widetilde{O}(\\log^{1/4} n)$.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "$c = O(\\sqrt{\\log \\min\\{d, n\\}})$ was given by Banaszczyk (1998) together with the Gaussian measure estimates for slices of the $\\ell_\\infty$ ball due to Barthe, Guédon, Mendelson and Naor (2005), where $d$ is the dimension of the span of the vectors. Bansal and Jiang (2025) improved the general bound to $\\widetilde{O}(\\log^{1/4} n)$ and proved the conjecture in a smoothed-analysis setting when the number of vectors satisfies $n = \\omega(d \\log d)$. The conjecture with $c = O(1)$ remains open."
+    }
+  ]
+}

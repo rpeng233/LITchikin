@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.15: Beck-Fiala conjecture and making it constructive",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.15",
+      "sourceStatement": "Given a set system $(V,\\mathcal{S})$ with $V=[n]$, $\\mathcal{S}=S_1,...,S_m$. Each $i\\in V$ occurs in at most $t$ sets from $\\mathcal{S}$. Then there is a coloring to the elements of $V$ achieving a discrepancy of $O(\\sqrt{t})$. Komlós conjecture implies this by treating the incidence vector of each $i\\in V$ as a vector and scaling it down by $\\sqrt{t}$.",
+      "problem": "Prove the Beck-Fiala conjecture: every set system in which each element belongs to at most $t$ sets has a 2-coloring of discrepancy $O(\\sqrt{t})$, with the bound independent of the number of elements and sets. A constructive (polynomial-time) version is also sought.",
+      "wordDescription": "The Beck-Fiala conjecture is the most famous open problem for sparse set systems: it asserts that maximum degree $t$ forces discrepancy $O(\\sqrt{t})$, far better than the linear $2t-1$ bound of the Beck-Fiala theorem. The Komlós conjecture implies it by scaling incidence vectors by $1/\\sqrt{t}$. Progress on the pure bound has been slow ($2t-3$, then $2t - \\log^* t$ by Bukh), while Banaszczyk's vector-balancing theorem gives the much better $O(\\sqrt{t\\log n})$ at the price of dependence on $n$ and a non-constructive proof. The algorithmic question was largely resolved: Bansal (2010), Lovett-Meka (2012) and Rothvoss (2014) achieved $O(\\sqrt{t}\\log n)$ constructively, and Bansal-Dadush-Garg (2016) made Banaszczyk's $O(\\sqrt{t\\log n})$ bound constructive. In 2025 Bansal and Jiang resolved the conjecture itself for all degrees $t \\geq \\log^2 n$ and gave $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for $t \\leq \\log^2 n$, so the full conjecture is now known up to $\\mathrm{poly}(\\log\\log n)$ factors, with only the small-degree regime $t < \\log^2 n$ remaining.",
+      "mathematicalConditions": "For a set system $(V, \\mathcal{S})$ with $|V| = n$, $|\\mathcal{S}| = m$, such that every $i \\in V$ lies in at most $t$ of the sets $S_1, \\dots, S_m$, there exists a coloring $\\chi: V \\to \\{-1, 1\\}$ with $\\max_{j \\in [m]} \\left|\\sum_{i \\in S_j} \\chi(i)\\right| = O(\\sqrt{t})$, where the constant is absolute (independent of $n, m, t$). The constructive version asks for a polynomial-time algorithm finding such a coloring.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "J. Beck, T. Fiala, 'Integer-making' theorems, Discrete Applied Mathematics 3(1):1-8, 1981",
+          "year": 1981,
+          "description": "Proves the Beck-Fiala theorem: discrepancy at most $2t-1$ for systems of maximum degree $t$, and states the conjecture that $O(\\sqrt{t})$ is the truth.",
+          "link": "https://scholar.google.com/scholar?q=Beck+Fiala+Integer+making+theorems+1981"
+        },
+        {
+          "title": "D. Bednarchak, M. Helm, A note on the Beck-Fiala theorem, Combinatorica 17(1):147-149, 1997; M. Helm, On the Beck-Fiala theorem, Discrete Mathematics 207:207, 1999",
+          "year": 1997,
+          "description": "Small improvements of the Beck-Fiala bound to $2t-3$ (for $t \\geq 3$).",
+          "link": "https://scholar.google.com/scholar?q=Bednarchak+Helm+note+on+the+Beck-Fiala+theorem"
+        },
+        {
+          "title": "B. Bukh, An improvement of the Beck-Fiala theorem, Combinatorics, Probability and Computing 25(3):380-398, 2016",
+          "year": 2016,
+          "description": "Improves the Beck-Fiala bound to $2t - \\log^* t$, where $\\log^*$ is the iterated logarithm — the best bound depending only on $t$.",
+          "link": "https://scholar.google.com/scholar?q=Bukh+An+improvement+of+the+Beck-Fiala+theorem"
+        },
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Implies the $O(\\sqrt{t\\log n})$ (equivalently $O(\\sqrt{t\\log m})$) bound for degree-$t$ systems, non-constructively.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017 (arXiv:1611.01805; first posted as arXiv:1512.02074)",
+          "year": 2017,
+          "description": "A framework going beyond the partial-coloring method; the AimPL page credits it with the $O(\\sqrt{t\\log n\\log|S_j|})$ guarantee in the $t$-sparse setting and it improved algorithmic bounds for Tusnády's and Steinitz problems.",
+          "link": "https://arxiv.org/abs/1611.01805"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.3961, 2025",
+          "year": 2025,
+          "description": "Resolves the Beck-Fiala conjecture for $t \\geq \\log^2 n$ and gives $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for $t \\leq \\log^2 n$, improving on Banaszczyk's $O(\\sqrt{t\\log n})$; all bounds are algorithmic.",
+          "link": "https://arxiv.org/abs/2508.3961"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.15",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Beck-Fiala conjecture",
+        "sparse set systems",
+        "algorithmic discrepancy"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The statements on the page are consistent with the literature: Beck-Fiala (1981) gives $2t-1$; Bukh's $2t - \\log^* t$ is published in Combinatorics, Probability and Computing 25 (2016) 380-398 (also stated in Theory of Computing 15(15), 2019); Banaszczyk's non-constructive bound is quoted as $O(\\sqrt{t\\log\\min\\{n,m\\}})$ in the literature. '[Bansal-Garg'15]' refers to Bansal-Garg, 'Algorithmic discrepancy beyond partial coloring', first posted December 2015 and published at STOC 2017 (arXiv:1611.01805). Bansal-Jiang (arXiv:2508.3961, 2025) confirmed: resolves the conjecture for $t \\geq \\log^2 n$ and gives $\\widetilde{O}(\\sqrt{t}+\\sqrt{\\log n})$ for $t \\leq \\log^2 n$.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "A $2t-1$ guarantee which is also algorithmic was given by Beck-Fiala. Recently, [Bukh] gave a guarantee of $2t-\\log^*t$. Banaszczyk's result implies a bound of $O(\\sqrt{t\\log m})$ but is non-constructive. Other algorithmic guarantees are $O(\\sqrt{t}\\log n)$ [Bansal'10, Lovett-Meka'12, Rothvoss'15] and $O(\\sqrt{t\\log n\\log|S_j|})$ [Bansal-Garg'15]. Bansal and Jiang (2025) resolved the conjecture for $t \\geq \\log^2 n$ and gave $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for $t \\leq \\log^2 n$; the conjecture is open only in the regime $t < \\log^2 n$."
+    }
+  ]
+}

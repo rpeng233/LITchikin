@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.8: Reverse Banaszczyk-type problems",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.8",
+      "sourceStatement": "Say that a convex body $K$ has property B if for any set of vectors of length no more than $c$ (some small constant), there exists a signing of them s.t. this signed sum lies inside $K$. What is the convex body with the smallest gaussian volume which has property $B$?",
+      "problem": "Characterize the convex body of minimum Gaussian volume that has 'property B': for every finite set of vectors of length at most some small constant $c$, there exist signs such that the signed sum lies in $K$.",
+      "wordDescription": "This is the reverse (extremal) direction of Banaszczyk's vector-balancing theorem, which states that every convex body $K$ of Gaussian measure at least $1/2$ has property B for vectors of length at most $1/5$ (up to a constant factor). The question asks for the smallest Gaussian volume a body with property B can have — i.e., how tight the $1/2$ threshold really is. The threshold is known to be 'essentially tight' in a weak sense (a body of Gaussian measure $< 1/2$ can fail to contain 0, and the halfspace argument shows $\\gamma(K) \\geq 1/2$ forces $0 \\in K$), but the extremal question about the true minimum Gaussian volume among property-B bodies is open. Daniel Dadush's remark recorded on the AimPL page shows that property B forces $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ for a standard Gaussian $G$, i.e. the Gaussian measure of $K$ is at least $\\exp(-(\\log n)^{O(1)})$ — so the answer lies between $\\approx 1/2$ and $\\exp(-\\mathrm{polylog}\\, n)$.",
+      "mathematicalConditions": "Let $K \\subseteq \\mathbb{R}^n$ be a convex body. Say $K$ has property B (with constant $c > 0$) if for every $m \\geq 1$ and every $v_1, \\dots, v_m$ with $\\|v_i\\|_2 \\leq c$ there exist signs $\\epsilon_i \\in \\{-1, 1\\}$ with $\\sum_{i=1}^m \\epsilon_i v_i \\in K$. Determine $\\inf\\{\\gamma_n(K) : K \\text{ has property B}\\}$, where $\\gamma_n$ is the standard Gaussian measure on $\\mathbb{R}^n$. Banaszczyk's theorem gives the upper bound $\\gamma_n(K) \\geq 1/2 \\Rightarrow$ property B (for $c = 1/5$); Dadush's workshop remark gives $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ as a necessary condition.",
+      "status": "partial progress",
+      "comments": [
+        {
+          "id": "aimpl-remark-reverse-banaszczyk-dadush",
+          "author": {
+            "displayName": "Daniel Dadush"
+          },
+          "body": "During the workshop it was shown that if $K$ has property $B$, then $\\mathbb{E} \\|G\\|_K = (\\log n)^{O(1)}$, where $G$ is a standard Gaussian random vector.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        }
+      ],
+      "literature": [
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "The forward direction: any convex body of Gaussian measure at least $1/2$ has property B for vectors of $\\ell_2$ norm at most $1/5$ (up to constant factors); the problem asks for the reverse/extremal characterization.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, Theory of Computing 15(15):1-58, 2019 (arXiv:1612.04304)",
+          "year": 2019,
+          "description": "Discusses the tightness of the Gaussian measure threshold $1/2$ in Banaszczyk's theorem (e.g. the necessity of $0 \\in K$), providing the context for the reverse question.",
+          "link": "https://arxiv.org/abs/1612.04304"
+        },
+        {
+          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018 (arXiv:1708.01079)",
+          "year": 2018,
+          "description": "Constructive version of Banaszczyk's theorem for general convex bodies; relevant to what shapes are 'attainable' by signed sums and hence to property B extremal questions.",
+          "link": "https://arxiv.org/abs/1708.01079"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.8",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Banaszczyk theorem",
+        "Gaussian measure",
+        "convex bodies"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. Banaszczyk's theorem and the 'essentially tight' threshold discussion (a body of Gaussian measure at least $1/2$ must contain 0; a body of small Gaussian measure need not) are confirmed in arXiv:1612.04304. Daniel Dadush's remark is transcribed verbatim from the AimPL page. No published resolution of the extremal question was located; it remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "Open. During the workshop it was shown that if $K$ has property B, then $\\mathbb{E} \\|G\\|_K = (\\log n)^{O(1)}$, where $G$ is a standard Gaussian random vector (remark of Daniel Dadush)."
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.5: Vector Balancing",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.5",
+      "sourceStatement": "Let $X,Y$ be norms on $\\mathbb{R}^d$. Given vectors $v_1,...,v_n\\in \\mathbb{R}^d$ satisfying $||v_i||_X\\le 1$ for all $i$. We want to find signs $\\epsilon_i \\in \\{-1,1\\}$ to minimize $|| \\sum_{i=1}^n\\epsilon_iv_i ||_Y$. Call this the discrepancy of the vectors. Define $\\alpha_n(X,Y,d)$ as the maximum of this discrepancy over all choice of $n$ vectors satisfying $||v_i||_X\\le 1$ and $\\alpha(X,Y,d) =sup_n \\alpha_n(X,Y,d)$. Banaszczyk proved $\\alpha(X,Y,d) \\ge \\sqrt{d}(\\frac{vol(B_X)}{vol(B_Y)})^{1/d}$ where $B_X,B_Y$ are the unit balls of the corresponding norms. Is this lower bound also an upper bound for $\\alpha(X,Y,d)$ upto $\\log d$ factors?",
+      "problem": "Determine whether Banaszczyk's volume-ratio lower bound for the vector-balancing constant $\\alpha(X, Y, d)$ is tight up to logarithmic factors: is $\\alpha(X, Y, d) = O\\left(\\sqrt{d} \\left(\\frac{\\mathrm{vol}(B_X)}{\\mathrm{vol}(B_Y)}\\right)^{1/d} \\cdot \\log d\\right)$ for all norms $X, Y$ on $\\mathbb{R}^d$?",
+      "wordDescription": "Vector balancing asks for signs minimizing the $Y$-norm of the signed sum of vectors whose $X$-norm is at most 1, and $\\alpha(X, Y, d)$ is the worst-case value over all such vector families. Banaszczyk proved the lower bound $\\alpha(X,Y,d) \\geq \\sqrt{d}\\,(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d}$, and the problem asks whether this is essentially the answer. As Sasho Nikolov's remarks on the AimPL page point out, the naive lower bound can be too small by a factor of $\\sqrt{d}$ (e.g. $X = Y = \\ell_1^d$), so the interesting candidate is the stronger 'subspace-ellipsoid' quantity obtained by maximizing over subspaces and minimizing over enclosing ellipsoids; up to logarithmic factors that quantity may be the right answer. This question is intimately connected with the $\\gamma_2$-norm approximation of hereditary discrepancy (Matoušek-Nikolov-Talwar) and with the constructive version of Banaszczyk's theorem (Dadush-Garg-Lovett-Nikolov; Bansal-Dadush-Garg-Lovett).",
+      "mathematicalConditions": "For norms $X, Y$ on $\\mathbb{R}^d$ with unit balls $B_X, B_Y$, define $\\alpha_n(X, Y, d) = \\max_{v_1,\\dots,v_n: \\|v_i\\|_X \\leq 1} \\min_{\\epsilon \\in \\{\\pm 1\\}^n} \\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_Y$ and $\\alpha(X, Y, d) = \\sup_n \\alpha_n(X, Y, d)$. Question: is $\\alpha(X, Y, d) \\leq C \\cdot \\sqrt{d}\\,(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d} \\cdot \\log d$ for an absolute constant $C$? (Nikolov's refined candidate: $\\max_{k=1}^d \\max_{W: \\dim W = k} \\min_{E: B_X \\cap W \\subseteq E} \\sqrt{k}\\, \\mathrm{vol}(E)^{1/k} / \\mathrm{vol}(B_Y \\cap W)^{1/k}$, up to log factors.)",
+      "status": "no progress",
+      "comments": [
+        {
+          "id": "aimpl-remark-vectorbal-nikolov-1",
+          "author": {
+            "displayName": "Sasho Nikolov"
+          },
+          "body": "In fact, this lower bound can be too small by a factor of $\\sqrt{d}$, for example when $X = Y = \\ell_1^d$. However, the following stronger lower bound may in fact also be an upper bound, up to logarithmic factors: $\\max_{k = 1}^{d}\\max_{W: \\mathrm{dim}(W) = k} \\min_{B_Y \\cap W \\subseteq E} \\sqrt{d} \\frac{vol(E)^{1/d}}{vol(B_X \\cap W)^{1/d}}$, where the maximum is over subspaces $W$ of dimension $k$ and the minimum is over ellipsoids $E$ containing $B_Y \\cap W$.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        },
+        {
+          "id": "aimpl-remark-vectorbal-nikolov-2",
+          "author": {
+            "displayName": "Sasho Nikolov"
+          },
+          "body": "The formula above should be $\\max_{k = 1}^d \\max_{W: \\mathrm{dim}(W) = k} \\min_{E: B_X \\cap W \\subseteq E} \\sqrt{k} \\frac{vol(E)^{1/k}}{vol(B_Y \\cap W)^{1/k}}$.",
+          "createdAt": "2016-03-01T00:00:00.000Z",
+          "updatedAt": null
+        }
+      ],
+      "literature": [
+        {
+          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
+          "year": 1998,
+          "description": "Source of the volume-ratio lower bound $\\alpha(X,Y,d) \\geq \\sqrt{d}(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d}$ and of the Gaussian-measure upper-bound machinery behind the question.",
+          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
+          "year": 2020,
+          "description": "Shows $\\gamma_2$ approximates hereditary discrepancy up to $O(\\sqrt{\\log m})$ factors; the subspace/ellipsoid geometry in this problem is the same machinery relevant to the vector-balancing question.",
+          "link": "https://arxiv.org/abs/1408.1376"
+        },
+        {
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, Theory of Computing 15(15):1-58, 2019 (arXiv:1612.04304)",
+          "year": 2019,
+          "description": "Constructive algorithms for the general vector-balancing theorem; discusses the tightness of the Gaussian-measure threshold and the geometry relevant to $\\alpha(X,Y,d)$.",
+          "link": "https://arxiv.org/abs/1612.04304"
+        },
+        {
+          "title": "S. K. K. Nikolov, K. Talwar, Approximating hereditary discrepancy via small width ellipsoids, SODA 2014",
+          "year": 2014,
+          "description": "Predecessor of the $\\gamma_2$ work: approximating hereditary discrepancy via ellipsoid width, the geometric language used in the remarks above.",
+          "link": "https://scholar.google.com/scholar?q=Nikolov+Talwar+Approximating+hereditary+discrepancy+via+small+width+ellipsoids"
+        },
+        {
+          "title": "Vector balancing in Lebesgue spaces, arXiv:2007.05634, 2020",
+          "year": 2020,
+          "description": "Recent bounds for balancing vectors between $\\ell_p$ spaces, illustrating the behavior of $\\alpha(X, Y, d)$ in concrete norm pairs.",
+          "link": "https://arxiv.org/abs/2007.05634"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.5",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "vector balancing",
+        "volume ratio",
+        "convex geometry"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. Banaszczyk's volume-ratio lower bound is stated consistently across the literature (e.g. arXiv:1612.04304 and arXiv:2007.05634 discuss the vector-balancing theorem and its applications). The two remarks by Sasho Nikolov are transcribed verbatim from the AimPL page (the second one corrects the first). No published resolution of the question was found; it remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "Banaszczyk proved $\\alpha(X,Y,d) \\ge \\sqrt{d}(\\mathrm{vol}(B_X)/\\mathrm{vol}(B_Y))^{1/d}$. Whether it is an upper bound up to $\\log d$ factors is open."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.2: Beck-Fiala for random set systems",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.2",
+      "sourceStatement": "Each element $i\\in [n]$ lies in $t$ randomly selected sets from $\\mathcal{S}$. They show that when $m\\ge n$, hereditary discrepancy of the set system is $O(\\sqrt{t\\log t})$ whp. When $n\\ge m^t$, hereditary discrepancy is $O(1)$. An open question is to explore this setting for the remaining range of parameters i.e. when $n^{1/t} < m < n$.",
+      "problem": "Determine the hereditary discrepancy of random sparse set systems: with $n$ elements and $m$ sets, each element placed in $t$ uniformly random sets, what is the hereditary discrepancy with high probability, especially in the intermediate parameter regime $n^{1/t} < m < n$?",
+      "wordDescription": "This is a probabilistic version of the Beck-Fiala conjecture due to Esther Ezra and Shachar Lovett. In the model where each element is assigned to $t$ random sets, they proved: (i) when $m \\geq n$ the hereditary discrepancy is $O(\\sqrt{t\\log t})$ with high probability, via a combination of the Lovász Local Lemma and partial matchings; and (ii) when $n \\gg m^t$ the hereditary discrepancy is $O(1)$, via an analysis of the lattice spanned by sparse vectors. The interesting open case is the intermediate range $n^{1/t} < m < n$, where neither regime applies. Follow-up work by Hoberg and Rothvoss made progress: a Fourier-analytic argument gives discrepancy at most 1 when $n \\geq \\Theta(m^2 \\log m)$, and a subsequent paper shows expected discrepancy $O(\\sqrt{t})$ over the whole range when $t = \\Omega((\\log\\log m)^2)$; an $\\Omega(\\sqrt{t})$ spectral lower bound (e.g. for $n = m = 2t$) shows this is tight.",
+      "mathematicalConditions": "Let $\\mathcal{S} = (X, \\Sigma)$ be a random set system with $|X| = n$ and $|\\Sigma| = m$, where each element $x \\in X$ is placed into $t$ sets chosen uniformly at random from $\\Sigma$ (the $t$-tuple of sets containing $x$ is uniform among the $\\binom{m}{t}$ possibilities). Determine the asymptotic behavior, with high probability, of $\\mathrm{herdisc}(X, \\Sigma)$, in particular in the regime $n^{1/t} < m < n$ not covered by the two known bounds ($m \\geq n \\Rightarrow O(\\sqrt{t\\log t})$; $n \\gg m^t \\Rightarrow O(1)$).",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "E. Ezra, S. Lovett, On the Beck-Fiala conjecture for random set systems, APPROX/RANDOM 2016 (LIPIcs vol. 60, 29:1-29:10); Random Structures & Algorithms 54(4):665-675, 2019",
+          "year": 2019,
+          "description": "The source paper for this problem: proves $O(\\sqrt{t\\log t})$ when $|\\Sigma| \\geq |X|$ and $O(1)$ when $|X| \\gg |\\Sigma|^t$, and poses the intermediate regime as open.",
+          "link": "https://arxiv.org/abs/1511.00583"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, A Fourier-analytic approach for the discrepancy of random set systems, arXiv:1806.04484, 2018",
+          "year": 2018,
+          "description": "Fourier-analytic method showing discrepancy at most 1 with high probability when $n \\geq \\Theta(m^2 \\log m)$, improving the $O(1)$ regime of Ezra-Lovett (which required $n \\gg m^t$).",
+          "link": "https://arxiv.org/abs/1806.04484"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, On the discrepancy of random low degree set systems, arXiv:1810.03374, 2018",
+          "year": 2018,
+          "description": "Shows the expected discrepancy is $O(\\sqrt{t})$ for the entire range of $n$ and $m$, provided $t = \\Omega((\\log\\log m)^2)$; also notes the $\\Omega(\\sqrt{t})$ spectral lower bound (e.g. $n = m = 2t$) and that the problem is open even for simple hypergraphs (pairwise intersecting edges in at most one element).",
+          "link": "https://arxiv.org/abs/1810.03374"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.2",
+        "problemBy": "Esther Ezra and Shachar Lovett",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Beck-Fiala conjecture",
+        "random set systems",
+        "hereditary discrepancy"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The problem and its two bounds match Ezra-Lovett (arXiv:1511.00583; APPROX/RANDOM 2016; journal version RSA 54(4):665-675, 2019). Two minor clarifications relative to the AimPL text: the paper states the $O(1)$ regime as $|X| \\gg |\\Sigma|^t$ (strictly larger), and the intermediate range is $m \\leq n \\leq m^t$ (i.e. $n^{1/t} \\leq m \\leq n$). Follow-up progress by Hoberg-Rothvoss (arXiv:1806.04484, arXiv:1810.03374) is confirmed; the full conjecture for the intermediate regime remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "When $m\\ge n$, hereditary discrepancy of the set system is $O(\\sqrt{t\\log t})$ whp. When $n\\ge m^t$, hereditary discrepancy is $O(1)$. The remaining range $n^{1/t} < m < n$ is open (with subsequent partial progress by Hoberg and Rothvoss)."
+    }
+  ]
+}

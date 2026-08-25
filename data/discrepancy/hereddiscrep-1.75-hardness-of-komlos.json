@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.75: Hardness of Komlós",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.75",
+      "sourceStatement": "Can we prove some hardness statement about finding a coloring achieving Komlos guarantee or the Banaszczyk discrepancy guarantee?",
+      "problem": "Prove a computational-hardness statement for the task of finding a coloring that achieves the Komlós guarantee ($\\|\\sum_i \\epsilon_i v_i\\|_\\infty = O(1)$, or the best known $O(\\sqrt{\\log \\min\\{d,n\\}})$ / Banaszczyk guarantee) for vectors in the Euclidean unit ball.",
+      "wordDescription": "For the general discrepancy-minimization problem on set systems, strong hardness is known: Charikar-Newman-Nikolov proved it is NP-hard to distinguish systems with discrepancy 0 from systems with discrepancy $\\Omega(\\sqrt{n})$, so no polynomial-time algorithm can find colorings of discrepancy $o(\\sqrt{n})$ even when near-perfect colorings exist; Austrin-Guruswami-Håstad proved it is NP-hard to approximate hereditary discrepancy within a factor of 2. However, these results concern the optimization version (approximating the discrepancy value / worst-case instances). The structured promise problem here — given unit-norm vectors, find signs achieving the (guaranteed) $O(\\sqrt{\\log \\min\\{d,n\\}})$ Banaszczyk bound — is not known to be hard, and no hardness result for it has been published. The question is whether such a hardness statement exists (or whether the task is always easy in a formal sense).",
+      "mathematicalConditions": "Given $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$ (or the $t$-sparse matrix version), the task is to find $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq C\\sqrt{\\log \\min\\{d, n\\}}$ (the Banaszczyk guarantee). Question: can one prove NP-hardness (or other intractability) for this task, or for the decision version of achieving the Komlós guarantee with constant $c$?",
+      "status": "no progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "M. Charikar, A. Newman, A. Nikolov, Tight hardness results for minimizing discrepancy, SODA 2011",
+          "year": 2011,
+          "description": "NP-hard to distinguish set systems with discrepancy 0 from those with discrepancy $\\Omega(\\sqrt{n})$ (for $O(n)$ sets on $n$ elements), showing Bansal's guarantees are tight for general systems and ruling out poly-time multiplicative approximation of discrepancy.",
+          "link": "https://scholar.google.com/scholar?q=Charikar+Newman+Nikolov+Tight+hardness+results+for+minimizing+discrepancy"
+        },
+        {
+          "title": "P. Austrin, V. Guruswami, J. Håstad, On the hardness of approximating discrepancy (2013)",
+          "year": 2013,
+          "description": "NP-hard to approximate the hereditary discrepancy of a set system within a factor of 2 (as cited in Nikolov-Talwar and the discrepancy literature).",
+          "link": "https://scholar.google.com/scholar?q=Austrin+Guruswami+H%C3%A5stad+hardness+approximating+discrepancy+hereditary"
+        },
+        {
+          "title": "V. V. S. P. Bhattiprolu, V. Guruswami, E. Lee, Approximate hypergraph coloring under low-discrepancy and related promises, RANDOM 2015",
+          "year": 2015,
+          "description": "Related promise-colorability hardness: for low-discrepancy hypergraphs, coloring is hard in various regimes, giving context for what kind of hardness might be provable for Komlós-style tasks.",
+          "link": "https://scholar.google.com/scholar?q=Bhattiprolu+Guruswami+Lee+Approximate+hypergraph+coloring+under+low-discrepancy+promises"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.75",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Komlós conjecture",
+        "hardness",
+        "complexity theory"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The Charikar-Newman-Nikolov hardness (NP-hard to distinguish disc 0 vs $\\Omega(\\sqrt{n})$) is confirmed (SODA 2011, full paper available from DIMACS); the Austrin-Guruswami-Håstad factor-2 hardness for hereditary discrepancy is cited in Nikolov's SODA 2014 slides. No published hardness result specific to finding Komlós/Banaszczyk-guarantee colorings was located; the question appears open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "Open. No hardness result for finding a coloring achieving the Komlós/Banaszczyk guarantee is known; the closest results are hardness for the general discrepancy-minimization problem (Charikar-Newman-Nikolov 2011) and factor-2 hardness for approximating hereditary discrepancy (Austrin-Guruswami-Håstad 2013)."
+    }
+  ]
+}

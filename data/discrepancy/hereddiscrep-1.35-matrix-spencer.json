@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "hereddiscrep-aimpl",
+  "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.35: Matrix Spencer",
+  "generatedAt": "2026-08-25T14:46:29.000Z",
+  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+  "lastVerified": "2026-08-25",
+  "problemCount": 1,
+  "problems": [
+    {
+      "recordId": "lit:hereddiscrep-aimpl:1.35",
+      "sourceStatement": "Given matrices $A_1,...,A_n \\in\\mathbb{R}^{n\\times n}$ satisfying $||A_i||_{op} \\le 1$ where $||.||_{op}$ is the operator norm of matrices. Do there exists signs $\\epsilon_1,...,\\epsilon_n\\in\\{-1,1\\}$ s.t. $||\\sum_{i=1}^n\\epsilon_i A_i || =O(\\sqrt{n})$.",
+      "problem": "Prove (or disprove) the Matrix Spencer conjecture: for any $n$ symmetric $d \\times d$ matrices of operator norm at most 1, there exist signs $\\epsilon_i \\in \\{-1, 1\\}$ such that the operator norm of the signed sum is $O(\\sqrt{n})$ (for $d = n$; more generally $O(\\sqrt{n \\max(1, \\log(d/n))})$).",
+      "wordDescription": "The Matrix Spencer conjecture (due to Zouzias 2012, popularized by Meka 2014) is the matrix analogue of Spencer's 'six standard deviations suffice' theorem: it asks whether signing $n$ unit-norm matrices can balance their sum in operator norm to $O(\\sqrt{n})$, the bound that Spencer's theorem gives when all matrices commute (in which case the problem reduces to its diagonal / vector form). Random signings achieve only $O(\\sqrt{n \\log d})$ by the non-commutative Khintchine inequality / matrix Chernoff bound, and the conjecture says the $\\sqrt{\\log d}$ factor can be removed. The conjecture remains open in general; notable partial results include rank-$O(\\sqrt{n})$ matrices (Hopkins-Raghavendra-Shetty), block-diagonal matrices (Levy-Ramadas-Rothvoss; Dadush-Jiang-Reis), and matrices of rank at most $n/\\log^3 n$ (Bansal-Jiang-Meka). Connections to quantum random access codes, Kadison-Singer-type problems, and graph sparsification are known.",
+      "mathematicalConditions": "There is an absolute constant $C > 0$ such that for all $n, d \\geq 1$ and all symmetric $d \\times d$ matrices $A_1, \\dots, A_n$ with $\\|A_i\\|_{\\mathrm{op}} \\leq 1$, there exist signs $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i A_i\\right\\|_{\\mathrm{op}} \\leq C\\sqrt{n \\max(1, \\log(d/n))}$. In the case $d = n$ (as stated on the AimPL page), the claim is $O(\\sqrt{n})$.",
+      "status": "partial progress",
+      "comments": [],
+      "literature": [
+        {
+          "title": "M. Zouzias (2012) — first appearance of the Matrix Spencer conjecture (as cited in R. van Handel, Randomstrasse101: Open Problems of 2024, arXiv:2504.20539)",
+          "year": 2012,
+          "description": "The conjecture is attributed to Zouzias (2012); see also R. Meka, 'Discrepancy: the vector and matrix versions', Windows on Theory blog (2014), which popularized it.",
+          "link": "https://scholar.google.com/scholar?q=Zouzias+2012+matrix+discrepancy+Spencer"
+        },
+        {
+          "title": "R. Meka, Discrepancy: the vector and matrix versions, Windows on Theory blog post, 2014",
+          "year": 2014,
+          "description": "Blog post (2014) that brought the Matrix Spencer conjecture to wide attention; cited as [Mek14] in the literature.",
+          "link": "https://windowsontheory.org/2014/02/07/discrepancy-the-vector-and-matrix-versions/"
+        },
+        {
+          "title": "R. van Handel (ed.), Randomstrasse101: Open Problems of 2024, arXiv:2504.20539",
+          "year": 2025,
+          "description": "Discusses the Matrix Spencer conjecture in depth, including the commutative and free extremes, and the 'Group Spencer' conjecture of Bandeira-Kunisky-Mixon-Zeng.",
+          "link": "https://arxiv.org/abs/2504.20539"
+        },
+        {
+          "title": "S. B. Hopkins, P. Raghavendra, A. Shetty, Matrix discrepancy from quantum communication, FOCS 2022",
+          "year": 2022,
+          "description": "Proves the Matrix Spencer conjecture for matrices of rank $O(\\sqrt{n})$, via a connection to quantum information theory.",
+          "link": "https://scholar.google.com/scholar?q=Hopkins+Raghavendra+Shetty+Matrix+discrepancy+from+quantum+communication"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, R. Meka, Resolving Matrix Spencer conjecture up to poly-logarithmic rank, arXiv:2208.11286, 2022",
+          "year": 2022,
+          "description": "Proves the conjecture for matrices with $\\|A_i\\|_F^2 \\leq n/\\log^3 n$ (in particular rank at most $n/\\log^3 n$), with an efficient algorithm, using improved non-commutative Khintchine inequalities of Bandeira-Boedihardjo-van Handel.",
+          "link": "https://arxiv.org/abs/2208.11286"
+        },
+        {
+          "title": "D. Dadush, H. Jiang, V. Reis, A new framework for matrix discrepancy: integrality gap bounds for the Lovász Cap Set problem, 2022; A. Levy, H. Ramadas, T. Rothvoss, Deterministic discrepancy minimization via the multiplicative weight update method, 2017",
+          "year": 2022,
+          "description": "Prove the conjecture for block-diagonal matrices (block size $h = O(n/d)$), the DJR paper via covering estimates for relative entropy.",
+          "link": "https://scholar.google.com/scholar?q=Dadush+Jiang+Reis+matrix+discrepancy+integrality+gap+Lov%C3%A1sz+cap+set"
+        }
+      ],
+      "source": {
+        "title": "Hereditary discrepancy and factorization norms",
+        "authors": [
+          "AimPL (American Institute of Mathematics Problem Lists)"
+        ],
+        "editor": "Shashwat Garg",
+        "url": "http://aimpl.org/hereddiscrep/1/",
+        "page": "/hereddiscrep/1/",
+        "problemNumber": "1.35",
+        "workshop": "AIM workshop 'Hereditary discrepancy and factorization norms', Feb 29 - Mar 4, 2016, organized by Aleksandar Nikolov and Kunal Talwar"
+      },
+      "tags": [
+        "discrepancy",
+        "Matrix Spencer conjecture",
+        "operator norm",
+        "matrix concentration"
+      ],
+      "verificationNotes": "Verified on 2026-08-25. The conjecture is confirmed to be a recognized open problem attributed to Zouzias (2012) and Meka (2014), with the exact statement $\\mathrm{disc}(A_1,\\dots,A_n) \\leq C\\sqrt{n\\max(1,\\log(d/n))}$ as in arXiv:2410.17887 and arXiv:2208.11286. Matrix Chernoff / non-commutative Khintchine gives $O(\\sqrt{n\\log d})$, matching the page's '$O(\\sqrt{n\\log n})$' for $d = n$. Partial results verified: HRS 2022 (rank $O(\\sqrt{n})$), LRR 2017 and DJR 2022 (block-diagonal), BJM 2022/2023 (rank $\\leq n/\\log^3 n$, arXiv:2208.11286). The full conjecture remains open as of 2026.",
+      "generatedAt": "2026-08-25T14:46:29.000Z",
+      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
+      "statusDetails": "We can assume that the matrices are symmetric. Matrix Chernoff gives a bound of $O(\\sqrt{n\\log n})$. The conjecture itself remains open; partial progress: rank $O(\\sqrt{n})$ (Hopkins-Raghavendra-Shetty 2022), block-diagonal matrices (Levy-Ramadas-Rothvoss 2017; Dadush-Jiang-Reis 2022), rank at most $n/\\log^3 n$ (Bansal-Jiang-Meka 2023)."
+    }
+  ]
+}
