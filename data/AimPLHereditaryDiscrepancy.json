@@ -14,7 +14,28 @@
       "wordDescription": "The Komlós conjecture is one of the central open problems in combinatorial discrepancy. It asserts that vectors of Euclidean norm at most one can always be signed so that every coordinate of the signed sum stays within an absolute constant, no matter how many vectors there are or how high the dimension is. It strictly generalizes the Beck–Fiala conjecture (scale each element's incidence vector by $1/\\sqrt{t}$), and in the special case of normalized $\\pm 1$ vectors it recovers Spencer's theorem. The best known general bound is logarithmic: Banaszczyk's vector-balancing theorem gives $O(\\sqrt{\\log n})$, and with Gaussian-slice estimates of Barthe, Guédon, Mendelson and Naor this improves to $O(\\sqrt{\\log d})$ where $d$ is the dimension of the span of the vectors. The conjecture remains open despite decades of effort; the recent bound of Bansal and Jiang ($\\widetilde{O}(\\log^{1/4} n)$) is the first to go beyond the square root of a logarithm.",
       "mathematicalConditions": "For every $d, n \\geq 1$ and every $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, there exist signs $\\epsilon_1, \\dots, \\epsilon_n \\in \\{-1, 1\\}$ and an absolute constant $c$ (independent of $d$ and $n$) such that $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq c$.",
       "status": "partial progress",
-      "comments": [],
+      "comments": [
+        {
+          "id": "b6e479d9-f61d-482d-b777-db24801af422",
+          "author": {
+            "id": "376e807c-b10e-4377-98af-1712aecf5158",
+            "displayName": "Fizzy"
+          },
+          "body": "test  123",
+          "createdAt": "2026-09-01T15:43:38.947Z",
+          "updatedAt": "2026-09-01T15:43:49.500Z"
+        },
+        {
+          "id": "72371af7-01a7-4080-a8f0-7338e1f509f2",
+          "author": {
+            "id": "376e807c-b10e-4377-98af-1712aecf5158",
+            "displayName": "Fizzy"
+          },
+          "body": "test b",
+          "createdAt": "2026-09-01T15:43:46.817Z",
+          "updatedAt": null
+        }
+      ],
       "literature": [
         {
           "title": "J. Komlós, A generalization of a problem of Steinitz, Acta Mathematica Academiae Scientiarum Hungaricae 41(3-4):217-229, 1983",
