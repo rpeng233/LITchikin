@@ -22,11 +22,12 @@ uploads a selected JSON file to a server.
 
 ## Current catalogs
 
-- `LaplacianOpenProblems.json`: 12 open or sharpened problems on Laplacian
+- `LaplacianOpenProblems.json`: 16 open or sharpened problems on Laplacian
   solvers, entrywise guarantees, sparsification, dynamic electrical quantities,
-  and determinant computation for general integer-weighted graphs. Its catalog-
-  and record-level `resolutionAudit` fields preserve the search cutoff, query
-  families, checked anchors, confidence, and the precise remaining gap.
+  determinant computation, connection Laplacians, spectral gaps, and floating-
+  point models. Its catalog- and record-level `resolutionAudit` fields preserve
+  the search cutoff, query families, checked anchors, confidence, and the
+  precise remaining gap.
 - `SimonsF25ComplexityLinAlg.json`: the Complexity and Linear Algebra open
   problems catalog from the Simons Institute Fall 2025 program.
 
