@@ -1,0 +1,1110 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "permanent-estimation-open-problems",
+  "title": "Permanent Estimation",
+  "generatedAt": "2026-09-17T21:07:00Z",
+  "contentUpdatedAt": "2026-09-17T21:38:03Z",
+  "lastVerified": "2026-09-17",
+  "problemCount": 19,
+  "groups": {
+    "graphs": [
+      "lit:permanent-estimation-open-problems:fpras-general-graph-perfect-matchings",
+      "lit:permanent-estimation-open-problems:extend-dense-hafnian-fptas"
+    ],
+    "physics": [
+      "lit:permanent-estimation-open-problems:gaussian-permanent-average-case-hardness",
+      "lit:permanent-estimation-open-problems:sharpen-gaussian-permanent-anticoncentration",
+      "lit:permanent-estimation-open-problems:subexponential-corrected-bethe-permanent",
+      "lit:permanent-estimation-open-problems:unconditional-approximate-bosonsampling-hardness",
+      "lit:permanent-estimation-open-problems:unconditional-gaussian-bosonsampling-hardness"
+    ],
+    "original matrix permanent": [
+      "lit:permanent-estimation-open-problems:faster-nonnegative-permanent-fpras",
+      "lit:permanent-estimation-open-problems:deterministic-subexponential-permanent-approximation",
+      "lit:permanent-estimation-open-problems:deterministic-fptas-nonnegative-permanent",
+      "lit:permanent-estimation-open-problems:derandomize-gurvits-complex-permanent-estimator",
+      "lit:permanent-estimation-open-problems:refine-psd-permanent-approximation",
+      "lit:permanent-estimation-open-problems:sub-two-exact-dense-permanent",
+      "lit:permanent-estimation-open-problems:lower-biased-random-permanent-threshold",
+      "lit:permanent-estimation-open-problems:subexponential-scaling-based-permanent",
+      "lit:permanent-estimation-open-problems:stable-polynomial-coefficient-subexponential",
+      "lit:permanent-estimation-open-problems:improve-mixed-discriminant-approximation",
+      "lit:permanent-estimation-open-problems:improve-random-permanent-zero-free-radius",
+      "lit:permanent-estimation-open-problems:rnc-permanent-approximation"
+    ]
+  },
+  "problems": [
+    {
+      "recordId": "lit:permanent-estimation-open-problems:faster-nonnegative-permanent-fpras",
+      "problem": "Can the FPRAS for the permanent of a nonnegative matrix be made asymptotically faster?",
+      "wordDescription": "The permanent of a nonnegative matrix is the weighted counting version of bipartite perfect matching, and Jerrum–Sinclair–Vigoda established the foundational FPRAS. Improving its running time matters because this remains the canonical general-purpose relative-error algorithm for nonnegative permanents.",
+      "mathematicalConditions": "For A in Q_{>=0}^{n x n}, epsilon,delta in (0,1), require an estimate Q with Pr[(1-epsilon)per(A) <= Q <= (1+epsilon)per(A)] >= 1-delta. The 2026 benchmark is O(n^6 epsilon^{-2} log^5(n) log(2/delta)); a strict polynomial-exponent improvement is O(n^{6-eta} poly(log n, epsilon^{-1}, log(delta^{-1}))) for any constant eta>0.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "approximation",
+        "fpras",
+        "nonnegative-matrix"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Faster FPRAS for the Permanent via Restricted Poincaré Inequalities and Coupled Flows",
+          "year": 2026,
+          "description": "Reported O(n^6 log^5 n) Boolean-permanent FPRAS at fixed accuracy/confidence via restricted Poincare inequalities. Retained from the supplied catalog; the primary arXiv text could not be retrieved during this search.",
+          "link": "https://arxiv.org/abs/2608.26599"
+        },
+        {
+          "title": "Near-Optimal Parallel Approximate Counting via Sampling",
+          "year": 2026,
+          "description": "Gives nonadaptive and two-round annealing reductions, with RNC applications including monomer-dimer counting. Removes a counting bottleneck, but does not supply a general perfect-matching sampler.",
+          "link": "https://arxiv.org/abs/2604.01263"
+        },
+        {
+          "title": "Accelerating Simulated Annealing for the Permanent and Combinatorial Counting Problems",
+          "year": 2008,
+          "description": "Improves annealing schedules and analysis, obtaining O(n^7 log^4 n) time for Boolean permanents at fixed accuracy and confidence; predecessor to the 2026 speedup.",
+          "link": "https://doi.org/10.1137/050644033"
+        },
+        {
+          "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
+          "year": 2004,
+          "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the sequential randomized baseline.",
+          "link": "https://doi.org/10.1145/1008731.1008738"
+        },
+        {
+          "title": "Approximating the Permanent",
+          "year": 1989,
+          "description": "Foundational matching-chain analysis: polynomial-time approximate counting when near-perfect matchings are not too numerous relative to perfect matchings; includes dense instances.",
+          "link": "https://doi.org/10.1137/0218077"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:deterministic-subexponential-permanent-approximation",
+      "problem": "Can deterministic polynomial-time approximation of a nonnegative permanent beat the current subexponential factor?",
+      "wordDescription": "Deterministic permanent approximation historically lagged far behind the randomized FPRAS, with only exponential-factor guarantees for unrestricted inputs until 2026. The first subexponential-factor algorithm makes the remaining quantitative gap to relative approximation a central derandomization problem.",
+      "mathematicalConditions": "For arbitrary A in Q_{>=0}^{n x n}, the current deterministic polynomial-time factor is exp(O(n (log log n)^2 / log n)). A strict asymptotic improvement is any deterministic polynomial-time factor exp(o(n (log log n)^2 / log n)); the ultimate target is 1+epsilon in time poly(n, bit(A), epsilon^{-1}).",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "deterministic",
+        "nonnegative-matrix",
+        "approximation"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Subexponential Approximation of the Permanent in Deterministic Polynomial Time",
+          "year": 2026,
+          "description": "First deterministic polynomial-time exp(O(n (log log n)^2/log n))-factor approximation for unrestricted nonnegative rational matrices, using convex optimization and correlation decay.",
+          "link": "https://arxiv.org/abs/2609.10516"
+        },
+        {
+          "title": "A deterministic (1+epsilon)^n approximation for the permanent of a nonnegative matrix",
+          "year": 2026,
+          "description": "Gives a deterministic strongly polynomial (1+epsilon)^n-factor approximation for every fixed epsilon>0; this is not a relative-error FPTAS.",
+          "link": "https://arxiv.org/abs/2609.11049"
+        },
+        {
+          "title": "Structural Corrections to the Bethe Approximation of the Permanent",
+          "year": 2026,
+          "description": "Uses detectable near-isolated 2x2 blocks to obtain a corrected-Bethe (sqrt(2)-epsilon)^n approximation.",
+          "link": "https://arxiv.org/abs/2608.31061"
+        },
+        {
+          "title": "Beyond the Bethe Approximation of the Permanent",
+          "year": 2026,
+          "description": "Breaks the canonical Bethe exponential base with a deterministic c^n approximation for some c<sqrt(2).",
+          "link": "https://arxiv.org/abs/2608.28031"
+        },
+        {
+          "title": "A Tight Analysis of Bethe Approximation for Permanent",
+          "year": 2018,
+          "description": "Proves the tight sqrt(2)^n comparison between the permanent and its polynomial-time Bethe approximation. Preprint 2018; FOCS 2019; journal version 2025.",
+          "link": "https://arxiv.org/abs/1811.02933"
+        },
+        {
+          "title": "Bounds on the permanent and some applications",
+          "year": 2014,
+          "description": "Improves deterministic approximation through upper and lower bounds for doubly stochastic permanents; also proves the asymptotic lower matching conjecture.",
+          "link": "https://arxiv.org/abs/1408.0976"
+        },
+        {
+          "title": "A Deterministic Strongly Polynomial Algorithm for Matrix Scaling and Approximate Permanents",
+          "year": 2000,
+          "description": "Develops strongly polynomial matrix scaling and an e^n-factor permanent approximation; the foundational scaling-based deterministic algorithm.",
+          "link": "https://doi.org/10.1007/s004930070007"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:deterministic-fptas-nonnegative-permanent",
+      "problem": "Is there a deterministic FPTAS for the permanent of every nonnegative matrix?",
+      "wordDescription": "The randomized relative-approximation problem was solved by Jerrum–Sinclair–Vigoda, but deterministic relative approximation remains open on unrestricted nonnegative matrices. Dense well-conditioned matrices now admit deterministic FPTASes, making extension beyond those structural assumptions a natural next frontier.",
+      "mathematicalConditions": "For every rational A in Q_{>=0}^{n x n} and epsilon in (0,1), output Q deterministically with (1-epsilon)per(A) <= Q <= (1+epsilon)per(A) in time poly(n, bit(A), epsilon^{-1}). Any extension of a deterministic FPTAS to a strictly larger unrestricted class than fixed-margin dense supports is progress; solving the stated condition for all A is the target.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "deterministic",
+        "fptas",
+        "nonnegative-matrix"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Diffuse Gaussian Truncation For Deterministic Approximate Counting",
+          "year": 2026,
+          "description": "Gives deterministic FPTASes for permanents and hafnians with fixed positive weight bounds and minimum-degree margin above one half; does not cover arbitrary supports.",
+          "link": "https://arxiv.org/abs/2609.04079"
+        },
+        {
+          "title": "Subexponential Approximation of the Permanent in Deterministic Polynomial Time",
+          "year": 2026,
+          "description": "First deterministic polynomial-time exp(O(n (log log n)^2/log n))-factor approximation for unrestricted nonnegative rational matrices, using convex optimization and correlation decay.",
+          "link": "https://arxiv.org/abs/2609.10516"
+        },
+        {
+          "title": "A deterministic (1+epsilon)^n approximation for the permanent of a nonnegative matrix",
+          "year": 2026,
+          "description": "Gives a deterministic strongly polynomial (1+epsilon)^n-factor approximation for every fixed epsilon>0; this is not a relative-error FPTAS.",
+          "link": "https://arxiv.org/abs/2609.11049"
+        },
+        {
+          "title": "Approximating permanents and hafnians",
+          "year": 2016,
+          "description": "Gives deterministic quasipolynomial relative approximation for permanents and hafnians with entries bounded between fixed positive constants; a predecessor to dense FPTASes.",
+          "link": "https://arxiv.org/abs/1601.07518"
+        },
+        {
+          "title": "Computing the permanent of (some) complex matrices",
+          "year": 2014,
+          "description": "Introduces zero-free interpolation for deterministic relative approximation in quasipolynomial time when every entry lies sufficiently close to 1; not an unrestricted algorithm.",
+          "link": "https://arxiv.org/abs/1405.1303"
+        },
+        {
+          "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
+          "year": 2004,
+          "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the sequential randomized baseline.",
+          "link": "https://doi.org/10.1145/1008731.1008738"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:derandomize-gurvits-complex-permanent-estimator",
+      "problem": "Can Gurvits's additive permanent estimator be derandomized for arbitrary complex matrices?",
+      "wordDescription": "Gurvits's estimator gives a fast additive approximation for arbitrary real or complex matrices, unlike the nonnegative-only multiplicative algorithms, and therefore plays a basic role in linear-optical complexity. Aaronson and Hance derandomized related estimators for nonnegative inputs but left the arbitrary-matrix case open.",
+      "mathematicalConditions": "Given A in C^{n x n} and epsilon in (0,1), seek a deterministic algorithm running in poly(n, bit(A), epsilon^{-1}) time that outputs Q satisfying |Q-per(A)| <= epsilon ||A||_2^n, where ||A||_2 is the operator norm. Matching the randomized Gurvits guarantee deterministically is the minimum qualitative improvement.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "stagnant-5",
+        "permanent",
+        "complex-matrix",
+        "derandomization",
+        "additive-approximation"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Generalizing and Derandomizing Gurvits's Approximation Algorithm for the Permanent",
+          "year": 2014,
+          "description": "Derandomizes variants for nonnegative matrices and explicitly leaves derandomization for general matrices open.",
+          "link": "https://arxiv.org/abs/1212.0025"
+        },
+        {
+          "title": "Computing the permanent of (some) complex matrices",
+          "year": 2014,
+          "description": "Derandomizes relative approximation only for complex matrices near the all-ones matrix via zero-free interpolation; does not match Gurvits’s additive guarantee on arbitrary inputs.",
+          "link": "https://arxiv.org/abs/1405.1303"
+        },
+        {
+          "title": "The Computational Complexity of Linear Optics",
+          "year": 2013,
+          "description": "Introduces BosonSampling and the Gaussian-permanent hardness and anti-concentration conjectures underlying approximate-sampling hardness. STOC 2011; full journal version 2013.",
+          "link": "https://theoryofcomputing.org/articles/v009a004/"
+        },
+        {
+          "title": "On the Complexity of Mixed Discriminants and Related Problems",
+          "year": 2005,
+          "description": "Presents additive permanent approximation in the mixed-discriminant framework; a primary source for Gurvits-style randomized estimation, rather than its general derandomization.",
+          "link": "https://doi.org/10.1007/11549345_39"
+        },
+        {
+          "title": "Classical deterministic complexity of Edmonds' problem and Quantum Entanglement",
+          "year": 2003,
+          "description": "Introduces the quantum-permanent and operator-scaling framework and randomized additive permanent estimation; foundational background for Gurvits-style approximation and its derandomization.",
+          "link": "https://arxiv.org/abs/quant-ph/0303055"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:refine-psd-permanent-approximation",
+      "problem": "Can the optimal exponential-rate approximation for PSD permanents be sharpened below its leading exponential factor?",
+      "wordDescription": "Positive-semidefinite permanents arise from Gaussian moment and quantum-optical formulations and behave differently from entrywise-nonnegative permanents because cancellation can be present in the entries. In 2026 the optimal deterministic exponential constant was settled at the Euler–Mascheroni constant gamma, leaving only lower-order-factor refinements unless complexity assumptions are changed.",
+      "mathematicalConditions": "For Hermitian A succeq 0, the current deterministic polynomial-time guarantee is exp((gamma+o(1))n), with matching hardness against exp((gamma-epsilon)n) for every fixed epsilon>0 under P!=NP. A genuine asymptotic refinement not excluded by that hardness is a polynomial-time factor exp(gamma n - omega(1)), for example exp(gamma n)/n^c for some c>0.",
+      "comments": [],
+      "status": "open-refinement",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "psd",
+        "approximation",
+        "complexity"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Optimal e^{(gamma+o(1))n}-Approximation of the Permanent of Positive Semidefinite Matrices",
+          "year": 2026,
+          "description": "Determines the optimal exponential approximation rate for deterministic polynomial-time algorithms, up to lower-order terms.",
+          "link": "https://arxiv.org/abs/2605.21946"
+        },
+        {
+          "title": "On approximability of the Permanent of PSD matrices",
+          "year": 2024,
+          "description": "Improves the algorithmic factor to e^{(0.9999+gamma)n} and proves NP-hardness below e^{(gamma-epsilon)n}; supplies the lower bound matched in 2026. STOC 2025.",
+          "link": "https://arxiv.org/abs/2404.10959"
+        },
+        {
+          "title": "Inapproximability of Positive Semidefinite Permanents and Quantum State Tomography",
+          "year": 2023,
+          "description": "Proves hardness of approximating PSD permanents through quantum-state tomography, ruling out a PTAS unless P=NP; an earlier hardness milestone.",
+          "link": "https://doi.org/10.1007/s00453-023-01169-1"
+        },
+        {
+          "title": "Maximizing Products of Linear Forms, and The Permanent of Positive Semidefinite Matrices",
+          "year": 2021,
+          "description": "Relates PSD permanents to products of linear forms over the complex sphere and obtains improved approximation certificates via convex relaxation and rounding.",
+          "link": "https://arxiv.org/abs/2002.04149"
+        },
+        {
+          "title": "Simply Exponential Approximation of the Permanent of Positive Semidefinite Matrices",
+          "year": 2017,
+          "description": "Gives a deterministic e^{(1+gamma)n}-factor convex-relaxation algorithm for Hermitian PSD permanents and establishes asymptotic tightness of that relaxation.",
+          "link": "https://arxiv.org/abs/1704.03486"
+        },
+        {
+          "title": "A quantum-inspired algorithm for estimating the permanent of positive semidefinite matrices",
+          "year": 2016,
+          "description": "Uses quantum-optical Gaussian representations for randomized PSD-permanent estimation, with polynomial-time guarantees for specified spectral regimes; not a general multiplicative FPRAS.",
+          "link": "https://arxiv.org/abs/1609.02416"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:fpras-general-graph-perfect-matchings",
+      "problem": "Is there an FPRAS for counting perfect matchings in arbitrary general graphs?",
+      "wordDescription": "For bipartite graphs the problem is exactly nonnegative 0-1 permanent estimation and has an FPRAS, but the analogous general-graph problem is the hafnian and remains unresolved. It is a long-standing test case for how far approximate counting by matching-chain methods extends beyond bipartite structure.",
+      "mathematicalConditions": "For every graph G=(V,E) with |V|=2n and epsilon in (0,1), seek a randomized algorithm running in poly(n, epsilon^{-1}) time that outputs Q with Pr[(1-epsilon)PM(G) <= Q <= (1+epsilon)PM(G)] >= 3/4, where PM(G) is the number of perfect matchings. Achieving this guarantee for all general graphs is the required improvement; the known JSV-style hole-weight chain is insufficient in general.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "stagnant-5",
+        "perfect-matching",
+        "hafnian",
+        "fpras",
+        "general-graph"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Diffuse Gaussian Truncation For Deterministic Approximate Counting",
+          "year": 2026,
+          "description": "Gives deterministic FPTASes for permanents and hafnians with fixed positive weight bounds and minimum-degree margin above one half; does not cover arbitrary supports.",
+          "link": "https://arxiv.org/abs/2609.04079"
+        },
+        {
+          "title": "Counting and Sampling Perfect Matchings in Regular Expanding Non-Bipartite Graphs",
+          "year": 2022,
+          "description": "Bounds the near-perfect/perfect matching ratio polynomially in regular strong expanders, enabling efficient matching-chain sampling and counting in this nonbipartite class.",
+          "link": "https://arxiv.org/abs/2103.08683"
+        },
+        {
+          "title": "On Counting Perfect Matchings in General Graphs",
+          "year": 2018,
+          "description": "Shows the natural JSV chain can mix torpidly in general and gives an FPRAS only for graphs sufficiently close to bipartite.",
+          "link": "https://arxiv.org/abs/1712.07504"
+        },
+        {
+          "title": "Approximating permanents and hafnians",
+          "year": 2016,
+          "description": "Gives quasipolynomial relative approximation for positive weighted hafnians; a restricted deterministic result, not an FPRAS for arbitrary unweighted graphs.",
+          "link": "https://arxiv.org/abs/1601.07518"
+        },
+        {
+          "title": "Hafnians, perfect matchings and Gaussian matrices",
+          "year": 2016,
+          "description": "Analyzes Barvinok’s hafnian estimator and obtains subexponential multiplicative error under expansion-type hypotheses; does not give relative approximation for arbitrary graphs.",
+          "link": "https://arxiv.org/abs/1409.3905"
+        },
+        {
+          "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
+          "year": 2004,
+          "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the sequential randomized baseline.",
+          "link": "https://doi.org/10.1145/1008731.1008738"
+        },
+        {
+          "title": "Approximating the Permanent",
+          "year": 1989,
+          "description": "Foundational matching-chain analysis: polynomial-time approximate counting when near-perfect matchings are not too numerous relative to perfect matchings; includes dense instances.",
+          "link": "https://doi.org/10.1137/0218077"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:extend-dense-hafnian-fptas",
+      "problem": "Can the deterministic dense-hafnian FPTAS be extended to the degree-half threshold or below?",
+      "wordDescription": "The hafnian is the general-graph analogue of the permanent and counts weighted perfect matchings in symmetric matrices. A 2026 deterministic FPTAS above the Dirac-type density threshold creates a concrete boundary whose sharpness is now algorithmically important.",
+      "mathematicalConditions": "Let A be an N x N symmetric nonnegative matrix, N even, with every nonzero entry in [theta,1] for fixed theta>0. The current FPTAS assumes minimum support-graph degree at least (1/2+gamma)N for fixed gamma>0; a strict improvement is an FPTAS when gamma=gamma_N -> 0, for example minimum degree at least N/2 + N^{1-eta} for some eta>0, with runtime poly(N, epsilon^{-1}).",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "hafnian",
+        "deterministic",
+        "fptas",
+        "dense-graph"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Diffuse Gaussian Truncation For Deterministic Approximate Counting",
+          "year": 2026,
+          "description": "Gives deterministic FPTASes for permanents and hafnians with fixed positive weight bounds and minimum-degree margin above one half; does not cover arbitrary supports.",
+          "link": "https://arxiv.org/abs/2609.04079"
+        },
+        {
+          "title": "Counting and Sampling Perfect Matchings in Regular Expanding Non-Bipartite Graphs",
+          "year": 2022,
+          "description": "Gives randomized efficient counting for regular strong expanders; an alternative structural regime, not a deterministic extension to the degree-half threshold.",
+          "link": "https://arxiv.org/abs/2103.08683"
+        },
+        {
+          "title": "Approximating permanents and hafnians",
+          "year": 2016,
+          "description": "Gives deterministic quasipolynomial relative approximation for permanents and hafnians with entries bounded between fixed positive constants; a predecessor to dense FPTASes.",
+          "link": "https://arxiv.org/abs/1601.07518"
+        },
+        {
+          "title": "Hafnians, perfect matchings and Gaussian matrices",
+          "year": 2016,
+          "description": "Analyzes Barvinok’s hafnian estimator and obtains subexponential multiplicative error under expansion-type hypotheses; does not give relative approximation for arbitrary graphs.",
+          "link": "https://arxiv.org/abs/1409.3905"
+        },
+        {
+          "title": "Entropy bounds for perfect matchings and Hamiltonian cycles",
+          "year": 2009,
+          "description": "Determines dense-graph matching counts up to exp(o(n)) through fractional-matching entropy; provides the Dirac-threshold asymptotic background, rather than an FPTAS.",
+          "link": "https://doi.org/10.1007/s00493-009-2366-9"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:sub-two-exact-dense-permanent",
+      "problem": "Can the exact permanent of an arbitrary dense matrix be computed in O((2-eta)^n poly(n)) time for some eta>0?",
+      "wordDescription": "Ryser- and Glynn-type inclusion–exclusion algorithms have kept the worst-case dense permanent at essentially n2^n arithmetic time for decades. Any reduction of the exponential base would be a fundamental exact-algorithm breakthrough for a canonical #P-complete function.",
+      "mathematicalConditions": "For an arbitrary n x n matrix A over a field or over integers of polynomial bit length, the benchmark is O(n 2^{n-1}) arithmetic operations. A strict exponential improvement is an exact algorithm using O((2-eta)^n poly(n)) arithmetic operations for any constant eta>0, with polynomial space if the claimed result also targets the standard space regime.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "stagnant-5",
+        "permanent",
+        "exact-algorithm",
+        "exponential-time"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Counting perfect matchings and Hamiltonian cycles faster",
+          "year": 2026,
+          "description": "Obtains 2^{n-Omega(sqrt(n))} time for polynomial-bit integer hafnians, hence n-by-n permanents. Corrects the older benchmark in this record; the fixed-base target remains open.",
+          "link": "https://arxiv.org/abs/2309.15422v2"
+        },
+        {
+          "title": "SUperman: Efficient Permanent Computation on GPUs",
+          "year": 2026,
+          "description": "Accelerates exact permanent computation on GPUs and clusters. Its Ryser/Glynn implementation benchmark should not be confused with the best theoretical polynomial-bit integer runtime.",
+          "link": "https://arxiv.org/abs/2502.16577"
+        },
+        {
+          "title": "Fast exact algorithms via the Matrix Tree Theorem",
+          "year": 2025,
+          "description": "Provides alternative polynomial-space exact counting algorithms using determinant identities and sieving, including Ryser-scale Boolean-permanent computation; not a fixed-base improvement.",
+          "link": "https://arxiv.org/abs/2512.08600"
+        },
+        {
+          "title": "Generalized Kakeya sets for polynomial evaluation and faster computation of fermionants",
+          "year": 2019,
+          "description": "Uses finite-field tabulation and generalized Kakeya sets to obtain a 2^{n-Omega(sqrt(n/log log n))} permanent algorithm for polynomial-bit integer inputs.",
+          "link": "https://doi.org/10.1007/s00453-018-0513-7"
+        },
+        {
+          "title": "Below All Subsets for Some Permutational Counting Problems",
+          "year": 2016,
+          "description": "Computes permanents of polynomial-bit integer matrices in 2^{n-Omega(sqrt(n/log n))} time; improves over 2^n without a constant exponential-base reduction.",
+          "link": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2016.17"
+        },
+        {
+          "title": "The permanent of a square matrix",
+          "year": 2010,
+          "description": "Gives permanent identities including the half-sized sign-sum formula underlying O(n 2^{n-1}) arithmetic evaluation in characteristic different from two.",
+          "link": "https://doi.org/10.1016/j.ejc.2010.01.010"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:gaussian-permanent-average-case-hardness",
+      "problem": "Can Gaussian permanent estimation be proved #P-hard at the robustness required for BosonSampling?",
+      "wordDescription": "Aaronson–Arkhipov reduced approximate BosonSampling hardness to average-case hardness of Gaussian permanent estimation, making this one of the central open problems in quantum advantage. Recent worst-to-average reductions greatly improved the tolerated additive error but still miss the conjectured scale.",
+      "mathematicalConditions": "The 2025 benchmark proves #P-hardness for typical BosonSampling output-probability estimation at additive error exp(-n log n - n - O(n^delta)) for every fixed delta>0. A strict improvement beyond all fixed-power losses is hardness at exp(-n log n - n - n^{o(1)}); the standard target is exp(-n log n - n - O(log n)).",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "gaussian",
+        "average-case-hardness",
+        "bosonsampling"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Anticoncentration of the Permanent in Ginibre Ensembles",
+          "year": 2026,
+          "description": "Resolves the complex Permanent Anticoncentration Conjecture and proves an O(n epsilon^2) small-ball bound after normalization.",
+          "link": "https://arxiv.org/abs/2607.20329"
+        },
+        {
+          "title": "Complexity-theoretic foundations of BosonSampling with a linear number of modes",
+          "year": 2026,
+          "description": "Extends hardness evidence to the experimentally relevant linear-mode, collision-rich regime.",
+          "link": "https://arxiv.org/abs/2312.00286"
+        },
+        {
+          "title": "Exponential improvements to the average-case hardness of BosonSampling",
+          "year": 2025,
+          "description": "Proves average-case probability-estimation hardness at exp(-n log n-n-O(n^delta)) error for every fixed delta>0; the inverse-polynomial relative-error robustness gap remains.",
+          "link": "https://arxiv.org/abs/2411.04566"
+        },
+        {
+          "title": "Noise and the frontier of quantum supremacy",
+          "year": 2021,
+          "description": "Strengthens robust average-case hardness for BosonSampling probabilities and identifies limitations of interpolation-based approaches; a predecessor to the 2025 improvement. FOCS 2021; journal 2022.",
+          "link": "https://arxiv.org/abs/2102.01738"
+        },
+        {
+          "title": "Approximating the Permanent of a Random Matrix with Vanishing Mean",
+          "year": 2017,
+          "description": "Shows tractability for biased random matrices with slowly vanishing mean; an algorithmic boundary that Gaussian average-case hardness reductions must respect.",
+          "link": "https://arxiv.org/abs/1711.09457"
+        },
+        {
+          "title": "The Computational Complexity of Linear Optics",
+          "year": 2013,
+          "description": "Introduces BosonSampling and the Gaussian-permanent hardness and anti-concentration conjectures underlying approximate-sampling hardness. STOC 2011; full journal version 2013.",
+          "link": "https://theoryofcomputing.org/articles/v009a004/"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:sharpen-gaussian-permanent-anticoncentration",
+      "problem": "Can Gaussian permanent anti-concentration be sharpened beyond the current polynomial dimension loss?",
+      "wordDescription": "Permanent anti-concentration was introduced as a key ingredient in the Aaronson–Arkhipov BosonSampling hardness framework. The original complex-Gaussian conjecture was resolved in 2026, leaving quantitative sharpening of the small-ball bound as the natural follow-up.",
+      "mathematicalConditions": "For G in C^{n x n} with i.i.d. standard complex Gaussians and W=per(G)/sqrt(n!), the 2026 bound is sup_z Pr[|W-z|<=epsilon] <= C n epsilon^2. A strict dimension-factor improvement is C n^{1-eta} epsilon^2 for some constant eta>0 uniformly in n, epsilon, and z; a dimension-free O(epsilon^2) bound is the strongest natural form.",
+      "comments": [],
+      "status": "open-refinement",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "gaussian",
+        "anticoncentration",
+        "bosonsampling"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Anticoncentration of the Permanent in Ginibre Ensembles",
+          "year": 2026,
+          "description": "Resolves the complex Permanent Anticoncentration Conjecture and proves an O(n epsilon^2) small-ball bound after normalization.",
+          "link": "https://arxiv.org/abs/2607.20329"
+        },
+        {
+          "title": "Approximating the Permanent of a Random Matrix with Polynomially Small Mean: Zeros and Universality",
+          "year": 2026,
+          "description": "Studies zeros of biased Gaussian permanent polynomials and establishes logarithmic-moment estimates; related probabilistic tools, not an improvement of the centered O(n epsilon^2) small-ball bound.",
+          "link": "https://arxiv.org/abs/2604.01367"
+        },
+        {
+          "title": "Exponential anticoncentration of the permanent",
+          "year": 2025,
+          "description": "Proves exponentially small point masses for permanents with independent anticoncentrated real entries. This discrete/atomic result does not give the Gaussian small-ball bound sought here.",
+          "link": "https://arxiv.org/abs/2509.22577"
+        },
+        {
+          "title": "Permanent of random matrices from representation theory: moments, numerics, concentration, and comments on hardness of boson-sampling",
+          "year": 2021,
+          "description": "Derives Gaussian and Haar-submatrix permanent moment identities and bounds; explains why moment information alone may not settle anti-concentration.",
+          "link": "https://arxiv.org/abs/2104.06423"
+        },
+        {
+          "title": "The Computational Complexity of Linear Optics",
+          "year": 2013,
+          "description": "Introduces BosonSampling and the Gaussian-permanent hardness and anti-concentration conjectures underlying approximate-sampling hardness. STOC 2011; full journal version 2013.",
+          "link": "https://theoryofcomputing.org/articles/v009a004/"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:lower-biased-random-permanent-threshold",
+      "problem": "Can random biased complex permanents be approximated efficiently at bias below n^{-1/3} up to polylogarithmic factors?",
+      "wordDescription": "Barvinok interpolation turns zero-free regions of per(zJ+W) into approximation algorithms, linking random permanent estimation to the geometry of its zeros. A 2026 result lowered the efficiently tractable mean to about n^{-1/3}, while most zeros lie nearer the n^{-1/2} scale.",
+      "mathematicalConditions": "For W with i.i.d. standard complex-Gaussian entries, current algorithms work when |z| >= ~Omega(n^{-1/3}), where ~ hides polylogarithmic factors. A strict exponent improvement is polynomial-time relative approximation with high probability for all |z| >= ~Omega(n^{-1/3-eta}) for some constant eta>0; the natural scale suggested by the bulk zeros is near n^{-1/2}.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "random-matrix",
+        "zero-free",
+        "interpolation"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Approximating the Permanent of a Random Matrix with Polynomially Small Mean: Zeros and Universality",
+          "year": 2026,
+          "description": "Places all zeros in a ~O(n^{-1/3}) disk and obtains efficient approximation at mean ~Omega(n^{-1/3}).",
+          "link": "https://arxiv.org/abs/2604.01367"
+        },
+        {
+          "title": "Approximating Permanent of Random Matrices with Vanishing Mean: Made Better and Simpler",
+          "year": 2021,
+          "description": "Lowers the tractable mean to inverse-polylogarithmic scale with deterministic quasipolynomial approximation and a PTAS; a direct algorithmic predecessor to polynomially small biases. SODA 2021.",
+          "link": "https://arxiv.org/abs/1911.11962"
+        },
+        {
+          "title": "Approximating the Permanent of a Random Matrix with Vanishing Mean",
+          "year": 2017,
+          "description": "Gives quasipolynomial approximation for random matrices with slowly vanishing mean using interpolation; establishes the biased-random-matrix approach. FOCS 2018.",
+          "link": "https://arxiv.org/abs/1711.09457"
+        },
+        {
+          "title": "Computing the permanent of (some) complex matrices",
+          "year": 2014,
+          "description": "Introduces zero-free interpolation for deterministic relative approximation in quasipolynomial time when every entry lies sufficiently close to 1; not an unrestricted algorithm.",
+          "link": "https://arxiv.org/abs/1405.1303"
+        },
+        {
+          "title": "The Computational Complexity of Linear Optics",
+          "year": 2013,
+          "description": "Introduces BosonSampling and the Gaussian-permanent hardness and anti-concentration conjectures underlying approximate-sampling hardness. STOC 2011; full journal version 2013.",
+          "link": "https://theoryofcomputing.org/articles/v009a004/"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:subexponential-corrected-bethe-permanent",
+      "problem": "Can a corrected Bethe-permanent method achieve subexponential worst-case error for every nonnegative matrix?",
+      "wordDescription": "The Bethe permanent is a tractable variational surrogate rooted in statistical physics and has long provided deterministic lower bounds and approximation guarantees. Recent structural corrections broke the tight (sqrt(2))^n guarantee of the uncorrected Bethe approximation, raising the question of whether Bethe-based corrections can reach the new subexponential deterministic frontier.",
+      "mathematicalConditions": "For every A in R_{>=0}^{n x n}, seek a deterministic polynomial-time estimator Q_B(A) whose computation starts from the Bethe variational optimum and adds polynomial-time computable correction terms, with per(A) <= Q_B(A) <= exp(o(n)) per(A). This would strictly improve the currently proved corrected-Bethe c^n guarantee for a constant c<sqrt(2).",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "bethe",
+        "variational",
+        "deterministic"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Structural Corrections to the Bethe Approximation of the Permanent",
+          "year": 2026,
+          "description": "Uses detectable near-isolated 2x2 blocks to obtain a corrected-Bethe (sqrt(2)-epsilon)^n approximation.",
+          "link": "https://arxiv.org/abs/2608.31061"
+        },
+        {
+          "title": "Beyond the Bethe Approximation of the Permanent",
+          "year": 2026,
+          "description": "Breaks the canonical Bethe exponential base with a deterministic c^n approximation for some c<sqrt(2).",
+          "link": "https://arxiv.org/abs/2608.28031"
+        },
+        {
+          "title": "Optimal girth-dependent bounds for the Bethe approximation of the permanent",
+          "year": 2026,
+          "description": "Proves the tight factor 2^{2n/g} when the support graph has girth at least g.",
+          "link": "https://arxiv.org/abs/2609.02017"
+        },
+        {
+          "title": "Subexponential Approximation of the Permanent in Deterministic Polynomial Time",
+          "year": 2026,
+          "description": "Achieves unrestricted subexponential approximation by convex optimization and correlation decay; supplies a comparison target, without establishing the specific corrected-Bethe framework in this entry.",
+          "link": "https://arxiv.org/abs/2609.10516"
+        },
+        {
+          "title": "Degree-M Bethe and Sinkhorn Permanent Based Bounds on the Permanent of a Non-negative Matrix",
+          "year": 2024,
+          "description": "Proves finite-cover Bethe and scaled-Sinkhorn bounds converging to their limiting guarantees; relevant to correction hierarchies, without an unrestricted subexponential algorithm.",
+          "link": "https://arxiv.org/abs/2306.02280"
+        },
+        {
+          "title": "The Bethe and Sinkhorn Permanents of Low Rank Matrices and Implications for Profile Maximum Likelihood",
+          "year": 2021,
+          "description": "Obtains exp(O(k log(N/k))) approximation bounds for Bethe and scaled Sinkhorn permanents at nonnegative rank k; gives stronger guarantees under low-rank structure.",
+          "link": "https://proceedings.mlr.press/v134/anari21a.html"
+        },
+        {
+          "title": "A Tight Analysis of Bethe Approximation for Permanent",
+          "year": 2018,
+          "description": "Proves the tight sqrt(2)^n comparison between the permanent and its polynomial-time Bethe approximation. Preprint 2018; FOCS 2019; journal version 2025.",
+          "link": "https://arxiv.org/abs/1811.02933"
+        },
+        {
+          "title": "Bounds on the permanent and some applications",
+          "year": 2014,
+          "description": "Improves deterministic approximation through upper and lower bounds for doubly stochastic permanents; also proves the asymptotic lower matching conjecture.",
+          "link": "https://arxiv.org/abs/1408.0976"
+        },
+        {
+          "title": "The Bethe Permanent of a Non-Negative Matrix",
+          "year": 2013,
+          "description": "Establishes convexity, efficient computation, and graph-cover interpretations of the Bethe permanent; foundational variational and combinatorial background for correction methods.",
+          "link": "https://arxiv.org/abs/1107.4196"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:subexponential-scaling-based-permanent",
+      "problem": "Can matrix scaling alone be upgraded to a subexponential-factor permanent approximation on all nonnegative matrices?",
+      "wordDescription": "Matrix scaling and capacity are among the earliest convex-analytic routes to deterministic permanent bounds, generalizing the van der Waerden inequality. Their simplicity and strong polynomial-time behavior make it important to understand whether a scaling-derived correction can match modern subexponential approximation guarantees.",
+      "mathematicalConditions": "Given A in Q_{>=0}^{n x n}, compute a Sinkhorn scaling A=D_1 B D_2 with B doubly stochastic whenever such scaling exists, handling reducible cases by the usual decomposition. A strict target is a deterministic poly(n,bit(A))-time estimator computed from the scaling data and polynomial-time corrections that satisfies per(A) <= Q(A) <= exp(o(n)) per(A) for every A.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "matrix-scaling",
+        "sinkhorn",
+        "capacity"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Unique Minimizers for Permanents, Mixed Discriminants, and Log-concave Polynomials",
+          "year": 2026,
+          "description": "Extends unique-minimizer results to near-doubly-stochastic marginals and Lorentzian polynomials. Structural progress posted September 17, not a new unrestricted approximation-factor algorithm.",
+          "link": "https://eccc.weizmann.ac.il/report/2026/191/"
+        },
+        {
+          "title": "Subexponential Approximation of the Permanent in Deterministic Polynomial Time",
+          "year": 2026,
+          "description": "Achieves the unrestricted subexponential target using convex optimization and correlation decay. Whether this qualifies as scaling-only depends on formalizing the allowed corrections.",
+          "link": "https://arxiv.org/abs/2609.10516"
+        },
+        {
+          "title": "Degree-M Bethe and Sinkhorn Permanent Based Bounds on the Permanent of a Non-negative Matrix",
+          "year": 2024,
+          "description": "Proves finite-cover Bethe and scaled-Sinkhorn bounds converging to their limiting guarantees; relevant to correction hierarchies, without an unrestricted subexponential algorithm.",
+          "link": "https://arxiv.org/abs/2306.02280"
+        },
+        {
+          "title": "The Bethe and Sinkhorn Permanents of Low Rank Matrices and Implications for Profile Maximum Likelihood",
+          "year": 2021,
+          "description": "Obtains exp(O(k log(N/k))) approximation bounds for Bethe and scaled Sinkhorn permanents at nonnegative rank k; gives stronger guarantees under low-rank structure.",
+          "link": "https://proceedings.mlr.press/v134/anari21a.html"
+        },
+        {
+          "title": "Capacity Lower Bounds via Productization",
+          "year": 2020,
+          "description": "Sharpens capacity lower bounds from gradient data and develops scaling for real-stable polynomials; improves analytic tools rather than proving unrestricted subexponential coefficient approximation. STOC 2021.",
+          "link": "https://arxiv.org/abs/2007.08390"
+        },
+        {
+          "title": "Van der Waerden/Schrijver-Valiant like Conjectures and Stable (aka Hyperbolic) Homogeneous Polynomials: One Theorem for all",
+          "year": 2008,
+          "description": "Proves coefficient-versus-capacity inequalities for homogeneous stable polynomials, unifying permanent and mixed-discriminant lower bounds; the generic exponential-factor baseline.",
+          "link": "https://arxiv.org/abs/0711.3496"
+        },
+        {
+          "title": "A deterministic polynomial-time algorithm for approximating mixed discriminant and mixed volume",
+          "year": 2000,
+          "description": "Develops generalized scaling/capacity methods that include permanent-type bounds.",
+          "link": "https://doi.org/10.1145/335305.335311"
+        },
+        {
+          "title": "A Deterministic Strongly Polynomial Algorithm for Matrix Scaling and Approximate Permanents",
+          "year": 2000,
+          "description": "Develops strongly polynomial matrix scaling and an e^n-factor permanent approximation; the foundational scaling-based deterministic algorithm.",
+          "link": "https://doi.org/10.1007/s004930070007"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:stable-polynomial-coefficient-subexponential",
+      "problem": "Can coefficients of general nonnegative real-stable polynomials be deterministically approximated within a subexponential factor?",
+      "wordDescription": "Gurvits-style capacity arguments recast permanent inequalities as coefficient bounds for stable and hyperbolic polynomials, opening a broad generalization of permanent estimation. Better generic coefficient approximation would transfer permanent techniques to matroidal, partition-function, and convex-geometric counting settings.",
+      "mathematicalConditions": "Let p in Q[x_1,...,x_m] be homogeneous of degree n, real stable, and have nonnegative coefficients, given by a polynomial-time evaluation oracle together with a multi-index alpha in Z_{>=0}^m of |alpha|=n and c_alpha=[x^alpha]p>0. Seek a deterministic poly(input size)-time estimate Q with c_alpha <= Q <= exp(o(n)) c_alpha; any exp(o(n)) general guarantee is a qualitative improvement over generic exp(Theta(n))-scale capacity bounds.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "stable-polynomial",
+        "coefficient-estimation",
+        "capacity",
+        "deterministic"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Unique Minimizers for Permanents, Mixed Discriminants, and Log-concave Polynomials",
+          "year": 2026,
+          "description": "Extends unique-minimizer results to near-doubly-stochastic marginals and Lorentzian polynomials. Structural progress posted September 17, not a new unrestricted approximation-factor algorithm.",
+          "link": "https://eccc.weizmann.ac.il/report/2026/191/"
+        },
+        {
+          "title": "Counting Matchings via Capacity Preserving Operators",
+          "year": 2021,
+          "description": "Provides tight capacity-preservation bounds for real-stability-preserving operators and applies them to matching inequalities; organizes the differential-operator approach to coefficient estimation.",
+          "link": "https://arxiv.org/abs/1804.04351"
+        },
+        {
+          "title": "Capacity Lower Bounds via Productization",
+          "year": 2020,
+          "description": "Sharpens capacity lower bounds from gradient data and develops scaling for real-stable polynomials; improves analytic tools rather than proving unrestricted subexponential coefficient approximation. STOC 2021.",
+          "link": "https://arxiv.org/abs/2007.08390"
+        },
+        {
+          "title": "A Generalization of Permanent Inequalities and Applications in Counting and Optimization",
+          "year": 2017,
+          "description": "Extends permanent inequalities to coefficient sums of stable polynomials and derives deterministic counting approximations, including nonmultilinear generalizations.",
+          "link": "https://arxiv.org/abs/1702.02937"
+        },
+        {
+          "title": "Van der Waerden/Schrijver-Valiant like Conjectures and Stable (aka Hyperbolic) Homogeneous Polynomials: One Theorem for all",
+          "year": 2008,
+          "description": "Proves coefficient-versus-capacity inequalities for homogeneous stable polynomials, unifying permanent and mixed-discriminant lower bounds; the generic exponential-factor baseline.",
+          "link": "https://arxiv.org/abs/0711.3496"
+        },
+        {
+          "title": "A deterministic polynomial-time algorithm for approximating mixed discriminant and mixed volume",
+          "year": 2000,
+          "description": "Develops generalized scaling/capacity methods that include permanent-type bounds.",
+          "link": "https://doi.org/10.1145/335305.335311"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:improve-mixed-discriminant-approximation",
+      "problem": "Can the approximation factor for mixed discriminants of arbitrary PSD matrices be improved?",
+      "wordDescription": "Mixed discriminants generalize permanents from diagonal matrices to tuples of positive-semidefinite matrices and arise in convex geometry and determinantal counting. Unlike the permanent, no JSV-type FPRAS is known, and the best unrestricted exponential-factor bounds are decades old.",
+      "mathematicalConditions": "For PSD matrices A_1,...,A_n in Q^{n x n}, let D(A_1,...,A_n) be their mixed discriminant. The classical randomized polynomial-time factor is c^n with c=2 e^{gamma-1}≈1.31, while the deterministic factor is e^n; a strict randomized exponential-base improvement is (c-eta)^n for any constant eta>0, and an FPRAS would output a (1±epsilon) estimate in poly(n,bit(A_i),epsilon^{-1}) time.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "stagnant-5",
+        "mixed-discriminant",
+        "psd",
+        "approximation"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Unique Minimizers for Permanents, Mixed Discriminants, and Log-concave Polynomials",
+          "year": 2026,
+          "description": "Extends unique-minimizer results to near-doubly-stochastic marginals and Lorentzian polynomials. Structural progress posted September 17, not a new unrestricted approximation-factor algorithm.",
+          "link": "https://eccc.weizmann.ac.il/report/2026/191/"
+        },
+        {
+          "title": "Stability and complexity of mixed discriminants",
+          "year": 2020,
+          "description": "Gives quasipolynomial relative approximation for PSD tuples near identity and structured doubly stochastic tuples; records unrestricted exponential-factor benchmarks. Preprint 2018; Mathematics of Computation 2020.",
+          "link": "https://arxiv.org/abs/1806.05105"
+        },
+        {
+          "title": "Van der Waerden/Schrijver-Valiant like Conjectures and Stable (aka Hyperbolic) Homogeneous Polynomials: One Theorem for all",
+          "year": 2008,
+          "description": "Proves coefficient-versus-capacity inequalities for homogeneous stable polynomials, unifying permanent and mixed-discriminant lower bounds; the generic exponential-factor baseline.",
+          "link": "https://arxiv.org/abs/0711.3496"
+        },
+        {
+          "title": "On the Complexity of Mixed Discriminants and Related Problems",
+          "year": 2005,
+          "description": "Studies mixed-discriminant complexity, including hardness for rank-two PSD inputs, and permanent approximation methods; a foundational source for the limitations of algebraic generalizations.",
+          "link": "https://doi.org/10.1007/11549345_39"
+        },
+        {
+          "title": "A deterministic polynomial-time algorithm for approximating mixed discriminant and mixed volume",
+          "year": 2000,
+          "description": "Develops generalized scaling/capacity methods that include permanent-type bounds.",
+          "link": "https://doi.org/10.1145/335305.335311"
+        },
+        {
+          "title": "Polynomial Time Algorithms to Approximate Permanents and Mixed Discriminants Within a Simply Exponential Factor",
+          "year": 1999,
+          "description": "Gives the classical randomized c^n approximation framework for PSD mixed discriminants.",
+          "link": "https://doi.org/10.1002/(SICI)1098-2418(1999010)14:1%3C29::AID-RSA2%3E3.0.CO;2-X"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:unconditional-approximate-bosonsampling-hardness",
+      "problem": "Can approximate BosonSampling hardness be proved without an unproved permanent average-case hardness conjecture?",
+      "wordDescription": "BosonSampling was proposed as a route to quantum advantage whose output probabilities are squared permanents of random submatrices. The complexity argument has progressively become robust to collisions and realistic mode counts, but a fully assumption-minimal approximate-sampling hardness theorem still hinges on average-case permanent hardness.",
+      "mathematicalConditions": "For n photons in m=poly(n) modes with a Haar-random interferometer, prove that no classical randomized poly(n)-time algorithm samples from a distribution within total-variation distance 1/poly(n) of ideal BosonSampling on a 1-o(1) fraction of interferometers unless the Polynomial Hierarchy collapses, using no unproved average-case permanent-hardness conjecture. Any theorem replacing the remaining conjectural permanent-estimation assumption by a standard complexity assumption is a qualitative improvement.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "bosonsampling",
+        "quantum-advantage",
+        "sampling-hardness",
+        "permanent"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Anticoncentration of the Permanent in Ginibre Ensembles",
+          "year": 2026,
+          "description": "Resolves the complex Permanent Anticoncentration Conjecture and proves an O(n epsilon^2) small-ball bound after normalization.",
+          "link": "https://arxiv.org/abs/2607.20329"
+        },
+        {
+          "title": "Complexity-theoretic foundations of BosonSampling with a linear number of modes",
+          "year": 2026,
+          "description": "Extends hardness evidence to the experimentally relevant linear-mode, collision-rich regime.",
+          "link": "https://arxiv.org/abs/2312.00286"
+        },
+        {
+          "title": "On computational complexity and average-case hardness of shallow-depth boson sampling",
+          "year": 2026,
+          "description": "Develops average-case hardness results for shallow-depth BosonSampling and Gaussian Boson Sampling.",
+          "link": "https://arxiv.org/abs/2405.01786"
+        },
+        {
+          "title": "Exponential improvements to the average-case hardness of BosonSampling",
+          "year": 2025,
+          "description": "Improves robust average-case probability hardness and proves a conditional multiplicative-error sampling result; does not establish the total-variation hardness target stated here.",
+          "link": "https://arxiv.org/abs/2411.04566"
+        },
+        {
+          "title": "Noise and the frontier of quantum supremacy",
+          "year": 2021,
+          "description": "Strengthens robust average-case hardness for BosonSampling probabilities and identifies limitations of interpolation-based approaches; a predecessor to the 2025 improvement. FOCS 2021; journal 2022.",
+          "link": "https://arxiv.org/abs/2102.01738"
+        },
+        {
+          "title": "The Computational Complexity of Linear Optics",
+          "year": 2013,
+          "description": "Introduces BosonSampling and the Gaussian-permanent hardness and anti-concentration conjectures underlying approximate-sampling hardness. STOC 2011; full journal version 2013.",
+          "link": "https://theoryofcomputing.org/articles/v009a004/"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:unconditional-gaussian-bosonsampling-hardness",
+      "problem": "Can approximate Gaussian Boson Sampling hardness be proved in realistic regimes without extra average-case conjectures?",
+      "wordDescription": "Gaussian Boson Sampling replaces permanents by hafnians and is widely used in photonic quantum-advantage proposals. Recent work extends hardness evidence to shallow and saturated regimes, but a clean approximate-sampling hardness theorem under only standard complexity assumptions remains a central target.",
+      "mathematicalConditions": "Consider zero-displacement Gaussian Boson Sampling with M=Theta(N) modes and expected detected photon number Theta(N), with squeezing parameters bounded by constants away from singular limits. Prove that no classical randomized poly(N)-time algorithm samples within total-variation distance 1/poly(N) of the ideal output distribution on a 1-o(1) fraction of random interferometers unless the Polynomial Hierarchy collapses, without an additional average-case hafnian/permanent hardness conjecture.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "gaussian-bosonsampling",
+        "hafnian",
+        "quantum-advantage",
+        "sampling-hardness"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "On computational complexity and average-case hardness of shallow-depth boson sampling",
+          "year": 2026,
+          "description": "Develops average-case hardness results for shallow-depth BosonSampling and Gaussian Boson Sampling.",
+          "link": "https://arxiv.org/abs/2405.01786"
+        },
+        {
+          "title": "Complexity-theoretic foundations of BosonSampling with a linear number of modes",
+          "year": 2026,
+          "description": "Extends worst-to-average hardness evidence to saturated linear-mode BosonSampling and a Gaussian variant; this is not conjecture-free approximate-sampling hardness.",
+          "link": "https://arxiv.org/abs/2312.00286"
+        },
+        {
+          "title": "Simulating Gaussian boson sampling on graphs in polynomial time",
+          "year": 2026,
+          "description": "Gives polynomial-time classical sampling for distributions used in graphical GBS applications; delineates a tractable variant, not generic Haar-interferometer GBS. Revised June 2026.",
+          "link": "https://arxiv.org/abs/2511.16558v2"
+        },
+        {
+          "title": "Sufficient conditions for hardness of lossy Gaussian boson sampling",
+          "year": 2025,
+          "description": "Transfers ideal-GBS complexity evidence to specified low-loss regimes and bounds statistical distance under loss; does not remove ideal-model average-case conjectures.",
+          "link": "https://arxiv.org/abs/2511.07853"
+        },
+        {
+          "title": "Transition of Anticoncentration in Gaussian Boson Sampling",
+          "year": 2025,
+          "description": "Shows that second-moment anti-concentration depends on the number of squeezed modes relative to detected photons; constrains which GBS regimes support hardness arguments.",
+          "link": "https://arxiv.org/abs/2312.08433"
+        },
+        {
+          "title": "The Complexity of Bipartite Gaussian Boson Sampling",
+          "year": 2021,
+          "description": "Proves conditional approximate-GBS hardness in the quadratic-mode regime using permanent-encoded probabilities, and treats limited collisions; retains permanent-hardness assumptions.",
+          "link": "https://arxiv.org/abs/2110.06964"
+        },
+        {
+          "title": "Gaussian Boson Sampling",
+          "year": 2017,
+          "description": "Introduces squeezed-state Gaussian Boson Sampling and hafnian output probabilities; the foundational link between hafnian estimation and photonic sampling.",
+          "link": "https://doi.org/10.1103/PhysRevLett.119.170501"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:improve-random-permanent-zero-free-radius",
+      "problem": "Can the zero-free radius for random permanent polynomials be pushed below n^{-1/3}?",
+      "wordDescription": "Barvinok interpolation reduces permanent approximation to locating zeros of the polynomial z -> per(zJ+W). The 2026 n^{-1/3} all-zero bound is algorithmically decisive for biased random matrices, while most zeros appearing near n^{-1/2} suggest room for a sharper extremal-zero theorem.",
+      "mathematicalConditions": "For W in C^{n x n} with i.i.d. standard complex Gaussians, the current high-probability statement places every zero of p_W(z)=per(zJ+W) in |z|<=~O(n^{-1/3}). A strict exponent improvement is a high-probability bound max{ |z| : p_W(z)=0 } <= ~O(n^{-1/3-eta}) for any constant eta>0; reaching n^{-1/2+o(1)} would match the scale of most zeros up to subpolynomial factors.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "core-18",
+        "permanent",
+        "zero-free",
+        "random-matrix",
+        "interpolation"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Approximating the Permanent of a Random Matrix with Polynomially Small Mean: Zeros and Universality",
+          "year": 2026,
+          "description": "Places all zeros in a ~O(n^{-1/3}) disk and obtains efficient approximation at mean ~Omega(n^{-1/3}).",
+          "link": "https://arxiv.org/abs/2604.01367"
+        },
+        {
+          "title": "Approximating Permanent of Random Matrices with Vanishing Mean: Made Better and Simpler",
+          "year": 2021,
+          "description": "Provides improved approximation at inverse-polylogarithmic mean. An algorithmic comparison point; does not establish the later all-zero n^{-1/3} disk bound.",
+          "link": "https://arxiv.org/abs/1911.11962"
+        },
+        {
+          "title": "Approximating the Permanent of a Random Matrix with Vanishing Mean",
+          "year": 2017,
+          "description": "Gives quasipolynomial approximation for random matrices with slowly vanishing mean using interpolation; establishes the biased-random-matrix approach. FOCS 2018.",
+          "link": "https://arxiv.org/abs/1711.09457"
+        },
+        {
+          "title": "Approximating permanents and hafnians",
+          "year": 2016,
+          "description": "Develops zero-free neighborhoods and interpolation for positive-entry permanents and hafnians; methodological background, not a random-Gaussian extremal-zero theorem.",
+          "link": "https://arxiv.org/abs/1601.07518"
+        },
+        {
+          "title": "Computing the permanent of (some) complex matrices",
+          "year": 2014,
+          "description": "Introduces zero-free interpolation for deterministic relative approximation in quasipolynomial time when every entry lies sufficiently close to 1; not an unrestricted algorithm.",
+          "link": "https://arxiv.org/abs/1405.1303"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:rnc-permanent-approximation",
+      "problem": "Is there an RNC algorithm for approximate permanent computation or sampling bipartite perfect matchings?",
+      "wordDescription": "Sequential randomized polynomial-time algorithms can approximately count bipartite perfect matchings, but efficient parallelization has remained open for decades. This is notable because it may separate an efficiently solvable counting problem from the highly parallelizable randomized class RNC.",
+      "mathematicalConditions": "For a bipartite graph G on 2n vertices and epsilon>=1/poly(n), seek a randomized parallel algorithm with depth log^{O(1)}(n/epsilon), poly(n,epsilon^{-1}) processors, and success probability at least 2/3 that outputs a (1±epsilon) estimate of PM(G), equivalently the permanent of its 0-1 bipartite adjacency matrix. An equivalent progress target is an RNC sampler within total-variation distance epsilon of the uniform distribution on perfect matchings.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-17",
+      "tags": [
+        "stagnant-5",
+        "permanent",
+        "parallel-algorithms",
+        "rnc",
+        "perfect-matching"
+      ],
+      "generatedAt": "2026-09-17T21:07:00Z",
+      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "literature": [
+        {
+          "title": "Near-Optimal Parallel Approximate Counting via Sampling",
+          "year": 2026,
+          "description": "Gives nonadaptive and two-round annealing reductions, with RNC applications including monomer-dimer counting. Removes a counting bottleneck, but does not supply a general perfect-matching sampler.",
+          "link": "https://arxiv.org/abs/2604.01263"
+        },
+        {
+          "title": "Efficient Parallel Ising Samplers via Localization Schemes",
+          "year": 2025,
+          "description": "Develops RNC Ising samplers and explicitly identifies RNC bipartite-perfect-matching sampling as open; useful context for the remaining parallelization barrier.",
+          "link": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol353-approx-random2025/LIPIcs.APPROX-RANDOM.2025.46/LIPIcs.APPROX-RANDOM.2025.46.pdf"
+        },
+        {
+          "title": "Sampling Arborescences in Parallel",
+          "year": 2021,
+          "description": "Establishes RNC sampling of weighted directed spanning trees; a related parallel-sampling breakthrough, not an algorithm for bipartite perfect matchings.",
+          "link": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2021.83"
+        },
+        {
+          "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
+          "year": 2004,
+          "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the sequential randomized baseline.",
+          "link": "https://doi.org/10.1145/1008731.1008738"
+        },
+        {
+          "title": "Approximating the Permanent",
+          "year": 1989,
+          "description": "Foundational matching-chain analysis: polynomial-time approximate counting when near-perfect matchings are not too numerous relative to perfect matchings; includes dense instances.",
+          "link": "https://doi.org/10.1137/0218077"
+        }
+      ]
+    }
+  ]
+}
