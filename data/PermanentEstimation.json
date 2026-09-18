@@ -3,12 +3,15 @@
   "catalogId": "permanent-estimation-open-problems",
   "title": "Permanent Estimation",
   "generatedAt": "2026-09-17T21:07:00Z",
-  "contentUpdatedAt": "2026-09-17T21:38:03Z",
+  "contentUpdatedAt": "2026-09-18T01:10:00Z",
   "lastVerified": "2026-09-17",
-  "problemCount": 19,
+  "problemCount": 22,
   "groups": {
     "graphs": [
+      "lit:permanent-estimation-open-problems:deterministic-fptas-bipartite-perfect-matchings",
       "lit:permanent-estimation-open-problems:fpras-general-graph-perfect-matchings",
+      "lit:permanent-estimation-open-problems:deterministic-fptas-counting-all-matchings",
+      "lit:permanent-estimation-open-problems:degree-independent-deterministic-matching-counting",
       "lit:permanent-estimation-open-problems:extend-dense-hafnian-fptas"
     ],
     "physics": [
@@ -43,14 +46,13 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "approximation",
         "fpras",
         "nonnegative-matrix"
       ],
       "generatedAt": "2026-09-17T21:07:00Z",
-      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "contentUpdatedAt": "2026-09-18T01:10:00Z",
       "literature": [
         {
           "title": "Faster FPRAS for the Permanent via Restricted Poincaré Inequalities and Coupled Flows",
@@ -71,6 +73,12 @@
           "link": "https://doi.org/10.1137/050644033"
         },
         {
+          "title": "Fast approximation of the permanent for very dense problems",
+          "year": 2008,
+          "description": "Sequential acceptance/rejection sampler with O(n^4 log n) expected time for a class of dense 0-1 matrices; shows much faster randomized bounds are possible under density assumptions.",
+          "link": "https://www1.cmc.edu/pages/faculty/MHuber/Research/papers/huber2008a.pdf"
+        },
+        {
           "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
           "year": 2004,
           "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the sequential randomized baseline.",
@@ -81,6 +89,12 @@
           "year": 1989,
           "description": "Foundational matching-chain analysis: polynomial-time approximate counting when near-perfect matchings are not too numerous relative to perfect matchings; includes dense instances.",
           "link": "https://doi.org/10.1137/0218077"
+        },
+        {
+          "title": "How hard is it to marry at random? (On the approximation of the permanent)",
+          "year": 1986,
+          "description": "Introduces the perfect/near-perfect matching Markov chain that underlies every later permanent FPRAS.",
+          "link": "https://doi.org/10.1145/12130.12136"
         }
       ]
     },
@@ -93,7 +107,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "deterministic",
         "nonnegative-matrix",
@@ -155,7 +168,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "deterministic",
         "fptas",
@@ -211,8 +223,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
-        "stagnant-5",
         "permanent",
         "complex-matrix",
         "derandomization",
@@ -262,7 +272,6 @@
       "status": "open-refinement",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "psd",
         "approximation",
@@ -310,23 +319,114 @@
       ]
     },
     {
+      "recordId": "lit:permanent-estimation-open-problems:deterministic-fptas-bipartite-perfect-matchings",
+      "problem": "Is there a deterministic FPTAS for counting perfect matchings in bipartite graphs (the 0-1 permanent)?",
+      "wordDescription": "Counting perfect matchings of a bipartite graph is the permanent of its 0-1 biadjacency matrix, the combinatorial core of permanent estimation. Jerrum–Sinclair–Vigoda settled the randomized question, but every deterministic algorithm on unrestricted bipartite graphs still loses a factor exponential, or at best barely subexponential, in n. A degree-3 bipartite gadget preserves the exact perfect-matching count, so the question is already equivalent for maximum-degree-3 bipartite graphs; unlike total matchings, bounded degree gives no relief.",
+      "mathematicalConditions": "For every bipartite G=(U cup V, E) with |U|=|V|=n and epsilon in (0,1), output Q deterministically with (1-epsilon)PM(G) <= Q <= (1+epsilon)PM(G) in time poly(n, epsilon^{-1}), where PM(G)=per(A_G) for the 0-1 biadjacency matrix A_G. Known deterministic factors on arbitrary bipartite G: e^n (matrix scaling), 2^n, sqrt(2)^n (Bethe), (1+epsilon)^n for fixed epsilon, and exp(O(n (log log n)^2/log n)); an FPTAS is known only for dense inputs (minimum degree at least (1/2+gamma)n) and planar inputs (exact, Kasteleyn). Because per of a block-diagonal direct sum of k copies of A equals per(A)^k, a deterministic exp(n^{1-eta})-factor approximation for any eta>0 already self-improves to an FPTAS and would count as solving the problem; an FPTAS for max-degree-3 bipartite graphs is equivalent to the full statement.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-18",
+      "tags": [
+        "perfect-matching",
+        "permanent",
+        "bipartite",
+        "deterministic",
+        "fptas",
+        "derandomization"
+      ],
+      "generatedAt": "2026-09-18T00:40:00Z",
+      "contentUpdatedAt": "2026-09-18T01:10:00Z",
+      "literature": [
+        {
+          "title": "Subexponential Approximation of the Permanent in Deterministic Polynomial Time",
+          "year": 2026,
+          "description": "First deterministic polynomial-time exp(O(n (log log n)^2/log n))-factor approximation for unrestricted nonnegative matrices, hence for 0-1 bipartite perfect-matching counts; still far from the exp(n^{1-eta}) threshold that would imply an FPTAS.",
+          "link": "https://arxiv.org/abs/2609.10516"
+        },
+        {
+          "title": "A deterministic (1+epsilon)^n approximation for the permanent of a nonnegative matrix",
+          "year": 2026,
+          "description": "Strongly polynomial deterministic (1+epsilon)^n-factor approximation for every fixed epsilon>0; exponential loss remains, so it is not an FPTAS.",
+          "link": "https://arxiv.org/abs/2609.11049"
+        },
+        {
+          "title": "Diffuse Gaussian Truncation For Deterministic Approximate Counting",
+          "year": 2026,
+          "description": "Deterministic FPTAS for permanents whose bipartite support graph has minimum degree at least (1/2+gamma)n; the only polynomial-time deterministic relative approximation beyond planar graphs, and dense only.",
+          "link": "https://arxiv.org/abs/2609.04079"
+        },
+        {
+          "title": "A Tight Analysis of Bethe Approximation for Permanent",
+          "year": 2018,
+          "description": "Shows the Bethe permanent is within sqrt(2)^n of the permanent, giving the best fixed-exponential-base deterministic factor before the 2026 results.",
+          "link": "https://arxiv.org/abs/1811.02933"
+        },
+        {
+          "title": "Bounds on the permanent and some applications",
+          "year": 2014,
+          "description": "Improves the scaling-based deterministic factor from e^n to 2^n via new bounds on permanents of doubly stochastic matrices.",
+          "link": "https://arxiv.org/abs/1408.0976"
+        },
+        {
+          "title": "Unleashing the power of Schrijver's permanental inequality with the help of the Bethe Approximation",
+          "year": 2011,
+          "description": "Proves per(A) >= Bethe lower bound via Schrijver's inequality and conjectures the sqrt(2)^n upper ratio (later proved by Anari–Rezaei); origin of the Bethe route to deterministic permanent approximation.",
+          "link": "https://arxiv.org/abs/1106.2844"
+        },
+        {
+          "title": "A deterministic approximation algorithm for computing the permanent of a 0,1 matrix",
+          "year": 2010,
+          "description": "Deterministic (1+epsilon)^n-factor approximation for 0-1 matrices of constant-degree expanders, combining correlation decay for partial matchings with the Jerrum–Vazirani near-perfect-matching reduction; needs expansion.",
+          "link": "https://doi.org/10.1016/j.jcss.2010.05.002"
+        },
+        {
+          "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
+          "year": 2004,
+          "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the randomized baseline that the deterministic question asks to match.",
+          "link": "https://doi.org/10.1145/1008731.1008738"
+        },
+        {
+          "title": "A Deterministic Strongly Polynomial Algorithm for Matrix Scaling and Approximate Permanents",
+          "year": 2000,
+          "description": "Matrix-scaling plus van der Waerden bound gives the first deterministic e^n-factor approximation for nonnegative permanents.",
+          "link": "https://doi.org/10.1007/s004930070007"
+        },
+        {
+          "title": "Approximating the permanent of graphs with large factors",
+          "year": 1992,
+          "description": "Contains the Dahlhaus–Karpinski gadget turning any bipartite graph into a maximum-degree-3 bipartite graph with exactly the same number of perfect matchings, so bounded degree does not simplify the 0-1 permanent.",
+          "link": "https://doi.org/10.1016/0304-3975(92)90234-7"
+        },
+        {
+          "title": "The complexity of computing the permanent",
+          "year": 1979,
+          "description": "Proves the 0-1 permanent, i.e. counting perfect matchings in bipartite graphs, is #P-complete, so approximation is the only realistic target.",
+          "link": "https://doi.org/10.1016/0304-3975(79)90044-6"
+        },
+        {
+          "title": "The statistics of dimers on a lattice",
+          "year": 1961,
+          "description": "Pfaffian orientations give exact polynomial-time perfect-matching counting for planar graphs, the classical exactly solvable special case (bipartite or not).",
+          "link": "https://doi.org/10.1016/0031-8914(61)90063-5"
+        }
+      ]
+    },
+    {
       "recordId": "lit:permanent-estimation-open-problems:fpras-general-graph-perfect-matchings",
       "problem": "Is there an FPRAS for counting perfect matchings in arbitrary general graphs?",
-      "wordDescription": "For bipartite graphs the problem is exactly nonnegative 0-1 permanent estimation and has an FPRAS, but the analogous general-graph problem is the hafnian and remains unresolved. It is a long-standing test case for how far approximate counting by matching-chain methods extends beyond bipartite structure.",
+      "wordDescription": "For bipartite graphs the problem is exactly nonnegative 0-1 permanent estimation and has an FPRAS, but the analogous general-graph problem is the hafnian and remains unresolved even allowing randomness. It is a long-standing test case for how far approximate counting by matching-chain methods extends beyond bipartite structure; the deterministic bipartite question and the (much easier) all-matchings questions are tracked as separate problems.",
       "mathematicalConditions": "For every graph G=(V,E) with |V|=2n and epsilon in (0,1), seek a randomized algorithm running in poly(n, epsilon^{-1}) time that outputs Q with Pr[(1-epsilon)PM(G) <= Q <= (1+epsilon)PM(G)] >= 3/4, where PM(G) is the number of perfect matchings. Achieving this guarantee for all general graphs is the required improvement; the known JSV-style hole-weight chain is insufficient in general.",
       "comments": [],
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
-        "stagnant-5",
         "perfect-matching",
         "hafnian",
         "fpras",
         "general-graph"
       ],
       "generatedAt": "2026-09-17T21:07:00Z",
-      "contentUpdatedAt": "2026-09-17T21:38:03Z",
+      "contentUpdatedAt": "2026-09-18T01:10:00Z",
       "literature": [
         {
           "title": "Diffuse Gaussian Truncation For Deterministic Approximate Counting",
@@ -339,6 +439,12 @@
           "year": 2022,
           "description": "Bounds the near-perfect/perfect matching ratio polynomially in regular strong expanders, enabling efficient matching-chain sampling and counting in this nonbipartite class.",
           "link": "https://arxiv.org/abs/2103.08683"
+        },
+        {
+          "title": "Counting Perfect Matchings and the Switch Chain",
+          "year": 2019,
+          "description": "Analyzes the Diaconis–Graham–Holmes switch chain on hereditary classes of nonbipartite graphs: identifies the largest ergodic class, a large rapidly mixing class, and exponential mixing just beyond it.",
+          "link": "https://doi.org/10.1137/18M1172910"
         },
         {
           "title": "On Counting Perfect Matchings in General Graphs",
@@ -359,16 +465,194 @@
           "link": "https://arxiv.org/abs/1409.3905"
         },
         {
+          "title": "Counting Perfect Matchings as Fast as Ryser",
+          "year": 2012,
+          "description": "Exact hafnian algorithm in O*(2^{n/2}) time and polynomial space, matching Ryser's bipartite bound; the exact-counting baseline that approximation must beat.",
+          "link": "https://doi.org/10.1137/1.9781611973099.73"
+        },
+        {
           "title": "A polynomial-time approximation algorithm for the permanent of a matrix with nonnegative entries",
           "year": 2004,
           "description": "Establishes the general nonnegative-permanent FPRAS using weighted perfect and near-perfect matchings and simulated annealing; the sequential randomized baseline.",
           "link": "https://doi.org/10.1145/1008731.1008738"
         },
         {
+          "title": "Polynomial Time Algorithms to Approximate Permanents and Mixed Discriminants Within a Simply Exponential Factor",
+          "year": 1999,
+          "description": "Gaussian-determinant (Godsil–Gutman type) randomized estimator giving c^n-factor approximation for hafnians of nonnegative matrices; the estimator later analyzed by Rudelson–Samorodnitsky–Zeitouni.",
+          "link": "https://doi.org/10.1002/(SICI)1098-2418(1999010)14:1%3C29::AID-RSA2%3E3.0.CO;2-X"
+        },
+        {
           "title": "Approximating the Permanent",
           "year": 1989,
           "description": "Foundational matching-chain analysis: polynomial-time approximate counting when near-perfect matchings are not too numerous relative to perfect matchings; includes dense instances.",
           "link": "https://doi.org/10.1137/0218077"
+        },
+        {
+          "title": "The statistics of dimers on a lattice",
+          "year": 1961,
+          "description": "Pfaffian orientations give exact polynomial-time perfect-matching counting for planar graphs, the classical exactly solvable special case (bipartite or not).",
+          "link": "https://doi.org/10.1016/0031-8914(61)90063-5"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:deterministic-fptas-counting-all-matchings",
+      "problem": "Is there a deterministic FPTAS for the total number of matchings in an arbitrary graph?",
+      "wordDescription": "Counting all matchings of any size, the monomer-dimer partition function, has admitted an FPRAS on every graph since Jerrum–Sinclair (1989), with no hardness threshold of the kind that blocks independent sets. Deterministically, both correlation decay and zero-free interpolation need a bound on the maximum degree or connective constant, and on unrestricted graphs the best deterministic algorithm is only subexponential. This is the cleanest open derandomization question in the matching family.",
+      "mathematicalConditions": "For every graph G on n vertices and epsilon in (0,1), output Q deterministically with (1-epsilon) m(G) <= Q <= (1+epsilon) m(G) in time poly(n, epsilon^{-1}), where m(G)=sum_k m_k(G) is the number of matchings, i.e. the matching generating polynomial at lambda=1 (the weighted version at any fixed lambda>0 is the same problem). Best known on arbitrary graphs: deterministic time exp(O(sqrt(n) log^2 n)); polynomial time only when the maximum degree or the connective constant is bounded. A deterministic quasipolynomial n^{O(log(n/epsilon))} algorithm on all graphs would already be progress.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-18",
+      "tags": [
+        "matching",
+        "monomer-dimer",
+        "deterministic",
+        "fptas",
+        "general-graph"
+      ],
+      "generatedAt": "2026-09-18T00:40:00Z",
+      "contentUpdatedAt": "2026-09-18T01:10:00Z",
+      "literature": [
+        {
+          "title": "Approximate counting and sampling via local central limit theorems",
+          "year": 2021,
+          "description": "Deterministic FPTAS for the number of matchings of any fixed size up to (1-delta) of the matching number in bounded-degree graphs; explicitly notes the wide randomized/deterministic gap for matchings and that runtime exponents depend on Delta.",
+          "link": "https://arxiv.org/abs/2108.01161"
+        },
+        {
+          "title": "The Complexity of Approximating the Matching Polynomial in the Complex Plane",
+          "year": 2021,
+          "description": "Completes the approximability picture for the matching polynomial: FPTAS off the negative real axis (Patel–Regts / connective-constant extensions) and #P-hardness for real activities below -1/(4(Delta-1)); positive activities, the case here, are the easy regime.",
+          "link": "https://doi.org/10.1145/3448645"
+        },
+        {
+          "title": "Deterministic polynomial-time approximation algorithms for partition functions and graph polynomials",
+          "year": 2017,
+          "description": "Barvinok-style zero-free interpolation made polynomial on bounded-degree graphs, including the matching polynomial via Heilmann–Lieb; the exponent of the running time still depends on Delta.",
+          "link": "https://doi.org/10.1137/16M1101003"
+        },
+        {
+          "title": "Spatial mixing and the connective constant: Optimal bounds",
+          "year": 2014,
+          "description": "Replaces the maximum-degree bound by a connective-constant bound with the same (n/epsilon)^{O(sqrt(Delta) log Delta)} runtime, and notes that the sqrt(Delta) exponent is optimal for Weitz-style computation-tree algorithms.",
+          "link": "https://arxiv.org/abs/1410.2595"
+        },
+        {
+          "title": "Simple deterministic approximation algorithms for counting matchings",
+          "year": 2007,
+          "description": "Correlation-decay FPTAS for the number of matchings in graphs of maximum degree Delta, running in time (n/epsilon)^{O(sqrt(Delta) log Delta)}; degrades to exp(O(sqrt(n) log^2 n)) time on arbitrary graphs, still the best deterministic bound there.",
+          "link": "https://doi.org/10.1145/1250790.1250809"
+        },
+        {
+          "title": "Counting independent sets up to the tree threshold",
+          "year": 2006,
+          "description": "Introduces the self-avoiding-walk tree and correlation-decay method that Bayati et al. adapt to matchings; its n^{O(log Delta)}-type running time is the template for degree-dependent exponents.",
+          "link": "https://doi.org/10.1145/1132516.1132538"
+        },
+        {
+          "title": "The Complexity of Counting in Sparse, Regular, and Planar Graphs",
+          "year": 2001,
+          "description": "Shows exact counting of matchings is #P-complete even on bounded-degree (and planar) graphs, so approximation is unavoidable throughout the matching family.",
+          "link": "https://doi.org/10.1137/S0097539797321602"
+        },
+        {
+          "title": "Approximating the Permanent",
+          "year": 1989,
+          "description": "Gives an FPRAS for the total number of matchings (the monomer-dimer partition function) on every graph via the matching Markov chain; the randomized benchmark for all-matchings counting.",
+          "link": "https://doi.org/10.1137/0218077"
+        },
+        {
+          "title": "The Complexity of Enumeration and Reliability Problems",
+          "year": 1979,
+          "description": "Introduces #P and shows counting all (imperfect) matchings is #P-complete already for bipartite graphs.",
+          "link": "https://doi.org/10.1137/0208032"
+        },
+        {
+          "title": "Theory of monomer-dimer systems",
+          "year": 1972,
+          "description": "Proves the matching (monomer-dimer) polynomial has only real negative roots, the analytic fact underlying both correlation decay and interpolation approaches to counting matchings.",
+          "link": "https://doi.org/10.1007/BF01877590"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:permanent-estimation-open-problems:degree-independent-deterministic-matching-counting",
+      "problem": "Can matchings in bounded-degree graphs be counted deterministically in polynomial time with an exponent independent of the degree?",
+      "wordDescription": "On graphs of maximum degree Delta the number of matchings has a deterministic FPTAS via correlation decay, but its running time is (n/epsilon)^{O(sqrt(Delta) log Delta)}, and the sqrt(Delta) in the exponent is optimal for Weitz-type computation-tree algorithms, while randomized Glauber dynamics mixes in O(m log n) steps on the same graphs. Removing the degree from the exponent is the sharp quantitative form of the randomized/deterministic gap for matchings and appears to need a genuinely new deterministic technique.",
+      "mathematicalConditions": "For every graph G with n vertices, m edges and maximum degree Delta, and epsilon in (0,1), output Q deterministically with (1-epsilon) m(G) <= Q <= (1+epsilon) m(G) in time f(Delta) * poly(n, epsilon^{-1}) where the polynomial exponent does not depend on Delta (for example f(Delta) * n^{O(1)} epsilon^{-2}); the same question for the monomer-dimer partition function at fixed activity lambda>0. Current best: (n/epsilon)^{O(sqrt(Delta) log Delta)} via correlation decay (also with Delta replaced by the connective constant) and polynomial time with a Delta-dependent exponent via zero-free interpolation; the randomized benchmark is O(m log n) mixing plus poly(n, epsilon^{-1}) sampling. A deterministic exponent o(sqrt(Delta) log Delta) would already be progress, since it must leave the Weitz framework.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-18",
+      "tags": [
+        "matching",
+        "monomer-dimer",
+        "deterministic",
+        "bounded-degree",
+        "running-time"
+      ],
+      "generatedAt": "2026-09-18T00:40:00Z",
+      "contentUpdatedAt": "2026-09-18T01:10:00Z",
+      "literature": [
+        {
+          "title": "Deterministic counting from coupling independence",
+          "year": 2024,
+          "description": "New recursive deterministic counting framework for bounded-degree spin systems matching randomized thresholds; its running time is n^{f(Delta)} with an exponent that still grows with Delta.",
+          "link": "https://arxiv.org/abs/2410.23225"
+        },
+        {
+          "title": "Towards derandomising Markov chain Monte Carlo",
+          "year": 2023,
+          "description": "Derandomizes MCMC via 'coupling towards the past' with only O(log n) random bits, yet the authors note the exponent of the resulting polynomial still depends on Delta, as in every known deterministic counting algorithm. FOCS 2023; SICOMP 2025.",
+          "link": "https://arxiv.org/abs/2211.03487"
+        },
+        {
+          "title": "Optimal Mixing of Glauber Dynamics: Entropy Factorization via High-Dimensional Expansion",
+          "year": 2021,
+          "description": "Proves O(m log n) mixing of Glauber dynamics for random matchings on any bounded-degree graph with m edges, the randomized running-time benchmark the deterministic question asks to match.",
+          "link": "https://doi.org/10.1145/3406325.3451035"
+        },
+        {
+          "title": "Approximate counting and sampling via local central limit theorems",
+          "year": 2021,
+          "description": "Deterministic FPTAS for the number of matchings of any fixed size up to (1-delta) of the matching number in bounded-degree graphs; explicitly notes the wide randomized/deterministic gap for matchings and that runtime exponents depend on Delta.",
+          "link": "https://arxiv.org/abs/2108.01161"
+        },
+        {
+          "title": "Deterministic polynomial-time approximation algorithms for partition functions and graph polynomials",
+          "year": 2017,
+          "description": "Barvinok-style zero-free interpolation made polynomial on bounded-degree graphs, including the matching polynomial via Heilmann–Lieb; the exponent of the running time still depends on Delta.",
+          "link": "https://doi.org/10.1137/16M1101003"
+        },
+        {
+          "title": "Spatial mixing and the connective constant: Optimal bounds",
+          "year": 2014,
+          "description": "Replaces the maximum-degree bound by a connective-constant bound with the same (n/epsilon)^{O(sqrt(Delta) log Delta)} runtime, and notes that the sqrt(Delta) exponent is optimal for Weitz-style computation-tree algorithms.",
+          "link": "https://arxiv.org/abs/1410.2595"
+        },
+        {
+          "title": "Simple deterministic approximation algorithms for counting matchings",
+          "year": 2007,
+          "description": "Correlation-decay FPTAS for the number of matchings in graphs of maximum degree Delta, running in time (n/epsilon)^{O(sqrt(Delta) log Delta)}; degrades to exp(O(sqrt(n) log^2 n)) time on arbitrary graphs, still the best deterministic bound there.",
+          "link": "https://doi.org/10.1145/1250790.1250809"
+        },
+        {
+          "title": "Counting independent sets up to the tree threshold",
+          "year": 2006,
+          "description": "Introduces the self-avoiding-walk tree and correlation-decay method that Bayati et al. adapt to matchings; its n^{O(log Delta)}-type running time is the template for degree-dependent exponents.",
+          "link": "https://doi.org/10.1145/1132516.1132538"
+        },
+        {
+          "title": "The Complexity of Counting in Sparse, Regular, and Planar Graphs",
+          "year": 2001,
+          "description": "Shows exact counting of matchings is #P-complete even on bounded-degree (and planar) graphs, so approximation is unavoidable throughout the matching family.",
+          "link": "https://doi.org/10.1137/S0097539797321602"
+        },
+        {
+          "title": "Theory of monomer-dimer systems",
+          "year": 1972,
+          "description": "Proves the matching (monomer-dimer) polynomial has only real negative roots, the analytic fact underlying both correlation decay and interpolation approaches to counting matchings.",
+          "link": "https://doi.org/10.1007/BF01877590"
         }
       ]
     },
@@ -381,7 +665,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "hafnian",
         "deterministic",
         "fptas",
@@ -431,8 +714,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
-        "stagnant-5",
         "permanent",
         "exact-algorithm",
         "exponential-time"
@@ -487,7 +768,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "gaussian",
         "average-case-hardness",
@@ -543,7 +823,6 @@
       "status": "open-refinement",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "gaussian",
         "anticoncentration",
@@ -593,7 +872,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "random-matrix",
         "zero-free",
@@ -643,7 +921,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "bethe",
         "variational",
@@ -717,7 +994,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "matrix-scaling",
         "sinkhorn",
@@ -785,7 +1061,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "stable-polynomial",
         "coefficient-estimation",
         "capacity",
@@ -841,8 +1116,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
-        "stagnant-5",
         "mixed-discriminant",
         "psd",
         "approximation"
@@ -897,7 +1170,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "bosonsampling",
         "quantum-advantage",
         "sampling-hardness",
@@ -953,7 +1225,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "gaussian-bosonsampling",
         "hafnian",
         "quantum-advantage",
@@ -1015,7 +1286,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "core-18",
         "permanent",
         "zero-free",
         "random-matrix",
@@ -1065,7 +1335,6 @@
       "status": "open",
       "lastVerified": "2026-09-17",
       "tags": [
-        "stagnant-5",
         "permanent",
         "parallel-algorithms",
         "rnc",
