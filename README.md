@@ -12,14 +12,15 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 │   ├── LaplacianOpenProblems.json
 │   └── SimonsF25ComplexityLinAlg.json
 ├── gener_ds.html
-├── sheet_viewer.html
 ├── open_problem_record.schema.json
-└── viewer.html
+├── viewer.html
+└── viewer2_devin.html
 ```
 
 `gener_ds.html` creates a one-problem catalog in the browser. `viewer.html`
-temporarily reads one or more local catalog files in the browser. Neither page
-uploads a selected JSON file to a server.
+temporarily reads one or more local catalog files in the browser, and
+`viewer2_devin.html` shows them as a sortable spreadsheet with expandable rows.
+None of these pages upload a selected JSON file to a server.
 
 ## Current catalogs
 
@@ -162,7 +163,7 @@ uses backslash escapes, LaTeX backslashes must be doubled inside JSON strings.
 
 ## Sheet viewer
 
-`sheet_viewer.html` shows every loaded problem as one row of a spreadsheet:
+`viewer2_devin.html` shows every loaded problem as one row of a spreadsheet:
 problem name, status, most recent progress date, comment count, and catalog.
 "Last progress" is the latest of the problem's `contentUpdatedAt` and its
 comments' `createdAt`/`updatedAt`. Clicking a row expands it in place with the
