@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LITchikin Problem Sheet</title>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+            },
+            options: { ignoreHtmlClass: 'no-mathjax' },
+            startup: { typeset: false }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #f4f6fa;
+            --surface: #ffffff;
+            --surface-alt: #f7f9fc;
+            --text: #1a1d23;
+            --text-secondary: #5a5f6b;
+            --border: #dce1e8;
+            --accent: #4f6ef7;
+            --accent-light: #eef1fd;
+            --danger: #e05555;
+            --success: #2ea76e;
+            --warn: #d9962b;
+            --radius: 8px;
+            --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding: 20px;
+        }
+        a { color: var(--accent); }
+
+        /* ── toolbar ── */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            margin-bottom: 14px;
+        }
+        .toolbar h1 { font-size: 1.1rem; font-weight: 650; margin-right: auto; }
+        .toolbar input[type="search"], .toolbar select {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font: inherit;
+            font-size: 0.9rem;
+            background: var(--surface);
+        }
+        .toolbar input[type="search"] { min-width: 240px; }
+        .btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface);
+            font: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+        .btn:hover { background: var(--accent-light); border-color: var(--accent); }
+        .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .btn.primary:hover { filter: brightness(0.95); }
+        .status-line {
+            width: 100%;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .status-line .count { font-weight: 650; color: var(--text); }
+
+        /* ── drop zone ── */
+        body.dragging::after {
+            content: 'Drop catalog JSON files to load';
+            position: fixed; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(79, 110, 247, 0.12);
+            border: 3px dashed var(--accent);
+            font-size: 1.4rem; color: var(--accent);
+            pointer-events: none;
+        }
+
+        /* ── sheet ── */
+        .sheet-wrap {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: auto;
+        }
+        table.sheet {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+        .sheet th, .sheet td {
+            border-bottom: 1px solid var(--border);
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .sheet th {
+            position: sticky; top: 0;
+            background: var(--surface-alt);
+            font-weight: 650;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--text-secondary);
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            z-index: 1;
+        }
+        .sheet th.sorted { color: var(--accent); }
+        .sheet th .arrow { font-size: 0.7rem; margin-left: 4px; }
+        .sheet tbody tr.row { cursor: pointer; }
+        .sheet tbody tr.row:hover { background: var(--accent-light); }
+        .sheet tbody tr.row.open { background: var(--accent-light); }
+        .sheet td.col-toggle { width: 28px; color: var(--text-secondary); font-family: var(--font-mono); text-align: center; }
+        .sheet td.col-idx { width: 40px; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+        .sheet td.col-status { width: 160px; }
+        .sheet td.col-date { width: 130px; font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap; }
+        .sheet td.col-catalog { width: 220px; color: var(--text-secondary); font-size: 0.82rem; }
+        .sheet td.col-comments { width: 50px; text-align: center; color: var(--text-secondary); font-size: 0.85rem; }
+        .sheet .empty { text-align: center; color: #9aa1ad; padding: 40px 10px; cursor: default; }
+
+        .pill {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #e8ebf2;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pill.open { background: #fdecec; color: #b73535; }
+        .pill.partial { background: #fff3dd; color: #9a6510; }
+        .pill.solved { background: #e3f6ec; color: #1d7a4c; }
+        .pill.none { background: #eceff4; color: #5a5f6b; }
+
+        /* ── detail row ── */
+        tr.detail td {
+            background: #fbfcfe;
+            padding: 18px 24px 22px 60px;
+            border-bottom: 2px solid var(--border);
+        }
+        .detail-grid { display: grid; gap: 18px; max-width: 1100px; }
+        .section h3 {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .section .body {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .section .body.mono { font-family: var(--font-mono); font-size: 0.86rem; background: var(--surface-alt); padding: 10px 12px; border-radius: 6px; }
+        .meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.82rem; color: var(--text-secondary); }
+        .meta .kv { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; }
+        .meta .kv b { color: var(--text); font-weight: 600; }
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .tag { background: var(--accent-light); color: var(--accent); border-radius: 4px; padding: 1px 7px; font-size: 0.78rem; }
+        .muted { color: #9aa1ad; font-style: italic; }
+
+        table.lit { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 4px; }
+        table.lit td { padding: 6px 8px; border-top: 1px solid var(--border); vertical-align: top; }
+        table.lit td.year { width: 60px; font-family: var(--font-mono); font-size: 0.82rem; white-space: nowrap; }
+        table.lit td.title { width: 38%; font-weight: 550; }
+        table.lit td.desc { color: var(--text-secondary); }
+
+        .progress-item { padding: 8px 0; border-top: 1px solid var(--border); }
+        .progress-item:first-child { border-top: none; }
+        .progress-item .label { font-size: 0.78rem; font-weight: 650; color: var(--text-secondary); margin-bottom: 2px; }
+        .progress-item .label span { font-weight: 400; margin-left: 6px; font-family: var(--font-mono); }
+
+        .comment { border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-top: 8px; background: var(--surface); }
+        .comment .head { display: flex; justify-content: space-between; gap: 10px; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .comment .head b { color: var(--text); }
+        .comment .cbody { white-space: pre-wrap; }
+
+        /* ── toast ── */
+        .toast {
+            position: fixed; bottom: 20px; left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #23262d; color: #fff;
+            padding: 10px 18px; border-radius: 6px;
+            font-size: 0.9rem; opacity: 0; pointer-events: none;
+            transition: 0.2s ease; max-width: 80vw;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.error { background: var(--danger); }
+        .toast.success { background: var(--success); }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <h1>LITchikin Problem Sheet</h1>
+        <input type="search" id="search" placeholder="Search problems, tags, descriptions…" />
+        <select id="statusFilter"><option value="">All statuses</option></select>
+        <button class="btn" id="expandAll">Expand all</button>
+        <button class="btn" id="collapseAll">Collapse all</button>
+        <button class="btn" id="clearAll">Clear</button>
+        <button class="btn" id="loadRepo" title="Fetch every catalog under data/ from GitHub">Load from GitHub</button>
+        <label class="btn primary" for="fileUpload">Open catalog files…</label>
+        <input type="file" id="fileUpload" accept=".json,application/json" multiple hidden />
+        <div class="status-line" id="statusLine">No catalogs loaded. Open one or more <code>1.4</code> catalog JSON files, drop them here, or load them from GitHub.</div>
+    </div>
+
+    <div class="sheet-wrap">
+        <table class="sheet">
+            <thead>
+                <tr>
+                    <th data-key="" style="cursor:default"></th>
+                    <th data-key="index">#</th>
+                    <th data-key="name">Problem</th>
+                    <th data-key="status">Status</th>
+                    <th data-key="progress">Last progress</th>
+                    <th data-key="comments" title="Number of comments">Cmts</th>
+                    <th data-key="catalog">Catalog</th>
+                </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+        </table>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const GITHUB_REPO = 'rpeng233/LITchikin';
+            const GITHUB_DATA_DIR = 'data';
+            const CATALOG_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+            const RECORD_SUFFIX_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
+
+            const rowsEl = document.getElementById('rows');
+            const statusLine = document.getElementById('statusLine');
+            const searchEl = document.getElementById('search');
+            const statusFilterEl = document.getElementById('statusFilter');
+            const fileUpload = document.getElementById('fileUpload');
+            const toast = document.getElementById('toast');
+
+            let entries = [];          // { id, recordId, catalogId, catalogTitle, filename, data, name, status, progress, progressWhy }
+            const expanded = new Set();
+            let sortKey = 'index';
+            let sortDir = 1;
+            let idCounter = 0;
+            let toastTimer;
+
+            // ── helpers ──
+            const safeStr = v => (v === undefined || v === null) ? '' : String(v);
+
+            function el(tag, cls, text) {
+                const node = document.createElement(tag);
+                if (cls) node.className = cls;
+                if (text !== undefined) node.textContent = text;
+                return node;
+            }
+
+            function renderMath(node) {
+                if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise([node]).catch(() => {});
+                }
+            }
+
+            function showToast(msg, type = '') {
+                clearTimeout(toastTimer);
+                toast.textContent = msg;
+                toast.className = 'toast ' + type + ' show';
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+            }
+
+            function isUtcTimestamp(v) {
+                return typeof v === 'string' && v.endsWith('Z') && Number.isFinite(Date.parse(v));
+            }
+
+            function fmtDate(iso) {
+                if (!iso) return '—';
+                const t = Date.parse(iso);
+                if (!Number.isFinite(t)) return iso;
+                return new Date(t).toISOString().slice(0, 10);
+            }
+
+            function authorName(author) {
+                if (typeof author === 'string') return author.trim() || 'Unknown user';
+                if (author && typeof author === 'object') {
+                    return safeStr(author.displayName || author.name || author.id).trim() || 'Unknown user';
+                }
+                return 'Unknown user';
+            }
+
+            function statusClass(status) {
+                const s = status.toLowerCase();
+                if (!s) return 'none';
+                if (s.includes('solved') && !s.startsWith('open')) return 'solved';
+                if (s.includes('partial') || s.includes('sharpened')) return 'partial';
+                if (s.includes('no progress')) return 'none';
+                if (s.startsWith('open')) return 'open';
+                return 'none';
+            }
+
+            // Most recent progress: latest of the content timestamp and every comment timestamp.
+            function computeProgress(rec) {
+                let best = { t: Date.parse(rec.contentUpdatedAt), iso: rec.contentUpdatedAt, why: 'content updated' };
+                for (const c of rec.comments || []) {
+                    for (const [field, why] of [['createdAt', 'comment added'], ['updatedAt', 'comment edited']]) {
+                        const v = c[field];
+                        if (!isUtcTimestamp(v)) continue;
+                        const t = Date.parse(v);
+                        if (t > best.t) best = { t, iso: v, why };
+                    }
+                }
+                return best;
+            }
+
+            // ── validation of a strict 1.4 catalog ──
+            function validateComments(comments, recordId) {
+                for (const comment of comments) {
+                    const authorIsValid = typeof comment?.author === 'string'
+                        ? Boolean(comment.author.trim())
+                        : comment?.author && typeof comment.author === 'object' &&
+                            Boolean(safeStr(comment.author.displayName).trim());
+                    if (!comment || typeof comment !== 'object' ||
+                        !safeStr(comment.id).trim() || typeof comment.body !== 'string' || !authorIsValid) {
+                        throw new Error(`Problem ${recordId} contains an invalid comment.`);
+                    }
+                    if (!isUtcTimestamp(comment.createdAt)) {
+                        throw new Error(`Comment ${comment.id} createdAt must be UTC.`);
+                    }
+                    if (comment.updatedAt !== undefined && comment.updatedAt !== null && !isUtcTimestamp(comment.updatedAt)) {
+                        throw new Error(`Comment ${comment.id} updatedAt must be UTC.`);
+                    }
+                }
+            }
+
+            function parseCatalog(raw) {
+                if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+                    throw new Error('Expected a LITchikin 1.4 catalog object.');
+                }
+                if (raw.schemaVersion !== '1.4') {
+                    throw new Error('Only schemaVersion 1.4 catalogs are supported.');
+                }
+                const catalogId = safeStr(raw.catalogId).trim();
+                if (!CATALOG_ID_PATTERN.test(catalogId)) {
+                    throw new Error('Catalog ID must use lowercase kebab-case.');
+                }
+                if (!isUtcTimestamp(raw.contentUpdatedAt)) {
+                    throw new Error('Catalog contentUpdatedAt must be an explicit UTC timestamp.');
+                }
+                if (raw.generatedAt !== undefined && !isUtcTimestamp(raw.generatedAt)) {
+                    throw new Error('Catalog generatedAt must be UTC when present.');
+                }
+                if (!Array.isArray(raw.problems)) {
+                    throw new Error('Catalog problems must be an array.');
+                }
+                if (raw.problemCount !== undefined && raw.problemCount !== raw.problems.length) {
+                    throw new Error('Catalog problemCount does not match its problems array.');
+                }
+                const seen = new Set();
+                const prefix = `lit:${catalogId}:`;
+                for (const record of raw.problems) {
+                    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+                        throw new Error('Catalog contains an invalid problem record.');
+                    }
+                    if (typeof record.problem !== 'string' || !record.problem.trim()) {
+                        throw new Error('Every problem must have a non-empty problem field.');
+                    }
+                    const recordId = safeStr(record.recordId).trim();
+                    const suffix = recordId.startsWith(prefix) ? recordId.slice(prefix.length) : '';
+                    if (!RECORD_SUFFIX_PATTERN.test(suffix)) {
+                        throw new Error(`Invalid recordId for catalog ${catalogId}.`);
+                    }
+                    if (seen.has(recordId)) {
+                        throw new Error(`Duplicate recordId: ${recordId}.`);
+                    }
+                    if (!isUtcTimestamp(record.contentUpdatedAt)) {
+                        throw new Error(`Problem ${recordId} needs an explicit UTC contentUpdatedAt.`);
+                    }
+                    if (record.generatedAt !== undefined && !isUtcTimestamp(record.generatedAt)) {
+                        throw new Error(`Problem ${recordId} generatedAt must be UTC when present.`);
+                    }
+                    if (!Array.isArray(record.comments)) {
+                        throw new Error(`Problem ${recordId} must contain a comments array.`);
+                    }
+                    validateComments(record.comments, recordId);
+                    seen.add(recordId);
+                }
+                return { catalogId, title: safeStr(raw.title).trim(), problems: raw.problems };
+            }
+
+            // ── loading ──
+            function addCatalog(raw, filename) {
+                const { catalogId, title, problems } = parseCatalog(raw);
+                let added = 0, skipped = 0;
+                for (const rec of problems) {
+                    const recordId = rec.recordId.trim();
+                    if (entries.some(e => e.recordId === recordId)) { skipped++; continue; }
+                    const progress = computeProgress(rec);
+                    entries.push({
+                        id: ++idCounter,
+                        recordId,
+                        catalogId,
+                        catalogTitle: title,
+                        filename,
+                        data: rec,
+                        name: rec.problem.trim(),
+                        status: safeStr(rec.status).trim(),
+                        progressT: progress.t,
+                        progressIso: progress.iso,
+                        progressWhy: progress.why,
+                        searchText: [
+                            rec.problem, rec.sourceStatement, rec.wordDescription, rec.mathematicalConditions,
+                            rec.status, rec.statusDetails, recordId, catalogId, title,
+                            Array.isArray(rec.tags) ? rec.tags.join(' ') : rec.tags,
+                        ].map(safeStr).join('\n').toLowerCase(),
+                    });
+                    added++;
+                }
+                return { added, skipped };
+            }
+
+            async function loadText(text, filename) {
+                let json;
+                try { json = JSON.parse(text); } catch (_) {
+                    showToast(`"${filename}" is not valid JSON. Skipped.`, 'error');
+                    return { added: 0, skipped: 0 };
+                }
+                try {
+                    return addCatalog(json, filename);
+                } catch (err) {
+                    showToast(`"${filename}": ${err.message}`, 'error');
+                    return { added: 0, skipped: 0 };
+                }
+            }
+
+            async function loadFiles(files) {
+                let added = 0, skipped = 0;
+                for (const file of files) {
+                    const res = await loadText(await file.text(), file.name);
+                    added += res.added; skipped += res.skipped;
+                }
+                finishLoad(added, skipped, `${files.length} file(s)`);
+            }
+
+            async function listGithubJson(path) {
+                const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`, {
+                    headers: { Accept: 'application/vnd.github+json' },
+                });
+                if (!res.ok) throw new Error(`GitHub API ${res.status} for ${path}`);
+                const items = await res.json();
+                const out = [];
+                for (const item of items) {
+                    if (item.type === 'dir') out.push(...await listGithubJson(item.path));
+                    else if (item.type === 'file' && item.name.endsWith('.json')) out.push(item);
+                }
+                return out;
+            }
+
+            async function loadFromGithub() {
+                const btn = document.getElementById('loadRepo');
+                btn.disabled = true;
+                statusLine.textContent = 'Fetching catalog list from GitHub…';
+                try {
+                    const files = await listGithubJson(GITHUB_DATA_DIR);
+                    let added = 0, skipped = 0;
+                    for (const f of files) {
+                        statusLine.textContent = `Loading ${f.path}…`;
+                        const res = await fetch(f.download_url);
+                        if (!res.ok) { showToast(`Failed to fetch ${f.path}`, 'error'); continue; }
+                        const r = await loadText(await res.text(), f.path);
+                        added += r.added; skipped += r.skipped;
+                    }
+                    finishLoad(added, skipped, `${files.length} catalog(s) on GitHub`);
+                } catch (err) {
+                    showToast(`GitHub load failed: ${err.message}`, 'error');
+                    updateStatusLine();
+                } finally {
+                    btn.disabled = false;
+                }
+            }
+
+            async function loadFromUrls(urls) {
+                let added = 0, skipped = 0;
+                for (const url of urls) {
+                    statusLine.textContent = `Loading ${url}…`;
+                    try {
+                        const res = await fetch(url);
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        const r = await loadText(await res.text(), url);
+                        added += r.added; skipped += r.skipped;
+                    } catch (err) {
+                        showToast(`Failed to fetch ${url}: ${err.message}`, 'error');
+                    }
+                }
+                finishLoad(added, skipped, `${urls.length} URL(s)`);
+            }
+
+            function finishLoad(added, skipped, source) {
+                rebuildStatusFilter();
+                render();
+                const parts = [`${added} problem(s) added from ${source}.`];
+                if (skipped) parts.push(`${skipped} duplicate record ID(s) skipped.`);
+                showToast(parts.join(' '), added ? 'success' : 'error');
+            }
+
+            // ── filtering & sorting ──
+            function rebuildStatusFilter() {
+                const current = statusFilterEl.value;
+                const statuses = [...new Set(entries.map(e => e.status || '(none)'))].sort();
+                statusFilterEl.replaceChildren(el('option', '', 'All statuses'));
+                statusFilterEl.firstChild.value = '';
+                for (const s of statuses) {
+                    const opt = el('option', '', s);
+                    opt.value = s;
+                    statusFilterEl.appendChild(opt);
+                }
+                statusFilterEl.value = statuses.includes(current) ? current : '';
+            }
+
+            function visibleEntries() {
+                const q = searchEl.value.trim().toLowerCase();
+                const st = statusFilterEl.value;
+                let list = entries.filter(e =>
+                    (!q || e.searchText.includes(q)) &&
+                    (!st || (e.status || '(none)') === st));
+                const cmp = {
+                    index: (a, b) => a.id - b.id,
+                    name: (a, b) => a.name.localeCompare(b.name),
+                    status: (a, b) => a.status.localeCompare(b.status) || a.id - b.id,
+                    progress: (a, b) => a.progressT - b.progressT || a.id - b.id,
+                    comments: (a, b) => a.data.comments.length - b.data.comments.length || a.id - b.id,
+                    catalog: (a, b) => a.catalogId.localeCompare(b.catalogId) || a.id - b.id,
+                }[sortKey] || ((a, b) => a.id - b.id);
+                list.sort((a, b) => sortDir * cmp(a, b));
+                return list;
+            }
+
+            function updateStatusLine() {
+                const total = entries.length;
+                const shown = visibleEntries().length;
+                const catalogs = new Set(entries.map(e => e.catalogId)).size;
+                if (!total) {
+                    statusLine.innerHTML = 'No catalogs loaded. Open one or more <code>1.4</code> catalog JSON files, drop them here, or load them from GitHub.';
+                    return;
+                }
+                statusLine.replaceChildren(
+                    el('span', 'count', String(shown)),
+                    document.createTextNode(shown === total ? ` problem(s) from ${catalogs} catalog(s). ` : ` of ${total} problem(s) shown (${catalogs} catalog(s)). `),
+                    document.createTextNode('Click a row to expand it. "Last progress" is the latest content update or comment.')
+                );
+            }
+
+            // ── rendering ──
+            function render() {
+                rowsEl.replaceChildren();
+                document.querySelectorAll('.sheet th').forEach(th => {
+                    th.classList.toggle('sorted', th.dataset.key === sortKey);
+                    const arrow = th.querySelector('.arrow');
+                    if (arrow) arrow.remove();
+                    if (th.dataset.key === sortKey) th.appendChild(el('span', 'arrow', sortDir > 0 ? '▲' : '▼'));
+                });
+
+                const list = visibleEntries();
+                updateStatusLine();
+                if (!list.length) {
+                    const tr = el('tr');
+                    const td = el('td', 'empty', entries.length ? 'No problems match the current filter.' : 'No problems loaded.');
+                    td.colSpan = 7;
+                    tr.appendChild(td);
+                    rowsEl.appendChild(tr);
+                    return;
+                }
+
+                list.forEach((e, i) => {
+                    const isOpen = expanded.has(e.id);
+                    const tr = el('tr', 'row' + (isOpen ? ' open' : ''));
+                    tr.dataset.id = e.id;
+                    tr.appendChild(el('td', 'col-toggle', isOpen ? '▾' : '▸'));
+                    tr.appendChild(el('td', 'col-idx', String(i + 1)));
+                    const nameTd = el('td', 'col-name', e.name);
+                    nameTd.title = e.recordId;
+                    tr.appendChild(nameTd);
+                    const stTd = el('td', 'col-status');
+                    const pill = el('span', 'pill ' + statusClass(e.status), e.status || '—');
+                    pill.title = e.status;
+                    stTd.appendChild(pill);
+                    tr.appendChild(stTd);
+                    const dateTd = el('td', 'col-date', fmtDate(e.progressIso));
+                    dateTd.title = `${e.progressIso} (${e.progressWhy})`;
+                    tr.appendChild(dateTd);
+                    tr.appendChild(el('td', 'col-comments', e.data.comments.length ? String(e.data.comments.length) : ''));
+                    const catTd = el('td', 'col-catalog', e.catalogTitle || e.catalogId);
+                    catTd.title = `${e.catalogId} · ${e.filename}`;
+                    tr.appendChild(catTd);
+                    tr.addEventListener('click', () => toggle(e.id));
+                    rowsEl.appendChild(tr);
+
+                    if (isOpen) {
+                        const dtr = el('tr', 'detail');
+                        const td = el('td');
+                        td.colSpan = 7;
+                        td.appendChild(buildDetail(e));
+                        dtr.appendChild(td);
+                        rowsEl.appendChild(dtr);
+                        renderMath(td);
+                    }
+                });
+                renderMath(rowsEl);
+            }
+
+            function toggle(id) {
+                if (expanded.has(id)) expanded.delete(id); else expanded.add(id);
+                render();
+            }
+
+            function section(title, node) {
+                const s = el('div', 'section');
+                s.appendChild(el('h3', '', title));
+                s.appendChild(node);
+                return s;
+            }
+
+            function textBody(text, cls = '') {
+                const t = safeStr(text).trim();
+                return t ? el('div', 'body ' + cls, t) : el('div', 'muted', 'Not provided.');
+            }
+
+            function buildDetail(e) {
+                const d = e.data;
+                const grid = el('div', 'detail-grid');
+
+                // header meta
+                const meta = el('div', 'meta');
+                const kv = (k, v) => {
+                    const span = el('span', 'kv');
+                    span.appendChild(el('b', '', k + ' '));
+                    span.appendChild(document.createTextNode(v));
+                    return span;
+                };
+                meta.appendChild(kv('id', e.recordId));
+                if (d.status) meta.appendChild(kv('status', d.status));
+                meta.appendChild(kv('content updated', fmtDate(d.contentUpdatedAt)));
+                if (d.lastVerified) meta.appendChild(kv('verified', d.lastVerified));
+                if (d.generatedAt) meta.appendChild(kv('generated', fmtDate(d.generatedAt)));
+                const src = d.source || {};
+                const srcParts = [];
+                if (src.title) srcParts.push(src.title);
+                if (src.authors) srcParts.push('by ' + (Array.isArray(src.authors) ? src.authors.join(', ') : String(src.authors)));
+                if (src.page) srcParts.push('p. ' + src.page);
+                if (src.problemNumber !== undefined && src.problemNumber !== null) srcParts.push('#' + src.problemNumber);
+                if (srcParts.length) meta.appendChild(kv('source', srcParts.join(' · ')));
+                if (src.url) {
+                    const span = el('span', 'kv');
+                    const a = el('a', '', src.url); a.href = src.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+                    span.appendChild(a);
+                    meta.appendChild(span);
+                }
+                if (Array.isArray(d.maintainers) && d.maintainers.length) {
+                    meta.appendChild(kv('curators', d.maintainers.map(m => m.name + (m.email ? ` <${m.email}>` : '')).join(', ')));
+                }
+                grid.appendChild(meta);
+
+                const tags = Array.isArray(d.tags) ? d.tags : (typeof d.tags === 'string' ? d.tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+                if (tags.length) {
+                    const tagsEl = el('div', 'tags');
+                    tags.forEach(t => tagsEl.appendChild(el('span', 'tag', String(t))));
+                    grid.appendChild(tagsEl);
+                }
+
+                if (d.sourceStatement) grid.appendChild(section('Source statement', textBody(d.sourceStatement)));
+                grid.appendChild(section('Formal description', textBody(d.wordDescription)));
+                grid.appendChild(section('Mathematical description', textBody(d.mathematicalConditions, 'mono')));
+                grid.appendChild(section('Progress', buildProgress(d)));
+                grid.appendChild(section(`Comments (${d.comments.length})`, buildComments(d.comments)));
+                return grid;
+            }
+
+            function buildProgress(d) {
+                const wrap = el('div');
+                const item = (label, node, when) => {
+                    const it = el('div', 'progress-item');
+                    const lab = el('div', 'label', label);
+                    if (when) lab.appendChild(el('span', '', when));
+                    it.appendChild(lab);
+                    it.appendChild(node);
+                    wrap.appendChild(it);
+                };
+                if (d.statusDetails) item('Status details', el('div', 'body', safeStr(d.statusDetails)), fmtDate(d.contentUpdatedAt));
+                if (d.verificationNotes) item('Verification notes', el('div', 'body', safeStr(d.verificationNotes)), d.lastVerified || '');
+                const audit = d.resolutionAudit;
+                if (audit && typeof audit === 'object') {
+                    const a = el('div', 'body');
+                    const lines = [];
+                    if (audit.assessment) lines.push(`Assessment: ${audit.assessment}`);
+                    if (audit.remainingGap) lines.push(`Remaining gap: ${audit.remainingGap}`);
+                    if (audit.confidence) lines.push(`Confidence: ${audit.confidence}`);
+                    a.textContent = lines.join('\n');
+                    if (Array.isArray(audit.anchorsChecked) && audit.anchorsChecked.length) {
+                        a.appendChild(document.createTextNode('\nAnchors checked: '));
+                        audit.anchorsChecked.forEach((u, i) => {
+                            if (i) a.appendChild(document.createTextNode(', '));
+                            const link = el('a', '', String(u)); link.href = String(u); link.target = '_blank'; link.rel = 'noopener noreferrer';
+                            a.appendChild(link);
+                        });
+                    }
+                    item('Resolution audit', a);
+                }
+                const lit = Array.isArray(d.literature) ? d.literature : [];
+                if (lit.length) {
+                    const table = el('table', 'lit');
+                    const sorted = [...lit].sort((x, y) => {
+                        const yx = x && typeof x === 'object' && x.year != null ? Number(x.year) : NaN;
+                        const yy = y && typeof y === 'object' && y.year != null ? Number(y.year) : NaN;
+                        if (Number.isNaN(yx) && Number.isNaN(yy)) return 0;
+                        if (Number.isNaN(yx)) return 1;
+                        if (Number.isNaN(yy)) return -1;
+                        return yy - yx;
+                    });
+                    for (const entry of sorted) {
+                        const tr = el('tr');
+                        let year = '—', title = '', desc = '', link = '';
+                        if (typeof entry === 'string') title = entry;
+                        else if (entry && typeof entry === 'object') {
+                            year = entry.year != null ? String(entry.year) : '—';
+                            title = safeStr(entry.title); desc = safeStr(entry.description); link = safeStr(entry.link);
+                        } else title = String(entry);
+                        const yearTd = el('td', 'year');
+                        if (link) { const a = el('a', '', year); a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer'; yearTd.appendChild(a); }
+                        else yearTd.textContent = year;
+                        tr.append(yearTd, el('td', 'title', title), el('td', 'desc', desc));
+                        table.appendChild(tr);
+                    }
+                    item(`Literature (${lit.length})`, table);
+                }
+                if (!wrap.childElementCount) wrap.appendChild(el('div', 'muted', 'No progress recorded.'));
+                return wrap;
+            }
+
+            function buildComments(comments) {
+                const wrap = el('div');
+                const list = Array.isArray(comments) ? comments.filter(c => c && typeof c === 'object') : [];
+                if (!list.length) { wrap.appendChild(el('div', 'muted', 'No comments yet.')); return wrap; }
+                for (const c of list) {
+                    const card = el('article', 'comment');
+                    const head = el('div', 'head');
+                    head.appendChild(el('b', '', authorName(c.author)));
+                    const when = el('time', '', safeStr(c.createdAt) + (c.updatedAt ? ` (edited ${safeStr(c.updatedAt)})` : ''));
+                    head.appendChild(when);
+                    card.appendChild(head);
+                    card.appendChild(el('div', 'cbody', safeStr(c.body)));
+                    wrap.appendChild(card);
+                }
+                return wrap;
+            }
+
+            // ── events ──
+            fileUpload.addEventListener('change', async e => {
+                const files = Array.from(e.target.files);
+                fileUpload.value = '';
+                if (files.length) await loadFiles(files);
+            });
+            document.getElementById('loadRepo').addEventListener('click', loadFromGithub);
+            document.getElementById('expandAll').addEventListener('click', () => { visibleEntries().forEach(e => expanded.add(e.id)); render(); });
+            document.getElementById('collapseAll').addEventListener('click', () => { expanded.clear(); render(); });
+            document.getElementById('clearAll').addEventListener('click', () => { entries = []; expanded.clear(); rebuildStatusFilter(); render(); });
+            searchEl.addEventListener('input', render);
+            statusFilterEl.addEventListener('change', render);
+            document.querySelectorAll('.sheet th[data-key]').forEach(th => {
+                if (!th.dataset.key) return;
+                th.addEventListener('click', () => {
+                    if (sortKey === th.dataset.key) sortDir = -sortDir;
+                    else { sortKey = th.dataset.key; sortDir = th.dataset.key === 'progress' ? -1 : 1; }
+                    render();
+                });
+            });
+
+            document.addEventListener('dragover', e => { e.preventDefault(); document.body.classList.add('dragging'); });
+            document.addEventListener('dragleave', e => { if (!e.relatedTarget) document.body.classList.remove('dragging'); });
+            document.addEventListener('drop', async e => {
+                e.preventDefault();
+                document.body.classList.remove('dragging');
+                const files = Array.from(e.dataTransfer.files).filter(f => f.name.endsWith('.json'));
+                if (files.length) await loadFiles(files);
+            });
+            document.addEventListener('keydown', e => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'o') { e.preventDefault(); fileUpload.click(); }
+            });
+
+            render();
+            const srcParams = new URLSearchParams(location.search).getAll('src')
+                .flatMap(v => v.split(',')).map(s => s.trim()).filter(Boolean);
+            if (srcParams.length) loadFromUrls(srcParams);
+        })();
+    </script>
+</body>
+</html>
