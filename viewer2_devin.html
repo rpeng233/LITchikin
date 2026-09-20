@@ -106,7 +106,7 @@
             overflow: auto;
         }
         table.sheet {
-            width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
             font-size: 0.92rem;
         }
@@ -118,6 +118,8 @@
         }
         .sheet th {
             position: sticky; top: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
             background: var(--surface-alt);
             font-weight: 650;
             font-size: 0.82rem;
@@ -131,16 +133,24 @@
         }
         .sheet th.sorted { color: var(--accent); }
         .sheet th .arrow { font-size: 0.7rem; margin-left: 4px; }
+        .sheet th .resizer {
+            position: absolute; top: 0; right: 0; bottom: 0;
+            width: 7px; cursor: col-resize; z-index: 2;
+        }
+        .sheet th .resizer::after {
+            content: ''; position: absolute; top: 6px; bottom: 6px; right: 2px;
+            width: 2px; background: var(--border);
+        }
+        .sheet th .resizer:hover::after, .sheet th .resizer.active::after { background: var(--accent); }
+        body.resizing, body.resizing * { cursor: col-resize !important; user-select: none; }
         .sheet tbody tr.row { cursor: pointer; }
         .sheet tbody tr.row:hover { background: var(--accent-light); }
         .sheet tbody tr.row.open { background: var(--accent-light); }
-        .sheet td.col-toggle { width: 28px; color: var(--text-secondary); font-family: var(--font-mono); text-align: center; }
-        .sheet td.col-idx { width: 260px; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.78rem; overflow-wrap: anywhere; }
+        .sheet td { overflow-wrap: anywhere; }
+        .sheet td.col-toggle { color: var(--text-secondary); font-family: var(--font-mono); text-align: center; }
+        .sheet td.col-idx { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.78rem; }
         .sheet td.col-idx .sep { color: #b3b9c4; margin: 0 3px; }
-        .sheet td.col-status { width: 160px; }
-        .sheet td.col-date { width: 130px; font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap; }
-        .sheet td.col-catalog { width: 220px; color: var(--text-secondary); font-size: 0.82rem; }
-        .sheet td.col-comments { width: 50px; text-align: center; color: var(--text-secondary); font-size: 0.85rem; }
+        .sheet td.col-date { font-family: var(--font-mono); font-size: 0.85rem; }
         .sheet .empty { text-align: center; color: #9aa1ad; padding: 40px 10px; cursor: default; }
 
         .pill {
@@ -232,16 +242,21 @@
     </div>
 
     <div class="sheet-wrap">
-        <table class="sheet">
+        <table class="sheet" id="sheet">
+            <colgroup>
+                <col data-col="toggle">
+                <col data-col="index">
+                <col data-col="name">
+                <col data-col="status">
+                <col data-col="progress">
+            </colgroup>
             <thead>
                 <tr>
-                    <th data-key="" style="cursor:default"></th>
-                    <th data-key="index" title="catalogId ::: record suffix">ID</th>
-                    <th data-key="name">Problem</th>
-                    <th data-key="status">Status</th>
-                    <th data-key="progress">Last progress</th>
-                    <th data-key="comments" title="Number of comments">Cmts</th>
-                    <th data-key="catalog">Catalog</th>
+                    <th data-key="" data-col="toggle" style="cursor:default"></th>
+                    <th data-key="index" data-col="index" title="catalogId ::: record suffix">ID</th>
+                    <th data-key="name" data-col="name">Problem</th>
+                    <th data-key="status" data-col="status">Status</th>
+                    <th data-key="progress" data-col="progress">Last progress</th>
                 </tr>
             </thead>
             <tbody id="rows"></tbody>
@@ -269,6 +284,9 @@
             let entries = [];          // { id, recordId, recordSuffix, catalogId, catalogTitle, filename, data, name, status, progressT, progressLabel, progressWhy }
             const expanded = new Set();
             let sortKey = 'index';
+            const COLUMNS = ['toggle', 'index', 'name', 'status', 'progress'];
+            const DEFAULT_WIDTHS = { toggle: 32, index: 260, name: 600, status: 170, progress: 160 };
+            const MIN_WIDTHS = { toggle: 24, index: 80, name: 160, status: 70, progress: 70 };
             let sortDir = 1;
             let idCounter = 0;
             let toastTimer;
@@ -584,8 +602,6 @@
                     name: (a, b) => a.name.localeCompare(b.name),
                     status: (a, b) => a.status.localeCompare(b.status) || a.id - b.id,
                     progress: cmpProgress,
-                    comments: (a, b) => a.data.comments.length - b.data.comments.length || a.id - b.id,
-                    catalog: (a, b) => a.catalogId.localeCompare(b.catalogId) || a.id - b.id,
                 }[sortKey] || ((a, b) => a.id - b.id);
                 list.sort((a, b) => sortDir * cmp(a, b));
                 return list;
@@ -621,7 +637,7 @@
                 if (!list.length) {
                     const tr = el('tr');
                     const td = el('td', 'empty', entries.length ? 'No problems match the current filter.' : 'No problems loaded.');
-                    td.colSpan = 7;
+                    td.colSpan = COLUMNS.length;
                     tr.appendChild(td);
                     rowsEl.appendChild(tr);
                     return;
@@ -634,7 +650,7 @@
                     tr.appendChild(el('td', 'col-toggle', isOpen ? '▾' : '▸'));
                     const idTd = el('td', 'col-idx');
                     idTd.append(e.catalogId, el('span', 'sep', ':::'), e.recordSuffix);
-                    idTd.title = e.recordId;
+                    idTd.title = `${e.recordId}\n${e.catalogTitle || e.catalogId} · ${e.filename}`;
                     tr.appendChild(idTd);
                     const nameTd = el('td', 'col-name', e.name);
                     nameTd.title = e.recordId;
@@ -647,17 +663,13 @@
                     const dateTd = el('td', 'col-date', e.progressLabel || '—');
                     dateTd.title = e.progressWhy;
                     tr.appendChild(dateTd);
-                    tr.appendChild(el('td', 'col-comments', e.data.comments.length ? String(e.data.comments.length) : ''));
-                    const catTd = el('td', 'col-catalog', e.catalogTitle || e.catalogId);
-                    catTd.title = `${e.catalogId} · ${e.filename}`;
-                    tr.appendChild(catTd);
                     tr.addEventListener('click', () => toggle(e.id));
                     rowsEl.appendChild(tr);
 
                     if (isOpen) {
                         const dtr = el('tr', 'detail');
                         const td = el('td');
-                        td.colSpan = 7;
+                        td.colSpan = COLUMNS.length;
                         td.appendChild(buildDetail(e));
                         dtr.appendChild(td);
                         rowsEl.appendChild(dtr);
@@ -827,11 +839,86 @@
             document.querySelectorAll('.sheet th[data-key]').forEach(th => {
                 if (!th.dataset.key) return;
                 th.addEventListener('click', () => {
+                    if (resizedRecently) return;
                     if (sortKey === th.dataset.key) sortDir = -sortDir;
                     else { sortKey = th.dataset.key; sortDir = th.dataset.key === 'progress' ? -1 : 1; }
                     render();
                 });
             });
+
+            // ── resizable columns ──
+            // Every column has an explicit pixel width; the table is exactly their sum, so
+            // widening a column scrolls horizontally instead of squeezing its neighbours.
+            // The Problem column absorbs any slack so the table fills the viewport initially.
+            const sheetEl = document.getElementById('sheet');
+            const sheetWrap = sheetEl.parentElement;
+            const cols = Object.fromEntries(Array.from(sheetEl.querySelectorAll('col')).map(c => [c.dataset.col, c]));
+            const WIDTH_KEY = 'viewer2.colWidths';
+            let widths = { ...DEFAULT_WIDTHS };
+            let nameSized = false;     // user dragged the Problem column, so fitting may only widen it
+            try {
+                const saved = JSON.parse(localStorage.getItem(WIDTH_KEY) || 'null');
+                if (saved && typeof saved === 'object') {
+                    for (const k of COLUMNS) if (Number.isFinite(saved[k]) && saved[k] >= MIN_WIDTHS[k]) widths[k] = saved[k];
+                    nameSized = Number.isFinite(saved.name);
+                }
+            } catch (_) { /* ignore corrupt storage */ }
+            let resizedRecently = false;
+            const saveWidths = () => {
+                const out = { ...widths };
+                if (!nameSized) delete out.name;
+                try { localStorage.setItem(WIDTH_KEY, JSON.stringify(out)); } catch (_) { /* storage unavailable */ }
+            };
+
+            function applyWidths() {
+                let total = 0;
+                for (const k of COLUMNS) { cols[k].style.width = widths[k] + 'px'; total += widths[k]; }
+                sheetEl.style.width = total + 'px';
+            }
+            function fitToViewport() {
+                const avail = sheetWrap.clientWidth - 2;
+                const others = COLUMNS.filter(k => k !== 'name').reduce((s, k) => s + widths[k], 0);
+                widths.name = Math.max(MIN_WIDTHS.name, avail - others, nameSized ? widths.name : 0);
+                applyWidths();
+            }
+            document.querySelectorAll('.sheet th[data-col]').forEach(th => {
+                const key = th.dataset.col;
+                const handle = el('div', 'resizer');
+                handle.title = 'Drag to resize';
+                th.appendChild(handle);
+                handle.addEventListener('mousedown', ev => {
+                    ev.preventDefault(); ev.stopPropagation();
+                    const startX = ev.clientX, startW = widths[key];
+                    handle.classList.add('active');
+                    document.body.classList.add('resizing');
+                    const move = e => {
+                        widths[key] = Math.max(MIN_WIDTHS[key], startW + e.clientX - startX);
+                        if (key === 'name') nameSized = true;
+                        applyWidths();
+                    };
+                    const up = () => {
+                        document.removeEventListener('mousemove', move);
+                        document.removeEventListener('mouseup', up);
+                        handle.classList.remove('active');
+                        document.body.classList.remove('resizing');
+                        saveWidths();
+                        resizedRecently = true;
+                        setTimeout(() => { resizedRecently = false; }, 0);
+                    };
+                    document.addEventListener('mousemove', move);
+                    document.addEventListener('mouseup', up);
+                });
+                handle.addEventListener('dblclick', ev => {
+                    ev.stopPropagation();
+                    widths[key] = DEFAULT_WIDTHS[key];
+                    if (key === 'name') nameSized = false;
+                    fitToViewport();
+                    saveWidths();
+                });
+                handle.addEventListener('click', ev => ev.stopPropagation());
+            });
+            new ResizeObserver(fitToViewport).observe(sheetWrap);
+            fitToViewport();
 
             document.addEventListener('dragover', e => { e.preventDefault(); document.body.classList.add('dragging'); });
             document.addEventListener('dragleave', e => { if (!e.relatedTarget) document.body.classList.remove('dragging'); });

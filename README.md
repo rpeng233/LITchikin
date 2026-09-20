@@ -164,9 +164,10 @@ uses backslash escapes, LaTeX backslashes must be doubled inside JSON strings.
 ## Sheet viewer
 
 `viewer2_devin.html` shows every loaded problem as one row of a spreadsheet:
-ID, problem name, status, most recent progress date, comment count, and
-catalog. The ID column is `<catalogId> ::: <record suffix>` (the part of
-`recordId` after `lit:<catalogId>:`). "Last progress" is the date of the most
+ID, problem name, status, and most recent progress date (the catalog and file
+name appear in the ID cell's tooltip). The ID column is
+`<catalogId> ::: <record suffix>` (the part of `recordId` after
+`lit:<catalogId>:`). "Last progress" is the date of the most
 recent `literature` entry, taken from each entry's `year` (integer, year
 string, or `YYYY-MM[-DD]` string); a problem with no dated literature shows
 "—" and sorts last. Clicking a row expands it in place with the
@@ -174,7 +175,9 @@ source statement, formal description, mathematical description, progress
 (`statusDetails`, verification notes, resolution audit, literature), and
 comments.
 
-Columns sort on click; the search box and status dropdown filter rows. Load
+Columns sort on click and resize by dragging the divider at the right edge of a
+header (double-click it to reset); widths persist in the browser's local
+storage. The search box and status dropdown filter rows. Load
 catalogs by choosing files, dropping them onto the page, clicking "Load from
 GitHub" (fetches every catalog under `data/` from this repository), or passing
 `?src=<url>` (repeatable or comma-separated). It applies the same `1.4`
