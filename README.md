@@ -12,6 +12,7 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 │   ├── LaplacianOpenProblems.json
 │   └── SimonsF25ComplexityLinAlg.json
 ├── gener_ds.html
+├── sheet_viewer.html
 ├── open_problem_record.schema.json
 └── viewer.html
 ```
@@ -158,3 +159,21 @@ showing any problems from a file.
 
 MathJax renders `$...$`, `$$...$$`, `\\(...\\)`, and `\\[...\\]`. Because JSON
 uses backslash escapes, LaTeX backslashes must be doubled inside JSON strings.
+
+## Sheet viewer
+
+`sheet_viewer.html` shows every loaded problem as one row of a spreadsheet:
+problem name, status, most recent progress date, comment count, and catalog.
+"Last progress" is the latest of the problem's `contentUpdatedAt` and its
+comments' `createdAt`/`updatedAt`. Clicking a row expands it in place with the
+source statement, formal description, mathematical description, progress
+(`statusDetails`, verification notes, resolution audit, literature), and
+comments.
+
+Columns sort on click; the search box and status dropdown filter rows. Load
+catalogs by choosing files, dropping them onto the page, clicking "Load from
+GitHub" (fetches every catalog under `data/` from this repository), or passing
+`?src=<url>` (repeatable or comma-separated). It applies the same `1.4`
+validation as `viewer.html`, and records whose `recordId` was already loaded are
+skipped, so overlapping catalogs such as `data/discrepancy/` do not duplicate
+rows.
