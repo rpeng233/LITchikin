@@ -3,54 +3,66 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.1: Constructive Komlós",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
       "recordId": "lit:hereddiscrep-aimpl:1.1",
       "sourceStatement": "Find a polynomial time algorithm to find the signs above.",
       "problem": "Design a polynomial-time algorithm that, given vectors $v_1, \\dots, v_n$ in the Euclidean unit ball of $\\mathbb{R}^d$, finds signs $\\epsilon_i \\in \\{-1, 1\\}$ achieving the strongest known (Komlós-type) discrepancy guarantee on $\\|\\sum_i \\epsilon_i v_i\\|_\\infty$.",
-      "wordDescription": "Banaszczyk's bound $O(\\sqrt{\\log \\min\\{d, n\\}})$ for the Komlós problem was originally non-constructive, and the question of finding the signs efficiently was a major challenge. The workshop-era status was a constructive $O(\\log \\min\\{d, n\\})$ bound via the partial-coloring based algorithms of Bansal and of Lovett-Meka and the convex-geometric algorithm of Rothvoss. Shortly after the workshop this gap was closed: Bansal, Dadush and Garg (FOCS 2016) gave a polynomial-time algorithm matching Banaszczyk's bound for the Komlós problem, and Bansal, Dadush, Garg and Lovett then gave a constructive version of the full Banaszczyk vector-balancing theorem (the Gram-Schmidt walk), with an alternative multiplicative-weight-update approach by Dadush, Garg, Lovett and Nikolov. The problem as posed is therefore essentially resolved: the remaining gap between the achievable constructive bound and a constant is exactly the Komlós conjecture itself.",
-      "mathematicalConditions": "Design a randomized (or deterministic) polynomial-time algorithm that, on input $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, outputs a coloring $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq f(d, n)$, where $f(d, n) = O(\\sqrt{\\log \\min\\{d, n\\}})$ matches Banaszczyk's non-constructive bound.",
+      "wordDescription": "Banaszczyk's bound $O(\\sqrt{\\log \\min\\{d, n\\}})$ for the Komlós problem was originally non-constructive, and finding the signs efficiently was a major challenge. The workshop-era status was a constructive $O(\\log \\min\\{d, n\\})$ bound via the partial-coloring algorithms of Bansal and of Lovett-Meka and the convex-geometric algorithm of Rothvoss. Shortly after the workshop the gap was closed: Bansal, Dadush and Garg (FOCS 2016) gave a polynomial-time algorithm matching Banaszczyk's bound, Bansal, Dadush, Garg and Lovett made the full Banaszczyk vector-balancing theorem constructive (the Gram-Schmidt walk), and Dadush, Garg, Lovett and Nikolov gave an alternative multiplicative-weight-update approach. Since then every improvement of the existential bound has been algorithmic as well: the current best general bound $\\widetilde{O}(\\log^{1/4} n)$ of Bansal and Jiang (2025) is achieved by a polynomial-time algorithm. The problem as posed is therefore resolved relative to the state of Problem 1.05: the only remaining gap between the constructive bound and a constant is the Komlós conjecture itself.",
+      "mathematicalConditions": "Setting. Let $f^{*}(d, n)$ denote the best bound currently proven for Problem 1.05, i.e. the smallest known function with $K(d, n) \\leq f^{*}(d, n)$; at present $f^{*}(d, n) = \\min\\{O(\\sqrt{\\log \\min\\{d, n\\}}),\\ \\widetilde{O}(\\log^{1/4} n)\\}$. Problem. Give an algorithm that, on input $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$ (rational entries), runs in time $\\mathrm{poly}(n, d, \\text{bit-size})$ and outputs $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq C\\, f^{*}(d, n)$ for an absolute constant $C$ (randomized algorithms succeeding with probability $\\geq 2/3$ are allowed). Benchmarks. Constructive $O(\\log \\min\\{d,n\\})$ (Bansal 2010; Lovett-Meka 2012; Rothvoss 2014); constructive $O(\\sqrt{\\log \\min\\{d, n\\}})$ (Bansal-Dadush-Garg 2016; Bansal-Dadush-Garg-Lovett 2018; Dadush-Garg-Lovett-Nikolov 2019); constructive $\\widetilde{O}(\\log^{1/4} n)$ (Bansal-Jiang 2025). Hence the constructive and existential states coincide and the record is resolved up to Problem 1.05. Complete resolution. A polynomial-time algorithm achieving $\\|\\sum_i \\epsilon_i v_i\\|_\\infty \\leq c$ for an absolute constant $c$ (this would also prove the Komlós conjecture). Minimal progress that counts as a solution of this record. Any of: (i) a polynomial-time algorithm whose guarantee is $O((\\log n)^\\gamma)$ with $\\gamma < 1/4$ (equivalently, algorithmic progress on Problem 1.05(i)); (ii) a deterministic polynomial-time algorithm matching a bound of $O(\\sqrt{\\log \\min\\{d,n\\}})$ or better; (iii) a near-linear-time (e.g. $\\widetilde{O}(nd)$) algorithm matching $O(\\sqrt{\\log \\min\\{d,n\\}})$; (iv) an efficient algorithm that, given any input, either certifies (via a polynomial-time verifiable certificate) that its discrepancy is at least a constant times its output, or achieves $O(1)$.",
       "status": "equivalent to problem 1.05",
       "comments": [],
       "literature": [
         {
           "title": "N. Bansal, Constructive algorithms for discrepancy minimization, FOCS 2010",
           "year": 2010,
-          "description": "The breakthrough SDP-based algorithm that first made classical discrepancy bounds (including Spencer's theorem and $O(\\sqrt{t} \\log n)$ for the $t$-sparse setting) constructive.",
-          "link": "https://scholar.google.com/scholar?q=Bansal+Constructive+algorithms+for+discrepancy+minimization+FOCS+2010"
+          "description": "The SDP-based random-walk algorithm that first made classical discrepancy bounds (Spencer's theorem and $O(\\sqrt{t}\\log n)$ for $t$-sparse systems) constructive.",
+          "link": "https://arxiv.org/abs/1002.2259",
+          "doi": "10.1109/FOCS.2010.7"
         },
         {
-          "title": "S. Lovett, R. Meka, Constructive discrepancy minimization by walking on the edges, FOCS 2012; SIAM Journal on Computing 44(5):1573-1605, 2015",
+          "title": "S. Lovett, R. Meka, Constructive discrepancy minimization by walking on the edges, FOCS 2012; SIAM Journal on Computing 44(5):1573-1582, 2015",
           "year": 2015,
-          "description": "A simpler random-walk ('edge-walk') algorithm matching Spencer's theorem; the partial-coloring machinery adapted to it yields the constructive $O(\\log \\min\\{d, n\\})$ bound for the Komlós problem.",
-          "link": "https://scholar.google.com/scholar?q=Lovett+Meka+Constructive+discrepancy+minimization+by+walking+on+the+edges"
+          "description": "Simpler 'edge-walk' algorithm for partial colorings, matching Spencer's theorem and giving constructive $O(\\log \\min\\{d,n\\})$-type bounds for the Komlós problem.",
+          "link": "https://arxiv.org/abs/1203.5747",
+          "doi": "10.1137/130929400"
         },
         {
-          "title": "T. Rothvoss, Constructive discrepancy minimization for convex sets, FOCS 2014",
-          "year": 2014,
-          "description": "A convex-geometric approach via Gaussian measure and separation oracles that also yields constructive bounds for the Komlós problem.",
-          "link": "https://scholar.google.com/scholar?q=Rothvoss+Constructive+discrepancy+minimization+for+convex+sets+FOCS+2014"
+          "title": "T. Rothvoss, Constructive discrepancy minimization for convex sets, FOCS 2014; SIAM Journal on Computing 46(1):224-234, 2017",
+          "year": 2017,
+          "description": "Convex-geometric partial-coloring algorithm (Gaussian projection onto a convex body) that makes all Gaussian-measure based partial-coloring bounds constructive.",
+          "link": "https://arxiv.org/abs/1404.0339",
+          "doi": "10.1137/141000282"
         },
         {
-          "title": "N. Bansal, D. Dadush, S. Garg, An algorithm for Komlós conjecture matching Banaszczyk's bound, FOCS 2016",
-          "year": 2016,
-          "description": "First polynomial-time algorithm achieving Banaszczyk's $O(\\sqrt{\\log \\min\\{d, n\\}})$ bound for the Komlós problem, resolving the constructive-Komlós question up to the conjecture itself.",
-          "link": "https://scholar.google.com/scholar?q=Bansal+Dadush+Garg+An+algorithm+for+Komlos+conjecture+matching+Banaszczyk+bound"
-        },
-        {
-          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, SoCG 2016; Theory of Computing 15(15):1-58, 2019",
+          "title": "N. Bansal, D. Dadush, S. Garg, An algorithm for Komlós conjecture matching Banaszczyk's bound, FOCS 2016; SIAM Journal on Computing 48(2):534-553, 2019",
           "year": 2019,
-          "description": "Multiplicative-weight-update based algorithm for the general vector-balancing theorem of Banaszczyk; also discusses the tightness of the Gaussian measure threshold $1/2$.",
-          "link": "https://arxiv.org/abs/1612.04304"
+          "description": "First polynomial-time algorithm achieving Banaszczyk's $O(\\sqrt{\\log \\min\\{d, n\\}})$ bound for the Komlós problem (and $O(\\sqrt{t \\log n})$ for Beck-Fiala).",
+          "link": "https://arxiv.org/abs/1605.02882",
+          "doi": "10.1137/17M1126795"
         },
         {
-          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018",
-          "year": 2018,
-          "description": "Constructive algorithm matching Banaszczyk's theorem for arbitrary convex bodies (beyond cubes), subsuming the constructive Komlós and Beck-Fiala results.",
-          "link": "https://arxiv.org/abs/1708.01079"
+          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018; Theory of Computing 15(21):1-27, 2019",
+          "year": 2019,
+          "description": "Constructive version of Banaszczyk's full vector-balancing theorem (for arbitrary convex bodies of Gaussian measure at least $1/2$), via the Gram-Schmidt walk.",
+          "link": "https://arxiv.org/abs/1708.01079",
+          "doi": "10.4086/toc.2019.v015a021"
+        },
+        {
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, APPROX/RANDOM 2016; Theory of Computing 15(15):1-58, 2019",
+          "year": 2019,
+          "description": "Multiplicative-weight-update based algorithm for Banaszczyk's theorem given a suitable subgaussian distribution; also discusses the tightness of the Gaussian-measure threshold $1/2$.",
+          "link": "https://arxiv.org/abs/1612.04304",
+          "doi": "10.4086/toc.2019.v015a015"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.03961, 2025",
+          "year": 2025,
+          "description": "Gives an algorithmic $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem, the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$, and proves the Beck-Fiala conjecture (discrepancy $O(\\sqrt{k})$) for all degrees $k \\geq \\log^2 n$, together with an $\\widetilde{O}(\\sqrt{k} + \\sqrt{\\log n})$ bound for every $k$.",
+          "link": "https://arxiv.org/abs/2508.03961"
         }
       ],
       "source": {
@@ -70,10 +82,11 @@
         "algorithmic discrepancy",
         "polynomial time"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The page's status '$O(\\log min\\{d,n\\})$ [Bansal'10, Lovett-Meka'14, Rothvoss'15]' matches the workshop-era state of the art: Garg's thesis (TU Eindhoven, 2018) states that 'partial coloring, and the algorithms for it, can be adapted to give an O(log n) bound for the Komlós setting'. The later improvement to $O(\\sqrt{\\log \\min\\{d, n\\}})$ by Bansal-Dadush-Garg (FOCS 2016) and Bansal-Dadush-Garg-Lovett (Gram-Schmidt walk, arXiv:1708.01079) is confirmed by multiple sources, e.g. arXiv:1806.04484 and arXiv:2207.03268 ('later work has since then closed the gap and given a polynomial time algorithm matching Banaszczyk's bound').",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/ and the arXiv listings of the cited papers. On 2026-09-20 the Google Scholar search links were replaced with arXiv/DOI links, the Gram-Schmidt walk paper was cited directly, and the record was updated to note that the Bansal-Jiang $\\widetilde{O}(\\log^{1/4} n)$ bound (arXiv:2508.03961) is algorithmic, so the constructive state equals the existential state.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "At workshop time: $O(\\log \\min\\{d, n\\})$ [Bansal'10, Lovett-Meka'14, Rothvoss'15]. Since then Bansal-Dadush-Garg (FOCS 2016) and Bansal-Dadush-Garg-Lovett (2016/2017) achieve $O(\\sqrt{\\log \\min\\{d, n\\}})$ constructively, matching Banaszczyk. The remaining challenge of a constant guarantee is equivalent to the Komlós conjecture."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "A polynomial-time algorithm matching Banaszczyk's $O(\\sqrt{\\log \\min\\{d, n\\}})$ bound was given by Bansal, Dadush and Garg (FOCS 2016); constructive versions of the full Banaszczyk theorem followed (Gram-Schmidt walk, STOC 2018; Dadush-Garg-Lovett-Nikolov). The best current existential bound $\\widetilde{O}(\\log^{1/4} n)$ of Bansal and Jiang (arXiv:2508.03961, 2025) is also algorithmic. Any further constructive improvement is equivalent to progress on Problem 1.05.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

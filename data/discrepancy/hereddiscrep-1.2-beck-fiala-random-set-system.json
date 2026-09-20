@@ -3,36 +3,51 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.2: Beck-Fiala for random set systems",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
       "recordId": "lit:hereddiscrep-aimpl:1.2",
       "sourceStatement": "Each element $i\\in [n]$ lies in $t$ randomly selected sets from $\\mathcal{S}$. They show that when $m\\ge n$, hereditary discrepancy of the set system is $O(\\sqrt{t\\log t})$ whp. When $n\\ge m^t$, hereditary discrepancy is $O(1)$. An open question is to explore this setting for the remaining range of parameters i.e. when $n^{1/t} < m < n$.",
-      "problem": "Determine the hereditary discrepancy of random sparse set systems: with $n$ elements and $m$ sets, each element placed in $t$ uniformly random sets, what is the hereditary discrepancy with high probability, especially in the intermediate parameter regime $n^{1/t} < m < n$?",
-      "wordDescription": "This is a probabilistic version of the Beck-Fiala conjecture due to Esther Ezra and Shachar Lovett. In the model where each element is assigned to $t$ random sets, they proved: (i) when $m \\geq n$ the hereditary discrepancy is $O(\\sqrt{t\\log t})$ with high probability, via a combination of the Lovász Local Lemma and partial matchings; and (ii) when $n \\gg m^t$ the hereditary discrepancy is $O(1)$, via an analysis of the lattice spanned by sparse vectors. The interesting open case is the intermediate range $n^{1/t} < m < n$, where neither regime applies. Follow-up work by Hoberg and Rothvoss made progress: a Fourier-analytic argument gives discrepancy at most 1 when $n \\geq \\Theta(m^2 \\log m)$, and a subsequent paper shows expected discrepancy $O(\\sqrt{t})$ over the whole range when $t = \\Omega((\\log\\log m)^2)$; an $\\Omega(\\sqrt{t})$ spectral lower bound (e.g. for $n = m = 2t$) shows this is tight.",
-      "mathematicalConditions": "Let $\\mathcal{S} = (X, \\Sigma)$ be a random set system with $|X| = n$ and $|\\Sigma| = m$, where each element $x \\in X$ is placed into $t$ sets chosen uniformly at random from $\\Sigma$ (the $t$-tuple of sets containing $x$ is uniform among the $\\binom{m}{t}$ possibilities). Determine the asymptotic behavior, with high probability, of $\\mathrm{herdisc}(X, \\Sigma)$, in particular in the regime $n^{1/t} < m < n$ not covered by the two known bounds ($m \\geq n \\Rightarrow O(\\sqrt{t\\log t})$; $n \\gg m^t \\Rightarrow O(1)$).",
+      "problem": "Determine the (hereditary) discrepancy of a random $t$-sparse set system: $n$ elements, $m$ sets, each element placed in $t$ sets chosen uniformly at random. Is it $O(\\sqrt{t})$ with high probability for all $n, m$ and all $t$, and in particular in the intermediate regime $n^{1/t} \\ll m \\ll n$ for small $t$?",
+      "wordDescription": "A natural test case for the Beck-Fiala conjecture is the random $t$-sparse model in which every element is put into $t$ uniformly random sets. Ezra and Lovett (2015) showed that the hereditary discrepancy is $O(\\sqrt{t \\log t})$ when $m \\geq n$ and $O(1)$ when $n \\gg m^t$, leaving open the intermediate regime. Subsequent work essentially settled the discrepancy of the whole system for moderately large $t$: Potukuchi (2018) proved $O(\\sqrt{t})$ almost surely for $m = n$ and $\\log^{10} n \\ll t \\ll \\sqrt{n}$, and Bansal and Meka (2019) proved a tight $O(\\sqrt{t})$ bound for the entire range of $n$ and $m$ provided $t = \\Omega((\\log\\log m)^2)$. In the related regime of many columns, Franks and Saks showed discrepancy at most $2$ for random $t$-sparse matrices once $n = \\Omega(m^3 \\log^2 m)$, Hoberg and Rothvoss showed discrepancy at most $1$ for the i.i.d. Bernoulli$(p)$ model when $n \\geq \\Theta(m^2 \\log m)$, and Potukuchi lowered this threshold to $n = \\Omega(m \\log m)$ for $p = 1/2$. What remains open is the regime of very small (in particular constant) $t$ in the intermediate range $n^{1/t} \\ll m \\ll n$, and the hereditary version of the newer bounds.",
+      "mathematicalConditions": "Model $\\mathcal{H}_1(n, m, t)$. Elements $X = [n]$, sets $S_1, \\dots, S_m$; independently for each $x \\in X$, a uniformly random $t$-subset $T_x \\subseteq [m]$ is chosen and $x$ is placed in exactly the sets $S_j$, $j \\in T_x$. Let $A \\in \\{0,1\\}^{m \\times n}$ be the incidence matrix. $\\mathrm{disc}(A) = \\min_{x \\in \\{-1,1\\}^n} \\|Ax\\|_\\infty$; $\\mathrm{herdisc}(A) = \\max_{J \\subseteq [n]} \\mathrm{disc}(A_J)$ where $A_J$ is the column-restriction to $J$. All statements are 'with high probability' (w.h.p.), i.e. with probability $1 - o(1)$ as $n \\to \\infty$, with $m = m(n)$ and $t = t(n)$. Question. Is $\\mathrm{disc}(A) = O(\\sqrt{t})$ w.h.p. for all $m, t$; and is the same true for $\\mathrm{herdisc}(A)$? Benchmarks. $\\mathrm{herdisc}(A) = O(\\sqrt{t \\log t})$ w.h.p. if $m \\geq n$, and $\\mathrm{herdisc}(A) = O(1)$ w.h.p. if $n \\gg m^t$ (Ezra-Lovett 2015). $\\mathrm{disc}(A) = O(\\sqrt{t})$ almost surely when $m = n$ and $\\log^{10} n \\ll t \\ll \\sqrt{n}$ (Potukuchi 2018). $\\mathrm{disc}(A) = O(\\sqrt{t})$ for all $n, m$ whenever $t = \\Omega((\\log\\log m)^2)$ (Bansal-Meka 2019, stated as tight: the discrepancy is also $\\Omega(\\sqrt{t})$ w.h.p. in the regimes where the sets have size $\\gg t$). Many-columns regime of $\\mathcal{H}_1$: $\\mathrm{disc}(A) \\leq 2$ w.h.p. once $n = \\Omega(m^3 \\log^2 m)$ (Franks-Saks 2020, improving Ezra-Lovett's $n \\geq m^t$). Related model $\\mathcal{H}_2(n, m, p)$: the entries of $A \\in \\{0,1\\}^{m \\times n}$ are i.i.d. Bernoulli$(p)$; $\\mathrm{disc}(A) \\leq 1$ w.h.p. when $n \\geq \\Theta(m^2 \\log m)$ (Hoberg-Rothvoss 2019), and $\\mathrm{disc}(A) \\leq 1$ a.s. when $p = 1/2$ and $n = \\Omega(m \\log m)$ (Potukuchi 2018, answering a question of Hoberg-Rothvoss). Complete resolution. A proof that, in $\\mathcal{H}_1(n,m,t)$, $\\mathrm{disc}(A) = O(\\sqrt{t})$ w.h.p. for all $m = m(n)$ and all $1 \\leq t \\leq m$ (any growth of $t$), together with either the same for $\\mathrm{herdisc}(A)$ or a proof that $\\mathrm{herdisc}(A) = \\omega(\\sqrt{t})$ w.h.p. in some regime; or a disproof exhibiting a regime with $\\mathrm{disc}(A) = \\omega(\\sqrt{t})$ w.h.p. Minimal progress that counts as a solution of this record. Any of: (i) $\\mathrm{disc}(A) = O(\\sqrt{t})$ w.h.p. for all $m$ and all $t \\geq t_0$ with $t_0 = o((\\log\\log m)^2)$ (e.g. $t_0 = O(1)$ or $t_0 = O(\\log\\log m)$); (ii) for fixed $t \\geq 3$, determining whether $\\mathrm{disc}(A) = O(1)$ w.h.p. throughout $n^{1/t} \\ll m \\ll n$ (or finding a sub-regime where it is not); (iii) $\\mathrm{herdisc}(A) = O(\\sqrt{t})$ w.h.p. for $m \\geq n$ (removing the $\\sqrt{\\log t}$ of Ezra-Lovett) or in any intermediate regime not covered by Ezra-Lovett; (iv) a polynomial-time algorithm finding a coloring of discrepancy $O(\\sqrt{t})$ w.h.p. in a regime where only an existential bound is known. Improvements of constants or of the exponent $10$ in $\\log^{10} n$ do not count.",
       "status": "partial progress",
       "comments": [],
       "literature": [
         {
-          "title": "E. Ezra, S. Lovett, On the Beck-Fiala conjecture for random set systems, APPROX/RANDOM 2016 (LIPIcs vol. 60, 29:1-29:10); Random Structures & Algorithms 54(4):665-675, 2019",
+          "title": "E. Ezra, S. Lovett, On the Beck-Fiala conjecture for random set systems, APPROX/RANDOM 2015; Random Structures & Algorithms 54(4):665-675, 2019",
           "year": 2019,
-          "description": "The source paper for this problem: proves $O(\\sqrt{t\\log t})$ when $|\\Sigma| \\geq |X|$ and $O(1)$ when $|X| \\gg |\\Sigma|^t$, and poses the intermediate regime as open.",
-          "link": "https://arxiv.org/abs/1511.00583"
+          "description": "Introduces the random $t$-sparse model and proves $\\mathrm{herdisc} = O(\\sqrt{t \\log t})$ w.h.p. for $m \\geq n$ and $O(1)$ for $n \\gg m^t$.",
+          "link": "https://arxiv.org/abs/1511.00583",
+          "doi": "10.1002/rsa.20810"
         },
         {
-          "title": "R. Hoberg, T. Rothvoss, A Fourier-analytic approach for the discrepancy of random set systems, arXiv:1806.04484, 2018",
+          "title": "A. Potukuchi, Discrepancy in random hypergraph models, arXiv:1811.01491, 2018",
           "year": 2018,
-          "description": "Fourier-analytic method showing discrepancy at most 1 with high probability when $n \\geq \\Theta(m^2 \\log m)$, improving the $O(1)$ regime of Ezra-Lovett (which required $n \\gg m^t$).",
+          "description": "In the model where every element lies in exactly $t$ random sets, proves discrepancy $O(\\sqrt{t})$ almost surely when $m = n$ and $\\log^{10} n \\ll t \\ll \\sqrt{n}$ (improving Ezra-Lovett in this range); in the i.i.d. model with $p = 1/2$ and $n = \\Omega(m \\log m)$ proves discrepancy at most $1$, answering a question of Hoberg-Rothvoss.",
+          "link": "https://arxiv.org/abs/1811.01491"
+        },
+        {
+          "title": "N. Bansal, R. Meka, On the discrepancy of random low degree set systems, SODA 2019; Random Structures & Algorithms 57(3):695-705, 2020",
+          "year": 2020,
+          "description": "Proves a tight $O(\\sqrt{t})$ discrepancy bound for the random $t$-sparse model for the entire range of $n$ and $m$ under $t = \\Omega((\\log\\log m)^2)$.",
+          "link": "https://arxiv.org/abs/1810.03374",
+          "doi": "10.1002/rsa.20935"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, A Fourier-analytic approach for the discrepancy of random set systems, SODA 2019; arXiv:1806.04484",
+          "year": 2019,
+          "description": "Introduces Fourier-analytic discrepancy bounds and applies them to the i.i.d. Bernoulli$(p)$ model: for $n \\geq \\Theta(m^2 \\log m)$ the discrepancy is at most $1$ w.h.p. (previously $O(1)$ only for $n \\gg m^t$ by Ezra-Lovett); the threshold was lowered to $n = \\Omega(m \\log m)$ for $p = 1/2$ by Potukuchi.",
           "link": "https://arxiv.org/abs/1806.04484"
         },
         {
-          "title": "R. Hoberg, T. Rothvoss, On the discrepancy of random low degree set systems, arXiv:1810.03374, 2018",
-          "year": 2018,
-          "description": "Shows the expected discrepancy is $O(\\sqrt{t})$ for the entire range of $n$ and $m$, provided $t = \\Omega((\\log\\log m)^2)$; also notes the $\\Omega(\\sqrt{t})$ spectral lower bound (e.g. $n = m = 2t$) and that the problem is open even for simple hypergraphs (pairwise intersecting edges in at most one element).",
-          "link": "https://arxiv.org/abs/1810.03374"
+          "title": "C. Franks, M. Saks, On the discrepancy of random matrices with many columns, Random Structures & Algorithms 57(1):64-96, 2020",
+          "year": 2020,
+          "description": "Local-limit-theorem approach (via Fourier analysis) to the discrepancy of random $m \\times n$ matrices with i.i.d. columns. For random $t$-sparse matrices ($t$ ones per column) shows $\\ell_\\infty$-discrepancy at most $2$ w.h.p. once $n = \\Omega(m^3 \\log^2 m)$, improving the $n \\geq m^t$ requirement of Ezra-Lovett.",
+          "link": "https://arxiv.org/abs/1807.04318",
+          "doi": "10.1002/rsa.20909"
         }
       ],
       "source": {
@@ -53,10 +68,11 @@
         "random set systems",
         "hereditary discrepancy"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The problem and its two bounds match Ezra-Lovett (arXiv:1511.00583; APPROX/RANDOM 2016; journal version RSA 54(4):665-675, 2019). Two minor clarifications relative to the AimPL text: the paper states the $O(1)$ regime as $|X| \\gg |\\Sigma|^t$ (strictly larger), and the intermediate range is $m \\leq n \\leq m^t$ (i.e. $n^{1/t} \\leq m \\leq n$). Follow-up progress by Hoberg-Rothvoss (arXiv:1806.04484, arXiv:1810.03374) is confirmed; the full conjecture for the intermediate regime remains open as of 2026.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/ and the arXiv abstracts of the cited papers. Corrections made on 2026-09-20 following the comment by Richard Peng: added Potukuchi (arXiv:1811.01491) with the exact regimes $m = n$, $\\log^{10} n \\ll t \\ll \\sqrt{n}$ (model $\\mathcal{H}_1$) and $p = 1/2$, $n = \\Omega(m \\log m)$ (model $\\mathcal{H}_2$); corrected the attribution of arXiv:1810.03374 to Bansal and Meka; distinguished bounds on discrepancy from bounds on hereditary discrepancy (Ezra-Lovett's bounds are hereditary, the later $O(\\sqrt{t})$ bounds are stated for the discrepancy of the sampled system). The AimPL statement uses $m$ for the number of sets and $n$ for the number of elements, which this record follows.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "When $m\\ge n$, hereditary discrepancy of the set system is $O(\\sqrt{t\\log t})$ whp. When $n\\ge m^t$, hereditary discrepancy is $O(1)$. The remaining range $n^{1/t} < m < n$ is open (with subsequent partial progress by Hoberg and Rothvoss)."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "Ezra and Lovett (2015): $\\mathrm{herdisc} = O(\\sqrt{t \\log t})$ w.h.p. for $m \\geq n$ and $O(1)$ for $n \\gg m^t$. Potukuchi (arXiv:1811.01491, 2018): $\\mathrm{disc} = O(\\sqrt{t})$ almost surely for $m = n$ and $\\log^{10} n \\ll t \\ll \\sqrt{n}$; also $\\mathrm{disc} \\leq 1$ in the i.i.d. $p = 1/2$ model when $n = \\Omega(m \\log m)$. Bansal and Meka (arXiv:1810.03374, 2019): tight $O(\\sqrt{t})$ for the entire range of $n$ and $m$ when $t = \\Omega((\\log\\log m)^2)$. Open: very small $t$ (in particular constant $t$) in the intermediate regime $n^{1/t} \\ll m \\ll n$, and hereditary discrepancy beyond Ezra-Lovett.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

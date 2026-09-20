@@ -3,8 +3,8 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.85: Polysize list of colorings",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
@@ -12,33 +12,29 @@
       "sourceStatement": "Is there a list of colorings of polynomial size such that for any subset of the columns, one of these colorings gives it a discrepancy of O(h), where $h$ is the hereditary discrepancy?",
       "problem": "Determine whether every set system admits a list of polynomially many 2-colorings such that, for every subset of the elements, some coloring in the list has discrepancy $O(h)$ on the induced subsystem, where $h$ is the hereditary discrepancy of the whole system.",
       "wordDescription": "This question asks whether hereditary discrepancy can be 'certified' by a small explicit list of colorings: given the system, is there a poly-size family of colorings that simultaneously realizes the hereditary discrepancy guarantee on every restriction? The AimPL page records that the answer is negative, resolved during the workshop: the counterexample is the simple set system consisting of $\\sqrt{n}$ disjoint rows (sets) of size $\\sqrt{n}$ each. Its hereditary discrepancy is $O(1)$ (each induced subsystem is a union of rows, each 2-colorable to discrepancy at most 1), yet any fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns, because each row contributes a signed sum of about $\\sqrt{n}/2$ random-sign elements; a single coloring can therefore serve only an exponentially small fraction of the $2^n$ subsets, so any list of polynomial size fails on some subset. No published paper describing this negative result was located; it is recorded here as resolved in the workshop discussion on the AimPL page.",
-      "mathematicalConditions": "Given a set system (matrix $A \\in \\{0,1\\}^{m \\times n}$) with hereditary discrepancy $h = \\mathrm{herdisc}(A)$, does there exist a list $\\mathcal{L}$ of $\\mathrm{poly}(n)$ colorings $\\chi \\in \\{-1,1\\}^n$ such that for every subset $J \\subseteq [n]$ of columns, some $\\chi \\in \\mathcal{L}$ satisfies $\\max_{i} \\left|\\sum_{j \\in S_i \\cap J} \\chi(j)\\right| = O(h)$? Answer (per the AimPL page): no — the system of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each has $h = O(1)$, yet no polynomial-size list of colorings can cover all subsets, since a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns.",
+      "mathematicalConditions": "Setting. For a set system $A \\in \\{0,1\\}^{m \\times n}$ and $J \\subseteq [n]$ let $A_J$ be the restriction to the columns in $J$, and $\\mathrm{disc}(A_J) = \\min_{x \\in \\{-1,1\\}^J}\\|A_J x\\|_\\infty$, so $\\mathrm{herdisc}(A) = \\max_J \\mathrm{disc}(A_J)$. A list $\\mathcal{L} \\subseteq \\{-1,1\\}^n$ of colorings is a $C$-certificate for $A$ if for every $J \\subseteq [n]$ some $x \\in \\mathcal{L}$ satisfies $\\|A_J x_J\\|_\\infty \\leq C\\cdot\\mathrm{herdisc}(A)$. Question (as posed). Does every set system admit a $C$-certificate of size $\\mathrm{poly}(n, m)$ for an absolute constant $C$ (or $C = \\mathrm{polylog}(n)$)? Resolution. Answered in the negative at the workshop: for $A$ consisting of $\\sqrt{n}$ disjoint sets of size $\\sqrt{n}$ each, $\\mathrm{herdisc}(A) = 1$, but for any fixed coloring $x$ a uniformly random $J$ leaves each set with $\\Theta(\\sqrt{n})$ elements and unbalanced by $\\Omega(n^{1/4})$ with constant probability per set, so that with probability $1 - 2^{-\\Omega(\\sqrt{n})}$ some set has $|\\sum_{j \\in J \\cap S} x_j| = \\Omega(n^{1/4})$; a union bound over a list of size $L$ shows that a $C$-certificate needs $L \\geq 2^{\\Omega(\\sqrt{n})}$ for any $C = o(n^{1/4})$. Status of this record. Solved (negative answer). Residual questions that would count as further progress: (i) the exact trade-off between list size $L$ and achievable factor $C(L)$, i.e. determining $\\min\\{C : \\text{a } C\\text{-certificate of size } L \\text{ exists for all } A\\}$ up to constants as a function of $L$, $n$ and $m$ (the counterexample gives a lower bound on $C(L)$ that decreases with $L$; matching upper bounds are not recorded); (ii) polynomial-size certificates for restricted classes (e.g. bounded VC-dimension or bounded $\\gamma_2$-norm systems) with $C = \\mathrm{polylog}(n)$; (iii) alternative polynomial-size, polynomial-time verifiable certificates of $\\mathrm{herdisc}(A) \\leq C\\,\\beta$ other than lists of colorings (e.g. the $\\gamma_2$/ellipsoid certificates of Nikolov-Talwar and Matoušek-Nikolov-Talwar, which certify $\\mathrm{herdisc}$ within $O(\\log^{3/2} m)$) with a better approximation factor.",
       "status": "solved",
       "comments": [],
       "literature": [
-        {
-          "title": "L. Lovász, J. Spencer, K. Vesztergombi, Discrepancies of set-systems and matrices, European Journal of Combinatorics 7(2):151-160, 1986",
-          "year": 1986,
-          "description": "Introduced hereditary discrepancy (and the determinant lower bound); the notion of hereditary discrepancy that the question refers to.",
-          "link": "https://scholar.google.com/scholar?q=Lov%C3%A1sz+Spencer+Vesztergombi+Discrepancies+of+set-systems+and+matrices+1986"
-        },
-        {
-          "title": "J. Matoušek, The determinant bound for discrepancy is almost tight, Proceedings of the AMS 141(2):451-460, 2013",
-          "year": 2013,
-          "description": "Establishes that the determinant lower bound approximates hereditary discrepancy up to polylog factors, the main structural tool for reasoning about herdisc.",
-          "link": "https://scholar.google.com/scholar?q=Matou%C5%A1ek+The+determinant+bound+for+discrepancy+is+almost+tight"
-        },
-        {
-          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
-          "year": 2020,
-          "description": "Polynomial-time approximation of hereditary discrepancy via the $\\gamma_2$ norm; the algorithmic context in which 'short certificates' for herdisc are relevant.",
-          "link": "https://arxiv.org/abs/1408.1376"
-        },
         {
           "title": "AimPL: Hereditary discrepancy and factorization norms — Problem 1.85 (with the negative answer)",
           "year": 2016,
           "description": "Records the question and the workshop resolution (negative answer via $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$); no separate publication of the negative result was found.",
           "link": "http://aimpl.org/hereddiscrep/1/"
+        },
+        {
+          "title": "A. Nikolov, K. Talwar, Approximating hereditary discrepancy via small width ellipsoids, SODA 2015; arXiv:1311.6204",
+          "year": 2015,
+          "description": "Provides polynomial-time computable certificates (ellipsoids / $\\gamma_2$-type quantities) approximating hereditary discrepancy within polylogarithmic factors, the natural alternative to lists of colorings.",
+          "link": "https://arxiv.org/abs/1311.6204",
+          "doi": "10.1137/1.9781611973730.24"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, International Mathematics Research Notices 2020(3):751-780 (arXiv 2014)",
+          "year": 2020,
+          "description": "Characterizes hereditary discrepancy up to logarithmic factors by the factorization norm $\\gamma_2$, which serves as an efficiently computable certificate of hereditary discrepancy.",
+          "link": "https://arxiv.org/abs/1408.1376",
+          "doi": "10.1093/imrn/rny033"
         }
       ],
       "source": {
@@ -58,10 +54,11 @@
         "colorings",
         "certificates"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The status ('answered in the negative' with the counterexample of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$) is transcribed from the AimPL page; no external publication of this negative result was located in the literature (searched 2026-08-25), so it is treated as workshop-recorded folklore. The intuition recorded in the wordDescription (a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns, so poly-many colorings cannot cover all $2^n$ subsets) is the standard explanation; the exact quantitative statement is best confirmed against the workshop participants' notes.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/. The status ('answered in the negative' with the counterexample of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$) is transcribed from the AimPL page; no external publication of this negative result was located (searched 2026-08-25 and 2026-09-20), so it is treated as workshop-recorded folklore. The quantitative form of the argument in mathematicalConditions (a fixed coloring has discrepancy $\\Omega(n^{1/4})$ on a random subset of columns with overwhelming probability, so lists of size $2^{o(\\sqrt{n})}$ cannot certify) is the standard explanation and is this record's formalization. On 2026-09-20 references to the $\\gamma_2$-based certificates were added.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "This was answered in the negative. Counterexample is a simple set system comprising of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "This was answered in the negative. Counterexample is a simple set system comprising of $\\sqrt{n}$ disjoint rows of size $\\sqrt{n}$ each.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

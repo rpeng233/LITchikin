@@ -3,42 +3,56 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.7: Beating LLL",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
       "recordId": "lit:hereddiscrep-aimpl:1.7",
       "sourceStatement": "Consider a matrix where both columns are rows are t-sparse. LLL gives a discrepancy bound of $O(\\sqrt{t\\log t})$ here. If we assume the stronger property that every pair of rows intersect in at most one element, can we get a $O(\\sqrt{t})$?",
-      "problem": "For 0-1 matrices (set systems) in which every row and every column has at most $t$ non-zero entries (both rows and columns $t$-sparse), determine whether the stronger hypothesis that any two rows intersect in at most one element (a simple / linear hypergraph) yields a discrepancy bound of $O(\\sqrt{t})$, improving on the Lovász Local Lemma bound $O(\\sqrt{t\\log t})$.",
-      "wordDescription": "For a $t$-sparse 0-1 matrix (each element lies in at most $t$ sets and each set has size at most $t$), a folklore application of the Lovász Local Lemma gives discrepancy $O(\\sqrt{t\\log t})$: a random coloring is analyzed per row and the dependencies are controlled by the sparsity. The question asks whether the 'simple hypergraph' condition — any two sets intersect in at most one element — removes the $\\sqrt{\\log t}$ factor, giving the Beck-Fiala-conjecture bound $O(\\sqrt{t})$ in this special case. This is a special case of the Beck-Fiala conjecture, and the literature notes explicitly that the conjecture 'is open even for very special cases such as when the hypergraph is simple, i.e. any two sets intersect in at most one element' (Hoberg-Rothvoss). No progress or resolution of this specific question was found in the literature as of 2026.",
-      "mathematicalConditions": "Let $A \\in \\{0,1\\}^{m \\times n}$ with all row sums and column sums at most $t$, and additionally $|\\{i: A_{i,j} = A_{i,j'} = 1\\}| \\leq 1$ for all distinct columns $j \\neq j'$ (any two rows share at most one element). Does there exist $\\chi \\in \\{-1,1\\}^n$ with $\\|A\\chi\\|_\\infty = O(\\sqrt{t})$, with an absolute constant? (The LLL bound is $O(\\sqrt{t\\log t})$ under mere sparsity.)",
+      "problem": "For 0-1 matrices (set systems) in which every row and every column has at most $t$ non-zero entries (both rows and columns $t$-sparse), determine whether the additional hypothesis that any two rows intersect in at most one element (a simple / linear hypergraph) yields a discrepancy bound of $O(\\sqrt{t})$, or at least $o(\\sqrt{t\\log t})$, improving on the Lovász Local Lemma bound $O(\\sqrt{t\\log t})$.",
+      "wordDescription": "For a $t$-sparse 0-1 matrix (each element lies in at most $t$ sets and each set has size at most $t$), a folklore application of the Lovász Local Lemma gives discrepancy $O(\\sqrt{t\\log t})$: a random coloring is analyzed per row and the dependencies are controlled by the sparsity. The question asks whether the 'simple hypergraph' condition — any two sets intersect in at most one element — removes the $\\sqrt{\\log t}$ factor, giving the Beck-Fiala-conjecture bound $O(\\sqrt{t})$ in this special case. This is a special case of the Beck-Fiala conjecture, and the Beck-Fiala conjecture is open even for this very special case of simple hypergraphs (any two sets intersect in at most one element). No progress or resolution of this specific question was found in the literature as of 2026.",
+      "mathematicalConditions": "Setting. Let $A \\in \\{0,1\\}^{m \\times n}$ be the incidence matrix of a set system $\\mathcal{S} = \\{S_1, \\dots, S_m\\}$ on $[n]$ that is $t$-sparse in both directions: every element lies in at most $t$ sets and every set has at most $t$ elements. Call $\\mathcal{S}$ simple (linear) if $|S_j \\cap S_k| \\leq 1$ for all $j \\neq k$. Write $\\mathrm{disc}(\\mathcal{S}) = \\min_{x \\in \\{-1,1\\}^n}\\|Ax\\|_\\infty$, and let $L(t) = \\sup \\mathrm{disc}(\\mathcal{S})$ over all doubly $t$-sparse simple systems (any $n, m$) and $D(t) = \\sup \\mathrm{disc}(\\mathcal{S})$ over all doubly $t$-sparse systems. Benchmarks. For doubly $t$-sparse systems each set intersects at most $t(t-1)$ others, so the Lovász Local Lemma (LLL) applied to a uniformly random coloring gives $D(t) = O(\\sqrt{t \\log t})$ (the bound recorded on the AimPL page), independent of $n$ and $m$; the Beck-Fiala theorem gives $D(t) \\leq 2t - 1$ and $\\Omega(\\sqrt{t}) \\leq L(t) \\leq D(t)$ (lower bound e.g. from the incidence system of a projective plane of order $t - 1$, which is simple, $t$-regular and has discrepancy $\\Omega(\\sqrt{t})$ by the eigenvalue bound). Bounds depending on $n$: Bansal-Jiang 2025 and Altschuler-Tikhomirov 2026 give $O(\\sqrt{t})$ for $t \\geq (\\log n)^{1+o(1)}$ and $\\widetilde{O}(\\sqrt{t} + \\sqrt{\\log n})$ for all $t$ (Problem 1.15), which beats the LLL bound only for $t$ at least polylogarithmic in $n$; for random $t$-sparse systems $O(\\sqrt{t})$ holds w.h.p. (Potukuchi 2018; Bansal-Meka 2019; Problem 1.2). No bound $o(\\sqrt{t \\log t})$ depending only on $t$ is known for simple doubly $t$-sparse systems. Question (as posed). Is $L(t) = O(\\sqrt{t})$? More generally, can the LLL bound $O(\\sqrt{t \\log t})$ be improved for doubly $t$-sparse systems under the simplicity hypothesis, and can such colorings be found efficiently? Complete resolution. A proof that $L(t) \\leq C\\sqrt{t}$ for an absolute constant $C$ and all $t$ (ideally with a polynomial-time algorithm), or a disproof: an infinite family of simple doubly $t_j$-sparse systems with $\\mathrm{disc}/\\sqrt{t_j} \\to \\infty$. Minimal progress that counts as a solution of this record. Any of: (i) an $n$-independent bound $L(t) = o(\\sqrt{t \\log t})$, i.e. $L(t) \\leq \\sqrt{t}\\, g(t)$ with $g(t) \\to \\infty$ slower than $\\sqrt{\\log t}$, or $L(t) = O(\\sqrt{t} (\\log t)^{\\gamma})$ for some constant $\\gamma < 1/2$; (ii) a lower bound $L(t) = \\omega(\\sqrt{t})$ (showing that simplicity does not suffice for the Beck-Fiala bound), or a proof that the LLL bound is tight, $L(t) = \\Omega(\\sqrt{t \\log t})$; (iii) $L(t) = O(\\sqrt{t})$ for a natural infinite subclass of simple systems where it is not implied by known results, e.g. all simple doubly $t$-sparse systems with $n \\leq t^{C}$ for a constant $C$ (so that $t \\geq n^{1/C} \\gg \\log n$ is not the issue), or all simple systems with girth at least $5$ or bounded codegree structure, provided the class is not covered by the random-model results; (iv) a polynomial-time algorithm achieving $o(\\sqrt{t \\log t})$ for all simple doubly $t$-sparse systems, or achieving the LLL bound $O(\\sqrt{t \\log t})$ deterministically where only randomized/existential arguments are known; (v) removing the simplicity hypothesis: $D(t) = o(\\sqrt{t \\log t})$ (this is progress on Problem 1.15 for bounded set sizes). Improving constants in the LLL or Beck-Fiala bounds does not count.",
       "status": "no progress",
       "comments": [],
       "literature": [
         {
-          "title": "N. Alon, J. H. Spencer, The Probabilistic Method (textbook), Wiley; see also the folklore discrepancy bound for hypergraphs of bounded degree and bounded edge size",
-          "year": 2000,
-          "description": "Standard reference for the Lovász Local Lemma and its application to discrepancy: hypergraphs of maximum degree $\\Delta$ and edge size $R$ have discrepancy $O(\\sqrt{R \\log(R\\Delta)})$, which specializes to $O(\\sqrt{t\\log t})$ for $R = \\Delta = t$.",
-          "link": "https://scholar.google.com/scholar?q=Alon+Spencer+The+Probabilistic+Method+Lov%C3%A1sz+Local+Lemma+discrepancy"
+          "title": "N. Alon, J. H. Spencer, The Probabilistic Method, 3rd ed., Wiley, 2008 (Chapter 5: The Local Lemma; Chapter 13: Discrepancy)",
+          "year": 2008,
+          "description": "Standard reference for the Lovász Local Lemma and for the probabilistic method in discrepancy, including the random-coloring and Beck-Fiala arguments.",
+          "link": "https://doi.org/10.1002/9780470277331"
         },
         {
-          "title": "A note on the discrepancy of matrices with bounded row and column sums, Discrete Mathematics (2015)",
-          "year": 2015,
-          "description": "Generalizes the LLL folklore result to real matrices with bounded row and column $\\ell_1$ norms, giving $O(R \\log(R\\Delta))$-type guarantees.",
-          "link": "https://scholar.google.com/scholar?q=note+on+the+discrepancy+of+matrices+with+bounded+row+and+column+sums"
+          "title": "E. Ezra, S. Lovett, On the Beck-Fiala conjecture for random set systems, APPROX/RANDOM 2015; Random Structures & Algorithms 54(4):665-675, 2019",
+          "year": 2019,
+          "description": "Uses an LLL-based argument to obtain $\\mathrm{herdisc} = O(\\sqrt{t\\log t})$ for random $t$-sparse systems with $m \\geq n$; the reference point that later work beats.",
+          "link": "https://arxiv.org/abs/1511.00583",
+          "doi": "10.1002/rsa.20810"
         },
         {
-          "title": "R. Hoberg, T. Rothvoss, On the discrepancy of random low degree set systems, arXiv:1810.03374, 2018",
+          "title": "A. Potukuchi, Discrepancy in random hypergraph models, arXiv:1811.01491, 2018",
           "year": 2018,
-          "description": "Explicitly notes that the Beck-Fiala-type problem 'is open even for very special cases such as when the hypergraph corresponding to the set system is simple, i.e. any two sets intersect in at most one element' — i.e. the exact question posed here remains open.",
-          "link": "https://arxiv.org/abs/1810.03374"
+          "description": "Beats the LLL bound for random $t$-sparse systems: discrepancy $O(\\sqrt{t})$ almost surely for $m = n$ and $\\log^{10} n \\ll t \\ll \\sqrt{n}$.",
+          "link": "https://arxiv.org/abs/1811.01491"
         },
         {
-          "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
-          "year": 1998,
-          "description": "Gives the best general bound $O(\\sqrt{t\\log n})$ for degree-$t$ systems; in particular contexts the pairwise-intersection condition is a candidate to improve this to $O(\\sqrt{t})$.",
-          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+          "title": "N. Bansal, R. Meka, On the discrepancy of random low degree set systems, SODA 2019; Random Structures & Algorithms 57(3):695-705, 2020",
+          "year": 2020,
+          "description": "Proves a tight $O(\\sqrt{t})$ discrepancy bound for the random $t$-sparse model for the entire range of $n$ and $m$ under $t = \\Omega((\\log\\log m)^2)$.",
+          "link": "https://arxiv.org/abs/1810.03374",
+          "doi": "10.1002/rsa.20935"
+        },
+        {
+          "title": "R. Hoberg, T. Rothvoss, A Fourier-analytic approach for the discrepancy of random set systems, SODA 2019; arXiv:1806.04484",
+          "year": 2019,
+          "description": "Fourier-analytic method giving $O(1)$ discrepancy for random i.i.d. set systems with $n \\geq C m \\log m$ elements.",
+          "link": "https://arxiv.org/abs/1806.04484"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.03961, 2025",
+          "year": 2025,
+          "description": "Gives an algorithmic $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem, the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$, and proves the Beck-Fiala conjecture (discrepancy $O(\\sqrt{k})$) for all degrees $k \\geq \\log^2 n$, together with an $\\widetilde{O}(\\sqrt{k} + \\sqrt{\\log n})$ bound for every $k$.",
+          "link": "https://arxiv.org/abs/2508.03961"
         }
       ],
       "source": {
@@ -58,10 +72,11 @@
         "sparse matrices",
         "linear hypergraphs"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The LLL folklore bound $O(\\sqrt{t\\log t})$ for systems with bounded degree and bounded set size is standard (Alon-Spencer; also stated in arXiv:1810.03374 and arXiv:1806.04484). The open question about simple hypergraphs (pairwise intersections of size at most 1) is confirmed open by the explicit remark in Hoberg-Rothvoss (arXiv:1810.03374). Note: the page's statement 'both columns are rows are t-sparse' (sic) is preserved verbatim in the source statement.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/ and the arXiv abstracts of the cited papers. On 2026-09-20 Google Scholar search links were replaced by DOI/arXiv links, the attribution of arXiv:1810.03374 was corrected to Bansal and Meka, Potukuchi (arXiv:1811.01491) was added, and cross-references to the 2025-26 Beck-Fiala results (Problem 1.15) were added. The AimPL page states this problem informally; the formalization in mathematicalConditions is this record's.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "LLL gives a discrepancy bound of $O(\\sqrt{t\\log t})$ here; whether the pairwise-intersection-at-most-one condition improves this to $O(\\sqrt{t})$ is open."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "Post-workshop progress: for random $t$-sparse systems the LLL-type bound $O(\\sqrt{t\\log t})$ of Ezra-Lovett was improved to $O(\\sqrt{t})$ by Potukuchi (2018, $m = n$, $\\log^{10} n \\ll t \\ll \\sqrt{n}$) and by Bansal-Meka (2019, all $n, m$ with $t = \\Omega((\\log\\log m)^2)$); Franks-Saks and Hoberg-Rothvoss treated the many-columns regime (see Problem 1.2). For worst-case sparse systems, Bansal-Jiang (2025) and Altschuler-Tikhomirov (2026) give $O(\\sqrt{t})$ whenever $t \\geq (\\log n)^{1+o(1)}$ (see Problem 1.15). A general method beating the LLL for arbitrary bounded-degree systems with $t \\leq \\log n$ is not known.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

@@ -3,54 +3,70 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.35: Matrix Spencer",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
       "recordId": "lit:hereddiscrep-aimpl:1.35",
       "sourceStatement": "Given matrices $A_1,...,A_n \\in\\mathbb{R}^{n\\times n}$ satisfying $||A_i||_{op} \\le 1$ where $||.||_{op}$ is the operator norm of matrices. Do there exists signs $\\epsilon_1,...,\\epsilon_n\\in\\{-1,1\\}$ s.t. $||\\sum_{i=1}^n\\epsilon_i A_i || =O(\\sqrt{n})$.",
-      "problem": "Prove (or disprove) the Matrix Spencer conjecture: for any $n$ symmetric $d \\times d$ matrices of operator norm at most 1, there exist signs $\\epsilon_i \\in \\{-1, 1\\}$ such that the operator norm of the signed sum is $O(\\sqrt{n})$ (for $d = n$; more generally $O(\\sqrt{n \\max(1, \\log(d/n))})$).",
-      "wordDescription": "The Matrix Spencer conjecture (due to Zouzias 2012, popularized by Meka 2014) is the matrix analogue of Spencer's 'six standard deviations suffice' theorem: it asks whether signing $n$ unit-norm matrices can balance their sum in operator norm to $O(\\sqrt{n})$, the bound that Spencer's theorem gives when all matrices commute (in which case the problem reduces to its diagonal / vector form). Random signings achieve only $O(\\sqrt{n \\log d})$ by the non-commutative Khintchine inequality / matrix Chernoff bound, and the conjecture says the $\\sqrt{\\log d}$ factor can be removed. The conjecture remains open in general; notable partial results include rank-$O(\\sqrt{n})$ matrices (Hopkins-Raghavendra-Shetty), block-diagonal matrices (Levy-Ramadas-Rothvoss; Dadush-Jiang-Reis), and matrices of rank at most $n/\\log^3 n$ (Bansal-Jiang-Meka). Connections to quantum random access codes, Kadison-Singer-type problems, and graph sparsification are known.",
-      "mathematicalConditions": "There is an absolute constant $C > 0$ such that for all $n, d \\geq 1$ and all symmetric $d \\times d$ matrices $A_1, \\dots, A_n$ with $\\|A_i\\|_{\\mathrm{op}} \\leq 1$, there exist signs $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i A_i\\right\\|_{\\mathrm{op}} \\leq C\\sqrt{n \\max(1, \\log(d/n))}$. In the case $d = n$ (as stated on the AimPL page), the claim is $O(\\sqrt{n})$.",
+      "problem": "Prove the Matrix Spencer conjecture: for any symmetric $n \\times n$ matrices $A_1, \\dots, A_n$ of operator norm at most $1$, there exist signs $\\epsilon \\in \\{-1,1\\}^n$ with $\\left\\|\\sum_i \\epsilon_i A_i\\right\\|_{\\mathrm{op}} = O(\\sqrt{n})$ (more generally, $O(\\sqrt{n \\max(1, \\log(d/n))})$ for $d \\times d$ matrices).",
+      "wordDescription": "The Matrix Spencer conjecture, posed by Zouzias (2012) and by Meka (2014), asks for a non-commutative analogue of Spencer's 'six standard deviations' theorem: the matrix Chernoff bound gives $O(\\sqrt{n \\log d})$ for random signs, and the conjecture asserts that the logarithmic factor can be removed, exactly as Spencer removed it in the scalar case. It contains Spencer's theorem (diagonal matrices). Progress has come in structured special cases: matrices of small Frobenius norm or low rank (Hopkins-Raghavendra-Shetty 2022, $\\|A_i\\|_F \\leq n^{1/4}$; Dadush-Jiang-Reis 2022, rank $r$ with $r d \\leq n$ for $d \\times d$ matrices, plus block-diagonal and Schatten-norm variants), matrices of rank at most $n/\\log^3 n$ via matrix concentration and partial coloring (Bansal-Jiang-Meka 2023), and, in 2026, two algebraic special cases: Bandeira and Bölcskei proved the 'Group Spencer' conjecture (the left regular representation of any finite group $G$ admits signs $\\epsilon \\in \\{\\pm1\\}^G$ with $\\|\\sum_g \\epsilon_g \\rho(g)\\| \\leq C\\sqrt{|G|}$), and Akbas and Sra proved the conjecture for any family of contractions inside a finite-dimensional $C^{*}$-algebra of complex dimension $O(n)$, which contains the group case and is stable under low-rank perturbations. The general conjecture remains open; for general families the best known bound remains $O(\\sqrt{n \\log d})$ from the non-commutative Khintchine/matrix Chernoff inequality (with the trivial $d = n$ case giving $O(\\sqrt{n \\log n})$).",
+      "mathematicalConditions": "Setting. Let $\\mathcal{S}_d$ be the real symmetric (or complex Hermitian) $d \\times d$ matrices with operator norm $\\|\\cdot\\|_{\\mathrm{op}} \\leq 1$. For $A_1, \\dots, A_n \\in \\mathcal{S}_d$ let $\\mathrm{disc}(A_1, \\dots, A_n) = \\min_{\\epsilon \\in \\{-1,1\\}^n} \\left\\|\\sum_{i=1}^n \\epsilon_i A_i\\right\\|_{\\mathrm{op}}$ and let $\\mathrm{MS}(n, d)$ be its supremum over all such families. Conjecture (Matrix Spencer). $\\mathrm{MS}(n, d) \\leq C\\sqrt{n \\max(1, \\log(d/n))}$ for an absolute constant $C$; in particular $\\mathrm{MS}(n, n) = O(\\sqrt{n})$ (the AimPL formulation, $d = n$). Benchmarks. Lower bound $\\mathrm{MS}(n, d) = \\Omega(\\sqrt{n \\max(1, \\log(d/n))})$ from diagonal matrices (Spencer's theorem is tight). Upper bounds: $\\mathrm{MS}(n, d) = O(\\sqrt{n \\log d})$ (matrix Chernoff / non-commutative Khintchine, random signs). Special cases proved: (a) Hopkins-Raghavendra-Shetty 2022: the conjecture whenever $\\|A_i\\|_F \\leq n^{1/4}$ for all $i$ (in particular whenever $\\mathrm{rank}(A_i) \\leq \\sqrt{n}$), via quantum communication complexity; Dadush-Jiang-Reis 2022: for $d \\times d$ matrices of rank at most $r$ the algorithmic bound $O(\\sqrt{n \\log\\min(rd/n, r)})$, hence the conjecture when $r d \\leq n$; for block-diagonal families with block size $h$ the bound $O(\\sqrt{n \\log(hd/n)})$; and Schatten-norm variants, all via a partial-coloring (mirror-descent) framework; (b) Bansal-Jiang-Meka 2023: $O(\\sqrt{n})$ whenever $\\mathrm{rank}(A_i) \\leq r$ for all $i$ with $r \\leq n / \\log^{3} n$; (c) Zouzias 2012: an algorithmic $O(\\sqrt{n \\log d})$ via a matrix hyperbolic-cosine potential; (d) Bandeira-Kunisky-Mixon-Zeng 2022/24: the group version for finite simple groups; (e) Bandeira-Bölcskei 2026: the group version for every finite group $G$ ($A_g = \\rho(g)$, $\\rho$ the left regular representation, $n = d = |G|$); (f) Akbas-Sra 2026: $O(\\sqrt{n})$ whenever $A_1, \\dots, A_n$ are contractions in a finite-dimensional $C^{*}$-algebra $\\mathcal{A} \\subseteq \\mathbb{C}^{d \\times d}$ with $\\dim_{\\mathbb{C}} \\mathcal{A} \\leq C n$ (including all matrices simultaneously block-diagonalizable with blocks of total squared size $O(n)$, and low-rank perturbations thereof). All of these are special cases; the general statement is open. Complete resolution. A proof of $\\mathrm{MS}(n, d) = O(\\sqrt{n \\max(1, \\log(d/n))})$ for all $n, d$ (or even just $\\mathrm{MS}(n, n) = O(\\sqrt{n})$), or a disproof: families with $\\mathrm{disc} / \\sqrt{n \\max(1,\\log(d/n))} \\to \\infty$. Minimal progress that counts as a solution of this record. Any of: (i) $\\mathrm{MS}(n, n) = O(\\sqrt{n}\\,(\\log n)^{\\gamma})$ for some constant $\\gamma < 1/2$, for arbitrary symmetric contractions; (ii) the conjecture for all families with $\\mathrm{rank}(A_i) \\leq r$ whenever $r \\leq n/(\\log n)^{\\gamma}$ for some constant $\\gamma < 3$ (improving the rank threshold of Bansal-Jiang-Meka by a polylogarithmic factor), or for $r \\leq n/(\\log\\log n)^{O(1)}$; (iii) the conjecture for all families lying in a $C^{*}$-algebra of dimension $\\leq n^{1+\\delta}$ for some fixed $\\delta > 0$, or for all families of commuting-up-to-low-rank type strictly extending Akbas-Sra; (iv) a super-$\\sqrt{n}$ lower bound $\\mathrm{MS}(n, n) = \\omega(\\sqrt{n})$; (v) a polynomial-time algorithm achieving $O(\\sqrt{n})$ in a structured case where only an existential proof is known (e.g. the Bandeira-Bölcskei group case). Improving constants alone does not count.",
       "status": "partial progress",
       "comments": [],
       "literature": [
         {
-          "title": "M. Zouzias (2012) — first appearance of the Matrix Spencer conjecture (as cited in R. van Handel, Randomstrasse101: Open Problems of 2024, arXiv:2504.20539)",
+          "title": "A. Zouzias, A matrix hyperbolic cosine algorithm and applications, ICALP 2012 (LNCS 7391), pp. 846-858; arXiv:1103.2793",
           "year": 2012,
-          "description": "The conjecture is attributed to Zouzias (2012); see also R. Meka, 'Discrepancy: the vector and matrix versions', Windows on Theory blog (2014), which popularized it.",
-          "link": "https://scholar.google.com/scholar?q=Zouzias+2012+matrix+discrepancy+Spencer"
+          "description": "Derandomizes the matrix Chernoff bound via a matrix hyperbolic-cosine potential and explicitly poses the Matrix Spencer question ($O(\\sqrt{n})$ for $n$ symmetric $n \\times n$ contractions).",
+          "link": "https://arxiv.org/abs/1103.2793",
+          "doi": "10.1007/978-3-642-31594-7_71"
         },
         {
-          "title": "R. Meka, Discrepancy: the vector and matrix versions, Windows on Theory blog post, 2014",
+          "title": "R. Meka, Discrepancy and beating the union bound, Windows on Theory blog, 7 Feb 2014",
           "year": 2014,
-          "description": "Blog post (2014) that brought the Matrix Spencer conjecture to wide attention; cited as [Mek14] in the literature.",
-          "link": "https://windowsontheory.org/2014/02/07/discrepancy-the-vector-and-matrix-versions/"
+          "description": "Blog post formulating the Matrix Spencer conjecture as 'beating the union bound' in the matrix Chernoff inequality, in analogy with Spencer's theorem.",
+          "link": "https://windowsontheory.org/2014/02/07/discrepancy-and-beating-the-union-bound/"
         },
         {
-          "title": "R. van Handel (ed.), Randomstrasse101: Open Problems of 2024, arXiv:2504.20539",
-          "year": 2025,
-          "description": "Discusses the Matrix Spencer conjecture in depth, including the commutative and free extremes, and the 'Group Spencer' conjecture of Bandeira-Kunisky-Mixon-Zeng.",
-          "link": "https://arxiv.org/abs/2504.20539"
-        },
-        {
-          "title": "S. B. Hopkins, P. Raghavendra, A. Shetty, Matrix discrepancy from quantum communication, FOCS 2022",
+          "title": "S. B. Hopkins, P. Raghavendra, A. Shetty, Matrix discrepancy from quantum communication, STOC 2022; arXiv:2110.10099",
           "year": 2022,
-          "description": "Proves the Matrix Spencer conjecture for matrices of rank $O(\\sqrt{n})$, via a connection to quantum information theory.",
-          "link": "https://scholar.google.com/scholar?q=Hopkins+Raghavendra+Shetty+Matrix+discrepancy+from+quantum+communication"
+          "description": "Uses quantum communication complexity to prove the Matrix Spencer conjecture whenever $\\|A_i\\|_F \\leq n^{1/4}$ for all $i$ (in particular for matrices of rank at most $\\sqrt{n}$), with a polynomial-time algorithm based on partial coloring and semidefinite programming; also shows the full conjecture is implied by a conjecture in quantum communication complexity.",
+          "link": "https://arxiv.org/abs/2110.10099",
+          "doi": "10.1145/3519935.3519954"
         },
         {
-          "title": "N. Bansal, H. Jiang, R. Meka, Resolving Matrix Spencer conjecture up to poly-logarithmic rank, arXiv:2208.11286, 2022",
+          "title": "D. Dadush, H. Jiang, V. Reis, A new framework for matrix discrepancy: partial coloring bounds via mirror descent, STOC 2022; arXiv:2111.03171",
           "year": 2022,
-          "description": "Proves the conjecture for matrices with $\\|A_i\\|_F^2 \\leq n/\\log^3 n$ (in particular rank at most $n/\\log^3 n$), with an efficient algorithm, using improved non-commutative Khintchine inequalities of Bandeira-Boedihardjo-van Handel.",
-          "link": "https://arxiv.org/abs/2208.11286"
+          "description": "Partial-coloring framework for matrix discrepancy via mirror descent; for $m \\times m$ matrices of rank at most $r$ efficiently finds signs with $\\|\\sum x_i A_i\\| = O(\\sqrt{n \\log\\min(rm/n, r)})$, proving the Matrix Spencer conjecture when $rm \\leq n$; gives $O(\\sqrt{n \\log(hm/n)})$ for block-diagonal matrices with block size $h$, extensions to Schatten norms, and a reduction of the full conjecture to the existence of a quantum relative entropy net on the spectraplex.",
+          "link": "https://arxiv.org/abs/2111.03171",
+          "doi": "10.1145/3519935.3519967"
         },
         {
-          "title": "D. Dadush, H. Jiang, V. Reis, A new framework for matrix discrepancy: integrality gap bounds for the Lovász Cap Set problem, 2022; A. Levy, H. Ramadas, T. Rothvoss, Deterministic discrepancy minimization via the multiplicative weight update method, 2017",
-          "year": 2022,
-          "description": "Prove the conjecture for block-diagonal matrices (block size $h = O(n/d)$), the DJR paper via covering estimates for relative entropy.",
-          "link": "https://scholar.google.com/scholar?q=Dadush+Jiang+Reis+matrix+discrepancy+integrality+gap+Lov%C3%A1sz+cap+set"
+          "title": "N. Bansal, H. Jiang, R. Meka, Resolving Matrix Spencer conjecture up to poly-logarithmic rank, STOC 2023; SIAM Journal on Computing (STOC 2023 special section), 2024; arXiv:2208.11286",
+          "year": 2023,
+          "description": "Proves the Matrix Spencer conjecture ($O(\\sqrt{n})$ for $n$ symmetric $n \\times n$ contractions) whenever all matrices have rank at most $n / \\log^3 n$, via the matrix concentration inequalities of Bandeira-Boedihardjo-van Handel and partial coloring.",
+          "link": "https://arxiv.org/abs/2208.11286",
+          "doi": "10.1137/23M1592201"
+        },
+        {
+          "title": "A. S. Bandeira, D. Kunisky, D. G. Mixon, X. Zeng, On the concentration of Gaussian Cayley matrices, arXiv:2212.00066, 2022 (published 2024)",
+          "year": 2024,
+          "description": "Introduces the 'Group Spencer' conjecture for the left regular representation of a finite group and proves it for finite simple groups.",
+          "link": "https://arxiv.org/abs/2212.00066"
+        },
+        {
+          "title": "A. S. Bandeira, H. Bölcskei, Matrix discrepancy for representations of finite groups, arXiv:2606.12181, 2026",
+          "year": 2026,
+          "description": "Proves the group version of the Matrix Spencer conjecture for every finite group $G$: there are signs $\\epsilon \\in \\{\\pm1\\}^G$ with $\\|\\sum_{g \\in G} \\epsilon_g \\rho(g)\\| \\leq C\\sqrt{|G|}$, $\\rho$ the left regular representation, via Peter-Weyl decomposition, intrinsic-freeness inequalities and iterated partial coloring. A structured special case; the general conjecture remains open.",
+          "link": "https://arxiv.org/abs/2606.12181"
+        },
+        {
+          "title": "E. Akbas, S. Sra, An algebraic Matrix Spencer theorem, arXiv:2606.16005, 2026",
+          "year": 2026,
+          "description": "Representation-theoretic approach to matrix discrepancy: for contractions $A_1, \\dots, A_n$ in a finite-dimensional $C^{*}$-algebra $\\mathcal{A}$ with $\\dim_{\\mathbb{C}} \\mathcal{A} \\lesssim n$ there are signs with $\\|\\sum_i x_i A_i\\| = O(\\sqrt{n})$; this contains the Group Spencer conjecture and extends to low-rank perturbations. A structured special case; the general conjecture remains open.",
+          "link": "https://arxiv.org/abs/2606.16005"
         }
       ],
       "source": {
@@ -70,10 +86,11 @@
         "operator norm",
         "matrix concentration"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The conjecture is confirmed to be a recognized open problem attributed to Zouzias (2012) and Meka (2014), with the exact statement $\\mathrm{disc}(A_1,\\dots,A_n) \\leq C\\sqrt{n\\max(1,\\log(d/n))}$ as in arXiv:2410.17887 and arXiv:2208.11286. Matrix Chernoff / non-commutative Khintchine gives $O(\\sqrt{n\\log d})$, matching the page's '$O(\\sqrt{n\\log n})$' for $d = n$. Partial results verified: HRS 2022 (rank $O(\\sqrt{n})$), LRR 2017 and DJR 2022 (block-diagonal), BJM 2022/2023 (rank $\\leq n/\\log^3 n$, arXiv:2208.11286). The full conjecture remains open as of 2026.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/ and the arXiv abstracts of the cited papers. On 2026-09-20, following the comment by Richard Peng, the two 2026 structured special cases were added (Bandeira-Bölcskei arXiv:2606.12181, all finite groups; Akbas-Sra arXiv:2606.16005, $C^{*}$-algebras of dimension $O(n)$), together with Bandeira-Kunisky-Mixon-Zeng (finite simple groups) and Dadush-Jiang-Reis; Google Scholar search links were replaced by arXiv/DOI links, and the Meka blog URL was corrected to the existing post 'Discrepancy and beating the union bound'. The general conjecture is open as of 2026.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "We can assume that the matrices are symmetric. Matrix Chernoff gives a bound of $O(\\sqrt{n\\log n})$. The conjecture itself remains open; partial progress: rank $O(\\sqrt{n})$ (Hopkins-Raghavendra-Shetty 2022), block-diagonal matrices (Levy-Ramadas-Rothvoss 2017; Dadush-Jiang-Reis 2022), rank at most $n/\\log^3 n$ (Bansal-Jiang-Meka 2023)."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "Open in general. Known special cases: low-rank / small-Schatten-norm families (Hopkins-Raghavendra-Shetty STOC 2022; Dadush-Jiang-Reis STOC 2022); rank $\\leq n/\\log^3 n$ (Bansal-Jiang-Meka, STOC 2023 / SIAM J. Comput.); the group version for finite simple groups (Bandeira-Kunisky-Mixon-Zeng, 2022/24), for all finite groups (Bandeira-Bölcskei, arXiv:2606.12181, 2026), and for contractions in a finite-dimensional $C^{*}$-algebra of dimension $O(n)$ (Akbas-Sra, arXiv:2606.16005, 2026). The general bound remains $O(\\sqrt{n \\log d})$.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }
