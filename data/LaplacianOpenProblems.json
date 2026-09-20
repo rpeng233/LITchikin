@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.4",
   "catalogId": "laplacian-open-problems",
-  "title": "Problems on Laplacian Solving with Integer Weights",
+  "title": "Laplacian Solving, Integer Weights",
   "source": {
     "title": "Problems on Laplacian solving with integer weights"
   },
   "generatedAt": "2026-08-18T04:19:43.000Z",
-  "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+  "contentUpdatedAt": "2026-09-20T22:16:00.000Z",
   "lastVerified": "2026-08-19",
   "problemCount": 16,
   "scopeNotes": "Unless a record says otherwise, a directed input is a strongly connected graph and an undirected input is a connected graph, with n vertices, m edges or arcs, and positive integer scalar weights in [1,n^{10}]. The connection-Laplacian problem additionally fixes a constant block dimension and requires an explicit finite-precision representation of its connection matrices. The catalog distinguishes word-operation improvements, classical high-accuracy bit complexity, precision-sensitive entrywise or determinant guarantees, and floating-point representations. The word 'faster' is always relative to the named primary-source baseline; when a broad seed milestone is already achieved, the record states the sharpened remaining question.",
@@ -82,9 +82,9 @@
   "problems": [
     {
       "sourceStatement": "Solve undirected Laplacians in vector error faster than Jambulapati-Sidford '21.",
-      "problem": "Improve the word-operation complexity of undirected vector-error Laplacian solving beyond Jambulapati-Sidford '21.",
+      "problem": "Faster Lx=b (undirected, vector error)",
       "wordDescription": "Jambulapati and Sidford give an expected-time solver that is linear in the number of edges up to iterated-logarithmic factors, with logarithmic dependence on normwise accuracy. The question is to improve those remaining graph-size logarithmic factors without weakening the energy-norm guarantee. In this regime, complexity is measured in operations on O(log n)-bit words, and all scalar weights already fit in O(log n) bits.\n\nA successful result could be a strictly smaller explicit polylogarithmic factor, removal of the iterated-logarithmic overhead, or a matching lower bound in a clearly specified word-RAM model. Bit-precision costs beyond the O(log n)-bit word convention belong to the later precision-sensitive problems.",
-      "mathematicalConditions": "Let G be a connected undirected graph with n vertices, m edges, and integer weights in [1,n^{10}], let L be its Laplacian, and let b be an O(log n)-bit integer vector with 1^T b=0. For x=L^\\dagger b, compute x_tilde satisfying ||x_tilde-x||_L <= epsilon ||x||_L with constant success probability. Improve the Jambulapati-Sidford expected O(m (log log n)^{O(1)} log(1/epsilon)) word-operation bound, ideally to O(m log(1/epsilon)) or by determining the optimal remaining logarithmic dependence.",
+      "mathematicalConditions": "Let G be a connected undirected graph with n vertices, m edges, and integer weights in [1,n^{10}], let L be its Laplacian, and let b be an O(log n)-bit integer vector with 1^T b=0. For x=L^\\dagger b, compute x_tilde satisfying ||x_tilde-x||_L <= epsilon ||x||_L with constant success probability. Improve the Jambulapati-Sidford expected O(m (log log n)^{O(1)} log(1/epsilon)) word-operation \\todo{fill in the O(1) here, it's around 17?} bound, ideally to O(m log(1/epsilon)) or by determining the optimal remaining logarithmic dependence.",
       "comments": [],
       "literature": [
         {
@@ -141,14 +141,14 @@
         "remainingGap": "Improve or remove the iterated-logarithmic graph-size overhead while preserving the energy-norm guarantee in the stated word model."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T21:53:09.000Z",
       "recordId": "lit:laplacian-open-problems:undirected-vector-error-solver"
     },
     {
-      "sourceStatement": "Solve directed polynomial-mixing-time Laplacians in vector error faster than Peng-Song '21 plus Jambulapati-Sachdeva-Sidford-Tian-Zhao '24.",
-      "problem": "Improve the logarithmic factors in directed polynomial-mixing-time vector-error solving beyond the Peng-Song and Jambulapati-Sachdeva-Sidford-Tian-Zhao frameworks.",
+      "sourceStatement": "Solve directed polynomial-mixing-time Laplacians in vector error faster.",
+      "problem": "Faster Directed Lx = b, poly-mixing",
       "wordDescription": "Peng-Song reduce directed solving to sparsified block elimination, and Jambulapati, Sachdeva, Sidford, Tian, and Zhao improve Eulerian sparsification and the resulting solver overhead. The remaining question is to reduce these logarithmic factors toward the best undirected word-operation bounds. Polynomial mixing time and weights in [1,n^{10}] keep this in the classical regime where directionality, rather than an extreme precision requirement, is the intended obstruction.\n\nAny improvement should include the cost of Eulerian scaling or reduction from a general strongly connected input and should state the stationary normalization and solution norm explicitly.",
-      "mathematicalConditions": "Let L be the column Laplacian of a strongly connected n-vertex, m-arc directed graph with integer weights in [1,n^{10}] and polynomial mixing time. Given b in im(L) and epsilon in (0,1), compute x_tilde approximating L^\\dagger b in a stated vector norm, such as the U_L-energy norm after Eulerian scaling. Improve the word-operation bound obtained by combining Peng-Song '21 with the Jambulapati-Sachdeva-Sidford-Tian-Zhao Eulerian sparsifier, ideally toward m (log log n)^{O(1)} log(1/epsilon) or O(m log(1/epsilon)).",
+      "mathematicalConditions": "Let L be the column Laplacian of a strongly connected n-vertex, m-arc directed graph with integer weights in [1,n^{10}] and polynomial mixing time. Given b in im(L) and epsilon in (0,1), compute x_tilde approximating L^\\dagger b in a stated vector norm, such as the U_L-energy norm after Eulerian scaling. Improve the word-operation bound obtained by combining Peng-Song '21 with the Jambulapati-Sachdeva-Sidford-Tian-Zhao Eulerian sparsifier, ideally toward m (log log n)^{O(1)} log(1/epsilon) or O(m log(1/epsilon)). \\todo{fill in the O(1) on exponent}",
       "comments": [],
       "literature": [
         {
@@ -206,12 +206,12 @@
         "remainingGap": "Match the best undirected graph-size overhead, including the reduction from general strongly connected graphs and explicit precision guarantees."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:directed-poly-mixing-solver"
     },
     {
       "sourceStatement": "Obtain a separation between solving directed Laplacians with arbitrary mixing times in vector error and solving general integer matrices in the classical high-accuracy regime, or show reductions between them.",
-      "problem": "Separate arbitrary-mixing directed vector-error solving from classical high-accuracy general integer linear-system solving, or give fine-grained reductions between them.",
+      "problem": "Faster Directed Lx = b, arbitrary mixing time",
       "wordDescription": "Arbitrary mixing time can make a directed Laplacian highly nonnormal or badly conditioned even though every edge weight has only O(log n) bits. At the same time, polynomially conditioned general integer systems have dense O(n^omega) and sparse O_tilde(n^{(3 omega - 4)/(omega - 1)}) high-accuracy benchmarks. The question is whether the directed graph structure still yields a genuine polynomial advantage, or whether either problem efficiently simulates the other.\n\nThis is the classical comparison problem: the directed output receives a vector-norm guarantee, while the general-matrix side only asks for the usual 1/poly(n) additive or normwise accuracy under polynomial conditioning. Problem 15 separately changes the general-matrix side to an entrywise guarantee and belongs to the precision-sensitive regime.",
       "mathematicalConditions": "Compare the following tasks under randomized or deterministic reductions that preserve dimension, sparsity, O(log n)-bit input entries, and accuracy up to polylogarithmic factors. Directed task: for the Laplacian L of a strongly connected n-vertex, m-arc graph with weights in [1,n^{10}] and no mixing-time promise, and b in im(L), compute x_tilde with ||x_tilde-L^\\dagger b||_N <= n^{-c}||L^\\dagger b||_N in an explicitly stated stationary-scaled norm N. General task: for a nonsingular polynomially conditioned integer matrix A with entries n^{O(1)}, compute an n^{-c}-additive or normwise approximation to A^{-1}b. Prove a polynomial separation, a sparsity-preserving reduction in either direction, or an equivalence matching the dense O(n^omega) and sparse O_tilde(n^{(3 omega - 4)/(omega - 1)}) benchmarks.",
       "comments": [],
@@ -278,12 +278,12 @@
         "remainingGap": "A dimension- and sparsity-preserving reduction in either direction, or a conditional polynomial separation between the two classical tasks."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:directed-arbitrary-mixing-exact"
     },
     {
       "sourceStatement": "Solve undirected Laplacians to entrywise error in m polylog(n) time.",
-      "problem": "Remove the subpolynomial overhead from the STOC 2026 entrywise SDDM solver.",
+      "problem": "Faster entrywise undirected Lx=b",
       "wordDescription": "The seed problem has been solved. Farfan, Ghadiri, and Yang give an almost-linear-time entrywise solver for fixed-point SDDM systems, improving the previous roughly m sqrt(n) bit-operation bound to m n^{o(1)}. The result applies to grounded undirected Laplacians with nonnegative right-hand sides and returns a multiplicative approximation to every coordinate, including exponentially small random-walk quantities.\n\nThe sharpened open question, stated in the paper's conclusion, is whether the subpolynomial factor can be reduced to polylogarithmic overhead, giving a truly near-linear algorithm. The floating-point input model is a separate remaining direction because of its connection to shortest-path barriers.",
       "mathematicalConditions": "The STOC 2026 result establishes the following fixed-point baseline: for an invertible integer SDDM matrix M with m nonzeros, entries in [1,n^{10}] in absolute value, and a nonnegative O(log n)-bit integer vector b, it returns an exp(epsilon)-entrywise approximation in O_tilde(m 2^{O(sqrt(log n))} polylog(n epsilon^{-1} delta^{-1})) bit operations in its stated epsilon range. For epsilon=n^{-O(1)}, obtain m polylog(n) bit complexity with high probability. The floating-point analogue is separated into problem 16.",
       "comments": [],
@@ -337,12 +337,12 @@
         "remainingGap": "Replace the 2^{O(sqrt(log n))} overhead by polylogarithmic overhead for fixed-point integer inputs."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:undirected-entrywise-solver"
     },
     {
       "sourceStatement": "Obtain a separation between solving directed Laplacians with polynomial mixing time to entrywise error and solving polynomially conditioned general matrices, or show reductions between them.",
-      "problem": "Separate entrywise solving of polynomial-mixing directed Laplacians from classical solving of polynomially conditioned general matrices, or reduce one task to the other.",
+      "problem": "Entrywise directed Lx=b",
       "wordDescription": "Entrywise relative accuracy can reveal escape probabilities and Green's-function coordinates that vector error misses, even when the graph has polynomial mixing time. The structural question is whether this stronger directed-Laplacian task remains easier than solving a general polynomially conditioned matrix to standard high accuracy, or whether a fine-grained reduction connects the two.\n\nThis record concerns one right-hand side or one specified random-walk quantity, not outputting an entire n-by-n inverse. The former full-inverse/output-sensitive formulation has been replaced. Fixed-point RDDL entrywise algorithms and floating-point conditional lower bounds provide useful evidence, but do not settle the polynomial-mixing comparison.",
       "mathematicalConditions": "Directed task: given a strongly connected n-vertex, m-arc graph with weights in [1,n^{10}], polynomial mixing time, a grounded RDDL matrix M, and a nonnegative O(log n)-bit vector b, return x_tilde with exp(-epsilon)(M^{-1}b)_i <= (x_tilde)_i <= exp(epsilon)(M^{-1}b)_i for every positive coordinate, for epsilon=n^{-O(1)}. General task: solve a nonsingular polynomially conditioned integer matrix A with n^{O(1)} entries to n^{-O(1)} additive or normwise error. Give dimension- and sparsity-preserving reductions, prove a polynomial separation, or match the O(n^omega) dense and O_tilde(n^{(3 omega - 4)/(omega - 1)}) sparse benchmarks.",
       "comments": [],
@@ -404,12 +404,12 @@
         "remainingGap": "A fine-grained reduction in either direction or a conditional polynomial separation under matched dimension, sparsity, conditioning, and accuracy."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:directed-entrywise-inverse"
     },
     {
       "sourceStatement": "Give a faster algorithm for finding an O(n)-sized cut or spectral sparsifier for undirected Laplacians.",
-      "problem": "Construct an O(n)-edge undirected cut or spectral sparsifier faster, ideally in input-linear time.",
+      "problem": "Faster BSS on Undirected Graphs",
       "wordDescription": "For fixed accuracy, linear-size cut and spectral sparsifiers already exist, and optimal-size spectral sparsifiers can be constructed in almost-linear randomized time. The revised problem deliberately permits either cut or spectral preservation and asks how cheaply an O(n)-edge representation can be found. The strongest spectral version retains O(n/epsilon^2) edges; the cut version may admit different techniques and runtime tradeoffs.\n\nFor constant epsilon, the natural target is O(m) time. For nonconstant epsilon, the size and runtime dependence must be stated explicitly. Deterministic construction remains a separate harder direction: the 2026 dense-graph result retains polylogarithmic sparsity overhead and a roughly quadratic additive term.",
       "mathematicalConditions": "Given a connected undirected n-vertex, m-edge graph with weights in [1,n^{10}], output, for constant epsilon, a reweighted O(n)-edge subgraph H that preserves either every cut or every Laplacian quadratic form within factors 1-epsilon and 1+epsilon; for variable epsilon, seek O(n/epsilon^2) edges. Improve the best construction time toward O(m) expected word operations or m polylog(n) bit operations, and state whether the algorithm is randomized or deterministic. The guarantee must not hide an output-size increase beyond the selected cut or spectral target.",
       "comments": [],
@@ -470,14 +470,14 @@
         "remainingGap": "A truly input-linear O(n)-edge construction for constant accuracy, with the strongest version achieving O(n/epsilon^2) spectral size and an equally sharp deterministic analogue."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:undirected-linear-size-sparsifier"
     },
     {
-      "sourceStatement": "Obtain the smallest possible Eulerian spectral sparsifier, and construct it efficiently if possible.",
-      "problem": "Determine the smallest possible Eulerian spectral sparsifier and whether it can be constructed efficiently.",
+      "sourceStatement": "Obtain the smallest possible Eulerian spectral sparsifier",
+      "problem": "Sparser Eulerian Sparsifiers",
       "wordDescription": "Eulerian directed sparsification must approximate an asymmetric Laplacian while preserving in-degree/out-degree balance. Undirected graphs admit the optimal O(n/epsilon^2) edge bound, but current Eulerian constructions retain polylogarithmic factors. Those factors propagate directly into the cost and complexity of directed Laplacian solvers.\n\nA 2025 fully dynamic construction maintains degree-balance-preserving directed spectral sparsifiers with polylogarithmic update time and O(n polylog n/epsilon^2) arcs; for Eulerian inputs its approximation notion is equivalent to direct Eulerian spectral approximation. This is important dynamic progress, but it retains the polylogarithmic size gap.\n\nThe central structural question is whether directionality forces extra edges or whether the undirected optimum remains attainable. Both existential and efficient-construction versions matter: proving a smaller sparsifier exists may require discrepancy tools, while finding it in almost-linear time adds algorithmic constraints.",
-      "mathematicalConditions": "For an n-vertex Eulerian directed graph with integer weights in [1,n^{10}], Laplacian L, and U_L=(L+L^T)/2, determine the minimum s(n,epsilon) such that an Eulerian reweighted subgraph with s arcs epsilon-approximates L in the standard asymmetric norm induced by U_L. Close the gap between the Omega(n/epsilon^2) lower bound inherited from undirected graphs and the best known O(n log^{3/2}(n)/epsilon^2) polynomial-time upper bound, up to alternative mixed epsilon terms. Prove or refute s(n,epsilon)=Theta(n/epsilon^2), then determine the fastest construction time.",
+      "mathematicalConditions": "For an n-vertex Eulerian directed graph with integer weights in [1,n^{10}], Laplacian L, and U_L=(L+L^T)/2, determine the minimum s(n,epsilon) such that an Eulerian reweighted subgraph with s arcs epsilon-approximates L in the standard asymmetric norm induced by U_L. Close the gap between the \\Omega(n/epsilon^2) lower bound inherited from undirected graphs and the best known O(n log^{3/2}(n)/epsilon^2) polynomial-time upper bound, up to alternative mixed epsilon terms. Prove or refute s(n,epsilon)=\\Theta(n/epsilon^2).",
       "comments": [],
       "literature": [
         {
@@ -541,14 +541,14 @@
         "remainingGap": "Close the static size gap to Theta(n/epsilon^2), first existentially and then with an almost-linear construction."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:eulerian-minimum-size-sparsifier"
     },
     {
-      "sourceStatement": "Faster dynamic effective resistances.",
-      "problem": "Improve the update-query tradeoff for fully dynamic approximate effective resistance on general weighted graphs.",
+      "sourceStatement": "Improve max(update,query) time for fully dynamic approximate effective resistance on general weighted graphs.",
+      "problem": "Faster undirected weighted dynamic effective resistances.",
       "wordDescription": "Effective resistance is a basic dynamic measure of connectivity and a central primitive behind sparsification, electrical-flow optimization, and random-walk analysis. Maintaining a spectral edge sparsifier is not by itself enough for fast arbitrary-pair resistance queries: evaluating a query still requires access to an inverse or a suitable dynamic Schur complement.\n\nExisting general-graph data structures achieve sublinear but polynomial update and query bounds, with different guarantees for unweighted versus weighted graphs and for oblivious versus adaptive adversaries. The open goal is to lower these exponents, obtain worst-case rather than amortized bounds, and understand which combinations are ruled out by dynamic lower bounds.",
-      "mathematicalConditions": "Maintain a connected undirected graph whose integer conductances remain in [1,n^{10}] under edge insertions, deletions, and weight changes. On a query (s,t), return R_eff^G(s,t) within a factor 1+epsilon. Improve the best general-graph tradeoffs, including the O_tilde(n^{2/3+o(1)} epsilon^{-O(1)}) amortized scale for all-pairs queries. Desired results include update and query times n^{1/2+o(1)} or better, worst-case guarantees, and robustness to an adaptive adversary; alternatively prove conditional lower bounds that identify the optimal frontier.",
+      "mathematicalConditions": "Maintain a connected undirected graph whose integer conductances remain in [1,n^{10}] under edge insertions, deletions, and weight changes. On a query (s,t), return R_eff^G(s,t) within a factor 1+epsilon. Obtain amortized update/query times better than \\tilde(n^{2/3+o(1)} epsilon^{-O(1)}) amortized scale for all-pairs queries; alternatively prove conditional lower bounds above the polylog range. This problem will be closed when these become within polylog factors.",
       "comments": [],
       "literature": [
         {
@@ -606,14 +606,14 @@
         "remainingGap": "Improve the general weighted-graph update/query exponents, worst-case guarantees, or adaptive-adversary robustness, or prove matching lower bounds."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:dynamic-effective-resistance"
     },
     {
-      "sourceStatement": "Dynamic electrical flows with heavy hitters (find all edges whose electrical flow values are greater than epsilon of the total).",
-      "problem": "Maintain an output-sensitive heavy-hitter oracle for electrical flows under dynamic resistances and demands.",
+      "sourceStatement": "Give a faster data structure for returning all edges whose electrical energy exceed \\epsilon fraction of the total energy in electrical flows, under updates to resistances and demands.",
+      "problem": "Dynamic electrical flows (oblivious adversary)",
       "wordDescription": "Optimization algorithms based on electrical flows often need only the few edges carrying a large fraction of the current flow or energy. Recomputing the full m-dimensional electrical flow after every resistance or demand update defeats this sparsity. A dynamic heavy-hitter oracle would expose the important coordinates without materializing the entire flow.\n\nSpecialized versions of this idea already power faster maximum-flow algorithms, but they rely on restricted update sequences and amortization tailored to an interior-point method. The broader open problem is to build a reusable data structure for general dynamic graphs, with a clean approximation guarantee and update/query bounds that scale with the number of reported heavy edges.",
-      "mathematicalConditions": "Let a connected undirected graph have integer conductances in [1,n^{10}], incidence matrix B, resistance matrix R, Laplacian L=B R^{-1} B^T, and dynamic zero-sum demand b. The electrical flow is f=R^{-1}B^T L^\\dagger b and its energy is E=f^T R f. Support resistance updates that preserve the weight range, edge insertions/deletions, and sparse changes to b. A query with epsilon must output a set H containing every edge e with sqrt(r_e)|f_e| >= epsilon sqrt(E), excluding every edge below (epsilon/2)sqrt(E), together with estimates of reported values. Seek sublinear, ideally polylogarithmic, amortized update time and O_tilde(epsilon^{-2}+|H|) query time under a stated adversary model.",
+      "mathematicalConditions": "Let a connected undirected graph have integer conductances in [1,n^{10}], incidence matrix B, resistance matrix R, Laplacian L=B R^{-1} B^T, and dynamic zero-sum demand b. The electrical flow is f=R^{-1}B^T L^\\dagger b and its energy is E=f^T R f. Support resistance updates that preserve the weight range, edge insertions/deletions, and sparse changes to b. A query with epsilon must output a set H containing every edge e with sqrt(r_e)|f_e| >= epsilon sqrt(E), excluding every edge below (epsilon/2)sqrt(E), together with estimates of reported values. \\todo{alterantively, give lower bounds, problem closed when tight within polylog factors} \\todo{extract the bounds from the 1/58 paper...}",
       "comments": [],
       "literature": [
         {
@@ -664,12 +664,12 @@
         "remainingGap": "A model-independent, output-sensitive locator supporting general topology, resistance, and sparse-demand updates with a clear adversary guarantee."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:dynamic-flow-heavy-hitters"
     },
     {
-      "sourceStatement": "Determinant estimation of undirected Laplacians.",
-      "problem": "Estimate an undirected Laplacian cofactor multiplicatively in nearly input-linear time.",
+      "sourceStatement": "Give a 2-approximation of Estimate an undirected Laplacian cofactor multiplicatively in nearly input-linear time.",
+      "problem": "Undirected approximate det(L_{-})",
       "wordDescription": "By the matrix-tree theorem, a cofactor of an undirected graph Laplacian is the total weight of its spanning trees. Approximating the log determinant additively can be done in near-linear time, but that guarantee may correspond to a very large multiplicative error in the determinant itself. A genuine 1+epsilon estimate of the determinant is therefore a stronger counting problem.\n\nRecent work gives a roughly m^{3/2}/epsilon-time multiplicative estimator by repeatedly removing uncorrelated edge sets, improving earlier sparse-graph bounds. Closing the remaining gap to near-linear time would connect electrical-flow localization, determinant-preserving sparsification, and high-accuracy trace estimation in a particularly clean setting.",
       "mathematicalConditions": "Given a connected undirected graph G with n vertices, m edges, and integer weights in [1,n^{10}], fix a root r and let tau(G)=det(L_{-r,-r}), the weighted spanning-tree count. With probability at least 1-delta, output tau_tilde satisfying (1-epsilon)tau(G) <= tau_tilde <= (1+epsilon)tau(G). Seek O_tilde(m poly(epsilon^{-1},log(delta^{-1}))) bit operations, improving the known O_tilde(m^{3/2} epsilon^{-1}) sparse-graph bound and the earlier roughly n^2 epsilon^{-2} determinant-preserving bound. The result must distinguish multiplicative determinant error from additive error in log tau(G).",
       "comments": [],
@@ -728,14 +728,14 @@
         "remainingGap": "Reduce the sparse-graph m^{3/2} dependence toward m polylog n while keeping multiplicative, not merely log-determinant, error."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:16:00.000Z",
       "recordId": "lit:laplacian-open-problems:undirected-determinant-estimation"
     },
     {
-      "sourceStatement": "Determinant estimation of directed Laplacians.",
-      "problem": "Develop a nearly input-linear multiplicative estimator for directed Laplacian cofactors and weighted arborescence counts.",
+      "sourceStatement": "Give a faster algorithm for computing a 2-approximation of det(L_{-}) for a poly mixing unit weighted L with O(n) edges, or show conditional hardness.",
+      "problem": "Directed det(L_{-}), sparse L",
       "wordDescription": "A cofactor of a directed Laplacian counts rooted weighted arborescences. Unlike the undirected case, the matrix is asymmetric and current spectral sparsification controls a norm induced by the symmetrization rather than determinant directly. There is no immediate directed analogue of the determinant-preserving SDDM machinery.\n\nA fast estimator would provide a counting counterpart to nearly-linear directed Laplacian solvers and could illuminate stationary-distribution normalization, since directed tree weights encode stationary masses. The problem is meaningful both for Eulerian graphs, where the spectral theory is cleanest, and for general strongly connected graphs.",
-      "mathematicalConditions": "Given a strongly connected directed graph with n vertices, m arcs, and integer weights in [1,n^{10}], fix a root r and let tau_r=det(L_{-r,-r}), the total weight of spanning in-arborescences rooted at r under the chosen Laplacian convention. Output a (1+epsilon)-multiplicative estimate with failure probability at most delta. Seek O_tilde(m poly(epsilon^{-1},log(delta^{-1}))) bit operations first for Eulerian graphs and then for arbitrary strongly connected graphs. Establish whether directed spectral or singular-value sparsifiers preserve enough information for this purpose, or identify a different primitive.",
+      "mathematicalConditions": "Given a strongly connected directed graph with n vertices, m arcs, and integer weights in [1,n^{10}], fix a root r and let tau_r=det(L_{-r,-r}), the total weight of spanning in-arborescences rooted at r under the chosen Laplacian convention. Output a 2-approximate estimate with probability at least 0.5, in time faster than \\todo{give current best time}, or alternatively show harness.",
       "comments": [],
       "literature": [
         {
@@ -793,14 +793,14 @@
         "remainingGap": "A nearly input-linear multiplicative estimator, first for Eulerian directed graphs and then for general strongly connected graphs."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:16:00.000Z",
       "recordId": "lit:laplacian-open-problems:directed-determinant-estimation"
     },
     {
-      "sourceStatement": "Determine the complexity of exact undirected Laplacian determinant computation.",
-      "problem": "Determine the exact bit complexity of undirected integer-weighted Laplacian determinants and spanning-tree counts.",
+      "sourceStatement": "Determine the exact bit complexity of undirected integer-weighted Laplacian cofactor determinants and spanning-tree counts.",
+      "problem": "Exact undirected det(L_{-})",
       "wordDescription": "Generic exact algorithms compute the determinant of an integer matrix in essentially integer-matrix-multiplication time. A reduced undirected graph Laplacian is much more structured: it is sparse, symmetric diagonally dominant, and its determinant is a positive weighted spanning-tree count. The question is how far this structure reduces exact bit complexity on general graphs.\n\nThis is exact symbolic computation rather than numerical linear algebra. Any speedup must account for coefficient growth, modular reconstruction, and the output length of the integer determinant. Exact directed arborescence counting is no longer part of this record; directed multiplicative estimation remains problem 11.",
-      "mathematicalConditions": "Given a connected undirected n-vertex, m-edge graph with integer weights in [1,n^{10}], compute exactly det(L_{-r,-r}) for a specified root r. Determine the optimal randomized and deterministic bit complexity as a function of m and n. Improve on generic integer determinant algorithms, whose dense Las Vegas complexity is essentially O_tilde(n^omega), and on sparse black-box determinant baselines by exploiting symmetry, diagonal dominance, and graph structure. An aspirational target is O_tilde(m+n^2) or another bound sensitive to the input and output bit lengths; alternatively prove a reduction or conditional lower bound from a standard exact-linear-algebra primitive.",
+      "mathematicalConditions": "Given a connected undirected n-vertex, m-edge graph with integer weights in [1,n^{10}], compute exactly det(L_{-r,-r}) for a specified root r. Determine the optimal randomized and deterministic bit complexity as a function of m and n. Improve on generic integer determinant algorithms, \\todo{give runtime in bit complexity}, or show that those are optimum under reasonable hardness assumptions.",
       "comments": [],
       "literature": [
         {
@@ -858,14 +858,14 @@
         "remainingGap": "Exploit undirected Laplacian structure to beat generic dense or sparse integer-determinant baselines, ideally with an output-sensitive bit bound, or prove an equivalence/lower bound."
       },
       "generatedAt": "2026-08-18T04:19:43.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:16:00.000Z",
       "recordId": "lit:laplacian-open-problems:exact-determinant-complexity"
     },
     {
-      "sourceStatement": "Solve connection Laplacian linear systems to 1/poly(n) accuracy in parallel in O(log^3 n) depth and m polylog(n) bit complexity.",
-      "problem": "Construct a work-efficient O(log^3 n)-depth parallel solver for finite-precision connection Laplacians.",
+      "sourceStatement": "Solve undirected Laplacian linear systems to 1/poly(n) accuracy in parallel in O(log^3 n) depth and m polylog(n) bit complexity.",
+      "problem": "more parallel nearly-linear work Lx=b",
       "wordDescription": "Connection Laplacians replace each scalar vertex value by a constant-dimensional vector and each edge sign by a unitary transport matrix. The 2015 sparsified-multigrid framework gives nearly-linear work and a parallel solver, but its preprocessing has n^{o(1)} depth and its solve depth contains an additional log log n factor; the arithmetic analysis also does not by itself give the requested end-to-end bit bound.\n\nThe target is a genuinely work-efficient parallel algorithm whose construction and application both fit within O(log^3 n) depth at 1/poly(n) accuracy. The representation of the connection matrices matters: a complete result must specify a fixed-dimensional exact or finite-precision model in which every primitive operation has controlled bit cost.",
-      "mathematicalConditions": "Let G be a connected undirected graph with n vertices, m edges, scalar weights in [1,n^{10}], constant block dimension r, and unitary connection matrices Q_ij with Q_ji=Q_ij^*. Assume the Q_ij have an explicit representation supporting adjoint, multiplication, and addition with polylog(n) bit cost and controlled rounding. For the resulting Hermitian block connection Laplacian M and b in im(M), compute x_tilde satisfying ||x_tilde-M^\\dagger b||_M <= n^{-c}||M^\\dagger b||_M. Seek a randomized or deterministic parallel algorithm with O(log^3 n) depth and m polylog(n) total bit operations, including preconditioner construction, with polynomial dependence on fixed r made explicit.",
+      "mathematicalConditions": "Let G be a connected undirected graph with n vertices, m edges, scalar weights in [1,n^{10}]. \\todo{give a goal that's faster than the current best parallel solver}",
       "comments": [],
       "literature": [
         {
@@ -910,12 +910,12 @@
         "remainingGap": "Remove the n^{o(1)} preprocessing-depth and log-log solve-depth overheads while proving an end-to-end nearly linear bit bound."
       },
       "generatedAt": "2026-08-20T02:36:26.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:parallel-connection-laplacian-solver"
     },
     {
       "sourceStatement": "Obtain a separation between computing the spectral gap of undirected Laplacians to n^{-1} additive error and solving general integer matrices, or show reductions between them.",
-      "problem": "Relate high-accuracy undirected Laplacian spectral-gap computation to general integer linear-system solving through reductions or separations.",
+      "problem": "Complexity of finding \\lambda_2(L) to high accuracy",
       "wordDescription": "The spectral gap is the smallest nonzero eigenvalue of an undirected Laplacian. General Hermitian eigenvalue algorithms can compute all eigenvalues in essentially matrix-multiplication time with explicit finite-precision guarantees, while inverse iteration and related methods connect small-eigenvalue computation to repeated linear solves. What is not known is whether the graph-Laplacian structure makes n^{-1}-additive gap estimation polynomially easier than solving a general integer system, or whether a fine-grained reduction transfers the general-linear-algebra barrier.\n\nThe reduction must preserve the relevant scale. Because weights can be as large as n^{10}, n^{-1} additive error is a high-accuracy requirement for the unnormalized combinatorial Laplacian and cannot be replaced silently by constant relative error or by a normalized-Laplacian statement.",
       "mathematicalConditions": "Given a connected undirected n-vertex, m-edge graph with weights in [1,n^{10}] and combinatorial Laplacian L, output lambda_tilde with |lambda_tilde-lambda_2(L)| <= n^{-1}. Compare this task with solving a nonsingular polynomially conditioned general integer matrix with n^{O(1)} entries to n^{-O(1)} additive or normwise error. Give reductions preserving dimension, sparsity, and O(log n)-bit entries up to polylogarithmic factors, or prove a conditional polynomial separation. State separately whether the result estimates only lambda_2 or also returns an approximate eigenvector.",
       "comments": [],
@@ -969,7 +969,7 @@
         "remainingGap": "A sparsity-preserving reduction in either direction or a conditional polynomial separation at n^{-1} additive accuracy."
       },
       "generatedAt": "2026-08-20T02:36:26.000Z",
-      "contentUpdatedAt": "2026-08-20T02:36:26.000Z",
+      "contentUpdatedAt": "2026-09-20T22:10:36.000Z",
       "recordId": "lit:laplacian-open-problems:spectral-gap-vs-general-systems"
     },
     {
