@@ -3,8 +3,8 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.75: Hardness of Komlós",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
@@ -12,27 +12,48 @@
       "sourceStatement": "Can we prove some hardness statement about finding a coloring achieving Komlos guarantee or the Banaszczyk discrepancy guarantee?",
       "problem": "Prove a computational-hardness statement for the task of finding a coloring that achieves the Komlós guarantee ($\\|\\sum_i \\epsilon_i v_i\\|_\\infty = O(1)$, or the best known $O(\\sqrt{\\log \\min\\{d,n\\}})$ / Banaszczyk guarantee) for vectors in the Euclidean unit ball.",
       "wordDescription": "For the general discrepancy-minimization problem on set systems, strong hardness is known: Charikar-Newman-Nikolov proved it is NP-hard to distinguish systems with discrepancy 0 from systems with discrepancy $\\Omega(\\sqrt{n})$, so no polynomial-time algorithm can find colorings of discrepancy $o(\\sqrt{n})$ even when near-perfect colorings exist; Austrin-Guruswami-Håstad proved it is NP-hard to approximate hereditary discrepancy within a factor of 2. However, these results concern the optimization version (approximating the discrepancy value / worst-case instances). The structured promise problem here — given unit-norm vectors, find signs achieving the (guaranteed) $O(\\sqrt{\\log \\min\\{d,n\\}})$ Banaszczyk bound — is not known to be hard, and no hardness result for it has been published. The question is whether such a hardness statement exists (or whether the task is always easy in a formal sense).",
-      "mathematicalConditions": "Given $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$ (or the $t$-sparse matrix version), the task is to find $\\epsilon \\in \\{-1, 1\\}^n$ with $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq C\\sqrt{\\log \\min\\{d, n\\}}$ (the Banaszczyk guarantee). Question: can one prove NP-hardness (or other intractability) for this task, or for the decision version of achieving the Komlós guarantee with constant $c$?",
+      "mathematicalConditions": "Setting. Input: $v_1, \\dots, v_n \\in \\mathbb{Q}^d$ with $\\|v_i\\|_2 \\leq 1$. Let $\\mathrm{disc}_\\infty(v) = \\min_{\\epsilon \\in \\{-1,1\\}^n}\\|\\sum_i \\epsilon_i v_i\\|_\\infty$ and $\\mathrm{herdisc}_\\infty(v) = \\max_{J \\subseteq [n]} \\mathrm{disc}_\\infty(v_J)$; let $K(d,n)$ be as in Problem 1.05, so $\\mathrm{disc}_\\infty(v) \\leq K(d, n) = \\widetilde{O}(\\log^{1/4} n)$ for every input. Problem (as posed). Determine the computational complexity of the Komlós problem: (a) given $v$, is it NP-hard to compute or approximate $\\mathrm{disc}_\\infty(v)$, and within which factor? (b) In particular, is it NP-hard to distinguish inputs with $\\mathrm{disc}_\\infty(v) = O(1)$ from inputs with $\\mathrm{disc}_\\infty(v) \\geq c\\,K(d,n)$ for a constant $c > 0$? (c) The same for hereditary discrepancy, where a polylogarithmic approximation exists via the $\\gamma_2$ norm (Nikolov-Talwar; Matoušek-Nikolov-Talwar). Benchmarks. Charikar-Newman-Nikolov (2011): it is NP-hard to distinguish set systems ($n$ sets on $n$ elements) with discrepancy $0$ from those with discrepancy $\\Omega(\\sqrt{n})$; hence discrepancy is NP-hard to approximate within any factor in the Spencer setting (this does not transfer directly to the Komlós normalization, where every input has discrepancy $\\widetilde{O}(\\log^{1/4} n)$ and the question is about distinguishing $O(1)$ from that bound). Austrin-Guruswami-Håstad (2014/17): it is NP-hard to distinguish set systems that admit a perfectly balanced coloring (discrepancy $\\leq 1$) from those in which every coloring has a monochromatic set; in particular hereditary discrepancy is NP-hard to approximate within a factor $2 - \\epsilon$ (as cited by Nikolov-Talwar). Nikolov-Talwar (2015) and Matoušek-Nikolov-Talwar: hereditary discrepancy can be approximated in polynomial time within $O(\\log^{3/2} m)$ via the $\\gamma_2$ norm, so no super-polylogarithmic hardness is possible for $\\mathrm{herdisc}$. On the algorithmic side, Bansal-Jiang (2025) find colorings with $\\|\\sum\\epsilon_i v_i\\|_\\infty = \\widetilde{O}(\\log^{1/4} n)$ in polynomial time. Complete resolution. Either (A) an NP-hardness (or hardness under a standard assumption such as the Unique Games Conjecture or ETH) result for distinguishing $\\mathrm{disc}_\\infty(v) \\leq C$ from $\\mathrm{disc}_\\infty(v) \\geq c\\,f(d,n)$ where $f$ is the best existential upper bound at the time (currently $\\widetilde{O}(\\log^{1/4} n)$), showing the algorithmic question is as hard as it can be; or (B) a polynomial-time algorithm that approximates $\\mathrm{disc}_\\infty(v)$ within a constant factor, or that finds an $O(1)$-discrepancy coloring whenever one exists. Minimal progress that counts as a solution of this record. Any of: (i) NP-hardness of distinguishing $\\mathrm{disc}_\\infty(v) \\leq C$ from $\\mathrm{disc}_\\infty(v) \\geq g(n)$ for any function $g(n) \\to \\infty$ (in the Komlós normalization $\\|v_i\\|_2 \\leq 1$); (ii) a polynomial-time algorithm approximating $\\mathrm{disc}_\\infty(v)$ within a factor $O(\\mathrm{polylog}(n))$ in the Komlós setting, or approximating $\\mathrm{herdisc}$ within a factor $O(\\log^{\\gamma} m)$ for some $\\gamma < 3/2$; (iii) a hardness result for hereditary discrepancy beyond factor $2$, e.g. $\\omega(1)$-factor hardness under NP $\\neq$ P or a standard conjecture, or a proof that the $\\gamma_2$-based algorithm is optimal up to constants under such an assumption; (iv) resolving the analogous questions for the Beck-Fiala normalization (columns in $\\{0,1\\}^m$ with at most $t$ ones), e.g. NP-hardness of distinguishing $\\mathrm{disc} \\leq C$ from $\\mathrm{disc} \\geq c\\sqrt{t}$.",
       "status": "no progress",
       "comments": [],
       "literature": [
         {
           "title": "M. Charikar, A. Newman, A. Nikolov, Tight hardness results for minimizing discrepancy, SODA 2011",
           "year": 2011,
-          "description": "NP-hard to distinguish set systems with discrepancy 0 from those with discrepancy $\\Omega(\\sqrt{n})$ (for $O(n)$ sets on $n$ elements), showing Bansal's guarantees are tight for general systems and ruling out poly-time multiplicative approximation of discrepancy.",
-          "link": "https://scholar.google.com/scholar?q=Charikar+Newman+Nikolov+Tight+hardness+results+for+minimizing+discrepancy"
+          "description": "Proves that it is NP-hard to distinguish set systems of discrepancy $0$ from those of discrepancy $\\Omega(\\sqrt{n})$ (for $n$ sets on $n$ elements), so Spencer's bound cannot be improved algorithmically in the worst case and discrepancy is hard to approximate within any factor.",
+          "link": "https://doi.org/10.1137/1.9781611973082.124"
         },
         {
-          "title": "P. Austrin, V. Guruswami, J. Håstad, On the hardness of approximating discrepancy (2013)",
-          "year": 2013,
-          "description": "NP-hard to approximate the hereditary discrepancy of a set system within a factor of 2 (as cited in Nikolov-Talwar and the discrepancy literature).",
-          "link": "https://scholar.google.com/scholar?q=Austrin+Guruswami+H%C3%A5stad+hardness+approximating+discrepancy+hereditary"
+          "title": "P. Austrin, V. Guruswami, J. Håstad, $(2+\\epsilon)$-SAT is NP-hard, FOCS 2014; SIAM Journal on Computing 46(5):1554-1573, 2017 (ECCC TR13-159)",
+          "year": 2017,
+          "description": "Among its consequences: given a $(2k+1)$-uniform hypergraph admitting a perfectly balanced 2-coloring (discrepancy $1$), it is NP-hard to find a 2-coloring with no monochromatic edge; this yields the factor-$(2-\\epsilon)$ hardness of approximating hereditary discrepancy cited in the discrepancy literature.",
+          "link": "https://doi.org/10.1137/15M1006507",
+          "eccc": "https://eccc.weizmann.ac.il/report/2013/159/"
         },
         {
-          "title": "V. V. S. P. Bhattiprolu, V. Guruswami, E. Lee, Approximate hypergraph coloring under low-discrepancy and related promises, RANDOM 2015",
+          "title": "A. Nikolov, K. Talwar, Approximating hereditary discrepancy via small width ellipsoids, SODA 2015; arXiv:1311.6204",
           "year": 2015,
-          "description": "Related promise-colorability hardness: for low-discrepancy hypergraphs, coloring is hard in various regimes, giving context for what kind of hardness might be provable for Komlós-style tasks.",
-          "link": "https://scholar.google.com/scholar?q=Bhattiprolu+Guruswami+Lee+Approximate+hypergraph+coloring+under+low-discrepancy+promises"
+          "description": "Polynomial-time $O(\\log^{3/2} m)$-approximation of hereditary discrepancy via the $\\gamma_2$ norm / small-width ellipsoids, complementing the hardness results.",
+          "link": "https://arxiv.org/abs/1311.6204",
+          "doi": "10.1137/1.9781611973730.24"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, International Mathematics Research Notices 2020(3):751-780 (arXiv 2014)",
+          "year": 2020,
+          "description": "Shows that hereditary discrepancy is characterized up to logarithmic factors by the factorization norm $\\gamma_2$, giving a polynomial-time polylogarithmic approximation and hence ruling out super-polylogarithmic hardness for hereditary discrepancy.",
+          "link": "https://arxiv.org/abs/1408.1376",
+          "doi": "10.1093/imrn/rny033"
+        },
+        {
+          "title": "V. Bhattiprolu, V. Guruswami, E. Lee, Approximate hypergraph coloring under low-discrepancy and related promises, APPROX/RANDOM 2015; arXiv:1506.06444",
+          "year": 2015,
+          "description": "Hardness and algorithms for coloring hypergraphs under low-discrepancy promises, refining the Austrin-Guruswami-Håstad picture for promise discrepancy problems.",
+          "link": "https://arxiv.org/abs/1506.06444"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.03961, 2025",
+          "year": 2025,
+          "description": "Gives an algorithmic $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem, the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$, and proves the Beck-Fiala conjecture (discrepancy $O(\\sqrt{k})$) for all degrees $k \\geq \\log^2 n$, together with an $\\widetilde{O}(\\sqrt{k} + \\sqrt{\\log n})$ bound for every $k$.",
+          "link": "https://arxiv.org/abs/2508.03961"
         }
       ],
       "source": {
@@ -52,10 +73,11 @@
         "hardness",
         "complexity theory"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The Charikar-Newman-Nikolov hardness (NP-hard to distinguish disc 0 vs $\\Omega(\\sqrt{n})$) is confirmed (SODA 2011, full paper available from DIMACS); the Austrin-Guruswami-Håstad factor-2 hardness for hereditary discrepancy is cited in Nikolov's SODA 2014 slides. No published hardness result specific to finding Komlós/Banaszczyk-guarantee colorings was located; the question appears open as of 2026.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/, the DOI records of Charikar-Newman-Nikolov and Austrin-Guruswami-Håstad, and the arXiv abstracts of Nikolov-Talwar and Matoušek-Nikolov-Talwar. On 2026-09-20 Google Scholar search links were replaced by DOI/arXiv links and the Austrin-Guruswami-Håstad citation was corrected to the paper '$(2+\\epsilon)$-SAT is NP-hard' (ECCC TR13-159 / FOCS 2014 / SICOMP 2017), which is the source of the hereditary-discrepancy hardness statement. The factor-$(2-\\epsilon)$ formulation is as cited by Nikolov-Talwar; the AimPL page itself states the problem informally.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "Open. No hardness result for finding a coloring achieving the Komlós/Banaszczyk guarantee is known; the closest results are hardness for the general discrepancy-minimization problem (Charikar-Newman-Nikolov 2011) and factor-2 hardness for approximating hereditary discrepancy (Austrin-Guruswami-Håstad 2013)."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "Open. No hardness result for finding a coloring achieving the Komlós/Banaszczyk guarantee is known; the closest results are hardness for the general discrepancy-minimization problem (Charikar-Newman-Nikolov 2011) and factor-2 hardness for approximating hereditary discrepancy (Austrin-Guruswami-Håstad 2013).",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

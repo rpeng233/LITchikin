@@ -3,47 +3,55 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.65: Tusnády's problem",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
       "recordId": "lit:hereddiscrep-aimpl:1.65",
       "sourceStatement": "Let $d_n$ be the discrepancy of $n$ points in $\\mathbb{R}^2$ wrt all alix-aligned rectangles i.e. the set system comprises of all axis-aligned rectangles in $\\mathbb{R}^2$ as sets, maximised over all choices of $n$ points. Tusnady's problem then asks for the exact value of $d_n$. We can also ask for the same question in $\\mathbb{R}^d$.",
-      "problem": "Determine the exact discrepancy $d_n$ of $n$ points in $\\mathbb{R}^2$ with respect to all axis-aligned rectangles (the maximum over all $n$-point sets of the combinatorial discrepancy of the set system of axis-parallel rectangles), and the analogous quantity in $\\mathbb{R}^d$ with respect to axis-parallel boxes.",
-      "wordDescription": "Tusnády's problem (posed by Tusnády in the early 1980s) asks for the tight value of the combinatorial discrepancy of axis-parallel rectangles: given $n$ points in the plane, 2-color them so that every axis-parallel rectangle contains nearly equal numbers of red and blue points, and minimize the worst imbalance. In dimension 2 the discrepancy is known to be $\\Theta(\\log n)$-ish but the exact growth is open: Schmidt's lower bound $\\Omega(\\log n)$ (via Lebesgue-measure discrepancy, combined with a reduction of Beck) is the best known, while the best upper bound progressed from $O(\\log^{2.5} n)$ to $O(\\log^2 n)$ (Bansal-Garg 2017). In higher dimensions $\\mathbb{R}^d$, Matoušek-Nikolov-Talwar proved $\\Omega(\\log^{d-1} n)$ (improving the previous $\\approx \\log^{(d-1)/2} n$) and $O(\\log^{d+1/2} n)$, and Nikolov later improved the upper bound to $O(\\log^{d-0.5} n)$; closing the gap between $\\log^{d-1}$ and $\\log^{d-0.5}$ remains open for $d \\geq 3$.",
-      "mathematicalConditions": "Let $\\mathcal{R}_d$ be the family of axis-parallel boxes in $\\mathbb{R}^d$ and define $d_n^{(d)} = \\max_{P: |P| = n} \\mathrm{disc}(P, \\mathcal{R}_d) = \\max_{P} \\min_{\\chi: P \\to \\{\\pm 1\\}} \\sup_{R \\in \\mathcal{R}_d} \\left|\\sum_{p \\in P \\cap R} \\chi(p)\\right|$. Tusnády's problem asks for the exact value of $d_n := d_n^{(2)}$ (and of $d_n^{(d)}$). Known: $d_n^{(2)} = \\Omega(\\log n)$ and $O(\\log^2 n)$; $d_n^{(d)} = \\Omega(\\log^{d-1} n)$ and $O(\\log^{d-0.5} n)$.",
+      "problem": "Tusnády's problem: determine the combinatorial discrepancy $d_d(n)$ of $n$ points in $\\mathbb{R}^d$ with respect to axis-parallel boxes. In the plane the known bounds are $\\Omega(\\log n) \\leq d_2(n) \\leq O(\\log^2 n)$; in $\\mathbb{R}^d$ they are $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$. Close the gap (the conjectured truth is $\\Theta(\\log^{d-1} n)$).",
+      "wordDescription": "Tusnády's problem asks for the worst-case discrepancy of axis-parallel boxes with respect to $n$-point sets: color the points red/blue so that every box is as balanced as possible. It is the combinatorial analogue of the classical (Lebesgue-measure) discrepancy of boxes, which is $\\Theta(\\log n)$ in the plane (Schmidt) and open in higher dimensions. Beck (1981) established the connection and proved $O(\\log^4 n)$ in the plane; subsequent work brought the planar upper bound down to $O(\\log^{2.5} n)$ (the state of the art at the time of the workshop), then to $O(\\log^2 n)$ (Bansal-Garg 2017), and the $d$-dimensional bound to $O_d(\\log^d n)$ (Bansal-Garg) and $O(\\log^{d-1/2} n)$ (Nikolov 2017). The lower bound $\\Omega(\\log^{d-1} n)$ follows from the $\\gamma_2$-norm characterization of hereditary discrepancy (Matoušek-Nikolov-Talwar). The remaining gap is a single $\\sqrt{\\log n}$ factor in every dimension; it is conjectured that $d_d(n) = \\Theta(\\log^{d-1} n)$, and even the planar case $d_2(n) = \\Theta(\\log n)$ is open.",
+      "mathematicalConditions": "Setting. For a finite set $P \\subset \\mathbb{R}^d$ let $\\mathcal{B}_d(P) = \\{P \\cap B : B = \\prod_{i=1}^d [a_i, b_i]\\}$ be the set system induced by axis-parallel boxes, $\\mathrm{disc}(P) = \\min_{\\chi : P \\to \\{-1,1\\}} \\max_{S \\in \\mathcal{B}_d(P)} |\\sum_{x \\in S} \\chi(x)|$, and $d_d(n) = \\max_{|P| = n} \\mathrm{disc}(P)$ (it suffices to consider anchored boxes $\\prod [0, b_i]$, up to a factor $2^d$). Problem. Determine the order of growth of $d_d(n)$ for each fixed $d \\geq 2$. Conjecture: $d_d(n) = \\Theta(\\log^{d-1} n)$. Benchmarks. Lower bounds: $d_2(n) = \\Omega(\\log n)$ (from Schmidt's geometric lower bound / directly), and $d_d(n) = \\Omega(\\log^{d-1} n)$ for all $d$ (Matoušek-Nikolov-Talwar, via $\\gamma_2$). Upper bounds: $d_2(n) = O(\\log^4 n)$ (Beck 1981), improved in steps to $O(\\log^{2.5} n)$ (the best bound before 2016) and then to $d_2(n) = O(\\log^2 n)$ (Bansal-Garg 2017); in general $d_d(n) = O_d(\\log^{d+1/2} n)$ (pre-2016), $O_d(\\log^d n)$ (Bansal-Garg 2017), and $d_d(n) = O(\\log^{d-1/2} n)$ (Nikolov 2017, using Banaszczyk's theorem on signed series). Hence $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$ for all $d \\geq 2$; the gap is $\\sqrt{\\log n}$. All upper bounds are attained by polynomial-time algorithms. Complete resolution. Determining $d_d(n)$ up to constant factors for every fixed $d$ (e.g. proving $d_d(n) = O(\\log^{d-1} n)$, or a lower bound $d_d(n) = \\Omega(\\log^{d-1/2} n)$). Minimal progress that counts as a solution of this record. Any of: (i) $d_2(n) = O(\\log^{2-\\delta} n)$ for some constant $\\delta > 0$, or $d_2(n) = \\Omega(\\log^{1+\\delta} n)$; (ii) for some fixed $d \\geq 3$, $d_d(n) = O(\\log^{d - 1/2 - \\delta} n)$ or $d_d(n) = \\Omega(\\log^{d-1+\\delta} n)$; (iii) the conjecture $d_d(n) = O(\\log^{d-1} n)$ for all product point sets $P = P_1 \\times \\dots \\times P_d$ (in particular all grids), for some $d \\geq 2$ where it is not already known; (iv) determining the hereditary discrepancy of boxes up to constants (currently between $\\Omega(\\log^{d-1} n)$ and $O(\\log^{d-1/2} n)$, the same range as $d_d(n)$). Improving constants or $\\log\\log n$ factors does not count.",
       "status": "partial progress",
       "comments": [],
       "literature": [
         {
-          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, IMRN 2020(3):751-790 (arXiv:1408.1376)",
+          "title": "W. M. Schmidt, Irregularities of distribution VII, Acta Arithmetica 21:45-50, 1972",
+          "year": 1972,
+          "description": "The $\\Omega(\\log n)$ lower bound for the (geometric) discrepancy of axis-parallel rectangles in the unit square, which underlies the planar lower bound $d_2(n) = \\Omega(\\log n)$.",
+          "link": "https://doi.org/10.4064/aa-21-1-45-50"
+        },
+        {
+          "title": "J. Beck, Balanced two-colorings of finite sets in the square I, Combinatorica 1(4):327-335, 1981",
+          "year": 1981,
+          "description": "Introduces Tusnády's problem (posed by G. Tusnády) and proves the first upper bound $O(\\log^4 n)$ in the plane, establishing the transference between geometric and combinatorial discrepancy of boxes.",
+          "link": "https://doi.org/10.1007/BF02579453"
+        },
+        {
+          "title": "J. Matoušek, A. Nikolov, K. Talwar, Factorization norms and hereditary discrepancy, International Mathematics Research Notices 2020(3):751-780 (arXiv 2014)",
           "year": 2020,
-          "description": "Proves the $\\Omega(\\log^{d-1} n)$ lower bound for the $d$-dimensional Tusnády problem (improving the previous $\\approx \\log^{(d-1)/2} n$) and gives a new simple proof of the $O(\\log^{d+1/2} n)$ upper bound.",
-          "link": "https://arxiv.org/abs/1408.1376"
+          "description": "Shows that hereditary discrepancy is characterized up to logarithmic factors by the factorization norm $\\gamma_2$ ($\\gamma_2(A)/O(\\log m) \\leq \\mathrm{herdisc}(A) \\leq O(\\sqrt{\\log m})\\,\\gamma_2(A)$); as an application derives the lower bound $\\Omega(\\log^{d-1} n)$ for Tusnády's problem in $\\mathbb{R}^d$.",
+          "link": "https://arxiv.org/abs/1408.1376",
+          "doi": "10.1093/imrn/rny033"
         },
         {
-          "title": "A. Nikolov, Tighter bounds for the discrepancy of boxes and polytopes, SoCG 2017",
+          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017; arXiv:1611.01805",
           "year": 2017,
-          "description": "Improves the upper bound for axis-parallel boxes in $\\mathbb{R}^d$ to $O(\\log^{d-0.5} n)$, currently the strongest known upper bound for Tusnády's problem in higher dimensions.",
-          "link": "https://scholar.google.com/scholar?q=Nikolov+Tighter+bounds+for+the+discrepancy+of+boxes+and+polytopes"
-        },
-        {
-          "title": "N. Bansal, S. Garg, Algorithmic discrepancy beyond partial coloring, STOC 2017 (arXiv:1611.01805)",
-          "year": 2017,
-          "description": "Gives an algorithmic $O(\\log^2 n)$ bound for axis-parallel rectangles in the plane (improving $O(\\log^{2.5} n)$) and $O_d(\\log^d n)$ for $d$-dimensional boxes.",
+          "description": "General algorithmic framework that overcomes the iterated-partial-coloring loss. For Tusnády's problem it improves the planar bound from $O(\\log^{2.5} n)$ to $O(\\log^2 n)$ and gives $O_d(\\log^d n)$ for boxes in $\\mathbb{R}^d$ (since improved to $O(\\log^{d-1/2} n)$ by Nikolov). For the Steinitz problem it gives the first algorithm matching Banaszczyk's non-constructive $\\ell_\\infty$ bound and an algorithmic $O(\\sqrt{d \\log n})$ bound in the $\\ell_2$ case.",
           "link": "https://arxiv.org/abs/1611.01805"
         },
         {
-          "title": "W. M. Schmidt, Irregularities of distribution VII, Acta Arithmetica 21:45-50, 1972; J. Beck, Roth's estimate of the discrepancy of integer sequences is nearly sharp, Combinatorica 1(4):319-325, 1981",
-          "year": 1972,
-          "description": "Schmidt's $\\Omega(\\log n)$ lower bound on Lebesgue-measure discrepancy in the plane together with Beck's reduction yields the $\\Omega(\\log n)$ lower bound for Tusnády's problem in $\\mathbb{R}^2$; this remains the best known lower bound in the plane.",
-          "link": "https://scholar.google.com/scholar?q=Schmidt+Irregularities+of+distribution+VII+Acta+Arithmetica"
+          "title": "A. Nikolov, Tighter bounds for the discrepancy of boxes and polytopes, SoCG 2017; Mathematika 63(3):1091-1113, 2017",
+          "year": 2017,
+          "description": "Proves the upper bound $O(\\log^{d-1/2} n)$ for Tusnády's problem in $\\mathbb{R}^d$ (improving the $O_d(\\log^d n)$ of Bansal-Garg) by combining the factorization-norm approach with Banaszczyk's theorem on signed series; extends the bound to dilates and translates of a fixed convex polytope, with nearly matching lower bounds.",
+          "link": "https://arxiv.org/abs/1701.05532",
+          "doi": "10.1112/S0025579317000250"
         },
         {
-          "title": "Discrepancy Theory: An Algorithmic and Geometric Perspective, arXiv:2608.00140, 2026",
+          "title": "N. Bansal, A. Nikolov, Discrepancy theory: an algorithmic and geometric perspective, arXiv:2608.00140, 2026",
           "year": 2026,
-          "description": "Recent survey confirming the state of the art for Tusnády's problem: lower bound $\\Omega(\\log^{d-1} n)$ (MNT) and strongest upper bound $O(\\log^{d-0.5} n)$ (Nikolov).",
+          "description": "2026 survey of combinatorial discrepancy (Komlós, Beck-Fiala, Tusnády, vector balancing and the algorithmic theory); cited here as the reference for the current state of these problems, in particular for Tusnády's problem ($\\Omega(\\log n) \\leq d_2(n) \\leq O(\\log^2 n)$ in the plane, $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$ in $\\mathbb{R}^d$) and for the fact that the Komlós and Beck-Fiala conjectures remain open in general.",
           "link": "https://arxiv.org/abs/2608.00140"
         }
       ],
@@ -64,10 +72,11 @@
         "axis-parallel rectangles",
         "geometric discrepancy"
       ],
-      "verificationNotes": "Verified on 2026-08-25. The page's status line contains a typo: the $\\mathbb{R}^2$ lower bound should be $\\Omega(\\log n)$ (not $O(\\log n)$); this is confirmed by the literature (Schmidt + Beck). The $\\mathbb{R}^2$ upper bound $O(\\log^{2.5} n)$ was later improved to $O(\\log^2 n)$ by Bansal-Garg (STOC 2017). In $\\mathbb{R}^d$ the page's upper bound $\\log^{d+1/2} n$ was later improved to $\\log^{d-0.5} n$ by Nikolov (SoCG 2017), per the survey arXiv:2608.00140. The problem remains open; in particular the exact value of $d_n$ in the plane is unknown.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/, the arXiv abstracts of Bansal-Garg (arXiv:1611.01805), Nikolov (arXiv:1701.05532) and Matoušek-Nikolov-Talwar (arXiv:1408.1376), and the 2026 survey arXiv:2608.00140. Corrections made on 2026-09-20 following the comment by Richard Peng: the planar lower bound is $\\Omega(\\log n)$ (the earlier record wrote $O(\\log n)$); the planar upper bound is $O(\\log^2 n)$ (Bansal-Garg), not $O(\\log^{2.5} n)$; the higher-dimensional upper bound is $O(\\log^{d-1/2} n)$ (Nikolov), not $\\log^{d+1/2} n$; Nikolov's paper is now cited directly. The sourceStatement preserves the original AimPL wording (including its typography) as historical text; the corrected bounds are in problem/statusDetails/mathematicalConditions.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "In $\\mathbb{R^2}$, we know a lower bound of $O(\\log n)$ on $d_n$ and an upper bound of $O(\\log^{2.5}n)$. In $\\mathbb{R}^d$, we know that $d_n\\in[\\log^{d-1}n,log^{d+1/2}n]$."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "In $\\mathbb{R}^2$: $\\Omega(\\log n) \\leq d_2(n) \\leq O(\\log^2 n)$ (lower bound classical/Schmidt-type; upper bound Bansal-Garg 2017, improving Larsen's $O(\\log^{2.5} n)$). In $\\mathbb{R}^d$: $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$ (lower bound Matoušek-Nikolov-Talwar; upper bound Nikolov 2017, improving Bansal-Garg's $O_d(\\log^d n)$ and the earlier $O_d(\\log^{d+1/2} n)$). All upper bounds are algorithmic.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

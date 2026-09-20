@@ -13,7 +13,7 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 │   ├── LaplacianOpenProblems.json
 │   ├── PermanentEstimation.json
 │   ├── SimonsF25ComplexityLinAlg.json
-│   └── discrepancy/            # one-problem catalogs split from AimPLHereditaryDiscrepancy.json
+│   └── discrepancy/            # one-problem catalogs, one per AimPL problem
 ├── open_problem_record.schema.json
 ├── viewer1_DS.html             # file viewer
 └── viewer2_devin.html          # spreadsheet viewer
@@ -26,9 +26,11 @@ selected JSON file to a server.
 
 ## Current catalogs
 
-- `AimPLHereditaryDiscrepancy.json`: 14 open problems on hereditary discrepancy
-  and factorization norms from the AimPL problem list. `data/discrepancy/`
-  holds the same problems as one-problem catalogs.
+- `AimPLHereditaryDiscrepancy.json`: the 14 problems of the AimPL problem list
+  [Hereditary discrepancy and factorization norms](http://aimpl.org/hereddiscrep/1/).
+  Each record keeps the AimPL statement verbatim in `sourceStatement`; the
+  descriptions, formalizations, and literature are added on top.
+  `data/discrepancy/` holds the same problems as one-problem catalogs.
 - `LaplacianOpenProblems.json`: 16 open or sharpened problems on Laplacian
   solvers, entrywise guarantees, sparsification, dynamic electrical quantities,
   determinant computation, connection Laplacians, spectral gaps, and floating-
@@ -36,7 +38,10 @@ selected JSON file to a server.
   the search cutoff, query families, checked anchors, confidence, and the
   precise remaining gap.
 - `PermanentEstimation.json`: 22 open problems on approximating and estimating
-  matrix permanents.
+  matrix permanents (matchings, nonnegative and complex permanents, Gaussian
+  permanents and BosonSampling). It is not transcribed from an existing problem
+  list; it is a recent literature crawl generated with Devin, grouped through
+  the catalog-level `groups` field.
 - `SimonsF25ComplexityLinAlg.json`: the Complexity and Linear Algebra open
   problems catalog from the Simons Institute Fall 2025 program.
 

@@ -3,48 +3,71 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.05: Komlós conjecture",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
       "recordId": "lit:hereddiscrep-aimpl:1.05",
       "sourceStatement": "There is a universal constant $c>0$ s.t. for every $v_1,v_2,...,v_n \\in \\mathbb{B_2}^d$, there exist signs $\\epsilon_1,...,\\epsilon_n\\in \\{-1,1\\}$ s.t. $|| \\sum_{i=1}^n \\epsilon_i v_i||_{\\infty} \\le c$",
-      "problem": "Prove the Komlós conjecture: for any multiset of $n$ vectors in the Euclidean unit ball of $\\mathbb{R}^d$, there exist $\\pm 1$ signs whose signed sum has $\\ell_\\infty$ norm bounded by an absolute constant, independent of both the dimension $d$ and the number of vectors $n$.",
-      "wordDescription": "The Komlós conjecture is one of the central open problems in combinatorial discrepancy. It asserts that vectors of Euclidean norm at most one can always be signed so that every coordinate of the signed sum stays within an absolute constant, no matter how many vectors there are or how high the dimension is. It strictly generalizes the Beck–Fiala conjecture (scale each element's incidence vector by $1/\\sqrt{t}$), and in the special case of normalized $\\pm 1$ vectors it recovers Spencer's theorem. The best known general bound is logarithmic: Banaszczyk's vector-balancing theorem gives $O(\\sqrt{\\log n})$, and with Gaussian-slice estimates of Barthe, Guédon, Mendelson and Naor this improves to $O(\\sqrt{\\log d})$ where $d$ is the dimension of the span of the vectors. The conjecture remains open despite decades of effort; the recent bound of Bansal and Jiang ($\\widetilde{O}(\\log^{1/4} n)$) is the first to go beyond the square root of a logarithm.",
-      "mathematicalConditions": "For every $d, n \\geq 1$ and every $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, there exist signs $\\epsilon_1, \\dots, \\epsilon_n \\in \\{-1, 1\\}$ and an absolute constant $c$ (independent of $d$ and $n$) such that $\\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty \\leq c$.",
+      "problem": "Prove the Komlós conjecture: for any multiset of $n$ vectors in the Euclidean unit ball of $\\mathbb{R}^d$, there exist $\\pm 1$ signs whose signed sum has $\\ell_\\infty$ norm bounded by an absolute constant, independent of both the dimension $d$ and the number of vectors $n$. Equivalently, the vector-balancing constant $\\mathrm{vb}(B_2^d, B_\\infty^d)$ is bounded uniformly in $d$.",
+      "wordDescription": "The Komlós conjecture is one of the central open problems in combinatorial discrepancy. It asserts that vectors of Euclidean norm at most one can always be signed so that every coordinate of the signed sum stays within an absolute constant, no matter how many vectors there are or how high the dimension is. It strictly generalizes the Beck-Fiala conjecture (scale each element's incidence vector by $1/\\sqrt{t}$), and in the special case of normalized $\\pm 1$ vectors it recovers Spencer's theorem. For decades the best general bound was Banaszczyk's $O(\\sqrt{\\log n})$ (1998), sharpened to $O(\\sqrt{\\log \\min\\{d, n\\}})$ via the Gaussian slice estimates of Barthe, Guédon, Mendelson and Naor (2005). In 2025 Bansal and Jiang broke this barrier with an algorithmic $\\widetilde{O}(\\log^{1/4} n)$ bound. The conjecture is known to hold in a smoothed-analysis model (Bansal, Jiang, Meka, Singla and Sinha, 2022: Gaussian perturbations of $n = \\omega(d\\log d)$ vectors), and for all $t$-sparse $0/1$ instances with $t \\geq (\\log n)^{1+o(1)}$ via the Beck-Fiala results of Bansal-Jiang and Altschuler-Tikhomirov (see Problem 1.15), but in full generality it remains open.",
+      "mathematicalConditions": "Setting. For integers $d, n \\geq 1$ and vectors $v_1, \\dots, v_n \\in \\mathbb{R}^d$ with $\\|v_i\\|_2 \\leq 1$, let $\\mathrm{disc}_\\infty(v_1, \\dots, v_n) = \\min_{\\epsilon \\in \\{-1,1\\}^n} \\left\\|\\sum_{i=1}^n \\epsilon_i v_i\\right\\|_\\infty$, and let $K(d, n)$ be the supremum of this quantity over all such families; set $K = \\sup_{d, n} K(d, n)$. Conjecture (Komlós). $K < \\infty$; i.e. there is an absolute constant $c$ with $K(d, n) \\leq c$ for all $d, n$. Benchmarks. $K(d,n) \\geq 1$ trivially; no lower bound growing with $d$ or $n$ is known. Upper bounds: $K(d, n) = O(\\sqrt{\\log \\min\\{d, n\\}})$ (Banaszczyk 1998 with Barthe-Guédon-Mendelson-Naor 2005), and $K(d, n) = \\widetilde{O}(\\log^{1/4} n)$ where $\\widetilde{O}$ hides $\\mathrm{poly}(\\log\\log n)$ factors (Bansal-Jiang 2025, algorithmic). In the smoothed model where each $v_i$ is replaced by $v_i + g_i$ with $g_i \\sim N(0, \\sigma^2 I_d/d)$ i.i.d. and fixed $\\sigma > 0$, the bound $O(1)$ holds with high probability whenever $n = \\omega(d \\log d)$ (Bansal-Jiang-Meka-Singla-Sinha 2022). Complete resolution. Either (A) a proof that $K \\leq c$ for some explicit or non-explicit absolute constant $c$, or (B) a disproof: a sequence of families $(v^{(j)}_1, \\dots, v^{(j)}_{n_j}) \\subset B_2^{d_j}$ with $\\mathrm{disc}_\\infty \\to \\infty$. Minimal progress that counts as a solution of this record. Any one of: (i) an upper bound $K(d, n) = O((\\log n)^{\\gamma})$ (or $O((\\log \\min\\{d,n\\})^{\\gamma})$) for some constant $\\gamma < 1/4$; (ii) a bound $K(d, n) = O(1)$ valid for all $n$ and $d$ in an infinite parameter regime that is not implied by the Beck-Fiala results (e.g. all $n \\leq d^{C}$ for a constant $C \\geq 1$, or all $n \\geq C d \\log d$ without perturbation); (iii) a super-constant lower bound, $K(d, n) \\to \\infty$ along any sequence $(d, n)$; (iv) the smoothed statement for $n = O(d \\log d)$ with perturbation magnitude $\\sigma$ allowed to depend polynomially on $1/d$ or $1/n$, or a proof of the conjecture for a natural non-smoothed random model of vectors in $B_2^d$ for all $n \\geq d$. Purely improving the $\\mathrm{poly}(\\log\\log n)$ factor hidden in $\\widetilde{O}(\\log^{1/4} n)$, or the constant in an existing bound, does not count.",
       "status": "partial progress",
-      "comments": [],
+      "comments": [
+        {
+          "id": "b4865708-3112-422b-abad-f7d3bd3bd7fb",
+          "author": {
+            "id": "6e502c91-a5d5-4e09-ac1a-b8f3cc6671b5",
+            "displayName": "Richard Peng"
+          },
+          "body": "Generic comment: this entire list is faulty, I need to trust whale less...\n\nIncorrect arXiv identifier\nIn Problems 1.05 (Komlós) and 1.15 (Beck–Fiala), the catalog cites arXiv:2508.3961.\n- Incorrect: https://arxiv.org/abs/2508.3961\n- Correct: https://arxiv.org/abs/2508.03961\n  Bansal–Jiang, Decoupling via Affine Spectral-Independence: Beck-Fiala and Komlós Bounds Beyond Banaszczyk.\nMissing recent progress\n1. Beck–Fiala conjecture (Problem 1.15)\n   The catalog only records the result for \\(t\\ge \\log^2 n\\). It misses the 2026 extension to \\(d\\ge \\log(T)^{1+o(1)}\\):\n   https://arxiv.org/abs/2607.14238\n   Altschuler–Tikhomirov, Online Beck--Fiala Down to Logarithmic Sparsity.\n2. Matrix Spencer conjecture (Problem 1.35)\n   The catalog misses two 2026 results establishing significant structured special cases:\n   https://arxiv.org/abs/2606.12181\n   Bandeira–Bölcskei, Matrix Discrepancy for Representations of Finite Groups.\n   https://arxiv.org/abs/2606.16005\n   Akbas–Sra, An Algebraic Matrix Spencer Theorem.\n3. Random sparse set systems (Problem 1.2)\n   The catalog misses the \\(O(\\sqrt t)\\) result for \\(m=n\\) in a substantial parameter regime:\n   https://arxiv.org/abs/1811.01491\n   Potukuchi, Discrepancy in Random Hypergraph Models.\nCorrection to the Steinitz problem formulation\nProblem 1.4 incorrectly presents the \\(O(\\sqrt d)\\) conjecture as applying uniformly to every norm. The general-norm and \\(\\ell_2/\\ell_\\infty\\) cases must be distinguished.\n- General Steinitz bounds and the symmetric-norm bound:\n  https://arxiv.org/abs/2505.09465\n  Ambrus–Heck, A Note on the Steinitz Lemma.\n- Recent constructive progress for the \\(\\ell_2\\) case:\n  https://arxiv.org/abs/2604.13355\n  Dutta–Jha–Jiang, Near-Optimal Constructive Bounds for \\(\\ell_2\\) Prefix Discrepancy and Steinitz Problems via Affine Spectral Independence.\nCorrections to the Tusnády problem status\nThe statusDetails field retains an incorrect \\(O(\\log n)\\) “lower bound” and obsolete upper bounds. The planar lower bound should be \\(\\Omega(\\log n)\\), and the improved upper bounds should be recorded.\n- Recent survey:\n  https://arxiv.org/abs/2608.00140\n- Bansal–Garg’s planar \\(O(\\log^2 n)\\) upper bound:\n  https://arxiv.org/abs/1611.01805\n- Nikolov’s higher-dimensional improvement:\n  https://arxiv.org/abs/1701.05532\nMissing citation for the Komlós smoothed-analysis result\nThe catalog mentions the smoothed-analysis result but does not directly cite the corresponding paper:\nhttps://arxiv.org/abs/2204.11427\nBansal–Jiang–Meka–Singla–Sinha, Smoothed Analysis of the Komlós Conjecture.",
+          "createdAt": "2026-09-01T14:47:41.276Z",
+          "updatedAt": null
+        }
+      ],
       "literature": [
         {
-          "title": "J. Komlós, A generalization of a problem of Steinitz, Acta Mathematica Academiae Scientiarum Hungaricae 41(3-4):217-229, 1983",
-          "year": 1983,
-          "description": "The paper in which the Komlós conjecture (in its vector-balancing form) originates; it studies signed sums of vectors and generalizes the classical Steinitz lemma.",
-          "link": "https://scholar.google.com/scholar?q=Komlos+A+generalization+of+a+problem+of+Steinitz+Acta+Mathematica+Hungaricae+1983"
+          "title": "J. Komlós, A generalization of a problem of Steinhaus, Acta Mathematica Academiae Scientiarum Hungaricae 18:217-229, 1967",
+          "year": 1967,
+          "description": "Komlós's paper on signed sums of vectors, generalizing a problem of Steinhaus; the Komlós conjecture is traditionally attributed to Komlós and appears in print in Spencer's 'Ten lectures on the probabilistic method' (1987).",
+          "link": "https://doi.org/10.1007/BF02020976"
         },
         {
           "title": "J. Spencer, Six standard deviations suffice, Transactions of the American Mathematical Society 289(2):679-706, 1985",
           "year": 1985,
-          "description": "Proves the $O(\\log n)$ bound for the $\\ell_\\infty$ discrepancy of vectors in the Euclidean ball and states the discrete version of the Komlós conjecture.",
-          "link": "https://scholar.google.com/scholar?q=Spencer+Six+standard+deviations+suffice+1985"
+          "description": "Proves $\\mathrm{disc} = O(\\sqrt{n})$ for $n$ sets on $n$ elements and, more generally, $O(\\sqrt{n \\log(2m/n)})$ for $m \\geq n$ sets; the Komlós conjecture is the vector generalization of this theorem.",
+          "link": "https://doi.org/10.1090/S0002-9947-1985-0784009-0"
         },
         {
           "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
           "year": 1998,
-          "description": "Proves the vector-balancing theorem for convex bodies of Gaussian measure at least $1/2$, which yields the best known bound $O(\\sqrt{\\log n})$ for the Komlós problem.",
-          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+          "description": "Proves the vector-balancing theorem for convex bodies of Gaussian measure at least $1/2$; applied to a scaled $\\ell_\\infty$ ball it gives $O(\\sqrt{\\log n})$ for the Komlós problem and $O(\\sqrt{k \\log n})$ for degree-$k$ set systems.",
+          "link": "https://doi.org/10.1002/(SICI)1098-2418(199807)12:4<351::AID-RSA3>3.0.CO;2-S"
         },
         {
           "title": "F. Barthe, O. Guédon, S. Mendelson, A. Naor, A probabilistic approach to the geometry of the $\\ell_p^n$-ball, Annals of Probability 33(2):480-513, 2005",
           "year": 2005,
-          "description": "The '[Naor'05]' reference of the AimPL page. Gaussian-measure estimates for slices of the $\\ell_p^n$ ball that, combined with Banaszczyk's theorem, improve the Komlós bound to $O(\\sqrt{\\log d})$ where $d \\leq \\min\\{n, m\\}$ is the dimension of the span.",
+          "description": "The '[Naor'05]' reference of the AimPL page. Gaussian-measure estimates for slices of the $\\ell_\\infty^n$ ball that, combined with Banaszczyk's theorem, give the Komlós bound $O(\\sqrt{\\log d})$ where $d$ is the dimension of the span of the vectors.",
           "link": "https://arxiv.org/abs/math/0503650"
         },
         {
-          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.3961, 2025",
+          "title": "N. Bansal, H. Jiang, Decoupling via affine spectral-independence: Beck-Fiala and Komlós bounds beyond Banaszczyk, arXiv:2508.03961, 2025",
           "year": 2025,
-          "description": "Gives an $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem (and resolves the Beck-Fiala conjecture for degree $k \\geq \\log^2 n$), the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$; the companion paper 'Smoothed analysis of the Komlós conjecture' proves the conjecture under Gaussian perturbations when $n = \\omega(d \\log d)$.",
-          "link": "https://arxiv.org/abs/2508.3961"
+          "description": "Gives an algorithmic $\\widetilde{O}(\\log^{1/4} n)$ bound for the Komlós problem, the first improvement over Banaszczyk's $O(\\sqrt{\\log n})$, and proves the Beck-Fiala conjecture (discrepancy $O(\\sqrt{k})$) for all degrees $k \\geq \\log^2 n$, together with an $\\widetilde{O}(\\sqrt{k} + \\sqrt{\\log n})$ bound for every $k$.",
+          "link": "https://arxiv.org/abs/2508.03961"
+        },
+        {
+          "title": "N. Bansal, H. Jiang, R. Meka, S. Singla, M. Sinha, Smoothed analysis of the Komlós conjecture, ICALP 2022; arXiv:2204.11427",
+          "year": 2022,
+          "description": "Proves the Komlós conjecture in a smoothed-analysis model: if $n = \\omega(d \\log d)$ arbitrary vectors in the unit ball are perturbed by small Gaussian noise, then with high probability there is a signing of $\\ell_\\infty$ discrepancy $O(1)$ (they also show $n = \\omega(d\\log d)$ is essentially necessary for this smoothed statement).",
+          "link": "https://arxiv.org/abs/2204.11427"
+        },
+        {
+          "title": "D. J. Altschuler, K. Tikhomirov, Online Beck-Fiala down to logarithmic sparsity, arXiv:2607.14238, 2026",
+          "year": 2026,
+          "description": "Proves the Beck-Fiala conjecture (and hence the $0/1$ sparse case of Komlós) for degree $d \\geq (\\log T)^{1+o(1)}$ via an efficient online prefix-discrepancy algorithm; see Problem 1.15.",
+          "link": "https://arxiv.org/abs/2607.14238"
         }
       ],
       "source": {
@@ -64,10 +87,11 @@
         "vector balancing",
         "convex geometry"
       ],
-      "verificationNotes": "Verified on 2026-08-25 against http://aimpl.org/hereddiscrep/1/ and the literature. The page attributes the bound $c=O(\\sqrt{\\log\\min\\{d,n\\}})$ to '[Banaszczyk'98] and [Naor'05]'; '[Naor'05]' is the joint paper Barthe, Guédon, Mendelson and Naor (2005), whose slice estimates give the $\\sqrt{\\log d}$ dependence on the span dimension (see e.g. the Theory of Computing article arXiv:1612.04304 for this derivation). Confirmed that the conjecture is still open as of 2026 and that Bansal-Jiang (arXiv:2508.3961) currently holds the best general bound $\\widetilde{O}(\\log^{1/4} n)$.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/, the arXiv listings of the cited papers, and the 2026 survey arXiv:2608.00140. The page attributes the bound $c=O(\\sqrt{\\log\\min\\{d,n\\}})$ to '[Banaszczyk'98] and [Naor'05]'; '[Naor'05]' is the joint paper Barthe, Guédon, Mendelson and Naor (2005), whose slice estimates give the $\\sqrt{\\log d}$ dependence on the span dimension (see e.g. arXiv:1612.04304 for this derivation). Corrections made on 2026-09-20 following the comment by Richard Peng: the Bansal-Jiang identifier is arXiv:2508.03961 (not 2508.3961); the smoothed-analysis result is the separate paper arXiv:2204.11427 by Bansal, Jiang, Meka, Singla and Sinha (not part of the Bansal-Jiang paper); the Komlós 1967 bibliographic data was corrected (the earlier record wrote 'problem of Steinitz', vol. 41, 1983); Google Scholar search links were replaced by DOI/arXiv links. Confirmed that the conjecture is still open in general as of 2026 and that Bansal-Jiang hold the best general bound $\\widetilde{O}(\\log^{1/4} n)$.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "$c = O(\\sqrt{\\log \\min\\{d, n\\}})$ was given by Banaszczyk (1998) together with the Gaussian measure estimates for slices of the $\\ell_\\infty$ ball due to Barthe, Guédon, Mendelson and Naor (2005), where $d$ is the dimension of the span of the vectors. Bansal and Jiang (2025) improved the general bound to $\\widetilde{O}(\\log^{1/4} n)$ and proved the conjecture in a smoothed-analysis setting when the number of vectors satisfies $n = \\omega(d \\log d)$. The conjecture with $c = O(1)$ remains open."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "$c = O(\\sqrt{\\log \\min\\{d, n\\}})$ was given by Banaszczyk (1998) together with the Gaussian-measure estimates for slices of the $\\ell_\\infty$ ball due to Barthe, Guédon, Mendelson and Naor (2005), where $d$ is the dimension of the span of the vectors. Bansal and Jiang (arXiv:2508.03961, 2025) improved the general bound to $\\widetilde{O}(\\log^{1/4} n)$ with a polynomial-time algorithm. Bansal, Jiang, Meka, Singla and Sinha (arXiv:2204.11427, 2022) proved the conjecture in a smoothed-analysis setting when the number of vectors satisfies $n = \\omega(d \\log d)$. The conjecture with $c = O(1)$ for arbitrary inputs remains open.",
+      "lastVerified": "2026-09-20"
     }
   ]
 }

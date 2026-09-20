@@ -3,8 +3,8 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.8: Reverse Banaszczyk-type problems",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-  "lastVerified": "2026-08-25",
+  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
     {
@@ -12,7 +12,7 @@
       "sourceStatement": "Say that a convex body $K$ has property B if for any set of vectors of length no more than $c$ (some small constant), there exists a signing of them s.t. this signed sum lies inside $K$. What is the convex body with the smallest gaussian volume which has property $B$?",
       "problem": "Characterize the convex body of minimum Gaussian volume that has 'property B': for every finite set of vectors of length at most some small constant $c$, there exist signs such that the signed sum lies in $K$.",
       "wordDescription": "This is the reverse (extremal) direction of Banaszczyk's vector-balancing theorem, which states that every convex body $K$ of Gaussian measure at least $1/2$ has property B for vectors of length at most $1/5$ (up to a constant factor). The question asks for the smallest Gaussian volume a body with property B can have — i.e., how tight the $1/2$ threshold really is. The threshold is known to be 'essentially tight' in a weak sense (a body of Gaussian measure $< 1/2$ can fail to contain 0, and the halfspace argument shows $\\gamma(K) \\geq 1/2$ forces $0 \\in K$), but the extremal question about the true minimum Gaussian volume among property-B bodies is open. Daniel Dadush's remark recorded on the AimPL page shows that property B forces $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ for a standard Gaussian $G$, i.e. the Gaussian measure of $K$ is at least $\\exp(-(\\log n)^{O(1)})$ — so the answer lies between $\\approx 1/2$ and $\\exp(-\\mathrm{polylog}\\, n)$.",
-      "mathematicalConditions": "Let $K \\subseteq \\mathbb{R}^n$ be a convex body. Say $K$ has property B (with constant $c > 0$) if for every $m \\geq 1$ and every $v_1, \\dots, v_m$ with $\\|v_i\\|_2 \\leq c$ there exist signs $\\epsilon_i \\in \\{-1, 1\\}$ with $\\sum_{i=1}^m \\epsilon_i v_i \\in K$. Determine $\\inf\\{\\gamma_n(K) : K \\text{ has property B}\\}$, where $\\gamma_n$ is the standard Gaussian measure on $\\mathbb{R}^n$. Banaszczyk's theorem gives the upper bound $\\gamma_n(K) \\geq 1/2 \\Rightarrow$ property B (for $c = 1/5$); Dadush's workshop remark gives $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ as a necessary condition.",
+      "mathematicalConditions": "Setting. Let $K \\subset \\mathbb{R}^n$ be a symmetric convex body and $\\gamma_n$ the standard Gaussian measure. Banaszczyk's theorem: if $\\gamma_n(K) \\geq 1/2$ then for any number $m$ of vectors $v_1, \\dots, v_m \\in B_2^n$ there are signs with $\\sum_i \\epsilon_i v_i \\in 5K$. Say $K$ has property $B$ (the 'Banaszczyk property') if there is a constant $C$ such that for every finite family $v_1, \\dots, v_m \\in B_2^n$ there are signs $\\epsilon$ with $\\sum_i \\epsilon_i v_i \\in C K$; write $\\mathrm{vb}(B_2^n, K)$ for the least such $C$ (the vector-balancing constant of $(B_2^n, K)$). Problem (reverse Banaszczyk). Characterize the bodies with property $B$: is it true that $\\mathrm{vb}(B_2^n, K) = O(1)$ implies $\\gamma_n(cK) \\geq 1/2$ for some absolute constant $c$ (equivalently, that $\\mathbb{E}\\|G\\|_K = O(1)$ for a standard Gaussian $G$)? More generally, determine $\\mathrm{vb}(B_2^n, K)$ in terms of Gaussian (or other geometric) parameters of $K$ up to constant factors. Benchmarks. Upper bound: $\\mathrm{vb}(B_2^n, K) \\leq 5t$ whenever $\\gamma_n(tK) \\geq 1/2$ (Banaszczyk 1998), so $\\mathrm{vb}(B_2^n, K) = O(\\mathbb{E}\\|G\\|_K)$. Lower bound (volume argument, cf. Problem 1.5): $\\mathrm{vb}(B_2^n, K) \\geq c\\,(\\mathrm{vol}(B_2^n)/\\mathrm{vol}(K))^{1/n}$. The Komlós conjecture is exactly the statement that $K = B_\\infty^n$ (for which $\\mathbb{E}\\|G\\|_K = \\Theta(\\sqrt{\\log n})$) has property $B$, so a full reverse Banaszczyk theorem would refute Komlós. Workshop result (Dadush, recorded as a comment): if $K$ has property $B$ then $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$; i.e. property $B$ implies $\\gamma_n((\\log n)^{O(1)} K) \\geq 1/2$. Dadush-Garg-Lovett-Nikolov (2019) discuss the tightness of the Gaussian-measure threshold $1/2$ in Banaszczyk's theorem. Complete resolution. Either (A) a proof that property $B$ implies $\\mathbb{E}\\|G\\|_K = O(1)$ (which would disprove the Komlós conjecture, since $\\mathbb{E}\\|G\\|_{B_\\infty^n} = \\Theta(\\sqrt{\\log n})$), or (B) a body $K$ with property $B$ and $\\mathbb{E}\\|G\\|_K \\to \\infty$ (the Komlós conjecture, if true, provides $K = B_\\infty^n$), together with a characterization of $\\mathrm{vb}(B_2^n, K)$ up to constants by a geometric parameter. Minimal progress that counts as a solution of this record. Any of: (i) improving the workshop bound $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$ for bodies with property $B$ to $\\mathbb{E}\\|G\\|_K = O(\\sqrt{\\log n})$ (which would be tight if the Komlós conjecture holds), or to any explicit exponent smaller than the one provable by the workshop argument; (ii) a body $K$ with $\\mathrm{vb}(B_2^n, K) = O(1)$ and $\\mathbb{E}\\|G\\|_K = \\omega(1)$ (unconditionally); (iii) a characterization of $\\mathrm{vb}(B_2^n, K)$ up to $\\mathrm{polylog}(n)$ factors for all symmetric convex $K$ (e.g. in terms of $\\mathbb{E}\\|G\\|_K$ and volumes of sections), or up to constants for all unconditional $K$; (iv) a polynomial-time algorithm that, given a membership oracle for $K$ and $v_1, \\dots, v_m \\in B_2^n$, finds signs with $\\sum \\epsilon_i v_i \\in O(\\mathrm{vb}(B_2^n, K)\\cdot\\mathrm{polylog}(n))\\, K$.",
       "status": "partial progress",
       "comments": [
         {
@@ -29,20 +29,22 @@
         {
           "title": "W. Banaszczyk, Balancing vectors and Gaussian measures of n-dimensional convex bodies, Random Structures & Algorithms 12(4):351-360, 1998",
           "year": 1998,
-          "description": "The forward direction: any convex body of Gaussian measure at least $1/2$ has property B for vectors of $\\ell_2$ norm at most $1/5$ (up to constant factors); the problem asks for the reverse/extremal characterization.",
-          "link": "https://scholar.google.com/scholar?q=Banaszczyk+Balancing+vectors+and+Gaussian+measures+of+n-dimensional+convex+bodies"
+          "description": "Proves the vector-balancing theorem for convex bodies of Gaussian measure at least $1/2$; applied to a scaled $\\ell_\\infty$ ball it gives $O(\\sqrt{\\log n})$ for the Komlós problem and $O(\\sqrt{k \\log n})$ for degree-$k$ set systems.",
+          "link": "https://doi.org/10.1002/(SICI)1098-2418(199807)12:4<351::AID-RSA3>3.0.CO;2-S"
         },
         {
-          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, Theory of Computing 15(15):1-58, 2019 (arXiv:1612.04304)",
+          "title": "D. Dadush, S. Garg, S. Lovett, A. Nikolov, Towards a constructive version of Banaszczyk's vector balancing theorem, APPROX/RANDOM 2016; Theory of Computing 15(15):1-58, 2019",
           "year": 2019,
-          "description": "Discusses the tightness of the Gaussian measure threshold $1/2$ in Banaszczyk's theorem (e.g. the necessity of $0 \\in K$), providing the context for the reverse question.",
-          "link": "https://arxiv.org/abs/1612.04304"
+          "description": "Algorithmic version of Banaszczyk's theorem; also discusses the tightness of the Gaussian-measure threshold $1/2$ and the relation between property-$B$-type statements and Gaussian measure.",
+          "link": "https://arxiv.org/abs/1612.04304",
+          "doi": "10.4086/toc.2019.v015a015"
         },
         {
-          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018 (arXiv:1708.01079)",
-          "year": 2018,
-          "description": "Constructive version of Banaszczyk's theorem for general convex bodies; relevant to what shapes are 'attainable' by signed sums and hence to property B extremal questions.",
-          "link": "https://arxiv.org/abs/1708.01079"
+          "title": "N. Bansal, D. Dadush, S. Garg, S. Lovett, The Gram-Schmidt walk: a cure for the Banaszczyk blues, STOC 2018; Theory of Computing 15(21):1-27, 2019",
+          "year": 2019,
+          "description": "Constructive version of Banaszczyk's full vector-balancing theorem (for arbitrary convex bodies of Gaussian measure at least $1/2$), via the Gram-Schmidt walk.",
+          "link": "https://arxiv.org/abs/1708.01079",
+          "doi": "10.4086/toc.2019.v015a021"
         }
       ],
       "source": {
@@ -62,10 +64,11 @@
         "Gaussian measure",
         "convex bodies"
       ],
-      "verificationNotes": "Verified on 2026-08-25. Banaszczyk's theorem and the 'essentially tight' threshold discussion (a body of Gaussian measure at least $1/2$ must contain 0; a body of small Gaussian measure need not) are confirmed in arXiv:1612.04304. Daniel Dadush's remark is transcribed verbatim from the AimPL page. No published resolution of the extremal question was located; it remains open as of 2026.",
+      "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/ and the DOI/arXiv records of the cited papers. On 2026-09-20 Google Scholar search links were replaced by DOI/arXiv links. Dadush's workshop comment (property $B$ implies $\\mathbb{E}\\|G\\|_K = (\\log n)^{O(1)}$) is transcribed from the AimPL page; no published version of this specific statement was located, and it is treated as workshop-recorded.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-08-25T15:01:11.000Z",
-      "statusDetails": "Open. During the workshop it was shown that if $K$ has property B, then $\\mathbb{E} \\|G\\|_K = (\\log n)^{O(1)}$, where $G$ is a standard Gaussian random vector (remark of Daniel Dadush)."
+      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "statusDetails": "Open. During the workshop it was shown that if $K$ has property B, then $\\mathbb{E} \\|G\\|_K = (\\log n)^{O(1)}$, where $G$ is a standard Gaussian random vector (remark of Daniel Dadush).",
+      "lastVerified": "2026-09-20"
     }
   ]
 }
