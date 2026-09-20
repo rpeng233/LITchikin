@@ -3,7 +3,7 @@
   "catalogId": "hereddiscrep-aimpl",
   "title": "Hereditary discrepancy and factorization norms (AimPL) — Problem 1.65: Tusnády's problem",
   "generatedAt": "2026-08-25T14:46:29.000Z",
-  "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+  "contentUpdatedAt": "2026-09-20T03:20:46.000Z",
   "lastVerified": "2026-09-20",
   "problemCount": 1,
   "problems": [
@@ -51,7 +51,7 @@
         {
           "title": "N. Bansal, A. Nikolov, Discrepancy theory: an algorithmic and geometric perspective, arXiv:2608.00140, 2026",
           "year": 2026,
-          "description": "2026 survey of combinatorial discrepancy (Komlós, Beck-Fiala, Tusnády, vector balancing and the algorithmic theory); cited here as the reference for the current state of these problems, in particular for Tusnády's problem ($\\Omega(\\log n) \\leq d_2(n) \\leq O(\\log^2 n)$ in the plane, $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$ in $\\mathbb{R}^d$) and for the fact that the Komlós and Beck-Fiala conjectures remain open in general.",
+          "description": "2026 survey of combinatorial discrepancy (Komlós, Beck-Fiala, Tusnády, vector balancing and the algorithmic theory); cited here as the reference for the current state of these problems, in particular for Tusnády's problem ($\\Omega(\\log n) \\leq d_2(n) \\leq O(\\log^2 n)$ in the plane, $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$ in $\\mathbb{R}^d$) and for the state of the Komlós and Beck-Fiala conjectures before their resolution in arXiv:2609.11189 (September 2026).",
           "link": "https://arxiv.org/abs/2608.00140"
         }
       ],
@@ -74,7 +74,7 @@
       ],
       "verificationNotes": "Re-verified on 2026-09-20 against http://aimpl.org/hereddiscrep/1/, the arXiv abstracts of Bansal-Garg (arXiv:1611.01805), Nikolov (arXiv:1701.05532) and Matoušek-Nikolov-Talwar (arXiv:1408.1376), and the 2026 survey arXiv:2608.00140. Corrections made on 2026-09-20 following the comment by Richard Peng: the planar lower bound is $\\Omega(\\log n)$ (the earlier record wrote $O(\\log n)$); the planar upper bound is $O(\\log^2 n)$ (Bansal-Garg), not $O(\\log^{2.5} n)$; the higher-dimensional upper bound is $O(\\log^{d-1/2} n)$ (Nikolov), not $\\log^{d+1/2} n$; Nikolov's paper is now cited directly. The sourceStatement preserves the original AimPL wording (including its typography) as historical text; the corrected bounds are in problem/statusDetails/mathematicalConditions.",
       "generatedAt": "2026-08-25T14:46:29.000Z",
-      "contentUpdatedAt": "2026-09-20T01:53:28.000Z",
+      "contentUpdatedAt": "2026-09-20T03:20:46.000Z",
       "statusDetails": "In $\\mathbb{R}^2$: $\\Omega(\\log n) \\leq d_2(n) \\leq O(\\log^2 n)$ (lower bound classical/Schmidt-type; upper bound Bansal-Garg 2017, improving Larsen's $O(\\log^{2.5} n)$). In $\\mathbb{R}^d$: $\\Omega(\\log^{d-1} n) \\leq d_d(n) \\leq O(\\log^{d-1/2} n)$ (lower bound Matoušek-Nikolov-Talwar; upper bound Nikolov 2017, improving Bansal-Garg's $O_d(\\log^d n)$ and the earlier $O_d(\\log^{d+1/2} n)$). All upper bounds are algorithmic.",
       "lastVerified": "2026-09-20"
     }
