@@ -9,27 +9,34 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 ```text
 .
 ├── data/
+│   ├── AimPLHereditaryDiscrepancy.json
 │   ├── LaplacianOpenProblems.json
-│   └── SimonsF25ComplexityLinAlg.json
-├── gener_ds.html
+│   ├── PermanentEstimation.json
+│   ├── SimonsF25ComplexityLinAlg.json
+│   └── discrepancy/            # one-problem catalogs split from AimPLHereditaryDiscrepancy.json
 ├── open_problem_record.schema.json
-├── viewer.html
-└── viewer2_devin.html
+├── viewer1_DS.html             # file viewer
+└── viewer2_devin.html          # spreadsheet viewer
 ```
 
-`gener_ds.html` creates a one-problem catalog in the browser. `viewer.html`
-temporarily reads one or more local catalog files in the browser, and
-`viewer2_devin.html` shows them as a sortable spreadsheet with expandable rows.
-None of these pages upload a selected JSON file to a server.
+The file viewer (`viewer1_DS.html`) temporarily reads one or more local catalog
+files in the browser, and the spreadsheet viewer (`viewer2_devin.html`) shows
+them as a sortable spreadsheet with expandable rows. Neither page uploads a
+selected JSON file to a server.
 
 ## Current catalogs
 
+- `AimPLHereditaryDiscrepancy.json`: 14 open problems on hereditary discrepancy
+  and factorization norms from the AimPL problem list. `data/discrepancy/`
+  holds the same problems as one-problem catalogs.
 - `LaplacianOpenProblems.json`: 16 open or sharpened problems on Laplacian
   solvers, entrywise guarantees, sparsification, dynamic electrical quantities,
   determinant computation, connection Laplacians, spectral gaps, and floating-
   point models. Its catalog- and record-level `resolutionAudit` fields preserve
   the search cutoff, query families, checked anchors, confidence, and the
   precise remaining gap.
+- `PermanentEstimation.json`: 22 open problems on approximating and estimating
+  matrix permanents.
 - `SimonsF25ComplexityLinAlg.json`: the Complexity and Linear Algebra open
   problems catalog from the Simons Institute Fall 2025 program.
 
@@ -59,7 +66,7 @@ Only the combined catalog shape is canonical:
 }
 ```
 
-The viewer rejects standalone problem objects, top-level arrays, older schema
+Both viewers reject standalone problem objects, top-level arrays, older schema
 versions, missing stable IDs, missing content timestamps, and non-UTC content
 timestamps.
 
@@ -139,29 +146,17 @@ scribe or scribes named for that problem's subsection in arXiv:2602.05394.
 Literature authors and other mentioned authors are excluded. Nonempty emails
 are copied only from official arXiv submission source bundles.
 
-## Generator
+## File viewer
 
-In `gener_ds.html`:
-
-1. Enter a problem description and generate/edit its content.
-2. Enter a lowercase kebab-case catalog ID.
-3. Enter the stable record suffix.
-4. Download the resulting strict `1.4` catalog JSON.
-
-The generator writes the same UTC timestamp into `generatedAt` and
-`contentUpdatedAt` for a newly created catalog and problem.
-
-## Viewer
-
-Open `viewer.html` and select one or more `1.4` catalog JSON files. All parsing
-is local to that browser tab. The viewer validates the schema version, catalog
-ID, catalog timestamp, record IDs, record timestamps, and duplicate IDs before
-showing any problems from a file.
+Open `viewer1_DS.html` and select one or more `1.4` catalog JSON files. All
+parsing is local to that browser tab. The file viewer validates the schema
+version, catalog ID, catalog timestamp, record IDs, record timestamps, and
+duplicate IDs before showing any problems from a file.
 
 MathJax renders `$...$`, `$$...$$`, `\\(...\\)`, and `\\[...\\]`. Because JSON
 uses backslash escapes, LaTeX backslashes must be doubled inside JSON strings.
 
-## Sheet viewer
+## Spreadsheet viewer
 
 `viewer2_devin.html` shows every loaded problem as one row of a spreadsheet:
 ID, problem name, status, most recent progress date, comment count, and
@@ -178,6 +173,6 @@ Columns sort on click; the search box and status dropdown filter rows. Load
 catalogs by choosing files, dropping them onto the page, clicking "Load from
 GitHub" (fetches every catalog under `data/` from this repository), or passing
 `?src=<url>` (repeatable or comma-separated). It applies the same `1.4`
-validation as `viewer.html`, and records whose `recordId` was already loaded are
+validation as the file viewer, and records whose `recordId` was already loaded are
 skipped, so overlapping catalogs such as `data/discrepancy/` do not duplicate
 rows.
