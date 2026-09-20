@@ -164,9 +164,12 @@ uses backslash escapes, LaTeX backslashes must be doubled inside JSON strings.
 ## Sheet viewer
 
 `viewer2_devin.html` shows every loaded problem as one row of a spreadsheet:
-problem name, status, most recent progress date, comment count, and catalog.
-"Last progress" is the latest of the problem's `contentUpdatedAt` and its
-comments' `createdAt`/`updatedAt`. Clicking a row expands it in place with the
+ID, problem name, status, most recent progress date, comment count, and
+catalog. The ID column is `<catalogId> ::: <record suffix>` (the part of
+`recordId` after `lit:<catalogId>:`). "Last progress" is the date of the most
+recent `literature` entry, taken from each entry's `year` (integer, year
+string, or `YYYY-MM[-DD]` string); a problem with no dated literature shows
+"—" and sorts last. Clicking a row expands it in place with the
 source statement, formal description, mathematical description, progress
 (`statusDetails`, verification notes, resolution audit, literature), and
 comments.
