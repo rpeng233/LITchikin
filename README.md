@@ -15,14 +15,16 @@ catalogs live in `data/` and use the strict `1.4` format defined by
 │   ├── SimonsF25ComplexityLinAlg.json
 │   └── discrepancy/            # one-problem catalogs, one per AimPL problem
 ├── open_problem_record.schema.json
+├── editor.html                 # catalog editor
 ├── viewer1_DS.html             # file viewer
 └── viewer2_devin.html          # spreadsheet viewer
 ```
 
 The file viewer (`viewer1_DS.html`) temporarily reads one or more local catalog
 files in the browser, and the spreadsheet viewer (`viewer2_devin.html`) shows
-them as a sortable spreadsheet with expandable rows. Neither page uploads a
-selected JSON file to a server.
+them as a sortable spreadsheet with expandable rows. The editor (`editor.html`)
+opens one local catalog, edits every field, and writes it back to the same
+file. None of the pages uploads a selected JSON file to a server.
 
 ## Current catalogs
 
@@ -160,6 +162,27 @@ duplicate IDs before showing any problems from a file.
 
 MathJax renders `$...$`, `$$...$$`, `\\(...\\)`, and `\\[...\\]`. Because JSON
 uses backslash escapes, LaTeX backslashes must be doubled inside JSON strings.
+
+## Editor
+
+Open `editor.html` and choose (or drop) one `1.4` catalog JSON file. The
+sidebar lists the catalog metadata and every problem; the main pane edits the
+selected item with a form covering all schema fields (statement texts, tags,
+`source`, `literature`, `maintainers`, `comments`, timestamps) plus a generic
+section for any non-schema keys (`statusDetails`, `resolutionAudit`, catalog
+`groups`, ...) edited as text or raw JSON. A JSON tab edits the selected record
+verbatim. Problems can be added, duplicated, reordered, and deleted.
+
+In Chrome and Edge, **Save** (or Ctrl+S) writes back to the opened file through
+the File System Access API after a one-time permission prompt; other browsers
+download the edited catalog under the same file name. Output uses the
+canonical two-space format, so unchanged files round-trip byte-for-byte. With
+"Maintain timestamps on save" checked, saving applies the time-field rules
+above: a problem's `contentUpdatedAt` moves only when its non-comment content
+changed, the catalog's moves when metadata or the problem set changed, and
+`problemCount` is set from the array. Uncheck it to manage timestamps by hand.
+The editor runs the same strict `1.4` checks as the viewers and warns before
+saving a catalog that fails them.
 
 ## Spreadsheet viewer
 

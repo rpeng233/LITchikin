@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LITchikin Catalog Editor</title>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+            },
+            options: { ignoreHtmlClass: 'no-mathjax' },
+            startup: { typeset: false }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #f4f6fa;
+            --surface: #ffffff;
+            --surface-alt: #f7f9fc;
+            --text: #1a1d23;
+            --text-secondary: #5a5f6b;
+            --border: #dce1e8;
+            --accent: #4f6ef7;
+            --accent-light: #eef1fd;
+            --danger: #e05555;
+            --danger-light: #fdeeee;
+            --success: #2ea76e;
+            --success-light: #e8f7ef;
+            --warn: #d9962b;
+            --warn-light: #fdf4e6;
+            --radius: 8px;
+            --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        html, body { height: 100%; }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            padding: 14px;
+            gap: 10px;
+        }
+        a { color: var(--accent); }
+        button { font: inherit; }
+
+        /* ── toolbar ── */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 10px 14px;
+        }
+        .toolbar h1 { font-size: 1.05rem; font-weight: 650; }
+        .filename {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-right: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .filename.dirty::after { content: ' •'; color: var(--warn); font-weight: 700; }
+        .check { display: flex; align-items: center; gap: 5px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; }
+        .btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface);
+            font-size: 0.88rem;
+            cursor: pointer;
+            color: var(--text);
+            white-space: nowrap;
+        }
+        .btn:hover:not(:disabled) { background: var(--accent-light); border-color: var(--accent); }
+        .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+        .btn.primary:hover:not(:disabled) { background: #3f5ce0; }
+        .btn.danger { color: var(--danger); }
+        .btn.danger:hover:not(:disabled) { background: var(--danger-light); border-color: var(--danger); }
+        .btn.small { padding: 2px 8px; font-size: 0.78rem; }
+        .btn.icon { padding: 2px 7px; font-size: 0.85rem; line-height: 1.2; }
+
+        /* ── status ── */
+        .status {
+            display: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+        }
+        .status.show { display: block; }
+        .status.ok { display: block; background: var(--success-light); border-color: var(--success); }
+        .status.warn { display: block; background: var(--warn-light); border-color: var(--warn); }
+        .status.err { display: block; background: var(--danger-light); border-color: var(--danger); }
+
+        /* ── layout ── */
+        .layout { display: flex; gap: 12px; flex: 1; min-height: 0; }
+        .sidebar {
+            width: 300px;
+            flex: 0 0 300px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        .side-head { padding: 10px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; }
+        .side-head input {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font: inherit;
+            font-size: 0.85rem;
+        }
+        .nav { list-style: none; overflow-y: auto; flex: 1; }
+        .nav li {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 0.83rem;
+        }
+        .nav li:hover { background: var(--surface-alt); }
+        .nav li.active { background: var(--accent-light); border-left: 3px solid var(--accent); padding-left: 9px; }
+        .nav li.catalog { font-weight: 650; background: var(--surface-alt); }
+        .nav li.catalog.active { background: var(--accent-light); }
+        .nav .suffix { font-family: var(--font-mono); font-weight: 600; font-size: 0.8rem; }
+        .nav .status-pill {
+            float: right;
+            font-size: 0.7rem;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            max-width: 55%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .nav .snippet { color: var(--text-secondary); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .nav li.modified .suffix::after { content: ' •'; color: var(--warn); }
+        .side-actions { padding: 10px; border-top: 1px solid var(--border); display: flex; gap: 6px; flex-wrap: wrap; }
+
+        .editor {
+            flex: 1;
+            min-width: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow-y: auto;
+            padding: 18px 22px 40px;
+        }
+        .empty { color: var(--text-secondary); text-align: center; padding: 60px 20px; }
+        .empty code { font-family: var(--font-mono); background: var(--surface-alt); padding: 1px 5px; border-radius: 4px; }
+
+        /* ── editor header / tabs ── */
+        .ed-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+        .ed-head h2 { font-size: 1rem; font-weight: 650; margin-right: auto; font-family: var(--font-mono); word-break: break-all; }
+        .tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+        .tabs button {
+            padding: 4px 12px;
+            border: none;
+            background: var(--surface);
+            cursor: pointer;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+        .tabs button.active { background: var(--accent); color: #fff; }
+
+        /* ── sections & fields ── */
+        .section { margin-bottom: 20px; border: 1px solid var(--border); border-radius: var(--radius); }
+        .section > summary {
+            padding: 8px 14px;
+            font-weight: 650;
+            font-size: 0.88rem;
+            cursor: pointer;
+            background: var(--surface-alt);
+            border-radius: var(--radius);
+            user-select: none;
+        }
+        .section[open] > summary { border-bottom: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; }
+        .section > summary .count { color: var(--text-secondary); font-weight: 400; margin-left: 6px; }
+        .section-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 12px; }
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+        @media (max-width: 1000px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+        .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+        .field label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .field label .key { font-family: var(--font-mono); }
+        .field label .req { color: var(--danger); }
+        .field label .type { font-weight: 400; font-size: 0.7rem; border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+        .field label .spacer { margin-left: auto; }
+        .field label .linkbtn {
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: var(--accent);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .field label .linkbtn.danger { color: var(--danger); }
+        .field label select { width: auto; font: inherit; font-size: 0.72rem; font-weight: 400; padding: 0 4px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+        .field input[type="text"], .field textarea, .field select {
+            width: 100%;
+            padding: 6px 9px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font: inherit;
+            font-size: 0.88rem;
+            background: var(--surface);
+            color: var(--text);
+        }
+        .field textarea { resize: vertical; min-height: 2.4em; line-height: 1.45; }
+        .field textarea.mono, .field input.mono { font-family: var(--font-mono); font-size: 0.82rem; }
+        .field input:focus, .field textarea:focus { outline: 2px solid var(--accent-light); border-color: var(--accent); }
+        .field input.invalid, .field textarea.invalid { border-color: var(--danger); background: var(--danger-light); }
+        .field input:read-only { background: var(--surface-alt); color: var(--text-secondary); }
+        .hint { font-size: 0.74rem; color: var(--text-secondary); }
+        .hint code { font-family: var(--font-mono); }
+        .field .err { font-size: 0.74rem; color: var(--danger); }
+
+        /* ── list items (literature, maintainers, comments) ── */
+        .items { display: flex; flex-direction: column; gap: 10px; }
+        .item {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            background: var(--surface-alt);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .item-head { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-secondary); }
+        .item-head .idx { font-weight: 650; }
+        .item-head .spacer { margin-left: auto; }
+        .item-head select { font: inherit; font-size: 0.78rem; padding: 1px 4px; border: 1px solid var(--border); border-radius: 4px; }
+        .row-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+        .add-field { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+        .add-field input, .add-field select {
+            padding: 5px 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font: inherit;
+            font-size: 0.83rem;
+        }
+
+        /* ── preview ── */
+        .preview { border-top: 1px dashed var(--border); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+        .preview h4 { font-size: 0.78rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 3px; }
+        .preview .pv { font-size: 0.92rem; white-space: pre-wrap; }
+
+        /* ── JSON mode ── */
+        .json-mode textarea {
+            width: 100%;
+            min-height: 60vh;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            resize: vertical;
+            line-height: 1.4;
+            tab-size: 2;
+        }
+        .json-mode textarea.invalid { border-color: var(--danger); }
+        .json-mode .row-actions { margin-top: 8px; }
+
+        .drop-active { outline: 3px dashed var(--accent); outline-offset: -6px; }
+    </style>
+</head>
+<body>
+    <header class="toolbar">
+        <h1>LITchikin Catalog Editor</h1>
+        <span id="fileName" class="filename">No catalog loaded</span>
+        <button id="openBtn" class="btn">Open catalog…</button>
+        <input type="file" id="fileInput" accept=".json,application/json" hidden />
+        <label class="check" title="On save: bump a problem's contentUpdatedAt when its non-comment content changed, bump the catalog contentUpdatedAt when metadata or the problem set changed, and set problemCount.">
+            <input type="checkbox" id="autoStamp" checked /> Maintain timestamps on save
+        </label>
+        <button id="revertBtn" class="btn" disabled>Revert</button>
+        <button id="saveAsBtn" class="btn" disabled>Save as…</button>
+        <button id="saveBtn" class="btn primary" disabled>Save</button>
+    </header>
+    <div id="status" class="status"></div>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="side-head">
+                <input type="search" id="filter" placeholder="Filter problems…" disabled />
+            </div>
+            <ul id="nav" class="nav"></ul>
+            <div class="side-actions">
+                <button id="addProblemBtn" class="btn small" disabled>+ Add problem</button>
+                <button id="dupProblemBtn" class="btn small" disabled>Duplicate</button>
+                <button id="upBtn" class="btn small" disabled title="Move up">↑</button>
+                <button id="downBtn" class="btn small" disabled title="Move down">↓</button>
+                <button id="deleteProblemBtn" class="btn small danger" disabled>Delete</button>
+            </div>
+        </aside>
+        <section id="editor" class="editor">
+            <div class="empty">
+                <p>Open a <code>1.4</code> catalog JSON file (or drop one onto this page) to edit it.</p>
+                <p style="margin-top:8px">In Chrome and Edge, <em>Save</em> writes straight back to the file you opened.
+                    Other browsers download the edited file under the same name.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+    (() => {
+        'use strict';
+
+        // ── constants ──
+        const CATALOG_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+        const RECORD_SUFFIX_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
+        const TIMESTAMP_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
+
+        const CATALOG_KNOWN = new Set(['schemaVersion', 'catalogId', 'title', 'generatedAt', 'contentUpdatedAt', 'lastVerified', 'problemCount', 'problems']);
+        const PROBLEM_KNOWN = new Set(['recordId', 'problem', 'sourceStatement', 'wordDescription', 'mathematicalConditions', 'status', 'lastVerified', 'tags', 'verificationNotes', 'source', 'literature', 'maintainers', 'comments', 'generatedAt', 'contentUpdatedAt']);
+        const SOURCE_KNOWN = new Set(['title', 'authors', 'url', 'page', 'problemNumber']);
+        const LITERATURE_KNOWN = new Set(['title', 'year', 'description', 'link']);
+        const COMMENT_KNOWN = new Set(['id', 'author', 'body', 'createdAt', 'updatedAt']);
+        const AUTHOR_KNOWN = new Set(['id', 'displayName']);
+
+        // ── state ──
+        let doc = null;              // working catalog object
+        let originalText = '';       // file contents at load (for Revert)
+        let fileHandle = null;       // FileSystemFileHandle when available
+        let fileName = '';
+        let selected = 'catalog';    // 'catalog' | problem index
+        let viewMode = 'form';       // 'form' | 'json'
+        let dirty = false;
+        let previewOn = false;
+        let jsonDirty = false;       // unapplied edits in the JSON tab
+
+        // Baseline fingerprints used to maintain contentUpdatedAt on save.
+        let problemOrigin = new WeakMap();  // problem object -> content fingerprint at load / last save
+        let baselineProblemCount = 0;
+        let baselineCatalogFingerprint = '';
+
+        // ── DOM refs ──
+        const $ = id => document.getElementById(id);
+        const editorEl = $('editor'), navEl = $('nav'), statusEl = $('status'), fileNameEl = $('fileName');
+        const openBtn = $('openBtn'), fileInput = $('fileInput'), saveBtn = $('saveBtn'), saveAsBtn = $('saveAsBtn'), revertBtn = $('revertBtn');
+        const autoStamp = $('autoStamp'), filterEl = $('filter');
+        const addProblemBtn = $('addProblemBtn'), dupProblemBtn = $('dupProblemBtn'), upBtn = $('upBtn'), downBtn = $('downBtn'), deleteProblemBtn = $('deleteProblemBtn');
+
+        // ── helpers ──
+        const safeStr = v => (v === undefined || v === null) ? '' : String(v);
+        const isUtcTimestamp = v => typeof v === 'string' && TIMESTAMP_PATTERN.test(v) && !Number.isNaN(Date.parse(v));
+        const nowUtc = () => new Date().toISOString().replace(/\.\d{3}Z$/, '.000Z');
+        const today = () => new Date().toISOString().slice(0, 10);
+        const isPlainObject = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+        const deepClone = v => JSON.parse(JSON.stringify(v));
+        const catalogPrefix = () => `lit:${safeStr(doc && doc.catalogId).trim()}:`;
+
+        function el(tag, attrs = {}, ...children) {
+            const node = document.createElement(tag);
+            for (const [k, v] of Object.entries(attrs)) {
+                if (v === undefined || v === null || v === false) continue;
+                if (k === 'class') node.className = v;
+                else if (k === 'text') node.textContent = v;
+                else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+                else if (k === 'checked' || k === 'disabled' || k === 'readOnly' || k === 'open' || k === 'hidden') node[k] = v;
+                else node.setAttribute(k, v);
+            }
+            for (const c of children.flat()) {
+                if (c === undefined || c === null || c === false) continue;
+                node.append(c instanceof Node ? c : document.createTextNode(String(c)));
+            }
+            return node;
+        }
+
+        function autoGrow(ta) {
+            ta.style.height = 'auto';
+            ta.style.height = Math.min(Math.max(ta.scrollHeight + 2, 34), window.innerHeight * 0.6) + 'px';
+        }
+        function growAll(root) {
+            requestAnimationFrame(() => root.querySelectorAll('textarea[data-grow]').forEach(autoGrow));
+        }
+
+        function setStatus(kind, msg) {
+            statusEl.className = 'status' + (kind ? ' ' + kind : '');
+            statusEl.textContent = msg || '';
+        }
+
+        function markDirty() {
+            if (!dirty) {
+                dirty = true;
+                fileNameEl.classList.add('dirty');
+            }
+            saveBtn.disabled = false;
+            refreshNavLabels();
+        }
+
+        // Fingerprints: a problem's content excludes its comments and its own contentUpdatedAt;
+        // the catalog's excludes problems, problemCount, and its contentUpdatedAt.
+        function problemFingerprint(p) {
+            const { comments, contentUpdatedAt, ...rest } = p;
+            return JSON.stringify(rest);
+        }
+        function catalogFingerprint(d) {
+            const { problems, problemCount, contentUpdatedAt, ...rest } = d;
+            return JSON.stringify(rest);
+        }
+        function rebaseline() {
+            problemOrigin = new WeakMap();
+            for (const p of doc.problems) problemOrigin.set(p, problemFingerprint(p));
+            baselineProblemCount = doc.problems.length;
+            baselineCatalogFingerprint = catalogFingerprint(doc);
+        }
+        function problemIsModified(p) {
+            const fp = problemOrigin.get(p);
+            return fp === undefined || fp !== problemFingerprint(p);
+        }
+
+        // ── validation (mirrors the viewers' strict 1.4 checks) ──
+        function validateCatalog(raw) {
+            const errors = [];
+            if (!isPlainObject(raw)) return ['Expected a LITchikin 1.4 catalog object.'];
+            if (raw.schemaVersion !== '1.4') errors.push('schemaVersion must be "1.4".');
+            const catalogId = safeStr(raw.catalogId).trim();
+            if (!CATALOG_ID_PATTERN.test(catalogId)) errors.push('catalogId must be lowercase kebab-case.');
+            if (!isUtcTimestamp(raw.contentUpdatedAt)) errors.push('Catalog contentUpdatedAt must be a UTC timestamp ending in Z.');
+            if (raw.generatedAt !== undefined && !isUtcTimestamp(raw.generatedAt)) errors.push('Catalog generatedAt must be a UTC timestamp when present.');
+            if (!Array.isArray(raw.problems)) { errors.push('problems must be an array.'); return errors; }
+            if (raw.problemCount !== undefined && raw.problemCount !== raw.problems.length) errors.push('problemCount does not match the problems array.');
+            const seen = new Set();
+            const prefix = `lit:${catalogId}:`;
+            raw.problems.forEach((record, i) => {
+                const where = `Problem #${i + 1}${record && record.recordId ? ` (${record.recordId})` : ''}`;
+                if (!isPlainObject(record)) { errors.push(`${where}: not an object.`); return; }
+                if (typeof record.problem !== 'string' || !record.problem.trim()) errors.push(`${where}: problem must be a non-empty string.`);
+                const recordId = safeStr(record.recordId).trim();
+                const suffix = recordId.startsWith(prefix) ? recordId.slice(prefix.length) : '';
+                if (!RECORD_SUFFIX_PATTERN.test(suffix)) errors.push(`${where}: recordId must look like ${prefix}<suffix>.`);
+                if (seen.has(recordId)) errors.push(`${where}: duplicate recordId.`);
+                seen.add(recordId);
+                if (!isUtcTimestamp(record.contentUpdatedAt)) errors.push(`${where}: contentUpdatedAt must be a UTC timestamp.`);
+                if (record.generatedAt !== undefined && !isUtcTimestamp(record.generatedAt)) errors.push(`${where}: generatedAt must be a UTC timestamp when present.`);
+                if (!Array.isArray(record.comments)) { errors.push(`${where}: comments must be an array.`); return; }
+                record.comments.forEach((c, j) => {
+                    const cw = `${where}, comment #${j + 1}`;
+                    if (!isPlainObject(c)) { errors.push(`${cw}: not an object.`); return; }
+                    if (!safeStr(c.id).trim()) errors.push(`${cw}: id is required.`);
+                    if (typeof c.body !== 'string') errors.push(`${cw}: body must be a string.`);
+                    const authorOk = typeof c.author === 'string' ? Boolean(c.author.trim())
+                        : isPlainObject(c.author) && Boolean(safeStr(c.author.displayName).trim());
+                    if (!authorOk) errors.push(`${cw}: author must be a string or an object with displayName.`);
+                    if (!isUtcTimestamp(c.createdAt)) errors.push(`${cw}: createdAt must be a UTC timestamp.`);
+                    if (c.updatedAt !== undefined && c.updatedAt !== null && !isUtcTimestamp(c.updatedAt)) errors.push(`${cw}: updatedAt must be null or a UTC timestamp.`);
+                });
+                if (Array.isArray(record.maintainers)) {
+                    record.maintainers.forEach((m, j) => {
+                        if (!isPlainObject(m) || !safeStr(m.name).trim() || typeof m.email !== 'string') errors.push(`${where}, maintainer #${j + 1}: needs a non-empty name and a string email.`);
+                    });
+                }
+            });
+            return errors;
+        }
+
+        // ── loading ──
+        async function loadFromText(text, name, handle) {
+            let parsed;
+            try { parsed = JSON.parse(text); }
+            catch (e) { setStatus('err', `Could not parse ${name}: ${e.message}`); return; }
+            if (!isPlainObject(parsed) || !Array.isArray(parsed.problems)) {
+                setStatus('err', `${name} is not a LITchikin catalog (expected an object with a problems array).`);
+                return;
+            }
+            doc = parsed;
+            originalText = text;
+            fileHandle = handle || null;
+            fileName = name;
+            selected = 'catalog';
+            viewMode = 'form';
+            dirty = false;
+            rebaseline();
+            fileNameEl.textContent = name;
+            fileNameEl.classList.remove('dirty');
+            document.title = `${name} — LITchikin Catalog Editor`;
+            saveBtn.disabled = false;
+            saveAsBtn.disabled = false;
+            revertBtn.disabled = false;
+            filterEl.disabled = false;
+            addProblemBtn.disabled = false;
+            const errors = validateCatalog(doc);
+            if (errors.length) setStatus('warn', `Loaded ${name} with ${errors.length} validation issue(s):\n• ${errors.join('\n• ')}`);
+            else setStatus('ok', `Loaded ${name}: ${doc.problems.length} problem(s).${fileHandle ? '' : ' Save will download the edited file (this browser cannot write in place).'}`);
+            renderNav();
+            renderEditor();
+        }
+
+        async function openWithPicker() {
+            if (window.showOpenFilePicker) {
+                try {
+                    const [handle] = await window.showOpenFilePicker({
+                        types: [{ description: 'JSON catalog', accept: { 'application/json': ['.json'] } }],
+                        multiple: false,
+                    });
+                    const file = await handle.getFile();
+                    await loadFromText(await file.text(), file.name, handle);
+                } catch (e) {
+                    if (e && e.name !== 'AbortError') setStatus('err', `Open failed: ${e.message}`);
+                }
+            } else {
+                fileInput.value = '';
+                fileInput.click();
+            }
+        }
+
+        fileInput.addEventListener('change', async () => {
+            const file = fileInput.files && fileInput.files[0];
+            if (file) await loadFromText(await file.text(), file.name, null);
+        });
+        openBtn.addEventListener('click', () => confirmDiscard() && openWithPicker());
+
+        document.body.addEventListener('dragover', e => { e.preventDefault(); document.body.classList.add('drop-active'); });
+        document.body.addEventListener('dragleave', () => document.body.classList.remove('drop-active'));
+        document.body.addEventListener('drop', async e => {
+            e.preventDefault();
+            document.body.classList.remove('drop-active');
+            const item = e.dataTransfer.items && e.dataTransfer.items[0];
+            if (!item || item.kind !== 'file') return;
+            if (!confirmDiscard()) return;
+            let handle = null;
+            if (item.getAsFileSystemHandle) {
+                try { handle = await item.getAsFileSystemHandle(); } catch { handle = null; }
+                if (handle && handle.kind !== 'file') handle = null;
+            }
+            const file = handle ? await handle.getFile() : item.getAsFile();
+            if (file) await loadFromText(await file.text(), file.name, handle);
+        });
+
+        function confirmDiscard() {
+            return !dirty || window.confirm('Discard unsaved changes?');
+        }
+        window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+        revertBtn.addEventListener('click', async () => {
+            if (!doc || !confirmDiscard()) return;
+            const keepSelected = selected;
+            await loadFromText(originalText, fileName, fileHandle);
+            if (keepSelected !== 'catalog' && keepSelected < doc.problems.length) { selected = keepSelected; renderNav(); renderEditor(); }
+            setStatus('ok', `Reverted to the last loaded/saved contents of ${fileName}.`);
+        });
+
+        // ── saving ──
+        function applyTimestampMaintenance() {
+            const now = nowUtc();
+            let catalogChanged = false;
+            for (const p of doc.problems) {
+                if (!isPlainObject(p)) continue;
+                if (problemIsModified(p)) {
+                    p.contentUpdatedAt = now;
+                    catalogChanged = true;
+                }
+            }
+            if (doc.problems.length !== baselineProblemCount) catalogChanged = true;
+            if (catalogFingerprint(doc) !== baselineCatalogFingerprint) catalogChanged = true;
+            if (catalogChanged) doc.contentUpdatedAt = now;
+            doc.problemCount = doc.problems.length;
+        }
+
+        function serialize() {
+            return JSON.stringify(doc, null, 2) + '\n';
+        }
+
+        function download(text, name) {
+            const blob = new Blob([text], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = el('a', { href: url, download: name });
+            document.body.append(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+        }
+
+        async function save(saveAs) {
+            if (!doc) return;
+            if (viewMode === 'json' && jsonDirty && !window.confirm('The JSON tab has unapplied edits that will not be saved. Continue?')) return;
+            if (autoStamp.checked) applyTimestampMaintenance();
+            const errors = validateCatalog(doc);
+            if (errors.length) {
+                setStatus('err', `${errors.length} validation issue(s):\n• ${errors.join('\n• ')}`);
+                if (!window.confirm(`The catalog has ${errors.length} validation issue(s) (see the status bar). Save anyway?`)) { renderEditor(); return; }
+            }
+            const text = serialize();
+            try {
+                if ((saveAs || !fileHandle) && window.showSaveFilePicker) {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: fileName || 'catalog.json',
+                        types: [{ description: 'JSON catalog', accept: { 'application/json': ['.json'] } }],
+                    });
+                    fileHandle = handle;
+                    fileName = handle.name;
+                    fileNameEl.textContent = fileName;
+                    document.title = `${fileName} — LITchikin Catalog Editor`;
+                }
+                if (fileHandle) {
+                    if (fileHandle.requestPermission) {
+                        const perm = await fileHandle.requestPermission({ mode: 'readwrite' });
+                        if (perm !== 'granted') { setStatus('err', 'Write permission was not granted.'); return; }
+                    }
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(text);
+                    await writable.close();
+                    setStatus(errors.length ? 'warn' : 'ok', `Saved ${fileName} (${doc.problems.length} problem(s)) at ${nowUtc()}.${errors.length ? ' Saved with validation issues.' : ''}`);
+                } else {
+                    download(text, fileName || 'catalog.json');
+                    setStatus(errors.length ? 'warn' : 'ok', `Downloaded ${fileName}. Replace the original file with the downloaded copy.`);
+                }
+            } catch (e) {
+                if (e && e.name === 'AbortError') { renderEditor(); return; }
+                setStatus('err', `Save failed: ${e.message}`);
+                return;
+            }
+            originalText = text;
+            dirty = false;
+            fileNameEl.classList.remove('dirty');
+            rebaseline();
+            renderNav();
+            renderEditor();
+        }
+        saveBtn.addEventListener('click', () => save(false));
+        saveAsBtn.addEventListener('click', () => save(true));
+        document.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); if (doc) save(e.shiftKey); }
+        });
+
+        // ── navigation ──
+        function problemLabel(p) {
+            const id = safeStr(p && p.recordId);
+            const prefix = catalogPrefix();
+            return id.startsWith(prefix) ? id.slice(prefix.length) : (id || '(no recordId)');
+        }
+
+        function renderNav() {
+            navEl.innerHTML = '';
+            if (!doc) return;
+            const q = filterEl.value.trim().toLowerCase();
+            navEl.append(el('li', {
+                class: 'catalog' + (selected === 'catalog' ? ' active' : ''),
+                onclick: () => select('catalog'),
+            }, `Catalog: ${safeStr(doc.catalogId) || '(no catalogId)'}`, el('span', { class: 'snippet', text: safeStr(doc.title) })));
+            doc.problems.forEach((p, i) => {
+                const hay = `${safeStr(p.recordId)} ${safeStr(p.problem)} ${safeStr(p.status)}`.toLowerCase();
+                if (q && !hay.includes(q)) return;
+                navEl.append(el('li', {
+                    class: (selected === i ? 'active' : '') + (problemIsModified(p) ? ' modified' : ''),
+                    'data-index': i,
+                    onclick: () => select(i),
+                    title: safeStr(p.recordId),
+                },
+                    el('span', { class: 'suffix', text: problemLabel(p) }),
+                    p.status ? el('span', { class: 'status-pill', text: safeStr(p.status) }) : null,
+                    el('span', { class: 'snippet', text: safeStr(p.problem) || '(empty problem)' }),
+                ));
+            });
+            updateSideButtons();
+        }
+
+        function refreshNavLabels() {
+            if (!doc) return;
+            navEl.querySelectorAll('li[data-index]').forEach(li => {
+                const i = Number(li.dataset.index);
+                const p = doc.problems[i];
+                if (!p) return;
+                li.classList.toggle('modified', problemIsModified(p));
+                li.querySelector('.suffix').textContent = problemLabel(p);
+                li.querySelector('.snippet').textContent = safeStr(p.problem) || '(empty problem)';
+                const pill = li.querySelector('.status-pill');
+                if (pill) pill.textContent = safeStr(p.status);
+            });
+            const cat = navEl.querySelector('li.catalog');
+            if (cat) {
+                cat.firstChild.textContent = `Catalog: ${safeStr(doc.catalogId) || '(no catalogId)'}`;
+                cat.querySelector('.snippet').textContent = safeStr(doc.title);
+            }
+        }
+
+        function updateSideButtons() {
+            const isProblem = doc && selected !== 'catalog';
+            dupProblemBtn.disabled = !isProblem;
+            deleteProblemBtn.disabled = !isProblem;
+            upBtn.disabled = !isProblem || selected === 0;
+            downBtn.disabled = !isProblem || selected === doc.problems.length - 1;
+        }
+
+        function select(target) {
+            if (viewMode === 'json' && jsonDirty && !window.confirm('Discard unapplied JSON edits?')) return;
+            selected = target;
+            jsonDirty = false;
+            renderNav();
+            renderEditor();
+            editorEl.scrollTop = 0;
+        }
+
+        filterEl.addEventListener('input', renderNav);
+
+        addProblemBtn.addEventListener('click', () => {
+            const now = nowUtc();
+            const p = {
+                sourceStatement: '',
+                problem: '',
+                wordDescription: '',
+                mathematicalConditions: '',
+                comments: [],
+                literature: [],
+                status: 'open',
+                lastVerified: today(),
+                tags: [],
+                generatedAt: now,
+                contentUpdatedAt: now,
+                recordId: catalogPrefix(),
+            };
+            doc.problems.push(p);
+            markDirty();
+            select(doc.problems.length - 1);
+        });
+        dupProblemBtn.addEventListener('click', () => {
+            if (selected === 'catalog') return;
+            const copy = deepClone(doc.problems[selected]);
+            const now = nowUtc();
+            copy.recordId = safeStr(copy.recordId) + '-copy';
+            copy.comments = [];
+            copy.generatedAt = now;
+            copy.contentUpdatedAt = now;
+            doc.problems.splice(selected + 1, 0, copy);
+            markDirty();
+            select(selected + 1);
+        });
+        deleteProblemBtn.addEventListener('click', () => {
+            if (selected === 'catalog') return;
+            const p = doc.problems[selected];
+            if (!window.confirm(`Delete problem ${safeStr(p.recordId) || '#' + (selected + 1)}?`)) return;
+            doc.problems.splice(selected, 1);
+            markDirty();
+            select(doc.problems.length ? Math.min(selected, doc.problems.length - 1) : 'catalog');
+        });
+        function move(delta) {
+            if (selected === 'catalog') return;
+            const j = selected + delta;
+            if (j < 0 || j >= doc.problems.length) return;
+            [doc.problems[selected], doc.problems[j]] = [doc.problems[j], doc.problems[selected]];
+            markDirty();
+            select(j);
+        }
+        upBtn.addEventListener('click', () => move(-1));
+        downBtn.addEventListener('click', () => move(1));
+
+        // ── field builders ──
+        // Each builder writes straight into the bound object on input and calls markDirty().
+
+        function labelFor(key, opts = {}) {
+            const label = el('label', {},
+                el('span', { class: 'key', text: opts.label || key }),
+                opts.required ? el('span', { class: 'req', text: '*', title: 'required' }) : null,
+                opts.type ? el('span', { class: 'type', text: opts.type }) : null,
+            );
+            if (opts.actions && opts.actions.length) {
+                label.append(el('span', { class: 'spacer' }), ...opts.actions);
+            }
+            return label;
+        }
+
+        function removeButton(obj, key, rerender) {
+            return el('button', {
+                class: 'linkbtn danger', type: 'button', title: `Remove the ${key} field`,
+                onclick: () => { if (window.confirm(`Remove field "${key}"?`)) { delete obj[key]; markDirty(); rerender(); } },
+            }, 'remove');
+        }
+
+        // String field. Absent optional keys stay absent while the input is empty.
+        function stringField(obj, key, opts = {}) {
+            const value = obj[key];
+            const isStr = typeof value === 'string';
+            const control = opts.multiline
+                ? el('textarea', { 'data-grow': '1', class: opts.mono ? 'mono' : null, rows: 2, placeholder: opts.placeholder || '' })
+                : el('input', { type: 'text', class: opts.mono ? 'mono' : null, placeholder: opts.placeholder || '' });
+            control.value = isStr ? value : (value === undefined || (opts.nullable && value === null) ? '' : JSON.stringify(value));
+            if (opts.readOnly) control.readOnly = true;
+            const err = el('div', { class: 'err' });
+            const check = () => {
+                const msg = opts.validate ? opts.validate(control.value) : '';
+                err.textContent = msg || '';
+                control.classList.toggle('invalid', Boolean(msg));
+            };
+            control.addEventListener('input', () => {
+                if (opts.nullable && control.value.trim() === '') obj[key] = null;
+                else if (control.value === '' && !(key in obj) && !opts.required) { /* keep absent */ }
+                else obj[key] = control.value;
+                if (opts.multiline) autoGrow(control);
+                check();
+                markDirty();
+                if (opts.onChange) opts.onChange(control.value);
+            });
+            check();
+            const actions = [];
+            if (opts.nowButton) {
+                actions.push(el('button', { class: 'linkbtn', type: 'button', onclick: () => { control.value = nowUtc(); control.dispatchEvent(new Event('input')); } }, 'now'));
+            }
+            if (opts.todayButton) {
+                actions.push(el('button', { class: 'linkbtn', type: 'button', onclick: () => { control.value = today(); control.dispatchEvent(new Event('input')); } }, 'today'));
+            }
+            if (!opts.required && !opts.readOnly && key in obj && opts.rerender) actions.push(removeButton(obj, key, opts.rerender));
+            return el('div', { class: 'field' },
+                labelFor(key, { ...opts, actions, type: (value !== undefined && !isStr) ? typeof value : null }),
+                control,
+                opts.hint ? el('div', { class: 'hint' }, opts.hint) : null,
+                err,
+            );
+        }
+
+        // Field whose value may be a string or an array of strings, edited one item per line
+        // (or comma-separated when `inline`). The stored type follows the current value's type.
+        function stringOrListField(obj, key, opts = {}) {
+            const value = obj[key];
+            const asArray = Array.isArray(value);
+            const sep = opts.inline ? ', ' : '\n';
+            const control = el('textarea', { 'data-grow': '1', rows: 1, placeholder: opts.placeholder || '' });
+            control.value = asArray ? value.map(safeStr).join(sep) : safeStr(value);
+            const typeSel = el('select', { title: 'Stored type' },
+                el('option', { value: 'array', text: 'list' }), el('option', { value: 'string', text: 'string' }));
+            typeSel.value = asArray ? 'array' : (value === undefined && opts.defaultArray ? 'array' : 'string');
+            const commit = () => {
+                const raw = control.value;
+                if (typeSel.value === 'array') {
+                    const parts = raw.split(opts.inline ? /[,\n]/ : /\n/).map(s => s.trim()).filter(Boolean);
+                    if (!parts.length && !(key in obj)) return;
+                    obj[key] = parts;
+                } else {
+                    if (raw === '' && !(key in obj)) return;
+                    obj[key] = raw;
+                }
+                autoGrow(control);
+                markDirty();
+            };
+            control.addEventListener('input', commit);
+            typeSel.addEventListener('change', commit);
+            const actions = [typeSel];
+            if (key in obj && opts.rerender) actions.push(removeButton(obj, key, opts.rerender));
+            return el('div', { class: 'field' },
+                labelFor(key, { ...opts, actions }),
+                control,
+                el('div', { class: 'hint' }, opts.hint || (opts.inline ? 'Comma-separated when stored as a list.' : 'One entry per line when stored as a list.')),
+            );
+        }
+
+        // Scalar field for values that may be integer, string, or null (literature.year, source.page, …).
+        function scalarField(obj, key, opts = {}) {
+            const value = obj[key];
+            const control = el('input', { type: 'text', placeholder: opts.placeholder || '' });
+            control.value = value === null ? 'null' : safeStr(value);
+            const commit = () => {
+                const raw = control.value.trim();
+                if (raw === '') { if (key in obj) delete obj[key]; }
+                else if (raw === 'null') obj[key] = null;
+                else if (/^-?\d+$/.test(raw) && opts.allowNumber !== false) obj[key] = Number(raw);
+                else if (/^-?\d+\.\d+$/.test(raw) && opts.allowFloat) obj[key] = Number(raw);
+                else obj[key] = control.value;
+                markDirty();
+            };
+            control.addEventListener('input', commit);
+            return el('div', { class: 'field' },
+                labelFor(key, { ...opts, type: value === undefined ? null : (value === null ? 'null' : typeof value) }),
+                control,
+                el('div', { class: 'hint' }, opts.hint || 'Digits are stored as a number, "null" as null, anything else as a string; empty removes the field.'),
+            );
+        }
+
+        // Raw JSON field for arbitrary values (used for non-schema keys).
+        function jsonField(obj, key, opts = {}) {
+            const control = el('textarea', { 'data-grow': '1', class: 'mono', rows: 2 });
+            control.value = JSON.stringify(obj[key], null, 2);
+            const err = el('div', { class: 'err' });
+            control.addEventListener('input', () => {
+                autoGrow(control);
+                try {
+                    obj[key] = JSON.parse(control.value);
+                    control.classList.remove('invalid');
+                    err.textContent = '';
+                    markDirty();
+                } catch (e) {
+                    control.classList.add('invalid');
+                    err.textContent = `Invalid JSON (not applied): ${e.message}`;
+                }
+            });
+            const actions = opts.rerender ? [removeButton(obj, key, opts.rerender)] : [];
+            const v = obj[key];
+            const type = Array.isArray(v) ? 'array' : v === null ? 'null' : typeof v;
+            return el('div', { class: 'field' }, labelFor(key, { ...opts, actions, type }), control, err);
+        }
+
+        // Editor for every key of `obj` that is not in `known`: strings as text, everything else as JSON.
+        function extraFieldsEditor(obj, known, rerender, opts = {}) {
+            const body = el('div', { class: 'section-body' });
+            const keys = Object.keys(obj).filter(k => !known.has(k));
+            for (const k of keys) {
+                body.append(typeof obj[k] === 'string'
+                    ? stringField(obj, k, { multiline: true, rerender })
+                    : jsonField(obj, k, { rerender }));
+            }
+            if (!keys.length) body.append(el('div', { class: 'hint', text: 'No additional fields.' }));
+            const keyInput = el('input', { type: 'text', placeholder: 'new field name' });
+            const typeSel = el('select', {},
+                el('option', { value: 'string', text: 'string' }),
+                el('option', { value: 'array', text: 'list' }),
+                el('option', { value: 'object', text: 'object' }),
+                el('option', { value: 'number', text: 'number' }),
+                el('option', { value: 'boolean', text: 'boolean' }),
+                el('option', { value: 'null', text: 'null' }));
+            const add = () => {
+                const k = keyInput.value.trim();
+                if (!k) return;
+                if (k in obj) { window.alert(`Field "${k}" already exists.`); return; }
+                const init = { string: '', array: [], object: {}, number: 0, boolean: false, null: null }[typeSel.value];
+                obj[k] = init;
+                markDirty();
+                rerender();
+            };
+            keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); add(); } });
+            body.append(el('div', { class: 'add-field' }, keyInput, typeSel, el('button', { class: 'btn small', type: 'button', onclick: add }, '+ Add field')));
+            return el('details', { class: 'section', open: opts.open !== false },
+                el('summary', {}, opts.title || 'Other fields', el('span', { class: 'count', text: keys.length ? `(${keys.length})` : '' })),
+                body);
+        }
+
+        function section(title, count, open, ...children) {
+            return el('details', { class: 'section', open },
+                el('summary', {}, title, count !== null && count !== undefined ? el('span', { class: 'count', text: `(${count})` }) : null),
+                el('div', { class: 'section-body' }, ...children));
+        }
+
+        // ── catalog form ──
+        function renderCatalogForm() {
+            const rerender = renderEditor;
+            const frag = document.createDocumentFragment();
+            frag.append(
+                section('Catalog metadata', null, true,
+                    el('div', { class: 'grid3' },
+                        stringField(doc, 'schemaVersion', { required: true, readOnly: true, mono: true, hint: 'Always "1.4".' }),
+                        stringField(doc, 'catalogId', {
+                            required: true, mono: true, placeholder: 'example-catalog',
+                            validate: v => CATALOG_ID_PATTERN.test(v.trim()) ? '' : 'Lowercase kebab-case required.',
+                            onChange: refreshNavLabels,
+                            hint: 'Every recordId must start with lit:<catalogId>:.',
+                        }),
+                        stringField(doc, 'lastVerified', { placeholder: 'YYYY-MM-DD', todayButton: true, rerender }),
+                    ),
+                    stringField(doc, 'title', { multiline: true, onChange: refreshNavLabels, rerender }),
+                ),
+                section('Timestamps', null, true,
+                    el('div', { class: 'grid3' },
+                        stringField(doc, 'generatedAt', { mono: true, nowButton: true, rerender, validate: v => (v === '' || isUtcTimestamp(v)) ? '' : 'UTC ISO 8601 ending in Z.', hint: 'Optional creation time.' }),
+                        stringField(doc, 'contentUpdatedAt', { required: true, mono: true, nowButton: true, validate: v => isUtcTimestamp(v) ? '' : 'UTC ISO 8601 ending in Z.', hint: autoStamp.checked ? 'Maintained automatically on save.' : 'Update when catalog metadata or the problem set changes.' }),
+                        (() => {
+                            const f = el('div', { class: 'field' }, labelFor('problemCount', { type: 'integer' }),
+                                el('input', { type: 'text', readOnly: true, value: safeStr(doc.problemCount) }),
+                                el('div', { class: 'hint', text: `${doc.problems.length} problem(s) in the array; set on save.` }));
+                            return f;
+                        })(),
+                    ),
+                ),
+                extraFieldsEditor(doc, CATALOG_KNOWN, rerender, { title: 'Other catalog fields', open: true }),
+            );
+            return frag;
+        }
+
+        // ── problem form ──
+        function renderProblemForm(p) {
+            const rerender = renderEditor;
+            const frag = document.createDocumentFragment();
+            const prefix = catalogPrefix();
+            const statuses = [...new Set(doc.problems.map(x => safeStr(x.status)).filter(Boolean))].sort();
+
+            // Identity
+            const statusField = stringField(p, 'status', { placeholder: 'open', onChange: refreshNavLabels, rerender });
+            const statusInput = statusField.querySelector('input');
+            statusInput.setAttribute('list', 'status-options');
+            frag.append(section('Identity', null, true,
+                el('div', { class: 'grid3' },
+                    stringField(p, 'recordId', {
+                        required: true, mono: true, placeholder: `${prefix}1`, onChange: refreshNavLabels,
+                        validate: v => {
+                            const s = v.trim();
+                            if (!s.startsWith(prefix)) return `Must start with ${prefix}`;
+                            if (!RECORD_SUFFIX_PATTERN.test(s.slice(prefix.length))) return 'Suffix: letters, digits, ., _, - (starting with a letter or digit).';
+                            if (doc.problems.some(q => q !== p && safeStr(q.recordId).trim() === s)) return 'Duplicate recordId.';
+                            return '';
+                        },
+                        hint: 'Stable; never re-derive after wording changes.',
+                    }),
+                    statusField,
+                    stringField(p, 'lastVerified', { placeholder: 'YYYY-MM-DD', todayButton: true, rerender }),
+                ),
+                el('datalist', { id: 'status-options' }, ...statuses.map(s => el('option', { value: s }))),
+                stringOrListField(p, 'tags', { inline: true, defaultArray: true, rerender, placeholder: 'tag one, tag two' }),
+            ));
+
+            // Statement
+            const previewBox = el('div', { class: 'preview', hidden: !previewOn });
+            let previewTimer = null;
+            const schedulePreview = () => {
+                if (!previewOn) return;
+                clearTimeout(previewTimer);
+                previewTimer = setTimeout(() => renderPreview(p, previewBox), 400);
+            };
+            const textOpts = key => ({ multiline: true, rerender, onChange: key === 'problem' ? () => { refreshNavLabels(); schedulePreview(); } : schedulePreview });
+            const previewBtn = el('button', { class: 'btn small', type: 'button', onclick: () => {
+                previewOn = !previewOn;
+                previewBox.hidden = !previewOn;
+                previewBtn.textContent = previewOn ? 'Hide rendered preview' : 'Show rendered preview';
+                if (previewOn) renderPreview(p, previewBox);
+            } }, previewOn ? 'Hide rendered preview' : 'Show rendered preview');
+            frag.append(section('Statement', null, true,
+                stringField(p, 'problem', { required: true, ...textOpts('problem'), hint: 'Short statement shown as the problem title.' }),
+                stringField(p, 'sourceStatement', { ...textOpts('sourceStatement'), hint: 'Verbatim statement from the source list.' }),
+                stringField(p, 'wordDescription', textOpts('wordDescription')),
+                stringField(p, 'mathematicalConditions', { ...textOpts('mathematicalConditions'), hint: 'LaTeX: $…$, $$…$$, \\(…\\), \\[…\\]. Type single backslashes here; the JSON escaping is handled on save.' }),
+                stringField(p, 'verificationNotes', textOpts('verificationNotes')),
+                el('div', { class: 'row-actions' }, previewBtn),
+                previewBox,
+            ));
+            if (previewOn) requestAnimationFrame(() => renderPreview(p, previewBox));
+
+            // Source
+            frag.append(renderSourceSection(p, rerender));
+
+            // Literature
+            frag.append(renderLiteratureSection(p, rerender));
+
+            // Maintainers
+            frag.append(renderMaintainersSection(p, rerender));
+
+            // Comments
+            frag.append(renderCommentsSection(p, rerender));
+
+            // Timestamps
+            frag.append(section('Timestamps', null, true,
+                el('div', { class: 'grid2' },
+                    stringField(p, 'generatedAt', { mono: true, nowButton: true, rerender, validate: v => (v === '' || isUtcTimestamp(v)) ? '' : 'UTC ISO 8601 ending in Z.', hint: 'Optional creation time.' }),
+                    stringField(p, 'contentUpdatedAt', { required: true, mono: true, nowButton: true, validate: v => isUtcTimestamp(v) ? '' : 'UTC ISO 8601 ending in Z.', hint: autoStamp.checked ? 'Maintained automatically on save (changes only for non-comment edits).' : 'Update when non-comment content changes.' }),
+                ),
+            ));
+
+            // Extra fields (statusDetails, resolutionAudit, …)
+            frag.append(extraFieldsEditor(p, PROBLEM_KNOWN, rerender, { title: 'Other problem fields', open: true }));
+            return frag;
+        }
+
+        function renderPreview(p, box) {
+            box.innerHTML = '';
+            const parts = [['problem', 'Problem'], ['sourceStatement', 'Source statement'], ['wordDescription', 'Description'], ['mathematicalConditions', 'Mathematical conditions'], ['verificationNotes', 'Verification notes']];
+            for (const [key, title] of parts) {
+                if (!safeStr(p[key]).trim()) continue;
+                box.append(el('div', {}, el('h4', { text: title }), el('div', { class: 'pv', text: p[key] })));
+            }
+            if (!box.children.length) box.append(el('div', { class: 'hint', text: 'Nothing to preview yet.' }));
+            if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([box]).catch(() => {});
+        }
+
+        function renderSourceSection(p, rerender) {
+            const hasSource = isPlainObject(p.source);
+            const body = [];
+            if (hasSource) {
+                const s = p.source;
+                body.push(
+                    stringField(s, 'title', { multiline: true }),
+                    stringOrListField(s, 'authors', { placeholder: 'One author per line', rerender }),
+                    el('div', { class: 'grid3' },
+                        stringField(s, 'url', { mono: true, rerender }),
+                        scalarField(s, 'page', {}),
+                        scalarField(s, 'problemNumber', { allowFloat: true, hint: 'Digits (or decimals) are stored as a number, "null" as null, anything else as a string; empty removes the field.' }),
+                    ),
+                    extraFieldsEditor(s, SOURCE_KNOWN, rerender, { title: 'Other source fields', open: Object.keys(s).some(k => !SOURCE_KNOWN.has(k)) }),
+                    el('div', { class: 'row-actions' }, el('button', { class: 'btn small danger', type: 'button', onclick: () => {
+                        if (window.confirm('Remove the source object?')) { delete p.source; markDirty(); rerender(); }
+                    } }, 'Remove source')),
+                );
+            } else if (p.source !== undefined) {
+                body.push(jsonField(p, 'source', { rerender, hint: 'Non-object source value.' }));
+            } else {
+                body.push(el('div', { class: 'row-actions' },
+                    el('span', { class: 'hint', text: 'No source recorded.' }),
+                    el('button', { class: 'btn small', type: 'button', onclick: () => {
+                        p.source = { title: isPlainObject(doc.source) ? safeStr(doc.source.title) : safeStr(doc.title) };
+                        markDirty(); rerender();
+                    } }, '+ Add source')));
+            }
+            return section('Source', null, hasSource, ...body);
+        }
+
+        function listControls(arr, i, rerender, label) {
+            return el('span', { class: 'row-actions' },
+                el('button', { class: 'btn icon', type: 'button', title: 'Move up', disabled: i === 0, onclick: () => { [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; markDirty(); rerender(); } }, '↑'),
+                el('button', { class: 'btn icon', type: 'button', title: 'Move down', disabled: i === arr.length - 1, onclick: () => { [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; markDirty(); rerender(); } }, '↓'),
+                el('button', { class: 'btn icon danger', type: 'button', title: `Remove ${label}`, onclick: () => { arr.splice(i, 1); markDirty(); rerender(); } }, '✕'),
+            );
+        }
+
+        function ensureArray(p, key) {
+            if (!Array.isArray(p[key])) p[key] = [];
+            return p[key];
+        }
+
+        function renderLiteratureSection(p, rerender) {
+            const lit = Array.isArray(p.literature) ? p.literature : [];
+            const items = el('div', { class: 'items' });
+            lit.forEach((entry, i) => {
+                const isObj = isPlainObject(entry);
+                const modeSel = el('select', { title: 'Entry shape' },
+                    el('option', { value: 'object', text: 'structured entry' }),
+                    el('option', { value: 'string', text: 'plain string' }));
+                modeSel.value = isObj ? 'object' : 'string';
+                modeSel.addEventListener('change', () => {
+                    if (modeSel.value === 'string') {
+                        lit[i] = isObj ? [entry.title, entry.year, entry.link].map(safeStr).filter(Boolean).join(', ') : safeStr(entry);
+                    } else {
+                        lit[i] = isObj ? entry : { title: safeStr(entry), year: null, description: '', link: '' };
+                    }
+                    markDirty(); rerender();
+                });
+                const head = el('div', { class: 'item-head' },
+                    el('span', { class: 'idx', text: `#${i + 1}` }), modeSel,
+                    el('span', { class: 'spacer' }), listControls(lit, i, rerender, 'literature entry'));
+                const card = el('div', { class: 'item' }, head);
+                if (isObj) {
+                    card.append(
+                        stringField(entry, 'title', { multiline: true }),
+                        el('div', { class: 'grid2' },
+                            scalarField(entry, 'year', { placeholder: '2025 or 2025-03-14', hint: 'Integer year, a year/date string, or null.' }),
+                            stringField(entry, 'link', { mono: true, placeholder: 'https://arxiv.org/abs/…' }),
+                        ),
+                        stringField(entry, 'description', { multiline: true }),
+                    );
+                    if (Object.keys(entry).some(k => !LITERATURE_KNOWN.has(k))) {
+                        card.append(extraFieldsEditor(entry, LITERATURE_KNOWN, rerender, { title: 'Other entry fields', open: true }));
+                    }
+                } else {
+                    const holder = { v: safeStr(entry) };
+                    const f = stringField(holder, 'v', { label: 'text', multiline: true, required: true, onChange: v => { lit[i] = v; } });
+                    card.append(f);
+                }
+                items.append(card);
+            });
+            const addBtn = el('button', { class: 'btn small', type: 'button', onclick: () => {
+                ensureArray(p, 'literature').push({ title: '', year: null, description: '', link: '' });
+                markDirty(); rerender();
+            } }, '+ Add literature entry');
+            return section('Literature', lit.length, true, items, el('div', { class: 'row-actions' }, addBtn,
+                p.literature !== undefined && !Array.isArray(p.literature) ? el('span', { class: 'err', text: 'literature is not an array; fix it in the JSON tab.' }) : null));
+        }
+
+        function renderMaintainersSection(p, rerender) {
+            const list = Array.isArray(p.maintainers) ? p.maintainers : [];
+            const items = el('div', { class: 'items' });
+            list.forEach((m, i) => {
+                if (!isPlainObject(m)) { list[i] = m = { name: safeStr(m), email: '' }; }
+                items.append(el('div', { class: 'item' },
+                    el('div', { class: 'item-head' }, el('span', { class: 'idx', text: `#${i + 1}` }), el('span', { class: 'spacer' }), listControls(list, i, rerender, 'maintainer')),
+                    el('div', { class: 'grid2' },
+                        stringField(m, 'name', { required: true, validate: v => v.trim() ? '' : 'Name is required.' }),
+                        stringField(m, 'email', { required: true, mono: true, placeholder: 'empty if no permitted public address', validate: v => (v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) ? '' : 'Must be empty or a valid email.' }),
+                    ),
+                    Object.keys(m).some(k => k !== 'name' && k !== 'email') ? el('div', { class: 'err', text: 'Maintainers allow only name and email; extra keys will fail schema validation.' }) : null,
+                ));
+            });
+            const actions = el('div', { class: 'row-actions' },
+                el('button', { class: 'btn small', type: 'button', onclick: () => { ensureArray(p, 'maintainers').push({ name: '', email: '' }); markDirty(); rerender(); } }, '+ Add curator'),
+                p.maintainers !== undefined ? el('button', { class: 'btn small danger', type: 'button', onclick: () => { if (window.confirm('Remove the maintainers field?')) { delete p.maintainers; markDirty(); rerender(); } } }, 'Remove field') : null,
+            );
+            return section('Eligible curators (maintainers)', list.length, list.length > 0,
+                items, actions, el('div', { class: 'hint', text: 'Public name and email only. An empty email is a roster placeholder.' }));
+        }
+
+        function renderCommentsSection(p, rerender) {
+            const list = ensureArray(p, 'comments');
+            const items = el('div', { class: 'items' });
+            list.forEach((c, i) => {
+                if (!isPlainObject(c)) { list[i] = c = { id: '', author: '', body: safeStr(c), createdAt: nowUtc(), updatedAt: null }; }
+                const authorIsObj = isPlainObject(c.author);
+                const authorSel = el('select', { title: 'Author shape' },
+                    el('option', { value: 'object', text: 'author object' }),
+                    el('option', { value: 'string', text: 'author string' }));
+                authorSel.value = authorIsObj ? 'object' : 'string';
+                authorSel.addEventListener('change', () => {
+                    c.author = authorSel.value === 'object'
+                        ? { id: '', displayName: safeStr(c.author) }
+                        : safeStr(authorIsObj ? c.author.displayName : c.author);
+                    markDirty(); rerender();
+                });
+                const authorFields = authorIsObj
+                    ? el('div', { class: 'grid2' },
+                        stringField(c.author, 'displayName', { label: 'author.displayName', required: true, validate: v => v.trim() ? '' : 'Required.' }),
+                        stringField(c.author, 'id', { label: 'author.id', mono: true, placeholder: 'user-123', rerender }))
+                    : stringField(c, 'author', { required: true, validate: v => v.trim() ? '' : 'Required.' });
+                items.append(el('div', { class: 'item' },
+                    el('div', { class: 'item-head' }, el('span', { class: 'idx', text: `#${i + 1}` }), authorSel, el('span', { class: 'spacer' }), listControls(list, i, rerender, 'comment')),
+                    el('div', { class: 'grid3' },
+                        stringField(c, 'id', { required: true, mono: true, validate: v => v.trim() ? '' : 'Required.' }),
+                        stringField(c, 'createdAt', { required: true, mono: true, nowButton: true, validate: v => isUtcTimestamp(v) ? '' : 'UTC ISO 8601 ending in Z.' }),
+                        stringField(c, 'updatedAt', { mono: true, nowButton: true, nullable: true, placeholder: 'null', validate: v => (v.trim() === '' || isUtcTimestamp(v)) ? '' : 'UTC timestamp, or empty for null.' }),
+                    ),
+                    authorFields,
+                    stringField(c, 'body', { required: true, multiline: true, hint: 'Markdown or LaTeX. Comment edits do not change content timestamps.' }),
+                    isPlainObject(c.author) && Object.keys(c.author).some(k => !AUTHOR_KNOWN.has(k)) ? extraFieldsEditor(c.author, AUTHOR_KNOWN, rerender, { title: 'Other author fields', open: true }) : null,
+                    Object.keys(c).some(k => !COMMENT_KNOWN.has(k)) ? extraFieldsEditor(c, COMMENT_KNOWN, rerender, { title: 'Other comment fields', open: true }) : null,
+                ));
+            });
+            const addBtn = el('button', { class: 'btn small', type: 'button', onclick: () => {
+                list.push({ id: `comment-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, author: { id: '', displayName: '' }, body: '', createdAt: nowUtc(), updatedAt: null });
+                markDirty(); rerender();
+            } }, '+ Add comment');
+            return section('Comments', list.length, list.length > 0, items, el('div', { class: 'row-actions' }, addBtn));
+        }
+
+        // ── JSON mode ──
+        function renderJsonMode(target) {
+            const isCatalog = target === 'catalog';
+            const value = isCatalog ? (() => { const { problems, ...rest } = doc; return rest; })() : doc.problems[target];
+            const ta = el('textarea', { spellcheck: 'false' });
+            ta.value = JSON.stringify(value, null, 2);
+            const err = el('div', { class: 'err' });
+            const applyBtn = el('button', { class: 'btn primary small', type: 'button' }, 'Apply JSON');
+            ta.addEventListener('input', () => {
+                jsonDirty = true;
+                try { JSON.parse(ta.value); ta.classList.remove('invalid'); err.textContent = ''; }
+                catch (e) { ta.classList.add('invalid'); err.textContent = e.message; }
+            });
+            ta.addEventListener('keydown', e => {
+                if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.setRangeText('  ', s, ta.selectionEnd, 'end'); ta.dispatchEvent(new Event('input')); }
+            });
+            applyBtn.addEventListener('click', () => {
+                let parsed;
+                try { parsed = JSON.parse(ta.value); } catch (e) { err.textContent = e.message; return; }
+                if (!isPlainObject(parsed)) { err.textContent = 'Expected a JSON object.'; return; }
+                if (isCatalog) {
+                    if ('problems' in parsed) { err.textContent = 'Edit problems from the sidebar; the problems key is managed separately.'; return; }
+                    const oldKeys = Object.keys(doc);
+                    const problemsIndex = oldKeys.indexOf('problems');
+                    const problems = doc.problems;
+                    for (const k of oldKeys) delete doc[k];
+                    Object.keys(parsed).forEach((k, idx) => {
+                        if (idx === problemsIndex) doc.problems = problems;
+                        doc[k] = parsed[k];
+                    });
+                    if (!('problems' in doc)) doc.problems = problems;
+                } else {
+                    const old = doc.problems[target];
+                    const fp = problemOrigin.get(old);
+                    doc.problems[target] = parsed;
+                    if (fp !== undefined) problemOrigin.set(parsed, fp);
+                }
+                jsonDirty = false;
+                markDirty();
+                viewMode = 'form';
+                renderNav();
+                renderEditor();
+            });
+            return el('div', { class: 'json-mode' },
+                el('div', { class: 'hint', style: 'margin-bottom:8px' }, isCatalog
+                    ? 'Catalog metadata as JSON (the problems array is omitted and preserved). Apply replaces the metadata.'
+                    : 'Full problem record as JSON. Apply replaces the record.'),
+                ta, err,
+                el('div', { class: 'row-actions' }, applyBtn,
+                    el('button', { class: 'btn small', type: 'button', onclick: () => { jsonDirty = false; viewMode = 'form'; renderEditor(); } }, 'Cancel')));
+        }
+
+        // ── main render ──
+        function renderEditor() {
+            editorEl.innerHTML = '';
+            if (!doc) return;
+            const isCatalog = selected === 'catalog';
+            if (!isCatalog && !doc.problems[selected]) { selected = 'catalog'; renderNav(); }
+            const p = isCatalog ? null : doc.problems[selected];
+            const title = isCatalog ? `Catalog · ${safeStr(doc.catalogId) || '(no catalogId)'}` : (safeStr(p.recordId) || `Problem #${selected + 1}`);
+            const tabs = el('div', { class: 'tabs' },
+                el('button', { class: viewMode === 'form' ? 'active' : '', type: 'button', onclick: () => { if (viewMode !== 'form' && (!jsonDirty || window.confirm('Discard unapplied JSON edits?'))) { jsonDirty = false; viewMode = 'form'; renderEditor(); } } }, 'Form'),
+                el('button', { class: viewMode === 'json' ? 'active' : '', type: 'button', onclick: () => { viewMode = 'json'; renderEditor(); } }, 'JSON'),
+            );
+            editorEl.append(el('div', { class: 'ed-head' },
+                el('h2', { text: title }),
+                !isCatalog ? el('span', { class: 'hint', text: `#${selected + 1} of ${doc.problems.length}` }) : null,
+                tabs));
+            if (viewMode === 'json') editorEl.append(renderJsonMode(selected));
+            else if (isCatalog) editorEl.append(renderCatalogForm());
+            else if (!isPlainObject(p)) editorEl.append(el('div', { class: 'err', text: 'This problem entry is not an object. Fix it in the JSON tab.' }));
+            else editorEl.append(renderProblemForm(p));
+            growAll(editorEl);
+        }
+
+        autoStamp.addEventListener('change', () => { if (doc && viewMode === 'form') renderEditor(); });
+        window.addEventListener('resize', () => growAll(editorEl));
+    })();
+    </script>
+</body>
+</html>
