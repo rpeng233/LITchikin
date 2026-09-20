@@ -135,7 +135,8 @@
         .sheet tbody tr.row:hover { background: var(--accent-light); }
         .sheet tbody tr.row.open { background: var(--accent-light); }
         .sheet td.col-toggle { width: 28px; color: var(--text-secondary); font-family: var(--font-mono); text-align: center; }
-        .sheet td.col-idx { width: 40px; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+        .sheet td.col-idx { width: 260px; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.78rem; overflow-wrap: anywhere; }
+        .sheet td.col-idx .sep { color: #b3b9c4; margin: 0 3px; }
         .sheet td.col-status { width: 160px; }
         .sheet td.col-date { width: 130px; font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap; }
         .sheet td.col-catalog { width: 220px; color: var(--text-secondary); font-size: 0.82rem; }
@@ -235,7 +236,7 @@
             <thead>
                 <tr>
                     <th data-key="" style="cursor:default"></th>
-                    <th data-key="index">#</th>
+                    <th data-key="index" title="catalogId ::: record suffix">ID</th>
                     <th data-key="name">Problem</th>
                     <th data-key="status">Status</th>
                     <th data-key="progress">Last progress</th>
@@ -265,7 +266,7 @@
             const fileUpload = document.getElementById('fileUpload');
             const toast = document.getElementById('toast');
 
-            let entries = [];          // { id, recordId, catalogId, catalogTitle, filename, data, name, status, progress, progressWhy }
+            let entries = [];          // { id, recordId, recordSuffix, catalogId, catalogTitle, filename, data, name, status, progressT, progressLabel, progressWhy }
             const expanded = new Set();
             let sortKey = 'index';
             let sortDir = 1;
@@ -324,18 +325,40 @@
                 return 'none';
             }
 
-            // Most recent progress: latest of the content timestamp and every comment timestamp.
+            // Date of a literature entry: `year` may be an integer, a year string, or a
+            // fuller date string; plain-string entries are scanned for a 4-digit year.
+            function literatureDate(entry) {
+                let raw;
+                if (entry && typeof entry === 'object') raw = entry.year;
+                else if (typeof entry === 'string') raw = entry;
+                if (raw === null || raw === undefined || raw === '') return null;
+                if (typeof raw === 'number' && Number.isInteger(raw)) {
+                    return { t: Date.UTC(raw, 0, 1), label: String(raw) };
+                }
+                const s = String(raw).trim();
+                const full = s.match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+                if (full) {
+                    const t = Date.UTC(+full[1], +full[2] - 1, full[3] ? +full[3] : 1);
+                    if (Number.isFinite(t)) return { t, label: full[0] };
+                }
+                const yr = s.match(/(?:^|\D)(1\d{3}|2\d{3})(?!\d)/);
+                if (yr) return { t: Date.UTC(+yr[1], 0, 1), label: yr[1] };
+                return null;
+            }
+
+            // Most recent progress: the date of the latest literature mention.
             function computeProgress(rec) {
-                let best = { t: Date.parse(rec.contentUpdatedAt), iso: rec.contentUpdatedAt, why: 'content updated' };
-                for (const c of rec.comments || []) {
-                    for (const [field, why] of [['createdAt', 'comment added'], ['updatedAt', 'comment edited']]) {
-                        const v = c[field];
-                        if (!isUtcTimestamp(v)) continue;
-                        const t = Date.parse(v);
-                        if (t > best.t) best = { t, iso: v, why };
+                let best = null;
+                const lit = Array.isArray(rec.literature) ? rec.literature : [];
+                for (const entry of lit) {
+                    const d = literatureDate(entry);
+                    if (!d) continue;
+                    if (!best || d.t > best.t) {
+                        const title = entry && typeof entry === 'object' ? safeStr(entry.title).trim() : String(entry).trim();
+                        best = { t: d.t, label: d.label, why: title ? `literature: ${title}` : 'literature' };
                     }
                 }
-                return best;
+                return best || { t: null, label: '', why: 'no dated literature' };
             }
 
             // ── validation of a strict 1.4 catalog ──
@@ -424,6 +447,7 @@
                     entries.push({
                         id: ++idCounter,
                         recordId,
+                        recordSuffix: recordId.slice(`lit:${catalogId}:`.length),
                         catalogId,
                         catalogTitle: title,
                         filename,
@@ -431,7 +455,7 @@
                         name: rec.problem.trim(),
                         status: safeStr(rec.status).trim(),
                         progressT: progress.t,
-                        progressIso: progress.iso,
+                        progressLabel: progress.label,
                         progressWhy: progress.why,
                         searchText: [
                             rec.problem, rec.sourceStatement, rec.wordDescription, rec.mathematicalConditions,
@@ -548,11 +572,18 @@
                 let list = entries.filter(e =>
                     (!q || e.searchText.includes(q)) &&
                     (!st || (e.status || '(none)') === st));
+                const cmpProgress = (a, b) => {
+                    if (a.progressT === b.progressT) return a.id - b.id;
+                    if (a.progressT === null) return sortDir;   // undated rows always sink to the bottom
+                    if (b.progressT === null) return -sortDir;
+                    return a.progressT - b.progressT;
+                };
                 const cmp = {
-                    index: (a, b) => a.id - b.id,
+                    index: (a, b) => a.catalogId.localeCompare(b.catalogId) ||
+                        a.recordSuffix.localeCompare(b.recordSuffix) || a.id - b.id,
                     name: (a, b) => a.name.localeCompare(b.name),
                     status: (a, b) => a.status.localeCompare(b.status) || a.id - b.id,
-                    progress: (a, b) => a.progressT - b.progressT || a.id - b.id,
+                    progress: cmpProgress,
                     comments: (a, b) => a.data.comments.length - b.data.comments.length || a.id - b.id,
                     catalog: (a, b) => a.catalogId.localeCompare(b.catalogId) || a.id - b.id,
                 }[sortKey] || ((a, b) => a.id - b.id);
@@ -571,7 +602,7 @@
                 statusLine.replaceChildren(
                     el('span', 'count', String(shown)),
                     document.createTextNode(shown === total ? ` problem(s) from ${catalogs} catalog(s). ` : ` of ${total} problem(s) shown (${catalogs} catalog(s)). `),
-                    document.createTextNode('Click a row to expand it. "Last progress" is the latest content update or comment.')
+                    document.createTextNode('Click a row to expand it. "Last progress" is the date of the most recent literature entry.')
                 );
             }
 
@@ -601,7 +632,10 @@
                     const tr = el('tr', 'row' + (isOpen ? ' open' : ''));
                     tr.dataset.id = e.id;
                     tr.appendChild(el('td', 'col-toggle', isOpen ? '▾' : '▸'));
-                    tr.appendChild(el('td', 'col-idx', String(i + 1)));
+                    const idTd = el('td', 'col-idx');
+                    idTd.append(e.catalogId, el('span', 'sep', ':::'), e.recordSuffix);
+                    idTd.title = e.recordId;
+                    tr.appendChild(idTd);
                     const nameTd = el('td', 'col-name', e.name);
                     nameTd.title = e.recordId;
                     tr.appendChild(nameTd);
@@ -610,8 +644,8 @@
                     pill.title = e.status;
                     stTd.appendChild(pill);
                     tr.appendChild(stTd);
-                    const dateTd = el('td', 'col-date', fmtDate(e.progressIso));
-                    dateTd.title = `${e.progressIso} (${e.progressWhy})`;
+                    const dateTd = el('td', 'col-date', e.progressLabel || '—');
+                    dateTd.title = e.progressWhy;
                     tr.appendChild(dateTd);
                     tr.appendChild(el('td', 'col-comments', e.data.comments.length ? String(e.data.comments.length) : ''));
                     const catTd = el('td', 'col-catalog', e.catalogTitle || e.catalogId);
