@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "1.4",
+  "catalogId": "gv-related",
+  "title": "Gilbert–Varshamov and Related Conjectures",
+  "generatedAt": "2026-09-21T02:30:00Z",
+  "contentUpdatedAt": "2026-09-21T02:30:00Z",
+  "lastVerified": "2026-09-21",
+  "problemCount": 5,
+  "scopeNotes": "Five open problems centered on the Gilbert–Varshamov (GV) bound: the GV tightness question itself, explicit constructions meeting it, the asymptotic value of the Delsarte LP that yields the MRRW upper bound, the Euclidean analogue (Minkowski–Hlawka vs. Kabatiansky–Levenshtein), and explicit binary codes at list-decoding capacity. Not transcribed from an existing problem list; compiled from the literature with Devin. Each mathematicalConditions field defines all notation first (citing where a full definition is impractical), records the known bounds, then states the full-resolution condition (Solve) followed, one per line, by the minimal quantitative requirements that would count as partial progress (Partial).",
+  "problems": [
+    {
+      "recordId": "lit:gv-related:gv-bound-tightness",
+      "problem": "Is the binary Gilbert–Varshamov bound asymptotically tight?",
+      "wordDescription": "The Gilbert–Varshamov (GV) bound is the rate achieved by random (linear) binary codes and has not been improved by an exponential factor since the 1950s; the best upper bound is the MRRW linear-programming bound of 1977. Whether the truth is GV, MRRW, or strictly between is the central open question of asymptotic coding theory. Over alphabets of size \\(q\\ge 49\\) (even prime powers) algebraic-geometry codes beat GV, and further improvements exist for other large \\(q\\), but for \\(q=2\\) no exponential improvement in either direction is known.",
+      "mathematicalConditions": "Definitions. A binary code of length \\(n\\) is a set \\(C\\subseteq\\{0,1\\}^n\\); it is linear if \\(C\\) is a subspace of \\(\\mathbb F_2^n\\). Its minimum distance \\(d(C)\\) is \\(\\min_{x\\ne y\\in C}|\\{i:x_i\\ne y_i\\}|\\), its rate is \\(\\tfrac1n\\log_2|C|\\), and its relative distance is \\(d(C)/n\\). \\(H(x)=-x\\log_2x-(1-x)\\log_2(1-x)\\) is the binary entropy function and \\(V(n,r)=\\sum_{i\\le r}\\binom ni\\) the Hamming-ball volume. \\(A_2(n,d)\\) is the maximum size of a binary code of length \\(n\\) and minimum distance \\(\\ge d\\), and \\(R(\\delta)=\\limsup_{n\\to\\infty}\\tfrac1n\\log_2A_2(n,\\lfloor\\delta n\\rfloor)\\) for \\(\\delta\\in(0,1/2)\\). The Gilbert–Varshamov bound is \\(A_2(n,d)\\ge2^n/V(n,d-1)\\), hence \\(R(\\delta)\\ge1-H(\\delta)\\). The first linear-programming (MRRW) bound is \\(R_{\\mathrm{LP1}}(\\delta)=H\\big(\\tfrac12-\\sqrt{\\delta(1-\\delta)}\\big)\\); the second is \\(R_{\\mathrm{LP2}}(\\delta)=\\min_{0<u\\le1-2\\delta}\\{1+g(u^2)-g(u^2+2\\delta u+2\\delta)\\}\\) with \\(g(x)=H\\big(\\tfrac{1-\\sqrt{1-x}}2\\big)\\) (McEliece–Rodemich–Rumsey–Welch 1977); \\(R_{\\mathrm{MRRW}}(\\delta)=\\min(R_{\\mathrm{LP1}},R_{\\mathrm{LP2}})(\\delta)\\), and the two coincide for \\(\\delta\\ge0.273\\). For \\(q\\)-ary codes \\(A_q\\), \\(R_q\\), \\(H_q(x)=x\\log_q(q-1)-x\\log_qx-(1-x)\\log_q(1-x)\\) are defined analogously and GV reads \\(R_q(\\delta)\\ge1-H_q(\\delta)\\).\nKnown: \\(1-H(\\delta)\\le R(\\delta)\\le R_{\\mathrm{MRRW}}(\\delta)\\); the lower bound has been improved only by sub-exponential factors (\\(A_2(n,d)\\ge c\\,2^n\\log_2V(n,d-1)/V(n,d-1)\\), Jiang–Vardy 2004). GV is beaten for all square \\(q\\ge49\\) (Tsfasman–Vlăduț–Zink 1982), all nonprime \\(q\\ge49\\), \\(q\\ne125\\) (Bassa et al. 2014), and all sufficiently large \\(q\\) (Liang 2024); it is open for every \\(q\\le48\\) and every prime \\(q\\).\nSolve: determine \\(R(\\delta)\\) for all \\(\\delta\\in(0,1/2)\\); in particular decide whether \\(R(\\delta)=1-H(\\delta)\\).\nPartial (binary, lower): exhibit \\(\\delta_0\\in(0,1/2)\\) and \\(c>0\\) with \\(R(\\delta_0)\\ge1-H(\\delta_0)+c\\).\nPartial (binary, upper): exhibit \\(\\delta_0\\in(0,1/2)\\) and \\(c>0\\) with \\(R(\\delta_0)\\le R_{\\mathrm{MRRW}}(\\delta_0)-c\\).\nPartial (\\(q\\)-ary): exhibit a fixed \\(q\\) for which GV is currently unbeaten (any \\(q\\le48\\), or any prime \\(q\\)), \\(\\delta_0\\in(0,1-1/q)\\) and \\(c>0\\) with \\(R_q(\\delta_0)\\ge1-H_q(\\delta_0)+c\\).\nExcluded: improvements of \\(A_2(n,d)\\) or of the upper bound by factors \\(2^{o(n)}\\).",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-21",
+      "tags": [
+        "coding-theory",
+        "gilbert-varshamov",
+        "rate-distance",
+        "mrrw",
+        "binary-codes"
+      ],
+      "generatedAt": "2026-09-21T02:30:00Z",
+      "contentUpdatedAt": "2026-09-21T02:30:00Z",
+      "literature": [
+        {
+          "title": "The q-ary Gilbert–Varshamov bound can be improved for all but finitely many positive integers q",
+          "year": 2024,
+          "description": "Shows \\(R_q(\\delta)>R_{\\mathrm{GV}}(\\delta,q)\\) for all \\(\\delta\\in[\\varepsilon,1-\\varepsilon]\\) once \\(q\\) is large enough (explicitly \\(q>e^{29}\\) at \\(\\delta=1/2\\)), via Lenstra's codes from geometry of numbers; leaves small \\(q\\), in particular \\(q=2\\), untouched.",
+          "link": "https://arxiv.org/abs/2403.08727"
+        },
+        {
+          "title": "An Improvement of the Gilbert–Varshamov Bound over Nonprime Fields",
+          "year": 2014,
+          "description": "GV is beaten for every nonprime field of order \\(\\ell\\ge 49\\) except possibly \\(\\ell=125\\), within transitive and self-orthogonal codes as well.",
+          "link": "https://doi.org/10.1109/TIT.2014.2316531"
+        },
+        {
+          "title": "Asymptotic Improvement of the Gilbert–Varshamov Bound on the Size of Binary Codes",
+          "year": 2004,
+          "description": "Jiang–Vardy: \\(A_2(n,d)\\ge c\\,2^n\\log_2 V(n,d-1)/V(n,d-1)\\) for \\(d/n\\le 0.499\\) via local sparsity of the Gilbert graph; a factor-\\(n\\) but not exponential improvement.",
+          "link": "https://arxiv.org/abs/math/0404325"
+        },
+        {
+          "title": "Towers of Global Function Fields with Asymptotically Many Rational Places and an Improvement on the Gilbert–Varshamov Bound",
+          "year": 1998,
+          "description": "Niederreiter–Xing: class field towers improve GV for sufficiently large composite nonsquare \\(q\\).",
+          "link": "https://doi.org/10.1002/mana.19981950110"
+        },
+        {
+          "title": "Modular curves, Shimura curves, and Goppa codes, better than Varshamov–Gilbert bound",
+          "year": 1982,
+          "description": "Tsfasman–Vlăduț–Zink: algebraic-geometry codes from modular curves give \\(R\\ge 1-\\delta-1/(\\sqrt q-1)\\), beating GV for square \\(q\\ge 49\\).",
+          "link": "https://doi.org/10.1002/mana.19821090103"
+        },
+        {
+          "title": "New upper bounds on the rate of a code via the Delsarte–MacWilliams inequalities",
+          "year": 1977,
+          "description": "McEliece–Rodemich–Rumsey–Welch: the first and second linear-programming bounds, still the best asymptotic upper bounds on \\(R(\\delta)\\).",
+          "link": "https://doi.org/10.1109/TIT.1977.1055688"
+        },
+        {
+          "title": "A Comparison of Signalling Alphabets",
+          "year": 1952,
+          "description": "Gilbert's greedy/covering argument \\(A_2(n,d)\\ge 2^n/V(n,d-1)\\); Varshamov (Dokl. Akad. Nauk SSSR 117, 1957) obtained the same bound for linear codes.",
+          "link": "https://doi.org/10.1002/j.1538-7305.1952.tb01393.x"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:gv-related:explicit-gv-codes",
+      "problem": "Explicit binary codes on the Gilbert–Varshamov bound",
+      "wordDescription": "Random linear codes meet GV, but no deterministic polynomial-time construction is known to do so at any distance. In the high-distance regime \\(\\delta=(1-\\varepsilon)/2\\), equivalent to \\(\\varepsilon\\)-biased sets of support \\(O(k/\\varepsilon^2)\\), Ta-Shma's expander-walk construction reaches rate \\(\\varepsilon^{2+o(1)}\\); the remaining \\(o(1)\\) is the frontier. The same regime carries the question of whether the true optimum is \\(\\Theta(\\varepsilon^2)\\) (GV) or \\(\\Theta(\\varepsilon^2\\log(1/\\varepsilon))\\) smaller (the MRRW-type lower bound on \\(\\varepsilon\\)-biased sets).",
+      "mathematicalConditions": "Definitions. A binary code of length \\(n\\) is a set \\(C\\subseteq\\{0,1\\}^n\\); it is linear if \\(C\\) is a subspace of \\(\\mathbb F_2^n\\). Its minimum distance \\(d(C)\\) is \\(\\min_{x\\ne y\\in C}|\\{i:x_i\\ne y_i\\}|\\), its rate is \\(\\tfrac1n\\log_2|C|\\), and its relative distance is \\(d(C)/n\\). \\(H(x)=-x\\log_2x-(1-x)\\log_2(1-x)\\) is the binary entropy function and \\(V(n,r)=\\sum_{i\\le r}\\binom ni\\) the Hamming-ball volume. A family of linear codes \\(\\{C_n\\}\\) is explicit if a deterministic \\(\\mathrm{poly}(n)\\)-time algorithm outputs a generator matrix of \\(C_n\\). A linear code is \\(\\varepsilon\\)-balanced if every nonzero codeword has Hamming weight in \\([\\tfrac{1-\\varepsilon}2n,\\tfrac{1+\\varepsilon}2n]\\); equivalently its generator matrix's columns form an \\(\\varepsilon\\)-biased set. The Blokh–Zyablov bound is \\(R_{\\mathrm{BZ}}(\\delta)=1-H(\\delta)-\\delta\\int_0^{1-H(\\delta)}\\frac{dx}{H^{-1}(1-x)}\\), where \\(H^{-1}:[0,1]\\to[0,1/2]\\) (Blokh–Zyablov 1982; Dumer's chapter in the Handbook of Coding Theory, 1998). Write \\(\\alpha_{\\mathrm{TS}}(\\varepsilon)=O\\big((\\log\\log\\tfrac1\\varepsilon/\\log\\tfrac1\\varepsilon)^{1/3}\\big)\\) for Ta-Shma's loss exponent (Ta-Shma 2017, main theorem).\nKnown: random linear codes are \\(\\varepsilon\\)-balanced with rate \\(\\Omega(\\varepsilon^2)\\) (GV), and no \\(\\varepsilon\\)-balanced code has rate above \\(O(\\varepsilon^2\\log\\tfrac1\\varepsilon)\\) (MRRW). Explicit frontier: \\(\\varepsilon\\)-balanced codes of rate \\(\\varepsilon^{2+\\alpha_{\\mathrm{TS}}(\\varepsilon)}\\) (Ta-Shma 2017); for fixed \\(\\delta\\in(0,1/2)\\), rate \\(R_{\\mathrm{BZ}}(\\delta)\\) via multilevel concatenation (Blokh–Zyablov 1982), which Ta-Shma's rate exceeds only as \\(\\delta\\to1/2\\).\nSolve: an explicit family with, for every \\(\\delta\\in(0,1/2)\\), relative distance \\(\\ge\\delta\\) and rate \\(\\ge1-H(\\delta)-o(1)\\); in particular explicit \\(\\varepsilon\\)-balanced codes of rate \\(\\Omega(\\varepsilon^2)\\).\nPartial (\\(\\varepsilon\\)-balanced): an explicit family of \\(\\varepsilon\\)-balanced codes with rate \\(\\varepsilon^{2+o(\\alpha_{\\mathrm{TS}}(\\varepsilon))}\\); milestone rate \\(\\Omega(\\varepsilon^2/\\mathrm{polylog}\\tfrac1\\varepsilon)\\); target rate \\(\\Omega(\\varepsilon^2)\\).\nPartial (fixed distance): \\(\\delta_0\\in(0,1/2)\\), \\(c>0\\), and an explicit family with relative distance \\(\\ge\\delta_0\\) and rate \\(\\ge\\max\\{R_{\\mathrm{BZ}}(\\delta_0),R_{\\mathrm{TS}}(\\delta_0)\\}+c\\), where \\(R_{\\mathrm{TS}}(\\delta_0)\\) is Ta-Shma's rate at \\(\\varepsilon=1-2\\delta_0\\).\nPartial (conditional): a construction achieving either of the above from an explicit combinatorial object whose existence is known (e.g. the sparse 3-uniform hypergraphs of Blanc–Doron 2022) would count once that object is made explicit.\nExcluded: constructions that are randomized, or explicit only for \\(\\varepsilon\\) bounded below by a constant.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-21",
+      "tags": [
+        "coding-theory",
+        "gilbert-varshamov",
+        "explicit-constructions",
+        "epsilon-biased-sets",
+        "derandomization"
+      ],
+      "generatedAt": "2026-09-21T02:30:00Z",
+      "contentUpdatedAt": "2026-09-21T02:30:00Z",
+      "literature": [
+        {
+          "title": "Gilbert and Varshamov Meet Johnson: List-Decoding Explicit Nearly-Optimal Binary Codes",
+          "year": 2023,
+          "description": "Richelson–Roy: polynomial-time list decoding of Ta-Shma's codes up to the Johnson bound, so the explicit near-GV codes are also algorithmically useful.",
+          "link": "https://doi.org/10.1109/FOCS57990.2023.00021"
+        },
+        {
+          "title": "New Near-Linear Time Decodable Codes Closer to the GV Bound",
+          "year": 2022,
+          "description": "Blanc–Doron: distance \\(1/2-\\varepsilon\\) and rate \\(\\varepsilon^2\\cdot 2^{-\\log^{\\alpha}(1/\\varepsilon)}\\), \\(\\alpha\\approx1/2\\), via walks on sparse hypergraphs; explicit only given sufficiently good explicit 3-uniform hypergraphs.",
+          "link": "https://doi.org/10.4230/LIPIcs.CCC.2022.10"
+        },
+        {
+          "title": "Near-linear time decoding of Ta-Shma's codes via splittable regularity",
+          "year": 2021,
+          "description": "Jeronimo–Srivastava–Tulsiani: near-linear-time unique decoding of Ta-Shma's codes.",
+          "link": "https://doi.org/10.1145/3406325.3451126"
+        },
+        {
+          "title": "Explicit, almost optimal, epsilon-balanced codes",
+          "year": 2017,
+          "description": "Ta-Shma: explicit \\(\\varepsilon\\)-biased sets of support \\(k/\\varepsilon^{2+\\alpha}\\), \\(\\alpha=O((\\log\\log\\frac1\\varepsilon/\\log\\frac1\\varepsilon)^{1/3})\\), via long walks on the \\(s\\)-wide replacement product; the current explicit frontier.",
+          "link": "https://doi.org/10.1145/3055399.3055408"
+        },
+        {
+          "title": "Simple Constructions of Almost k-wise Independent Random Variables",
+          "year": 1992,
+          "description": "Alon–Goldreich–Håstad–Peralta: explicit \\(\\varepsilon\\)-biased sets of size \\(O(k^2/\\varepsilon^2)\\) and \\(O(k/\\varepsilon^3)\\), and the \\(\\Omega(k/(\\varepsilon^2\\log(1/\\varepsilon)))\\) lower bound via MRRW.",
+          "link": "https://doi.org/10.1002/rsa.3240030308"
+        },
+        {
+          "title": "Linear concatenated codes",
+          "year": 1982,
+          "description": "Blokh–Zyablov (Moscow: Nauka): multilevel concatenation attaining the Blokh–Zyablov rate–distance tradeoff, the best explicit binary tradeoff for fixed \\(\\delta\\) away from \\(1/2\\); see also Dumer's chapter \"Concatenated codes and their multilevel generalizations\" in the Handbook of Coding Theory (1998).",
+          "link": "https://scholar.google.com/scholar?q=Blokh+Zyablov+Linear+concatenated+codes+1982"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:gv-related:delsarte-lp-asymptotic-optimum",
+      "problem": "Asymptotic optimum of Delsarte's linear program for binary codes",
+      "wordDescription": "All known asymptotic upper bounds on binary code rate come from Delsarte's LP, yet the LP's own asymptotic value \\(R_{\\mathrm{LP}}(\\delta)\\) is unknown: MRRW only exhibits a feasible dual solution. Samorodnitsky proved \\(R_{\\mathrm{LP}}\\) is at least the average of GV and MRRW and conjectured equality, while numerical evidence (Barg–Jaffe) suggests \\(R_{\\mathrm{LP}}\\) equals the first LP bound where that bound applies. Settling this determines whether GV can ever be proved via Delsarte's LP alone, and motivates the stronger hierarchies (Schrijver SDP; Coregliano–Jeronimo–Jones and Loyfer–Linial LPs) whose bounded levels have not yet yielded any asymptotic improvement over MRRW.",
+      "mathematicalConditions": "Definitions. A binary code of length \\(n\\) is a set \\(C\\subseteq\\{0,1\\}^n\\); it is linear if \\(C\\) is a subspace of \\(\\mathbb F_2^n\\). Its minimum distance \\(d(C)\\) is \\(\\min_{x\\ne y\\in C}|\\{i:x_i\\ne y_i\\}|\\), its rate is \\(\\tfrac1n\\log_2|C|\\), and its relative distance is \\(d(C)/n\\). \\(H(x)=-x\\log_2x-(1-x)\\log_2(1-x)\\) is the binary entropy function and \\(V(n,r)=\\sum_{i\\le r}\\binom ni\\) the Hamming-ball volume. The Krawtchouk polynomials are \\(K_k(x)=\\sum_{j=0}^k(-1)^j\\binom xj\\binom{n-x}{k-j}\\), \\(k=0,\\dots,n\\). Delsarte's LP is \\(A_{\\mathrm{LP}}(n,d)=\\max\\{\\sum_{i=0}^na_i:\\ a_0=1,\\ a_i=0\\ (1\\le i<d),\\ a_i\\ge0,\\ \\sum_{i=0}^na_iK_k(i)\\ge0\\ (0\\le k\\le n)\\}\\); taking \\(a_i\\) to be the distance distribution of a code shows \\(A_2(n,d)\\le A_{\\mathrm{LP}}(n,d)\\). Set \\(R_{\\mathrm{LP}}(\\delta)=\\limsup_n\\tfrac1n\\log_2A_{\\mathrm{LP}}(n,\\lfloor\\delta n\\rfloor)\\). The first linear-programming (MRRW) bound is \\(R_{\\mathrm{LP1}}(\\delta)=H\\big(\\tfrac12-\\sqrt{\\delta(1-\\delta)}\\big)\\); the second is \\(R_{\\mathrm{LP2}}(\\delta)=\\min_{0<u\\le1-2\\delta}\\{1+g(u^2)-g(u^2+2\\delta u+2\\delta)\\}\\) with \\(g(x)=H\\big(\\tfrac{1-\\sqrt{1-x}}2\\big)\\) (McEliece–Rodemich–Rumsey–Welch 1977); \\(R_{\\mathrm{MRRW}}(\\delta)=\\min(R_{\\mathrm{LP1}},R_{\\mathrm{LP2}})(\\delta)\\), and the two coincide for \\(\\delta\\ge0.273\\). Both are obtained from explicit dual-feasible solutions, so \\(R_{\\mathrm{LP}}\\le R_{\\mathrm{MRRW}}\\). Strengthenings whose definitions are too long to reproduce here: Schrijver's semidefinite program on triples of codewords (Schrijver 2005); the level-\\(k\\) linear programs of Coregliano–Jeronimo–Jones (2022) and of Loyfer–Linial (2023) for linear codes, each with Delsarte's LP at level 1. For any such program \\(P\\) write \\(R_P(\\delta)\\) for its asymptotic value as for \\(R_{\\mathrm{LP}}\\).\nKnown: \\(\\tfrac12\\big(1-H(\\delta)+R_{\\mathrm{LP1}}(\\delta)\\big)\\le R_{\\mathrm{LP}}(\\delta)\\le R_{\\mathrm{MRRW}}(\\delta)\\) (Samorodnitsky 2001); no bounded level of the hierarchies above is known to satisfy \\(R_P(\\delta)<R_{\\mathrm{MRRW}}(\\delta)\\) at any \\(\\delta\\).\nSolve: determine \\(R_{\\mathrm{LP}}(\\delta)\\) for all \\(\\delta\\in(0,1/2)\\).\nPartial (LP, upper): \\(\\delta_0\\in(0,1/2)\\), \\(c>0\\) with \\(R_{\\mathrm{LP}}(\\delta_0)\\le R_{\\mathrm{MRRW}}(\\delta_0)-c\\).\nPartial (LP, lower): \\(\\delta_0\\in(0,1/2)\\), \\(c>0\\) with \\(R_{\\mathrm{LP}}(\\delta_0)\\ge\\tfrac12\\big(1-H(\\delta_0)+R_{\\mathrm{LP1}}(\\delta_0)\\big)+c\\).\nPartial (hierarchy): a fixed level \\(k\\) (independent of \\(n\\)) of the Schrijver, Coregliano–Jeronimo–Jones, or Loyfer–Linial hierarchy, \\(\\delta_0\\in(0,1/2)\\), and \\(c>0\\) with \\(R_P(\\delta_0)\\le R_{\\mathrm{MRRW}}(\\delta_0)-c\\).\nExcluded: levels \\(k\\) growing with \\(n\\) (the complete hierarchy trivially reaches \\(R(\\delta)\\)), and finite-\\(n\\) numerical improvements.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-21",
+      "tags": [
+        "coding-theory",
+        "linear-programming-bound",
+        "mrrw",
+        "delsarte",
+        "sdp-hierarchy"
+      ],
+      "generatedAt": "2026-09-21T02:30:00Z",
+      "contentUpdatedAt": "2026-09-21T02:30:00Z",
+      "literature": [
+        {
+          "title": "On the Difficulty to Beat the First Linear Programming Bound for Binary Codes",
+          "year": 2024,
+          "description": "Samorodnitsky: necessary conditions any Friedman–Tillich-style dual solution must satisfy to beat the first LP bound, explaining the barrier.",
+          "link": "https://doi.org/10.1109/TIT.2024.3504268"
+        },
+        {
+          "title": "One more proof of the first linear programming bound for binary codes and two conjectures",
+          "year": 2023,
+          "description": "New proof of the first LP bound plus two conjectures whose truth would improve it.",
+          "link": "https://doi.org/10.1007/s11856-023-2514-8"
+        },
+        {
+          "title": "New LP-Based Upper Bounds in the Rate-vs.-Distance Problem for Binary Linear Codes",
+          "year": 2023,
+          "description": "Loyfer–Linial: a family of LPs for linear codes with Delsarte's LP as weakest member, numerically much stronger; asymptotics of bounded levels open.",
+          "link": "https://doi.org/10.1109/TIT.2023.3236660"
+        },
+        {
+          "title": "A Complete Linear Programming Hierarchy for Linear Codes",
+          "year": 2022,
+          "description": "Coregliano–Jeronimo–Jones: LP hierarchy for linear codes that converges to the true rate at finite level, with Delsarte's LP at the base.",
+          "link": "https://doi.org/10.4230/LIPIcs.ITCS.2022.51"
+        },
+        {
+          "title": "Linear Programming Bounds for Codes via a Covering Argument",
+          "year": 2009,
+          "description": "Navon–Samorodnitsky: recovers the first LP bound by Fourier duality and a covering argument, identifying it with an isoperimetric constant of the Hamming cube.",
+          "link": "https://doi.org/10.1007/s00454-008-9128-0"
+        },
+        {
+          "title": "New Code Upper Bounds From the Terwilliger Algebra and Semidefinite Programming",
+          "year": 2005,
+          "description": "Schrijver: SDP strengthening of Delsarte's LP via triples of codewords; improves finite-\\(n\\) bounds, asymptotics unresolved.",
+          "link": "https://doi.org/10.1109/TIT.2005.851748"
+        },
+        {
+          "title": "Generalized Alon–Boppana Theorems and Error-Correcting Codes",
+          "year": 2005,
+          "description": "Friedman–Tillich: first LP bound for linear codes via spectral (Alon–Boppana) arguments.",
+          "link": "https://doi.org/10.1137/S0895480102408353"
+        },
+        {
+          "title": "On the Optimum of Delsarte's Linear Program",
+          "year": 2001,
+          "description": "Samorodnitsky: \\(R_{\\mathrm{LP}}\\ge\\) average of GV and MRRW, so Delsarte's LP cannot prove GV; conjectures equality with the average.",
+          "link": "https://doi.org/10.1006/jcta.2001.3176"
+        },
+        {
+          "title": "Numerical results on the asymptotic rate of binary codes",
+          "year": 2001,
+          "description": "Barg–Jaffe: numerical evidence that MRRW is asymptotically all Delsarte's LP yields in the first-LP range.",
+          "link": "https://scholar.google.com/scholar?q=Barg+Jaffe+Numerical+results+on+the+asymptotic+rate+of+binary+codes"
+        },
+        {
+          "title": "An algebraic approach to the association schemes of coding theory",
+          "year": 1973,
+          "description": "Delsarte's thesis introducing the linear-programming bound for codes in association schemes.",
+          "link": "https://scholar.google.com/scholar?q=Delsarte+An+algebraic+approach+to+the+association+schemes+of+coding+theory"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:gv-related:minkowski-hlawka-tightness",
+      "problem": "Is the Minkowski–Hlawka sphere-packing bound exponentially tight?",
+      "wordDescription": "The Minkowski–Hlawka bound \\(\\Delta_n\\ge 2^{-n}\\) is the Euclidean analogue of GV: a random-lattice/greedy argument that has only been improved by polynomial factors, while the best upper bound is the Kabatiansky–Levenshtein LP bound \\(2^{-(0.599+o(1))n}\\), the analogue of MRRW. Whether the packing density is \\(2^{-(1+o(1))n}\\) or exponentially larger is open, and opinions differ (Torquato–Stillinger conjecture exponentially denser disordered packings).",
+      "mathematicalConditions": "Definitions. A sphere packing in \\(\\mathbb R^n\\) is a set \\(P\\) of unit balls with pairwise disjoint interiors; its (upper) density is \\(\\limsup_{r\\to\\infty}\\mathrm{vol}(B_r\\cap\\bigcup P)/\\mathrm{vol}(B_r)\\), \\(B_r\\) the ball of radius \\(r\\) about the origin. \\(\\Delta_n\\) is the supremum of densities over all packings and \\(\\Delta^{\\mathrm L}_n\\) over lattice packings (ball centres forming a lattice \\(\\Lambda\\), density \\(\\mathrm{vol}(B_1)/\\det\\Lambda\\) with \\(\\Lambda\\) of minimum norm 2); \\(\\Delta^{\\mathrm L}_n\\le\\Delta_n\\). The Minkowski–Hlawka theorem is \\(\\Delta^{\\mathrm L}_n\\ge\\zeta(n)\\,2^{1-n}\\ge2^{-n}\\). The Kabatiansky–Levenshtein bound is \\(\\Delta_n\\le2^{-(0.5990\\ldots+o(1))n}\\), the constant being \\(\\min_\\theta\\) of an explicit function derived from the linear-programming bound for spherical codes (Kabatiansky–Levenshtein 1978; restated in Cohn–Zhao 2014).\nKnown: \\(c\\,n^2\\,2^{-n}\\le\\Delta^{\\mathrm L}_n\\le\\Delta_n\\le2^{-(0.599+o(1))n}\\) (Klartag 2025; Kabatiansky–Levenshtein 1978, with constant-factor refinements by Cohn–Zhao 2014, Sardari–Zargar 2023, Zargar 2024). Best non-lattice-specific lower bound before Klartag: \\((1-o(1))\\,n\\log n\\,2^{-n-1}\\) (Campos–Jenssen–Michelen–Sahasrabudhe 2023).\nSolve: determine \\(\\lim_{n\\to\\infty}\\tfrac1n\\log_2\\Delta_n\\); in particular decide whether \\(\\Delta_n=2^{-(1+o(1))n}\\).\nPartial (lower, any packing): \\(c>0\\) with \\(\\Delta_n\\ge2^{-(1-c)n}\\) for infinitely many \\(n\\).\nPartial (lower, lattice): \\(c>0\\) with \\(\\Delta^{\\mathrm L}_n\\ge2^{-(1-c)n}\\) for infinitely many \\(n\\).\nPartial (upper): \\(c>0\\) with \\(\\Delta_n\\le2^{-(0.599+c)n}\\) for all sufficiently large \\(n\\).\nExcluded: improvements by factors \\(2^{o(n)}\\) on either side, and bounds restricted to a fixed finite set of dimensions.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-21",
+      "tags": [
+        "sphere-packing",
+        "lattices",
+        "minkowski-hlawka",
+        "kabatiansky-levenshtein",
+        "gilbert-varshamov"
+      ],
+      "generatedAt": "2026-09-21T02:30:00Z",
+      "contentUpdatedAt": "2026-09-21T02:30:00Z",
+      "literature": [
+        {
+          "title": "Lattice packing of spheres in high dimensions using a stochastically evolving ellipsoid",
+          "year": 2025,
+          "description": "Klartag: lattice packings of density \\(\\ge c\\,n^2 2^{-n}\\), the current best lower bound (Invent. Math. 2026).",
+          "link": "https://arxiv.org/abs/2504.05042"
+        },
+        {
+          "title": "Stiefel manifolds and upper bounds for spherical codes and packings",
+          "year": 2024,
+          "description": "Zargar: improves the Kabatiansky–Levenshtein density bound by a factor \\((1+o(1))/e\\); exponent unchanged.",
+          "link": "https://arxiv.org/abs/2407.10697"
+        },
+        {
+          "title": "A new lower bound for sphere packing",
+          "year": 2023,
+          "description": "Campos–Jenssen–Michelen–Sahasrabudhe: non-lattice packings of density \\((1-o(1))\\,n\\log n/2^{n+1}\\), the first growing improvement over Rogers since 1947.",
+          "link": "https://arxiv.org/abs/2312.10026"
+        },
+        {
+          "title": "New upper bounds for spherical codes and packings",
+          "year": 2023,
+          "description": "Sardari–Zargar: first explicit uniform constant-factor improvement of the Kabatiansky–Levenshtein bounds.",
+          "link": "https://doi.org/10.1007/s00208-023-02738-z"
+        },
+        {
+          "title": "Sphere packing bounds via spherical codes",
+          "year": 2014,
+          "description": "Cohn–Zhao: constant-factor improvement of the Kabatiansky–Levenshtein packing bound.",
+          "link": "https://arxiv.org/abs/1212.5966"
+        },
+        {
+          "title": "A note on sphere packings in high dimension",
+          "year": 2013,
+          "description": "Venkatesh: density \\(\\ge 65963\\,n\\,2^{-n}\\), and \\(n\\log\\log n\\,2^{-n}\\) along a sparse sequence of dimensions.",
+          "link": "https://doi.org/10.1093/imrn/rns096"
+        },
+        {
+          "title": "New conjectural lower bounds on the optimal density of sphere packings",
+          "year": 2006,
+          "description": "Torquato–Stillinger: conjecture that disordered packings of density about \\(2^{-0.7786n}\\) exist, i.e. that Minkowski–Hlawka is not exponentially tight.",
+          "link": "https://arxiv.org/abs/math/0508381"
+        },
+        {
+          "title": "On Bounds for Packings on a Sphere and in Space",
+          "year": 1978,
+          "description": "Kabatiansky–Levenshtein: LP bound \\(\\Delta_n\\le 2^{-(0.599+o(1))n}\\), still the best exponent.",
+          "link": "https://www.mathnet.ru/eng/ppi1518"
+        }
+      ]
+    },
+    {
+      "recordId": "lit:gv-related:explicit-binary-list-decoding-capacity",
+      "problem": "Explicit binary codes achieving list-decoding capacity",
+      "wordDescription": "Random binary codes of rate \\(1-H(p)-\\varepsilon\\) are list-decodable from a \\(p\\) fraction of errors with list size \\(O(1/\\varepsilon)\\), the GV-type existence result for list decoding. Over large alphabets folded Reed–Solomon codes achieve capacity explicitly, but for binary codes the best explicit polynomial-time-decodable tradeoff is the Blokh–Zyablov bound from multilevel concatenation, far below \\(1-H(p)\\); near \\(p=1/2\\) explicit rate is \\(\\Omega(\\varepsilon^3)\\) versus the capacity \\(\\Theta(\\varepsilon^2)\\).",
+      "mathematicalConditions": "Definitions. A binary code of length \\(n\\) is a set \\(C\\subseteq\\{0,1\\}^n\\); it is linear if \\(C\\) is a subspace of \\(\\mathbb F_2^n\\). Its minimum distance \\(d(C)\\) is \\(\\min_{x\\ne y\\in C}|\\{i:x_i\\ne y_i\\}|\\), its rate is \\(\\tfrac1n\\log_2|C|\\), and its relative distance is \\(d(C)/n\\). \\(H(x)=-x\\log_2x-(1-x)\\log_2(1-x)\\) is the binary entropy function and \\(V(n,r)=\\sum_{i\\le r}\\binom ni\\) the Hamming-ball volume. A family of linear codes \\(\\{C_n\\}\\) is explicit if a deterministic \\(\\mathrm{poly}(n)\\)-time algorithm outputs a generator matrix of \\(C_n\\). A code \\(C\\subseteq\\{0,1\\}^n\\) is \\((p,L)\\)-list-decodable if every Hamming ball of radius \\(pn\\) contains at most \\(L\\) codewords. A family is efficiently list-decodable from radius \\(p\\) if a \\(\\mathrm{poly}(n)\\)-time algorithm outputs, for any received word, the list of all codewords within distance \\(pn\\). The Blokh–Zyablov bound is \\(R_{\\mathrm{BZ}}(\\delta)=1-H(\\delta)-\\delta\\int_0^{1-H(\\delta)}\\frac{dx}{H^{-1}(1-x)}\\), where \\(H^{-1}:[0,1]\\to[0,1/2]\\) (Blokh–Zyablov 1982; Dumer's chapter in the Handbook of Coding Theory, 1998).\nKnown: for \\(p\\in(0,1/2)\\) and \\(\\varepsilon>0\\), random (and random linear) codes of rate \\(1-H(p)-\\varepsilon\\) are \\((p,O(1/\\varepsilon))\\)-list-decodable (Elias 1991; Guruswami–Håstad–Kopparty 2011; Li–Wootters 2021), and every \\((p,L)\\)-list-decodable family of rate \\(>1-H(p)\\) has \\(L=2^{\\Omega(n)}\\). Explicit, efficiently list-decodable frontier: rate \\(R_{\\mathrm{BZ}}(p)-\\varepsilon\\) at radius \\(p\\) (Guruswami–Rudra 2009); at \\(p=1/2-\\varepsilon\\) this is rate \\(\\Omega(\\varepsilon^3)\\) versus capacity \\(\\Theta(\\varepsilon^2)\\).\nSolve: for every \\(p\\in(0,1/2)\\) and \\(\\varepsilon>0\\), an explicit family of rate \\(\\ge1-H(p)-\\varepsilon\\) that is \\((p,\\mathrm{poly}(n))\\)-list-decodable and efficiently list-decodable from radius \\(p\\).\nPartial (algorithmic): \\(p_0\\in(0,1/2)\\), \\(c>0\\), and an explicit family of rate \\(\\ge R_{\\mathrm{BZ}}(p_0)+c\\) that is \\((p_0,\\mathrm{poly}(n))\\)-list-decodable and efficiently list-decodable from radius \\(p_0\\).\nPartial (high noise): \\(c>0\\) and an explicit family, efficiently list-decodable from radius \\(1/2-\\varepsilon\\) with \\(\\mathrm{poly}(n)\\) lists, of rate \\(\\Omega(\\varepsilon^{3-c})\\) for all sufficiently small \\(\\varepsilon\\).\nPartial (combinatorial): as in the algorithmic partial but with only \\((p_0,\\mathrm{poly}(n))\\)-list-decodability required, no decoder.\nExcluded: alphabets larger than 2, and constructions using \\(\\omega(\\log n)\\) random bits.",
+      "comments": [],
+      "status": "open",
+      "lastVerified": "2026-09-21",
+      "tags": [
+        "coding-theory",
+        "list-decoding",
+        "explicit-constructions",
+        "binary-codes",
+        "gilbert-varshamov"
+      ],
+      "generatedAt": "2026-09-21T02:30:00Z",
+      "contentUpdatedAt": "2026-09-21T02:30:00Z",
+      "literature": [
+        {
+          "title": "Randomness-Efficient Constructions of Capacity-Achieving List-Decodable Codes",
+          "year": 2024,
+          "description": "Algebraic Wozencraft-type ensembles reaching the Elias bound \\(R\\ge1-H(\\rho)-O(1/L)\\) with \\(O(Ln)\\) random bits; explicit capacity-achieving binary codes remain open.",
+          "link": "https://arxiv.org/abs/2402.11533"
+        },
+        {
+          "title": "Gilbert and Varshamov Meet Johnson: List-Decoding Explicit Nearly-Optimal Binary Codes",
+          "year": 2023,
+          "description": "Richelson–Roy: Ta-Shma's rate-\\(\\varepsilon^{2+o(1)}\\) codes list-decoded in polynomial time up to the Johnson bound, radius \\((1-\\rho)/2\\) for \\(\\rho\\ge\\sqrt\\varepsilon\\).",
+          "link": "https://doi.org/10.1109/FOCS57990.2023.00021"
+        },
+        {
+          "title": "Improved list-decodability of random linear binary codes",
+          "year": 2021,
+          "description": "Li–Wootters: random linear binary codes of rate \\(1-H(p)-\\varepsilon\\) are list-decodable with list size \\(H(p)/\\varepsilon+2\\), matching random codes.",
+          "link": "https://arxiv.org/abs/1801.07839"
+        },
+        {
+          "title": "On the List-Decodability of Random Linear Codes",
+          "year": 2011,
+          "description": "Guruswami–Håstad–Kopparty: random linear codes achieve capacity with list size \\(O(1/\\varepsilon)\\).",
+          "link": "https://arxiv.org/abs/1001.1386"
+        },
+        {
+          "title": "Better Binary List-Decodable Codes via Multilevel Concatenation",
+          "year": 2009,
+          "description": "Guruswami–Rudra: explicit binary codes list-decodable in polynomial time up to the Blokh–Zyablov bound; the current explicit frontier.",
+          "link": "https://doi.org/10.1109/TIT.2008.2008124"
+        },
+        {
+          "title": "Explicit Codes Achieving List Decoding Capacity: Error-Correction With Optimal Redundancy",
+          "year": 2008,
+          "description": "Guruswami–Rudra: folded Reed–Solomon codes achieve capacity \\(1-R-\\varepsilon\\) over large alphabets; concatenation gives explicit binary codes up to the Zyablov bound.",
+          "link": "https://doi.org/10.1109/TIT.2007.911222"
+        },
+        {
+          "title": "Combinatorial bounds for list decoding",
+          "year": 2002,
+          "description": "Guruswami–Håstad–Sudan–Zuckerman: existence of binary linear codes of rate \\(1-H(p)-1/L\\) list-decodable with list size \\(L\\).",
+          "link": "https://doi.org/10.1109/18.995539"
+        },
+        {
+          "title": "Error-correcting codes for list decoding",
+          "year": 1991,
+          "description": "Elias: random-coding argument establishing list-decoding capacity \\(1-H(p)\\) (also Zyablov–Pinsker 1981).",
+          "link": "https://doi.org/10.1109/18.75235"
+        }
+      ]
+    }
+  ]
+}
